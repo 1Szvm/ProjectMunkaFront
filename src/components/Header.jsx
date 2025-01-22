@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../context/userContext'
 
-const {user,logoutUser}=useContext(UserContext)
+const {user}=useContext(UserContext)
 
 
 export const Header=()=> {
