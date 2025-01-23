@@ -1,13 +1,16 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Header } from './components/Header'
-import Home from './pages/Home'
-import NotFound from './pages/NotFound'
+import { Home } from './pages/Home'
+import { Futamok } from './pages/Futamok'
+import { NotFound } from './pages/NotFound'
 
 const router=createBrowserRouter([
   {element:<Header/>,
     children:[
       {path:'/',element:<Home />},
       {path:'*',element:<NotFound />},
+      {path:'/futamok',element:<Futamok/>},
+      
     ]
   }
 ],
