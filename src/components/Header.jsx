@@ -1,16 +1,20 @@
 import React from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
+import { Nav, Navbar } from 'reactstrap';
 
 
 export const Header = () => {
   return (
+    <>
     <div className="navbar bg-base-300 rounded-b-xl">
       <div className="navbar-start">
         <div>
-          <a className="btn btn-ghost text-xl">Futamok</a>
-          <a className="btn btn-ghost text-xl">Forum</a>
+          <NavLink className="btn btn-ghost text-xl" to="/futamok" >Futamok</NavLink>
+          <NavLink className="btn btn-ghost text-xl" to="/forum">Forum</NavLink>
         </div>
       </div>
       <div className="navbar-center">
+        <img src="logo.jpg" alt="" style={{height:"5vh", width:"5vh"}} />
         <a className="btn btn-ghost text-xl">HSRT</a>
       </div>
       <div className="navbar-end">
@@ -36,6 +40,9 @@ export const Header = () => {
           </ul>
         </div>
       </div>
+      
     </div>
+    <Outlet/>
+    </>
   );
 };
