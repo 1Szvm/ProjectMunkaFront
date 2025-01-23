@@ -1,6 +1,9 @@
 import React from 'react'
 
-const Home = () => {
+
+export const Home = () => {
+  console.log('Home');
+  
   return (
     <div className='m-20'>
       
@@ -8,4 +11,4 @@ const Home = () => {
   )
 }
 
-export default Home
+
