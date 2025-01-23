@@ -1,4 +1,5 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 
 export const Header = () => {
@@ -6,12 +7,12 @@ export const Header = () => {
     <div className="navbar bg-base-300 rounded-b-xl">
       <div className="navbar-start">
         <div>
-          <a className="btn btn-ghost text-xl">Futamok</a>
+          <a className="btn btn-ghost text-xl" href='futamok'> Futamok</a>
           <a className="btn btn-ghost text-xl">Forum</a>
         </div>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost text-xl">HSRT</a>
+        <a className="btn btn-ghost text-xl">HUN-SRT</a>
       </div>
       <div className="navbar-end">
         <div className="dropdown dropdown-end">
@@ -36,6 +37,6 @@ export const Header = () => {
           </ul>
         </div>
       </div>
-    </div>
+    </div>  
   );
 };
