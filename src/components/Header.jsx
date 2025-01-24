@@ -48,8 +48,8 @@ export const Header = () => {
         </>
         :
         <>
-          <NavLink className="btn btn-ghost mx-1 bg-red-800 hover:bg-red-700 text-xl" to="/auth/in" >Bejelentkezés</NavLink>
-          <NavLink className="btn btn-ghost mx-1 text-xl" to="/auth/up">Regisztráció</NavLink>
+          <NavLink className="btn btn-ghost mx-1 bg-indigo-800 hover:bg-indigo-700 text-xl text-yellow-400" to="/auth/in" >Bejelentkezés</NavLink>
+          <NavLink className="btn btn-ghost mx-1 bg-violet-900 hover:bg-violet-900 text-xl text-yellow-400"  to="/auth/up">Regisztráció</NavLink>
         </>}
       </div>
       
