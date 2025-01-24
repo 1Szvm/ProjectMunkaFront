@@ -8,7 +8,7 @@ export const NotFound = () => {
         <defs>
           <filter id="glow">
             <feGaussianBlur className="blur" result="coloredBlur" stdDeviation="4"></feGaussianBlur>
-            <feMerge>
+            <feMerge> 
               <feMergeNode in="coloredBlur"></feMergeNode>
               <feMergeNode in="SourceGraphic"></feMergeNode>
             </feMerge>
@@ -30,9 +30,10 @@ export const NotFound = () => {
         </g>
       </svg>
 
-      <h2 style={styles.heading}>Page Not Found</h2>
-
-      <NavLink className="btn btn-ghost text-xl" to="/futamok">Futamok</NavLink>
+      
+    
+      <NavLink style={styles.heading} className="btn btn-ghost text-xl" to="/futamok">Home</NavLink>
+      
 
       {/* Inject CSS for animations */}
       <style>
@@ -95,7 +96,7 @@ const styles = {
     height: '100%',
     width: '100%',
     margin: 0,
-    background: 'radial-gradient(circle, #240015 0%, #12000b 100%)',
+    background: 'radial-gradient(circle, #240015 0%, #301934 100%)',
     overflow: 'hidden',
   },
   svg: {
@@ -114,6 +115,7 @@ const styles = {
     filter: 'url(#glow)',
   },
   heading: {
+    
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -122,10 +124,10 @@ const styles = {
     textTransform: 'uppercase',
     transform: 'translate(-50%, -50%)',
     display: 'block',
-    color: '#12000a',
+    color: 'red',
     fontWeight: 300,
     fontFamily: 'Audiowide',
-    textShadow: '0px 0px 4px #12000a',
+    textShadow: '0px 0px 4px green',
     animation: 'fadeInText 3s ease-in 3.5s forwards, flicker4 5s linear 7.5s infinite, hueRotate 6s ease-in-out 3s infinite',
   },
 };
