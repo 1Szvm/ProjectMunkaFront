@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export const NotFound = () => {
   return (
@@ -30,6 +31,58 @@ export const NotFound = () => {
       </svg>
 
       <h2 style={styles.heading}>Page Not Found</h2>
+
+      <NavLink className="btn btn-ghost text-xl" to="/futamok">Futamok</NavLink>
+
+      {/* Inject CSS for animations */}
+      <style>
+        {`
+          @keyframes fadeInText {
+            0% {
+              opacity: 0;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+
+          @keyframes flicker4 {
+            0% {
+              opacity: 1;
+            }
+            5% {
+              opacity: 0.4;
+            }
+            10% {
+              opacity: 1;
+            }
+            20% {
+              opacity: 0.3;
+            }
+            25% {
+              opacity: 1;
+            }
+            30% {
+              opacity: 0.5;
+            }
+            35% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+
+          @keyframes hueRotate {
+            0% {
+              filter: hue-rotate(0deg);
+            }
+            100% {
+              filter: hue-rotate(360deg);
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };
