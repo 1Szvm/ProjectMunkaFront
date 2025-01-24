@@ -9,7 +9,7 @@ export const Header = () => {
   
   return (
     <>
-    <div className="navbar bg-base-300 rounded-b-xl">
+    <div className="navbar bg-base-300 rounded-b-xl ">
       <div className="navbar-start">
         <div>
           <NavLink className="btn btn-ghost text-xl" to="/futamok" >Futamok</NavLink>
@@ -18,7 +18,7 @@ export const Header = () => {
       </div>
       <div className="navbar-center">
         <img src="logo.jpg" alt="" style={{height:"5vh", width:"5vh"}} />
-        <a className="btn btn-ghost text-xl">HSRT</a>
+        <NavLink className="btn btn-ghost text-xl">HSRT</NavLink>
       </div>
       <div className="navbar-end">
         {user ? 
