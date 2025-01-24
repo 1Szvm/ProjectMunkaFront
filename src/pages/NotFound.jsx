@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NotFound = () => {
+export const NotFound = () => {
   return (
     <div style={styles.container}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 250" style={styles.svg}>
@@ -76,5 +76,3 @@ const styles = {
     animation: 'fadeInText 3s ease-in 3.5s forwards, flicker4 5s linear 7.5s infinite, hueRotate 6s ease-in-out 3s infinite',
   },
 };
-
-export default NotFound;
