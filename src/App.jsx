@@ -3,14 +3,16 @@ import { Header } from './components/Header'
 import { Home } from './pages/Home'
 import { Futamok } from './pages/Futamok'
 import { NotFound } from './pages/NotFound'
+import { Auth } from './pages/Auth'
 
 const router=createBrowserRouter([
   {element:<Header/>,
     children:[
       {path:'/',element:<Home />},
-      {path:'*',element:<NotFound />},
+      {path:'/auth/in',element:<Auth />},
+      {path:'/auth/up',element:<Auth />},
       {path:'/futamok',element:<Futamok/>},
-      
+      {path:'*',element:<NotFound />},
     ]
   }
 ],
