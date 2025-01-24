@@ -13,6 +13,7 @@ export const Header = () => {
       <div className="navbar-start">
         <div>
           <NavLink className="btn btn-ghost text-xl" to="/futamok" >Futamok</NavLink>
+          <NavLink className="btn btn-ghost text-xl" to="/forum">Bajnokságok</NavLink>
           <NavLink className="btn btn-ghost text-xl" to="/forum">Forum</NavLink>
         </div>
       </div>
