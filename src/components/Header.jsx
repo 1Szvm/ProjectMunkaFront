@@ -5,13 +5,14 @@ import { UserContext } from '../context/UserContext';
 export const Header = () => {
   const { user, logoutUser } = useContext(UserContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+}
   // Toggle mobile menu
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(prev => !prev);
   };
 
   return (
+    
     <>
       <div className="navbar bg-base-300 rounded-b-xl px-4 md:px-8">
         {/* Start of Navbar */}
@@ -95,18 +96,18 @@ export const Header = () => {
           )}
         </div>
         {/* End of Navbar */}
-    <div className="navbar bg-base-300 rounded-b-xl ">
-      <div className="navbar-start">
-        <div>
-          <NavLink className="btn btn-ghost text-xl" to="/futamok" >Futamok</NavLink>
-          <NavLink className="btn btn-ghost text-xl" to="/forum">Bajnokságok</NavLink>
-          <NavLink className="btn btn-ghost text-xl" to="/forum">Forum</NavLink>
+      <div className="navbar bg-base-300 rounded-b-xl ">
+        <div className="navbar-start">
+          <div>
+            <NavLink className="btn btn-ghost text-xl" to="/futamok" >Futamok</NavLink>
+            <NavLink className="btn btn-ghost text-xl" to="/forum">Bajnokságok</NavLink>
+            <NavLink className="btn btn-ghost text-xl" to="/forum">Forum</NavLink>
+          </div>
         </div>
-      </div>
-      <div className="navbar-center">
-        <img src="logo.jpg" alt="" style={{height:"5vh", width:"5vh"}} />
-        <NavLink className="btn btn-ghost text-xl">HSRT</NavLink>
-      </div>
+        <div className="navbar-center">
+          <img src="logo.jpg" alt="" style={{height:"5vh", width:"5vh"}} />
+          <NavLink className="btn btn-ghost text-xl">HSRT</NavLink>
+        </div>
       <div className="navbar-end">
         {user ? 
         <>
@@ -189,8 +190,10 @@ export const Header = () => {
           )}
         </div>
       )}
-
+       
       <Outlet />
-    </>
-  );
-};
+      
+    </> 
+  )
+  
+}

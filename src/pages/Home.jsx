@@ -1,9 +1,11 @@
 import React from 'react'
 
-
+import { useRef } from "react"
 export const Home = () => {
-  console.log('Home');
-  
+  console.log('Home');  
+  function Component() {
+    const scrollRef = useRef(null)
+
   return (
     <>
     <div className='justify-center items-center flex m-0 w-full'>
@@ -13,11 +15,11 @@ export const Home = () => {
            </video>
       </div>
       <div>
-      
+    
       </div>
     </div>
     </>
   )
 }
 
-
+}
