@@ -32,7 +32,7 @@ export const NotFound = () => {
 
       
     
-      <NavLink style={styles.heading} className="btn btn-ghost text-xl" to="/futamok">Home</NavLink>
+      <NavLink style={styles.heading} className="btn btn-ghost text-xl" to="/">Home</NavLink>
       
 
       {/* Inject CSS for animations */}
