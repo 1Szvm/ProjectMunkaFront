@@ -4,6 +4,7 @@ import { Home } from './pages/Home'
 import { Futamok } from './pages/Futamok'
 import { NotFound } from './pages/NotFound'
 import { Auth } from './pages/Auth'
+import Profile from './pages/Profile'
 
 const router=createBrowserRouter([
   {element:<Header/>,
@@ -12,6 +13,7 @@ const router=createBrowserRouter([
       {path:'/auth/in',element:<Auth />},
       {path:'/auth/up',element:<Auth />},
       {path:'/futamok',element:<Futamok/>},
+      {path:'/profile',element:<Profile/>},
       {path:'*',element:<NotFound />},
     ]
   }
