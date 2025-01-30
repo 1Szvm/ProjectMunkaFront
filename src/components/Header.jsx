@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 
@@ -25,7 +25,6 @@ export const Header = () => {
       <div className="navbar bg-base-300 rounded-b-xl px-4 md:px-8">
         {/* Navbar Start */}
         <div className="navbar-start flex items-center justify-between w-full md:w-auto">
-          {/* Logo and Links on Mobile */}
           <div className="flex items-center">
             <NavLink className="btn btn-ghost text-xl" to="/futamok">Futamok</NavLink>
             <NavLink className="btn btn-ghost text-xl" to="/forum">Bajnokságok</NavLink>
@@ -98,17 +97,12 @@ export const Header = () => {
             </div>
           ) : (
             <>
-              <NavLink className="btn btn-ghost mx-1 bg-indigo-800 hover:bg-indigo-700 text-xl text-yellow-400" to="/auth/in">
-                Bejelentkezés
-              </NavLink>
-              <NavLink className="btn btn-ghost mx-1 bg-violet-900 hover:bg-violet-900 text-xl text-yellow-400" to="/auth/up">
-                Regisztráció
-              </NavLink>
+              <NavLink className="btn btn-ghost mx-1 bg-indigo-800 hover:bg-indigo-700 text-xl text-yellow-400" to="/auth/in">Bejelentkezés</NavLink>
+              <NavLink className="btn btn-ghost mx-1 bg-violet-900 hover:bg-violet-900 text-xl text-yellow-400" to="/auth/up">Regisztráció</NavLink>
             </>
           )}
         </div>
-      )}
-
+      </div>
       <Outlet />
     </>
   );
