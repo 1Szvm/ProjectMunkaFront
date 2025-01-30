@@ -5,6 +5,14 @@ import { UserContext } from '../context/UserContext';
 export const Header = () => {
   const { user, logoutUser } = useContext(UserContext);
 
+  const navLinks = (
+    <>
+      <NavLink className="btn btn-ghost text-xl" to="/futamok">Futamok</NavLink>
+      <NavLink className="btn btn-ghost text-xl" to="/forum">Bajnokságok</NavLink>
+      <NavLink className="btn btn-ghost text-xl" to="/forum">Forum</NavLink>
+    </>
+  );
+
   return (
     <>
       <div className="navbar bg-base-300 rounded-b-xl px-4 md:px-8">
@@ -18,7 +26,7 @@ export const Header = () => {
           </div>
         </div>
 
-        {/* Centered Logo and Brand Name */}
+        {/* Centered Logo */}
         <div className="navbar-center flex items-center space-x-4">
           <img src="logo.jpg" alt="Logo" style={{ height: '5vh', width: '5vh' }} />
           <NavLink className="btn btn-ghost text-xl">HSRT</NavLink>
