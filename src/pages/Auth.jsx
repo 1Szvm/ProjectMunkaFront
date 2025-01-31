@@ -76,7 +76,7 @@ export const Auth = () => {
         >
           Elfelejtett jelszó...
         </a>
-        {msg && <Toastify {...msg} />}
+        <Toastify {...msg}  />
       </div>
     </div>
   );

@@ -60,12 +60,13 @@ export const UserProvider=({children})=>{
         try {
             await createUserWithEmailAndPassword(auth,email,password)
             await updateProfile(auth.currentUser,{displayName})
-            setMsg({})
             setMsg({signup:"Sikeres Regisztráció!"})
+            
         } catch (error) {
             console.log(error);
             
         }
+
     }
 
     const deletAccount=async ()=>{
