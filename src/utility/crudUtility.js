@@ -7,6 +7,14 @@ export const readCategories = (setCategories) => {
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setCategories(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
     });
+    return unsubscribe;
+  };
 
+  export const readRaces = (setRaces) => {
+    const collectionRef = collection(db, "futamok");
+    const q = query(collectionRef, orderBy('idopont', 'asc'))                                       
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setRaces(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+    });
     return unsubscribe;
   };
