@@ -6,6 +6,7 @@ import { NotFound } from './pages/NotFound'
 import { Auth } from './pages/Auth'
 import Profile from './pages/Profile'
 import { Footer } from './components/Footer'
+import PwReset from './pages/Pwreset'
 
 const router=createBrowserRouter([
   {element:<Header/>,
@@ -16,6 +17,7 @@ const router=createBrowserRouter([
       {path:'/futamok',element:<Futamok/>},
       {path:'/profile',element:<Profile/>},
       {path:'*',element:<NotFound />},
+      {path:'/pwreset',element:<PwReset/>},
     ]
   }
 
