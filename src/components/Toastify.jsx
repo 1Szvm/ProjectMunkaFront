@@ -17,6 +17,7 @@ export default function Toastify({err,signin,signup,resetPw,update}) {
             setTimeout(()=>navigate("/"),2000)
         }else if(signin){
             toast.success(signin,{position:"bottom-right"})
+            setTimeout(()=>navigate("/"),2000)
         }else if(resetPw){
             toast.success(resetPw,{position:"top-left"})
             setTimeout(()=>navigate("/auth/in"),2000)
