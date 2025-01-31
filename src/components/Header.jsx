@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'; // Make sure to import useEffect
 import { NavLink, Outlet } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
+import { Footer } from './Footer';
 
 export const Header = () => {
   const { user, logoutUser } = useContext(UserContext);
@@ -36,15 +37,15 @@ export const Header = () => {
   );
 
   return (
-     <div >
+     <div className='bg-slate-800 text-cyan-50'>
       {matches ? ( // Desktop view
       <>
-      <div className='flex items-center justify-center w-screen  flex-wrap }'>
+      <div className='bg-rose-600 flex items-center justify-center w-screen  flex-wrap }'>
         <div className="navbar bg-slate-3 00 px-4 md:px-8 w-full flex items-center justify-center">
           {/* Navbar Start */}
-          <div className="navbar-start flex items-center justify-between w-full md:w-auto">
+          <div className="bg-rose-600 navbar-start flex items-center justify-between w-full md:w-auto">
             {/* Logo and Links on Mobile */}
-            <div className="flex items-center">
+            <div className="bg-rose-600 flex items-center">
               {navLinks}
             </div>
 
@@ -140,6 +141,7 @@ export const Header = () => {
         </div>
       )}
       <Outlet />
+      <Footer/>
    </div>
   );
 };

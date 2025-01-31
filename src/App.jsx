@@ -5,6 +5,7 @@ import { Futamok } from './pages/Futamok'
 import { NotFound } from './pages/NotFound'
 import { Auth } from './pages/Auth'
 import Profile from './pages/Profile'
+import { Footer } from './components/Footer'
 
 const router=createBrowserRouter([
   {element:<Header/>,
@@ -17,7 +18,9 @@ const router=createBrowserRouter([
       {path:'*',element:<NotFound />},
     ]
   }
+
 ],
+
 {
   future: {
     v7_relativeSplatPath: true,
@@ -29,7 +32,7 @@ const router=createBrowserRouter([
 )
 
 function App() {
-  return <RouterProvider router={router}  future={{v7_startTransition: true}}/>
+  return <RouterProvider router={router}  future={{v7_startTransition: true}} /> 
 }
 
 export default App
