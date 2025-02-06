@@ -31,7 +31,7 @@ export const Header = () => {
   const navLinks = (
     <>
       <NavLink className="btn btn-ghost text-xl" to="/futamok">Futamok</NavLink>
-      <NavLink className="btn btn-ghost text-xl" to="/forum">Bajnokságok</NavLink>
+      <NavLink className="btn btn-ghost text-xl" to="/bajnoksagok">Bajnokságok</NavLink>
       <NavLink className="btn btn-ghost text-xl" to="/forum">Forum</NavLink>
     </>
   );
@@ -141,7 +141,7 @@ export const Header = () => {
         </div>
       )}
       <Outlet />
-      <Footer/>
+
    </div>
   );
 };
