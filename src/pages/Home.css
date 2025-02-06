@@ -1,0 +1,15 @@
+.home {
+    position: relative;
+   
+  }
+  
+  #sticky-footer {
+    padding: 50px 0;
+    background: var(--header_background);  /* optional */
+    color: var(--primary-medium); /* optional */
+    text-align: center; /* optional */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+  }

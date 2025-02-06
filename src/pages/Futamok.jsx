@@ -1,5 +1,6 @@
 import React, {useEffect, useState } from 'react';
 import { readCategories, readRaces } from '../utility/crudUtility';
+import { Footer } from '../components/Footer';
 
 export const Futamok = () => {
   const [categories,setCategories]=useState(null)
@@ -50,6 +51,6 @@ export const Futamok = () => {
           ))
           ))}
       </div>
-    </div>
+      </div>
 );
 }
