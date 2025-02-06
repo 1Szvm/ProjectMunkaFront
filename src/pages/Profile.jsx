@@ -1,8 +1,11 @@
 import React from 'react';
-
+import { Footer } from '../components/Footer';
+import './Home.css'
 export default function Profile() {
   return (
+    <div className="home">
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6">Profile Settings</h1>
         <form>
@@ -29,6 +32,9 @@ export default function Profile() {
           <button type="submit" className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save Changes</button>
         </form>
       </div>
+      </div>
+      <Footer/>
     </div>
+     
   );
 }
