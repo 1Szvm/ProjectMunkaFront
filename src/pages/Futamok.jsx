@@ -46,7 +46,6 @@ export const Futamok = () => {
                     <h2 className="card-title rounded-lg p-2 text-sm text-center max-w-fit " style={{backgroundColor:`${category.color}`}}>
                       {category.nev}
                     </h2>
-                    <p>{races.idopont.seconds/86400}</p>
                   </div>
                 </div>
                 :
