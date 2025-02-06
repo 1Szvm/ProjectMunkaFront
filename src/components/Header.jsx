@@ -74,13 +74,13 @@ export const Header = () => {
                     </svg>
                   </div>
                 </div>
-                <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                <ul tabIndex={0} className="menu menu-sm dropdown-content bg-stone-900  rounded-box z-[1] mt-3 w-52 p-2 shadow">
                   <div className='border-b border-gray-400 p-2 mb-2'>
                     <h1 className="font-bold">Felhasználónév:</h1>
                     <h1 className='text-end'>{user.displayName}</h1>
                   </div>
-                  <li><NavLink className="btn btn-ghost bg-base-100 text-lg" to="/profile">Profil</NavLink></li>
-                  <li><a className='btn bg-red-800 mt-2 hover:bg-red-700' onClick={logoutUser}>Kijelentkezés</a></li>
+                  <li><NavLink className="btn btn-ghost bg-green-600 text-lg hover:bg-green-700" to="/profile">Profil</NavLink></li>
+                  <li><a className='btn bg-red-800 mt-2 hover:bg-red-700 text-slate-100' onClick={logoutUser}>Kijelentkezés</a></li>
                 </ul>
               </div>
             ) : (
@@ -116,9 +116,9 @@ export const Header = () => {
                       </svg>
                     </div>
                   </div>
-                  <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                    <li><NavLink className="btn btn-ghost bg-base-100 text-lg" to="/profile">Profil</NavLink></li>
-                    <li><a className='btn bg-red-800 mt-2 hover:bg-red-700' onClick={logoutUser}>Kijelentkezés</a></li>
+                  <ul tabIndex={0} className="menu menu-sm dropdown-content bg-stone-900 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                    <li><NavLink className="btn btn-ghosttext-lg bg-green-600 text-lg hover:bg-green-700" to="/profile">Profil</NavLink></li>
+                    <li><a className='btn bg-red-800 mt-2 hover:bg-red-700 text-slate-100' onClick={logoutUser}>Kijelentkezés</a></li>
                   </ul>
                 </div>
               ) : (
