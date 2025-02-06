@@ -4,7 +4,7 @@ import './Home.css'
 export const Home = () => {
   
   const [matches, setMatches] = useState(
-    window.matchMedia("(min-width: 1068px)").matches
+    window.matchMedia("(min-width: 1168px)").matches
   );
   window.onresize = function(event)
 {
@@ -13,7 +13,7 @@ document.location.reload(true);
 
   // Update match state when the screen size changes
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 1068px)");
+    const mediaQuery = window.matchMedia("(min-width: 1168px)");
     const handleMediaQueryChange = (e) => setMatches(e.matches);
 
     mediaQuery.addEventListener('change', handleMediaQueryChange);

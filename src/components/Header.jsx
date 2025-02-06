@@ -7,12 +7,12 @@ export const Header = () => {
   const { user, logoutUser } = useContext(UserContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [matches, setMatches] = useState(
-    window.matchMedia("(min-width: 768px)").matches
+    window.matchMedia("(min-width: 1168px)").matches
   );
 
   // Update match state when the screen size changes
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    const mediaQuery = window.matchMedia("(min-width: 1168px)");
     const handleMediaQueryChange = (e) => setMatches(e.matches);
 
     mediaQuery.addEventListener('change', handleMediaQueryChange);
@@ -37,34 +37,25 @@ export const Header = () => {
   );
 
   return (
-     <div className='bg-slate-800 text-cyan-50'>
-      {matches ? ( // Desktop view
-      <>
-      <div className='bg-rose-600 flex items-center justify-center w-screen  flex-wrap }'>
-        <div className="navbar bg-slate-3 00 px-4 md:px-8 w-full flex items-center justify-center">
+   <div className='bg-slate-800 text-cyan-50 w-full overflow-hidden'>
+  {matches ? ( // Desktop view
+    <>
+      <div className='bg-rose-600 flex items-center justify-center w-full'>
+        <div className="navbar px-4 md:px-8 w-full max-w-screen-xl mx-auto flex items-center justify-between">
           {/* Navbar Start */}
-          <div className="bg-rose-600 navbar-start flex items-center justify-between w-full md:w-auto">
-            {/* Logo and Links on Mobile */}
-            <div className="bg-rose-600 flex items-center">
-              {navLinks}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button className="md:hidden btn btn-ghost text-xl" onClick={toggleMobileMenu}>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 5h18M3 12h18M3 19h18" />
-              </svg>
-            </button>
+          <div className="navbar-start flex items-center gap-4">
+            {/* Logo and Links */}
+            {navLinks}
           </div>
 
           {/* Centered Logo */}
-          <div className="navbar-center flex items-center space-x-4">
-            <img src="logo.jpg" alt="Logo" style={{ marginLeft:'450px', height: '5vh', width: '5vh' }} />
+          <div className="navbar-center flex items-center justify-center">
+            <img src="logo.jpg" alt="Logo" className="h-[5vh] w-[5vh]" />
             <NavLink className="btn btn-ghost text-xl">HSRT</NavLink>
           </div>
 
-          {/* User or Auth Links */}
-          <div className="navbar-end flex items-center space-x-2">
+          {/* User/Auth Links */}
+          <div className="navbar-end flex items-center gap-2">
             {user ? (
               <div className="dropdown dropdown-end">
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
@@ -74,74 +65,69 @@ export const Header = () => {
                     </svg>
                   </div>
                 </div>
-                <ul tabIndex={0} className="menu menu-sm dropdown-content bg-stone-900  rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                  <div className='border-b border-gray-400 p-2 mb-2'>
-                    <h1 className="font-bold">Felhasználónév:</h1>
-                    <h1 className='text-end'>{user.displayName}</h1>
-                  </div>
+                <ul tabIndex={0} className="menu menu-sm dropdown-content bg-stone-900 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                   <li><NavLink className="btn btn-ghost bg-green-600 text-lg hover:bg-green-700" to="/profile">Profil</NavLink></li>
                   <li><a className='btn bg-red-800 mt-2 hover:bg-red-700 text-slate-100' onClick={logoutUser}>Kijelentkezés</a></li>
                 </ul>
               </div>
             ) : (
               <>
-                <NavLink className="btn btn-ghost mx-1 bg-indigo-800 hover:bg-indigo-700 text-xl text-yellow-400" to="/auth/in">
+                <NavLink className="btn btn-ghost bg-indigo-800 hover:bg-indigo-700 text-xl text-yellow-400" to="/auth/in">
                   Bejelentkezés
                 </NavLink>
-                <NavLink className="btn btn-ghost mx-1 bg-violet-900 hover:bg-violet-900 text-xl text-yellow-400" to="/auth/up">
+                <NavLink className="btn btn-ghost bg-violet-900 hover:bg-violet-900 text-xl text-yellow-400" to="/auth/up">
                   Regisztráció
                 </NavLink>
               </>
             )}
           </div>
         </div>
-        </div>
-        </>) : ( // Mobile view
-        <div>
-          {/* Mobile Menu */}
-          <></>
-          {isMobileMenuOpen && (
-            <div className="md:hidden flex flex-col space-y-4 mt-4">
-                <div className="navbar-center flex items-center space-x-4 ">
-                <img src="logo.jpg" alt="Logo" style={{ height: '5vh', width: '5vh' }} />
-                <NavLink className="btn btn-ghost text-xl">HSRT</NavLink>
+      </div>
+    </>
+  ) : ( // Mobile view
+    <div>
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden flex flex-col space-y-4 mt-4 items-center">
+          <div className="navbar-center flex items-center space-x-4">
+            <img src="logo.jpg" alt="Logo" className="h-[5vh] w-[5vh]" />
+            <NavLink className="btn btn-ghost text-xl">HSRT</NavLink>
           </div>
-              {navLinks}
-              {user ? (
-                <div className="dropdown dropdown-end">
-                  <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                    <div className="w-10 rounded-full">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-10">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                      </svg>
-                    </div>
-                  </div>
-                  <ul tabIndex={0} className="menu menu-sm dropdown-content bg-stone-900 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                    <li><NavLink className="btn btn-ghosttext-lg bg-green-600 text-lg hover:bg-green-700" to="/profile">Profil</NavLink></li>
-                    <li><a className='btn bg-red-800 mt-2 hover:bg-red-700 text-slate-100' onClick={logoutUser}>Kijelentkezés</a></li>
-                  </ul>
+          {navLinks}
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-10">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                  </svg>
                 </div>
-              ) : (
-                <>
-                  <NavLink className="btn btn-ghost mx-1 bg-indigo-800 hover:bg-indigo-700 text-xl text-yellow-400" to="/auth/in">
-                    Bejelentkezés
-                  </NavLink>
-                  <NavLink className="btn btn-ghost mx-1 bg-violet-900 hover:bg-violet-900 text-xl text-yellow-400" to="/auth/up">
-                    Regisztráció
-                  </NavLink>
-                </>
-              )}
+              </div>
+              <ul tabIndex={0} className="menu menu-sm dropdown-content bg-stone-900 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                <li><NavLink className="btn btn-ghost text-lg bg-green-600 text-lg hover:bg-green-700" to="/profile">Profil</NavLink></li>
+                <li><a className='btn bg-red-800 mt-2 hover:bg-red-700 text-slate-100' onClick={logoutUser}>Kijelentkezés</a></li>
+              </ul>
             </div>
+          ) : (
+            <>
+              <NavLink className="btn btn-ghost bg-indigo-800 hover:bg-indigo-700 text-xl text-yellow-400" to="/auth/in">
+                Bejelentkezés
+              </NavLink>
+              <NavLink className="btn btn-ghost bg-violet-900 hover:bg-violet-900 text-xl text-yellow-400" to="/auth/up">
+                Regisztráció
+              </NavLink>
+            </>
           )}
-          <button className="md:hidden btn btn-ghost text-xl" onClick={toggleMobileMenu}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 5h18M3 12h18M3 19h18" />
-            </svg>
-          </button>
         </div>
       )}
-      <Outlet />
-
-   </div>
+      <button className="md:hidden btn btn-ghost text-xl" onClick={toggleMobileMenu}>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 5h18M3 12h18M3 19h18" />
+        </svg>
+      </button>
+    </div>
+  )}
+  <Outlet />
+</div>
   );
 };
