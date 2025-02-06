@@ -14,6 +14,7 @@ export const Futamok = () => {
   },[])
   
   
+  
   return (
     <div className=''>
       <h1 className='text-3xl m-3 text-center font-bold w-100'>Futamok</h1>
@@ -38,6 +39,7 @@ export const Futamok = () => {
                     <h2 className="text-4xl font-bold text-center transition-transform duration-300 transform">
                       {races.palya}
                     </h2>
+                    <p>{races.idopont.seconds/86400}</p>
                   </div>
                 </figure>
                 <div className="card-body p-4">
