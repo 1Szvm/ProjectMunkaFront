@@ -5,7 +5,6 @@ import { Futamok } from './pages/Futamok'
 import { NotFound } from './pages/NotFound'
 import { Auth } from './pages/Auth'
 import Profile from './pages/Profile'
-import { Footer } from './components/Footer'
 import PwReset from './pages/Pwreset'
 import Bajnoksagok from './pages/Bajnoksagok'
 import Forum from './pages/Forum'
@@ -41,6 +40,7 @@ const router=createBrowserRouter([
     v7_skipActionErrorRevalidation: true,
   }} 
 )
+
 
 function App() {
   return <RouterProvider router={router}  future={{v7_startTransition: true}} /> 
