@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
+import { Footer } from '../components/Footer';
+import './Home.css'
 export const Home = () => {
   
   const [matches, setMatches] = useState(
@@ -23,7 +24,7 @@ document.location.reload(true);
   }, []);
   
   return (
-    <>
+    <div className='home'>
       {matches ? (
         <div className='justify-center items-center flex m-0 w-full'>
           <div className='overflow-hidden'>
@@ -43,6 +44,7 @@ document.location.reload(true);
           <div></div>
         </div>
       )}
-    </>
+      <Footer/>
+    </div>
   );
 };
