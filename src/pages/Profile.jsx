@@ -3,24 +3,13 @@ import { Footer } from '../components/Footer';
 import { useState } from 'react';
 
 export default function Profile() {
-  const [darkMode, setDarkMode] = useState(true);
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
 
 
   return (
     <div
-    className={`${darkMode ? 'bg-slate-900 text-white' : 'bg-gradient-to-r from-neutral-100 text-gray-700'} 
-                min-h-screen transition-colors duration-500 ease-in-out`}
-  >
+   >
     <div className="home h-screen">
-    <button
-          onClick={toggleDarkMode}
-          className="absolute top-[10px] right-5 p-3 rounded-full bg-gray-700 text-white transition-transform duration-300 transform hover:scale-100 md:top-[10px] lg:top-[15px]"
-        >
-          {darkMode ? '🌙' : '🌞'}
-        </button>
+
     <div className="min-h-screen  flex items-center justify-center">
       <div className="bg-neutral-100 p-8 rounded-lg shadow-lg w-80 h-100 max-w-md mb-16">
         <h1 className="text-2xl font-bold mb-6 text-indigo-950">Profile Settings</h1>
