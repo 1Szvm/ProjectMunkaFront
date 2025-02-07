@@ -123,15 +123,18 @@ export const Header = () => {
         <div>
              <button
           onClick={toggleDarkMode}
-          className="absolute top-[10px] right-5 p-3 rounded-full bg-gray-700 text-white transition-transform duration-500 transform hover:scale-100 md:top-[10px] lg:top-[15px]"
+          className="absolute top-[10px] left-1 p-2 rounded-full bg-gray-700 text-white transition-transform duration-500 transform hover:scale-100 md:top-[10px] lg:top-[15px]"
         >
           {darkMode ? '🌙' : '🌞'}
         </button>
-          <button className="md:hidden btn btn-ghost text-xl" onClick={toggleMobileMenu}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 5h18M3 12h18M3 19h18" />
-            </svg>
-          </button>
+        <div className="flex justify-end pb-2 pt-1">
+  <button className="md:hidden btn btn-ghost text-xl" onClick={toggleMobileMenu}>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 5h18M3 12h18M3 19h18" />
+    </svg>
+  </button>
+</div>
+
 
           <AnimatePresence>
             {isMobileMenuOpen && (
