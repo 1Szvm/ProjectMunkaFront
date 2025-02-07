@@ -54,7 +54,7 @@ export const Futamok = () => {
                       {category.nev}
                     </h2>
                     {racedate =new Date(races.idopont.seconds * 1000 + races.idopont.nanoseconds / 1000000,).toLocaleDateString("de-DE").split(".")}
-                    {today[2]!=racedate[2]?<p className="text-center text-lg font-bold">&gt; 1 év</p>:today[0]!=racedate[0]?<p className="text-center text-lg font-bold">{racedate[0]-today[0]} hónap múlva</p>:today[1]!=racedate[1]?<p className="text-center text-lg font-bold">{racedate[1]-today[1]} nap múlva</p>:}
+                    {today[2]!=racedate[2]?<p className="text-center text-lg font-bold">&gt; 1 év</p>:today[0]!=racedate[0]?<p className="text-center text-lg font-bold">{racedate[0]-today[0]} hónap múlva</p>:today[1]!=racedate[1]?<p className="text-center text-lg font-bold">{racedate[1]-today[1]} nap múlva</p>:<p>balls</p>}
                   </div>
                 </div>
                 :
