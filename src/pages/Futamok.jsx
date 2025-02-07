@@ -12,16 +12,9 @@ export const Futamok = () => {
   useEffect(()=>{
     readRaces(setRaces)
   },[])
-
-  let racedate;
   const today=new Date().toLocaleDateString("de-DE").split(".");
-  console.log(today);
-  
-  
+  let racedate
 
-  
-  
-  
   return (
     <div className="home" >
       <div className='min-h-screen'>
@@ -38,6 +31,7 @@ export const Futamok = () => {
         <div className='grid grid-cols-4 gap-4'>
           {races && races.map((races) => (
             categories && categories.map((category) => (
+              racedate =new Date(races.idopont.seconds * 1000 + races.idopont.nanoseconds / 1000000,).toLocaleDateString("de-DE").split("."),
               category.id===races.kategoria?
                 <div className="card bg-base-100 w-96 shadow-xl" key={races.id}>
                   <figure className='relative'>
@@ -53,8 +47,8 @@ export const Futamok = () => {
                     <h2 className="card-title rounded-lg p-2 text-sm text-center max-w-fit " style={{backgroundColor:`${category.color}`}}>
                       {category.nev}
                     </h2>
-                    {racedate =new Date(races.idopont.seconds * 1000 + races.idopont.nanoseconds / 1000000,).toLocaleDateString("de-DE").split(".")}
-                    {today[2]!=racedate[2]?<p className="text-center text-lg font-bold">&gt; 1 év</p>:today[0]!=racedate[0]?<p className="text-center text-lg font-bold">{racedate[0]-today[0]} hónap múlva</p>:today[1]!=racedate[1]?<p className="text-center text-lg font-bold">{racedate[1]-today[1]} nap múlva</p>:<p>balls</p>}
+                    {}
+                    {today[2]!=racedate[2]?<p className="text-center text-lg font-bold">&gt; 1 év</p>:today[0]!=racedate[0]?<p className="text-center text-lg font-bold">{racedate[0]-today[0]} hónap múlva</p>:today[1]!=racedate[1]?<p className="text-center text-lg font-bold">{racedate[1]-today[1]} nap múlva</p>:<p>Ma</p>}
                   </div>
                 </div>
                 :

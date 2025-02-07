@@ -20,6 +20,7 @@ export default function Adminpage() {
         <h1 className='text-center text-4xl font-bold m-2'>Admin page</h1>
         <div className='grid grid-cols-4 gap-4 m-auto'>
           <div className='btn btn-lg'>Felhasználók</div>
+          <div className='btn btn-lg'>Futamok</div>
           
         </div>
       </div>
