@@ -40,7 +40,7 @@ export const Header = () => {
   );
 
   return (
-    <div className="bg-slate-800 text-cyan-50 w-full overflow-hidden">
+    <div className="bg-slate-800 text-cyan-50 w-full overflow-hidden ">
       {matches ? ( // Desktop View
         <div className="bg-rose-600 flex items-center justify-center w-full">
           <div className="navbar px-4 md:px-8 w-full max-w-screen-xl mx-auto flex items-center justify-between">
