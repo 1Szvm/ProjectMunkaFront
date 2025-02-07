@@ -5,15 +5,25 @@ import { UserContext } from '../context/UserContext';
 
 export default function Adminpage() {
     const navigate=useNavigate()
-        const { user, logoutUser } = useContext(UserContext);
+        const { user } = useContext(UserContext);
       const [admins,setAdmins]=useState(null)
       useEffect(()=>{
         readAuthorization(setAdmins)
       },[])
-      if(!admins.map(admin=>admin.id).includes(user.uid)){
+      if(admins&&!admins.map(admin=>admin.Ids.includes(user.uid))){
         navigate('/')
       }
   return (
-    <div>Adminpage</div>
+    <>
+    {admins&&!admins.map(admin=>admin.Ids.includes(user.uid))?navigate('/'):
+      <div>
+        <h1 className='text-center text-4xl font-bold m-2'>Admin page</h1>
+        <div className='grid grid-cols-4 gap-4 m-auto'>
+          <div className='btn btn-lg'>Felhasználók</div>
+          
+        </div>
+      </div>
+    }
+    </>
   )
 }

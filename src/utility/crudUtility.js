@@ -21,9 +21,9 @@ export const readCategories = (setCategories) => {
 
   export const readAuthorization = (setAuth) => {
     const collectionRef = collection(db, "adminIds");
-    /*const q = query(collectionRef, orderBy('idopont', 'asc'))*/
+    const q = query(collectionRef, orderBy('Ids', 'asc'))
     const unsubscribe = onSnapshot(collectionRef, (snapshot) => {
-      setRaces(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+      setAuth(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
     });
     return unsubscribe;
   };

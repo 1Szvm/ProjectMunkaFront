@@ -12,6 +12,13 @@ export const Futamok = () => {
   useEffect(()=>{
     readRaces(setRaces)
   },[])
+
+  let racedate;
+  const today=new Date().toLocaleDateString("de-DE").split(".");
+  console.log(today);
+  
+  
+
   
   
   
@@ -46,6 +53,10 @@ export const Futamok = () => {
                     <h2 className="card-title rounded-lg p-2 text-sm text-center max-w-fit " style={{backgroundColor:`${category.color}`}}>
                       {category.nev}
                     </h2>
+                    {racedate =new Date(races.idopont.seconds * 1000 + races.idopont.nanoseconds / 1000000,).toLocaleDateString("de-DE").split(".")}
+                    {today[2]!=racedate[2]?<p className="text-center text-lg font-bold">&gt; 1 év</p>:<p className="text-center text-lg font-bold">Ma</p>}
+                    <p>{
+                    }</p>
                   </div>
                 </div>
                 :
