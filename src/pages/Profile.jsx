@@ -1,7 +1,9 @@
 import React from 'react';
+import { Footer } from '../components/Footer';
 
 export default function Profile() {
   return (
+    <div className="home h-screen">
     <div className="min-h-screen bg-gray-800 flex items-center justify-center">
       <div className="bg-neutral-100 p-8 rounded-lg shadow-lg w-80 h-100 max-w-md mb-16">
         <h1 className="text-2xl font-bold mb-6 text-indigo-950">Profile Settings</h1>
@@ -29,6 +31,8 @@ export default function Profile() {
           <button type="submit" className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save Changes</button>
         </form>
       </div>
+    </div>
+    <Footer/>
     </div>
   );
 }

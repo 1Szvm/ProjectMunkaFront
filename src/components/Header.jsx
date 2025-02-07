@@ -58,10 +58,10 @@ export const Header = () => {
           </div>
 
           {/* Centered Logo */}
-          <div className="navbar-center flex items-center space-x-4">
-            <img src="logo.jpg" alt="Logo" style={{ marginLeft:'450px', height: '5vh', width: '5vh' }} />
-            <NavLink className="btn btn-ghost text-xl">HSRT</NavLink>
-          </div>
+            <div className="navbar-center flex items-center space-x-4">
+              <img src="logo.jpg" alt="Logo" style={{ marginLeft:"450px" ,height: '5vh', width: '5vh' }} />
+              <NavLink className="btn btn-ghost text-xl">HSRT</NavLink>
+            </div>
 
           {/* User or Auth Links */}
           <div className="navbar-end flex items-center space-x-2">
