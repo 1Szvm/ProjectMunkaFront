@@ -79,24 +79,25 @@ export const Header = () => {
                   </button>
                   <AnimatePresence>
                     {isUserDropdownOpen && (
-                      <motion.ul
-                        initial={{ opacity: 0, scale: 0.9, y: -10 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.9, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute right-0 bg-stone-900 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-                      >
-                        <li>
-                          <NavLink className="btn btn-ghost bg-green-600 text-lg hover:bg-green-700" to="/profile">
-                            Profil
-                          </NavLink>
-                        </li>
-                        <li>
-                          <button className="btn bg-red-800 mt-2 hover:bg-red-700 text-slate-100" onClick={logoutUser}>
-                            Kijelentkezés
-                          </button>
-                        </li>
-                      </motion.ul>
+                    <motion.ul
+                    initial={{ opacity: 0, scale: 0.9, y: -10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="write here absolute right-0 bg-stone-900 rounded-box z-[1] mt-3 w-52 p-2 shadow flex flex-col items-center"
+                  >
+                    <li>
+                      <NavLink className="btn btn-ghost bg-green-600 text-lg hover:bg-green-700 w-[118px]" to="/profile">
+                        Profil
+                      </NavLink>
+                    </li>
+                    <li>
+                      <button className="btn bg-red-800 mt-2 hover:bg-red-700 text-slate-100" onClick={logoutUser}>
+                        Kijelentkezés
+                      </button>
+                    </li>
+                  </motion.ul>
+                  
                     )}
                     
                   </AnimatePresence>

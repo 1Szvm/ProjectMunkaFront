@@ -8,7 +8,7 @@ export default function Profile() {
   return (
     <div
    >
-    <div className="home h-screen">
+    <div className="home h-screen ">
 
     <div className="min-h-screen  flex items-center justify-center">
       <div className="bg-neutral-100 p-8 rounded-lg shadow-lg w-80 h-100 max-w-md mb-16">
