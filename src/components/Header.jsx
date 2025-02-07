@@ -111,7 +111,7 @@ export const Header = () => {
                   <NavLink className="btn btn-ghost bg-violet-900 hover:bg-violet-900 text-xl text-yellow-400" to="/auth/up">
                     Regisztráció
                   </NavLink>
-                  
+                  {}
                 </>
               )}
             </div>
