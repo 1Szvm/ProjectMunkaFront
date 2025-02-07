@@ -1,10 +1,16 @@
 import React from 'react';
 import { Footer } from '../components/Footer';
+import { useState } from 'react';
 
 export default function Profile() {
+
+
   return (
-    <div className="home h-screen">
-    <div className="min-h-screen bg-gray-800 flex items-center justify-center">
+    <div
+   >
+    <div className="home h-screen ">
+
+    <div className="min-h-screen  flex items-center justify-center">
       <div className="bg-neutral-100 p-8 rounded-lg shadow-lg w-80 h-100 max-w-md mb-16">
         <h1 className="text-2xl font-bold mb-6 text-indigo-950">Profile Settings</h1>
         <form>
@@ -33,6 +39,7 @@ export default function Profile() {
       </div>
     </div>
     <Footer/>
+    </div>
     </div>
   );
 }
