@@ -3,7 +3,7 @@ import { Footer } from '../components/Footer'
 
 const Bajnoksagok = () => {
   return (
-    <div>
+    <div className='home min-h-screen'>
       <Footer/>
     </div>
     

@@ -3,9 +3,9 @@ import { Footer } from '../components/Footer'
 
 const Forum = () => {
   return (
-    <div>
-      <Footer/>
-    </div>
+    <div className='home min-h-screen'>
+    <Footer/>
+   </div>
   )
 }
 

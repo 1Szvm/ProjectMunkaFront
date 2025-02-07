@@ -3,7 +3,7 @@ import React from 'react'
 export const Footer = () => {
     return (
       <div id="sticky-footer">
-        <div class="wrap">
+        <div className="wrap">
           <footer style={{ 
             height: '100px', 
             display: 'flex', 
