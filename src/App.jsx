@@ -8,6 +8,7 @@ import Profile from './pages/Profile'
 import PwReset from './pages/Pwreset'
 import Bajnoksagok from './pages/Bajnoksagok'
 import Forum from './pages/Forum'
+import Adminpage from './pages/Adminpage'
 
 
 const router=createBrowserRouter([
@@ -22,7 +23,8 @@ const router=createBrowserRouter([
       {path:'*',element:<NotFound />},
       {path:'/pwreset',element:<PwReset/>},
       {path:'/bajnoksagok',element:<Bajnoksagok/>},
-      {path:'/forum',element:<Forum/>}
+      {path:'/forum',element:<Forum/>},
+      {path:'/admin',element:<Adminpage/>}
       
     ],
    
