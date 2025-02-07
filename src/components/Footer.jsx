@@ -14,7 +14,7 @@ export const Footer = () => {
             padding: '10px', 
             background: '#333', 
             color: '#fff', 
-            position: 'absolute', 
+            position:"fixed",
             bottom: '0', 
             left: '0', 
             width: '100%' 
