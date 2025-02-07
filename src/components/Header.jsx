@@ -107,10 +107,10 @@ export const Header = () => {
                 </div>
               ) : (
                 <>
-                  <NavLink className="btn btn-ghost bg-indigo-800 hover:bg-indigo-700 text-xl text-yellow-400" to="/auth/in">
+                  <NavLink className="btn btn-ghost bg-indigo-800 p-1 hover:bg-indigo-700 text-l text-yellow-400 ml-1" to="/auth/in">
                     Bejelentkezés
                   </NavLink>
-                  <NavLink className="btn btn-ghost bg-violet-900 hover:bg-violet-900 text-xl text-yellow-400" to="/auth/up">
+                  <NavLink className="btn btn-ghost bg-violet-900 p-1 hover:bg-violet-900 text-l text-yellow-400 mr-6" to="/auth/up">
                     Regisztráció
                   </NavLink>
                   {}
@@ -123,7 +123,7 @@ export const Header = () => {
         <div>
              <button
           onClick={toggleDarkMode}
-          className="absolute top-[10px] left-1 p-2 rounded-full bg-gray-700 text-white transition-transform duration-500 transform hover:scale-100 md:top-[10px] lg:top-[15px]"
+          className="absolute top-[10px] left-3 p-2 rounded-full bg-gray-700 text-white transition-transform duration-500 transform hover:scale-100 md:top-[10px] lg:top-[15px]"
         >
           {darkMode ? '🌙' : '🌞'}
         </button>
