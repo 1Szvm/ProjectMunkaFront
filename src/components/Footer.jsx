@@ -5,7 +5,7 @@ export const Footer = () => {
       <div id="sticky-footer">
         <div className="wrap">
           <footer style={{ 
-            height: '100px', 
+            height: '50px', 
             display: 'flex', 
             flexDirection: 'column', 
             alignItems: 'center', 
