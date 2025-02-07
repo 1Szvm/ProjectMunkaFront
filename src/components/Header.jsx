@@ -45,11 +45,11 @@ export const Header = () => {
   );
 
   return (
-    <div className={`${darkMode ? 'bg-slate-900 text-white' : 'bg-gradient-to-r from-neutral-100 text-gray-900'} 
+    <div className={`${darkMode ? 'bg-slate-900 text-white' : 'bg-gradient-to-r bg-neutral-200 text-gray-900'} 
     min-h-screen transition-colors duration-500 ease-in-out`}>
       {matches ? ( // Desktop View
       
-        <div className={`${darkMode ? 'bg-rose-600' : 'bg-green-600'} 
+        <div className={`${darkMode ? 'bg-purple-800' : 'bg-sky-400'} 
         transition-colors duration-500 ease-in-out flex items-center justify-center w-full`}
           
       >

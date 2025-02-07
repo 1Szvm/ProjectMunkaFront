@@ -47,7 +47,8 @@ document.location.reload(true);
         </div>
       )}
       <AboutUs/>
-      
+      <Footer/>
+      <p className='h-[130px]'></p>
     </div>
   );
 };
