@@ -33,7 +33,7 @@ export const Futamok = () => {
             categories && categories.map((category) => (
               racedate =new Date(races.idopont.seconds * 1000 + races.idopont.nanoseconds / 1000000,).toLocaleDateString("de-DE").split("."),
               category.id===races.kategoria?
-                <div className="card bg-base-100 w-96 shadow-xl" key={races.id}>
+                <div className="card bg-slate-400 m-5 w-[390px] shadow-xl" key={races.id}>
                   <figure className='relative'>
                     <img
                       src={races.imageUrl}  alt={races.palya} className='transition-opacity duration-300 hover:opacity-0' />
