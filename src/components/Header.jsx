@@ -50,20 +50,22 @@ export const Header = () => {
       {matches ? ( // Desktop View
       
         <div className={`${darkMode ? 'bg-purple-800' : 'bg-sky-400'} 
-        transition-colors duration-500 ease-in-out flex items-center justify-center w-full`}
+        transition-colors duration-500 ease-in-out flex items-center justify-center w-full pb-1`}
           
       >
-            <button
-          onClick={toggleDarkMode}
-          className="absolute top-[10px] right-5 p-3 rounded-full bg-gray-700 text-white transition-transform duration-300 transform hover:scale-100 md:top-[10px] lg:top-[15px]"
-        >
-          {darkMode ? '🌙' : '🌞'}
-        </button>
+            
           <div className="navbar px-4 md:px-8 w-full max-w-screen-xl mx-auto flex items-center justify-between">
-            <div className="navbar-start flex items-center gap-4">{navLinks}</div>
-            <div className="navbar-center flex items-center justify-center">
+            
+            <div className="pl-10 navbar-start flex items-center gap-4">{navLinks}</div>
+            <div className="navbar-center flex items-center justify-center pl-16">
               <img src="logo.jpg" alt="Logo" className="h-[5vh] w-[5vh]" />
               <NavLink className="btn btn-ghost text-xl">HSRT</NavLink>
+              <button
+              onClick={toggleDarkMode}
+              className="absolute  left-8 p-[11px] rounded-full bg-gray-700 text-white transition-transform duration-300 transform hover:scale-100 md:top-[10px] lg:top-[15px]"
+            >
+              {darkMode ? '🌙' : '🌞'}
+            </button>
             </div>
 
             <div className="navbar-end flex items-center gap-2">
