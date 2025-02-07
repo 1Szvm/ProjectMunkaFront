@@ -135,6 +135,7 @@ export const Header = () => {
               </motion.div>
             )}
           </AnimatePresence>
+          
         </div>
       )}
       <Outlet />
