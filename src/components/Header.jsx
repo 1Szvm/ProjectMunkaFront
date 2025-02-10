@@ -12,10 +12,10 @@ export const Header = () => {
     window.matchMedia("(min-width: 768px)").matches
   );
   const [darkMode, setDarkMode] = useState(true);
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
-
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 768px)");
@@ -23,10 +23,17 @@ export const Header = () => {
 
     mediaQuery.addEventListener("change", handleMediaQueryChange);
 
+    // Apply dark mode based on the state
+    if (darkMode) {
+      document.documentElement.classList.add("dark"); // Add 'dark' class to the root element
+    } else {
+      document.documentElement.classList.remove("dark"); // Remove 'dark' class when light mode is active
+    }
+
     return () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
     };
-  }, []);
+  }, [darkMode]);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -46,32 +53,27 @@ export const Header = () => {
 
   return (
     <div className={`${darkMode ? 'bg-slate-900 text-white' : 'bg-gradient-to-r bg-neutral-200 text-gray-900'} 
-    min-h-screen transition-colors duration-500 ease-in-out`}>
+      min-h-screen transition-colors duration-500 ease-in-out`}>
       {matches ? ( // Desktop View
-      
         <div className={`${darkMode ? 'bg-purple-800' : 'bg-sky-400'} 
-        transition-colors duration-500 ease-in-out flex items-center justify-center w-full pb-1`}
-          
-      >
-            
+          transition-colors duration-500 ease-in-out flex items-center justify-center w-full pb-1`}
+        >
           <div className="navbar px-4 md:px-8 w-full max-w-screen-xl mx-auto flex items-center justify-between">
-            
             <div className="pl-10 navbar-start flex items-center gap-4">{navLinks}</div>
             <div className="navbar-center flex items-center justify-center pl-16">
               <img src="logo.jpg" alt="Logo" className="h-[5vh] w-[5vh]" />
               <NavLink className="btn btn-ghost text-xl">HSRT</NavLink>
               <button
-              onClick={toggleDarkMode}
-              className="absolute  left-8 p-[11px] rounded-full bg-gray-700 text-white transition-transform duration-300 transform hover:scale-100 md:top-[10px] lg:top-[15px]"
-            >
-              {darkMode ? '🌙' : '🌞'}
-            </button>
+                onClick={toggleDarkMode}
+                className="absolute  left-8 p-[11px] rounded-full bg-gray-700 text-white transition-transform duration-300 transform hover:scale-100 md:top-[10px] lg:top-[15px]"
+              >
+                {darkMode ? '🌙' : '🌞'}
+              </button>
             </div>
 
             <div className="navbar-end flex items-center gap-2">
               {user ? (
                 <div className="relative">
-                  
                   <button onClick={toggleUserDropdown} className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-10">
@@ -81,29 +83,26 @@ export const Header = () => {
                   </button>
                   <AnimatePresence>
                     {isUserDropdownOpen && (
-                    <motion.ul
-                    initial={{ opacity: 0, scale: 0.9, y: -10 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.9, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="write here absolute right-0 bg-stone-900 rounded-box z-[1] mt-3 w-52 p-2 shadow flex flex-col items-center"
-                  >
-                    <li>
-                      <NavLink className="btn btn-ghost bg-green-600 text-lg hover:bg-green-700 w-[118px]" to="/profile">
-                        Profil
-                      </NavLink>
-                    </li>
-                    <li>
-                      <button className="btn bg-red-800 mt-2 hover:bg-red-700 text-slate-100" onClick={logoutUser}>
-                        Kijelentkezés
-                      </button>
-                    </li>
-                  </motion.ul>
-                  
+                      <motion.ul
+                        initial={{ opacity: 0, scale: 0.9, y: -10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute right-0 bg-stone-900 rounded-box z-[1] mt-3 w-52 p-2 shadow flex flex-col items-center"
+                      >
+                        <li>
+                          <NavLink className="btn btn-ghost bg-green-600 text-lg hover:bg-green-700 w-[118px]" to="/profile">
+                            Profil
+                          </NavLink>
+                        </li>
+                        <li>
+                          <button className="btn bg-red-800 mt-2 hover:bg-red-700 text-slate-100" onClick={logoutUser}>
+                            Kijelentkezés
+                          </button>
+                        </li>
+                      </motion.ul>
                     )}
-                    
                   </AnimatePresence>
-                  
                 </div>
               ) : (
                 <>
@@ -113,7 +112,6 @@ export const Header = () => {
                   <NavLink className="btn btn-ghost bg-violet-900 p-1 hover:bg-violet-900 text-l text-yellow-400 mr-6" to="/auth/up">
                     Regisztráció
                   </NavLink>
-                  {}
                 </>
               )}
             </div>
@@ -121,20 +119,19 @@ export const Header = () => {
         </div>
       ) : ( // Mobile View
         <div>
-             <button
-          onClick={toggleDarkMode}
-          className="absolute top-[10px] left-3 p-2 rounded-full bg-gray-700 text-white transition-transform duration-500 transform hover:scale-100 md:top-[10px] lg:top-[15px]"
-        >
-          {darkMode ? '🌙' : '🌞'}
-        </button>
-        <div className="flex justify-end pb-2 pt-1">
-  <button className="md:hidden btn btn-ghost text-xl" onClick={toggleMobileMenu}>
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M3 5h18M3 12h18M3 19h18" />
-    </svg>
-  </button>
-</div>
-
+          <button
+            onClick={toggleDarkMode}
+            className="absolute top-[10px] left-3 p-2 rounded-full bg-gray-700 text-white transition-transform duration-500 transform hover:scale-100 md:top-[10px] lg:top-[15px]"
+          >
+            {darkMode ? '🌙' : '🌞'}
+          </button>
+          <div className="flex justify-end pb-2 pt-1">
+            <button className="md:hidden btn btn-ghost text-xl" onClick={toggleMobileMenu}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 5h18M3 12h18M3 19h18" />
+              </svg>
+            </button>
+          </div>
 
           <AnimatePresence>
             {isMobileMenuOpen && (
