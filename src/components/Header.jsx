@@ -48,8 +48,19 @@ export const Header = () => {
   );
 
   return (
-    <div className={`${darkMode ? 'bg-gradient-to-r from-gray-800 to-black text-white' : 'bg-gradient-to-r from-gray-100 to-gray-300 text-gray-800'} 
-  min-h-screen transition-colors duration-300 ease-in-out`}>
+    <motion.div
+    className={`min-h-screen transition-colors duration-300 ease-in-out ${
+      darkMode
+        ? "bg-gradient-to-r from-gray-800 to-black text-white"
+        : "bg-gradient-to-r from-gray-100 to-gray-300 text-gray-800"
+    }`}
+    animate={{
+      background: darkMode
+        ? "linear-gradient(to right, #1f2937, #000000)" // Dark mode gradient
+        : "linear-gradient(to right, #f3f4f6, #d1d5db)", // Light mode gradient
+    }}
+    transition={{ duration: 0.5, ease: "easeInOut" }}
+  >
 
       {matches ? ( // Desktop View
         <div className={`${darkMode ? 'bg-gradient-to-r from-gray-900 to-black' : 'bg-gradient-to-r from-teal-500 to-teal-600'} 
@@ -62,14 +73,23 @@ export const Header = () => {
           >
             <div className="pl-10 navbar-start flex items-center gap-4">{navLinks}</div>
             <div className="navbar-center flex items-center justify-center pl-16">
-              <motion.img
-                src="logo.jpg"
-                alt="Logo"
-                className="h-[5vh] w-[5vh] transition-all duration-300 ease-in-out transform hover:scale-110"
-                whileHover={{ scale: 1.1, rotate: 10 }}
-              />
-              <NavLink className="btn btn-ghost text-xl font-bold transition-all transform hover:scale-110 hover:text-amber-500">HSRT</NavLink>
+              <motion.button
+                className="flex items-center gap-2"
+                whileHover={{ scale: 1.1}} // rotate: 720000 csak egy kis fun xd
+                whileTap={{ scale: 0.95 }}
+                onClick={() => window.location.href = '/'} // Redirect on click (if needed)
+              >
+                <motion.img
+                  src="logo.jpg"
+                  alt="Logo"
+                  className="h-[5vh] w-[5vh] transition-all duration-300 ease-in-out"
+                />
+                <span className="text-xl font-bold transition-all transform hover:scale-110 hover:text-amber-500">
+                  HSRT
+                </span>
+              </motion.button>
             </div>
+
 
             <div className="navbar-end flex items-center gap-2">
               {/* Dark Mode Toggle Button */}
@@ -210,6 +230,6 @@ export const Header = () => {
         </div>
       )}
       <Outlet />
-    </div>
+    </motion.div>
   );
 };
