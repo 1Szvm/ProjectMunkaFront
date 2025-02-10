@@ -48,12 +48,12 @@ export const Header = () => {
   );
 
   return (
-    <div className={`${darkMode ? 'bg-gradient-to-r from-gray-900 to-black text-white' : 'bg-gradient-to-r from-teal-100 to-lime-200 text-gray-900'} 
-      min-h-screen transition-colors duration-500 ease-in-out`}>
-      
+    <div className={`${darkMode ? 'bg-gradient-to-r from-gray-800 to-black text-white' : 'bg-gradient-to-r from-gray-100 to-gray-300 text-gray-800'} 
+  min-h-screen transition-colors duration-300 ease-in-out`}>
+
       {matches ? ( // Desktop View
-        <div className={`${darkMode ? 'bg-gradient-to-r from-gray-900 to-black' : 'bg-gradient-to-r from-teal-400 to-lime-500'} 
-          transition-colors duration-500 ease-in-out flex items-center justify-center w-full pb-1`}>
+        <div className={`${darkMode ? 'bg-gradient-to-r from-gray-900 to-black' : 'bg-gradient-to-r from-teal-500 to-teal-600'} 
+          transition-colors duration-300 ease-in-out flex items-center justify-center w-full pb-1`}>
           <motion.div
             className="navbar px-4 md:px-8 w-full max-w-screen-xl mx-auto flex items-center justify-between"
             initial={{ opacity: 0, y: -30 }}
