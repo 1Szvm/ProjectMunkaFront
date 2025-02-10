@@ -1,6 +1,7 @@
-import React, {useEffect, useState } from 'react';
-import { readCategories, readRaces } from '../utility/crudUtility';
+import React, {useContext, useEffect, useState } from 'react';
+import { readAuthorization, readCategories, readRaces } from '../utility/crudUtility';
 import { Footer } from '../components/Footer';
+import { UserContext } from '../context/UserContext';
 
 export const Futamok = () => {
   const [categories,setCategories]=useState(null)
@@ -14,6 +15,15 @@ export const Futamok = () => {
   },[])
   const today=new Date().toLocaleDateString("de-DE").split(".");
   let racedate
+
+  const { user } = useContext(UserContext);
+  const [admins,setAdmins]=useState(null)
+  useEffect(()=>{
+    readAuthorization(setAdmins)
+  },[])
+  if(admins&&!admins.map(admin=>admin.Ids.includes(user.uid))){
+    navigate('/')
+  }
 
   return (
     <div className="home" >
@@ -56,6 +66,14 @@ export const Futamok = () => {
             ))
             ))}
         </div>
+        {admins&&admins.map(admin=>admin.Ids.includes(user.uid))?
+        <div className='btn rounded-full bg-red-600'>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+        </div>
+        :
+        <p>balls</p>}
         <Footer/>
         </div>
         </div>

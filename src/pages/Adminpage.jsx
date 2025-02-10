@@ -5,7 +5,7 @@ import { UserContext } from '../context/UserContext';
 
 export default function Adminpage() {
     const navigate=useNavigate()
-        const { user } = useContext(UserContext);
+      const { user } = useContext(UserContext);
       const [admins,setAdmins]=useState(null)
       useEffect(()=>{
         readAuthorization(setAdmins)
@@ -13,6 +13,7 @@ export default function Adminpage() {
       if(admins&&!admins.map(admin=>admin.Ids.includes(user.uid))){
         navigate('/')
       }
+      
   return (
     <>
     {admins&&!admins.map(admin=>admin.Ids.includes(user.uid))?navigate('/'):
