@@ -13,7 +13,7 @@ export const AboutUs = () => {
         transition={{ duration: 1.5, type: 'spring', stiffness: 100 }}
       >
         <h1 className="text-5xl font-extrabold mb-4 text-amber-800 dark:text-amber-500">Rólunk – HUNSRT</h1>
-        <p className="text-lg text-red-900 dark:text-gray-200">
+        <p className="text-lg">
           A HUNSRT egy népszerű magyar szimulátoros versenyliga, amely különböző platformokon szervez versenyeket.
         </p>
       </motion.div>
