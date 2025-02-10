@@ -23,14 +23,14 @@ export const Auth = () => {
   return (
     <div className="home">
       <div className="flex items-center justify-center min-h-screen">
-        <div className="w-full max-w-md bg-base-00 text-gray-200 rounded-lg shadow-lg p-6">
+        <div className="w-full max-w-md bg-base-00 rounded-lg shadow-lg p-6">
           <h3 className="text-2xl font-semibold text-center mb-6">
             {isSignIn ? 'Bejelentkezés' : 'Regisztráció'}
           </h3>
           <Form onSubmit={handleSubmit} className="space-y-4">
             {!isSignIn && (
               <div className="flex flex-col">
-                <label htmlFor="displayName" className="mb-1 text-sm font-medium text-gray-400">
+                <label htmlFor="displayName" className="mb-1 text-sm font-medium ">
                   Felhasználónév
                 </label>
                 <input
