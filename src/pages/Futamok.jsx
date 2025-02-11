@@ -1,81 +1,89 @@
-import React, {useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { readAuthorization, readCategories, readRaces } from '../utility/crudUtility';
 import { Footer } from '../components/Footer';
 import { UserContext } from '../context/UserContext';
 
 export const Futamok = () => {
-  const [categories,setCategories]=useState(null)
-  useEffect(()=>{
-    readCategories(setCategories)
-  },[])
-
-  const [races,setRaces]=useState(null)
-  useEffect(()=>{
-    readRaces(setRaces)
-  },[])
-  const today=new Date().toLocaleDateString("de-DE").split(".");
-  let racedate
-
   const { user } = useContext(UserContext);
-  const [admins,setAdmins]=useState(null)
-  useEffect(()=>{
-    readAuthorization(setAdmins)
-  },[])
+  const [admins, setAdmins] = useState(null);
+  const [categories, setCategories] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null); // Single selection
+  const [races, setRaces] = useState(null);
+  const today = new Date();
 
+  useEffect(() => {
+    readCategories(setCategories);
+    readRaces(setRaces);
+    readAuthorization(setAdmins);
+  }, []);
 
+  // Toggle selection
+  const handleCategoryClick = (categoryId) => {
+    setSelectedCategory((prev) => (prev === categoryId ? null : categoryId)); // Deselect if clicked again
+  };
+  
   const [add, setAdd] = useState(false);
   const handleAdd = () => {
     setAdd(!add);    
   };
 
   return (
-    <div className="home" >
-      <div className='min-h-screen '>
-        <div className='bg-slate-700'>
-          <h1 className='text-3xl m-3 text-center font-bold w-100 text-white'>Futamok</h1>
-          <div className="btn-group pb-4 text-center flex justify-center" role="group" aria-label="Category selection">
-            {categories?.map((category) => (
-              <div key={category.id} className="px-2 pt-1">
-                <label className={`btn btn-outline`} style={{color:`${category.color}`, opacity:"0.8"}} htmlFor={category.name}>
-                  {category.nev}
-                </label>
-              </div>
-            ))}
-          </div>
+    <div className="home">
+      <div className='min-h-screen'>
+        <h1 className='text-3xl m-3 text-center font-bold w-100'>Futamok</h1>
+
+        {/* Category Selector */}
+        <div className="btn-group pb-4 text-center flex justify-center" role="group" aria-label="Category selection">
+          {categories && categories.map((category) => (
+            <div key={category.id} className="p-1">
+              <label 
+                className={`btn ${selectedCategory === category.id ? 'btn-outline ' : ''}`}
+                style={{ color: category.color, opacity: "0.8" }}
+                onClick={() => handleCategoryClick(category.id)}
+              >
+                {category.nev}
+              </label>
+            </div>
+          ))}
         </div>
+
+        {/* Filter and Display Races */}
         <div className='grid grid-cols-4 gap-4'>
-          {races?.map((races) => (
-            categories?.map((category) => (
-              racedate =new Date(races.idopont.seconds * 1000 + races.idopont.nanoseconds / 1000000,).toLocaleDateString("de-DE").split("."),
-              category.id===races.kategoria?
-                <div className="card bg-slate-400 m-5 w-[390px] shadow-xl" key={races.id}>
+          {races && races
+            .filter((race) => !selectedCategory || race.kategoria === selectedCategory) // Show only selected category races
+            .map((race) => {
+              const racedate = new Date(
+                race.idopont.seconds * 1000 + race.idopont.nanoseconds / 1000000
+              )
+              const daysDiff = Math.ceil((racedate - today) / (1000 * 60 * 60 * 24));
+              
+              const category = categories?.find(cat => cat.id === race.kategoria);
+              if (!category) return null;
+
+              return (
+                <div className="card  m-5 w-[390px] shadow-xl" key={race.id}>
                   <figure className='relative'>
-                    <img
-                      src={races.imageUrl}  alt={races.palya} className='transition-opacity duration-300 hover:opacity-0' />
-                    <div className='absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 hover:opacity-60' style={{backgroundColor:`${category.color}`}}>
-                      <h2 className="text-4xl font-bold text-center transition-transform duration-300 transform">
-                        {races.palya}
+                    <img src={race.imageUrl} alt={race.palya} className='transition-opacity duration-300 hover:opacity-0' />
+                    <div className='absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 hover:opacity-60' 
+                      style={{ backgroundColor: category.color }}>
+                      <h2 className="text-4xl font-bold text-center text-white transition-transform duration-300 transform">
+                        {race.palya}
                       </h2>
                     </div>
                   </figure>
-                  <div className="card-body p-4">
-                    <h2 className="card-title rounded-lg p-2 text-sm text-center max-w-fit " style={{backgroundColor:`${category.color}`}}>
+                  <div className="m-2 flex justify-between">
+                    <div className="rounded-lg p-2 text-sm text-white text-center max-w-fit" 
+                      style={{ backgroundColor: category.color }}>
                       {category.nev}
-                    </h2>
-                    {}
-                    {today[2]!=racedate[2]?<p className="text-center text-lg font-bold">&gt; 1 év</p>:today[0]!=racedate[0]?<p className="text-center text-lg font-bold">{racedate[0]-today[0]} hónap múlva</p>:today[1]!=racedate[1]?<p className="text-center text-lg font-bold">{racedate[1]-today[1]} nap múlva</p>:<p>Ma</p>}
+                    </div>
+                    <div className='rounded-lg p-2 text-sm text-white text-center max-w-fit' style={{backgroundColor:category.color}}>{daysDiff} nap mulva</div>
                   </div>
+                  <div className='p-2 btn text-white text-xl text-center max-w-full m-2 rounded-lg' style={{backgroundColor:category.color}} >Részletek</div>
                 </div>
-                :
-                null
-            ))
-            ))}
+              );
+            })
+          }
         </div>
-        {add && admins?.some(admin => admin.Ids.includes(user.uid)) && (
-            <div className='transition-transform duration-300'>
-              <p>ADD</p>
-            </div>
-          )}
 
         {admins?.some(admin => admin.Ids.includes(user.uid)) && (
           <div
@@ -95,9 +103,8 @@ export const Futamok = () => {
           </svg>
           </div>
         )}
-        <Footer/>
-        </div>
+        <Footer />
       </div>
-        
-);
-}
+    </div>
+  );
+};
