@@ -22,8 +22,8 @@ export const Futamok = () => {
     readAuthorization(setAdmins)
   },[])
 
-  const [add, setAdd] = useState(false);
 
+  const [add, setAdd] = useState(false);
   const handleAdd = () => {
     setAdd(!add);    
   };
@@ -31,15 +31,17 @@ export const Futamok = () => {
   return (
     <div className="home" >
       <div className='min-h-screen '>
-        <h1 className='text-3xl m-3 text-center font-bold w-100 '>Futamok</h1>
-        <div className="btn-group pb-4 text-center flex justify-center bg-slate-700 max-w-min rounded-xl p-2 m-auto" role="group" aria-label="Category selection">
-          {categories?.map((category) => (
-            <div key={category.id} className="px-2 pt-1">
-              <label className={`btn btn-outline`} style={{color:`${category.color}`, opacity:"0.8"}} htmlFor={category.name}>
-                {category.nev}
-              </label>
-            </div>
-          ))}
+        <div className='bg-slate-700'>
+          <h1 className='text-3xl m-3 text-center font-bold w-100 text-white'>Futamok</h1>
+          <div className="btn-group pb-4 text-center flex justify-center" role="group" aria-label="Category selection">
+            {categories?.map((category) => (
+              <div key={category.id} className="px-2 pt-1">
+                <label className={`btn btn-outline`} style={{color:`${category.color}`, opacity:"0.8"}} htmlFor={category.name}>
+                  {category.nev}
+                </label>
+              </div>
+            ))}
+          </div>
         </div>
         <div className='grid grid-cols-4 gap-4'>
           {races?.map((races) => (
@@ -95,7 +97,7 @@ export const Futamok = () => {
         )}
         <Footer/>
         </div>
-        </div>
+      </div>
         
 );
 }
