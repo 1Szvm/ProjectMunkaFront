@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 export const AboutUs = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen p-8">
       
@@ -178,6 +180,45 @@ export const AboutUs = () => {
           <br />
           <strong>🌐 Weboldal:</strong> www.hunsrt.hu  
         </motion.p>
+      </motion.section>
+      <motion.section
+        className="max-w-6xl mx-auto mb-16 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, delay: 0.8 }}
+      >
+        <motion.h2
+          className="text-3xl font-bold text-red-600 dark:text-green-400 mb-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.8 }}
+        >
+          📩 Szabályzat
+        </motion.h2>
+        <motion.p
+  className="text-lg text-gray-900 dark:text-slate-300"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 1.2, delay: 1 }}
+>
+  <strong>📜 Általános szabályzat: </strong> 
+  Ugyanazt a nevet használd Discordon is mint játékban, hogy be tudjunk azonosítani (Írd át a beceneved a szerveren)
+  Hirdetni nem hirdetünk csak az arra kijelölt helyen
+  A futamokat kötelező rögzíteni amennyiben megoldható, balesetek elemzése érdekében (F1-ben futam után "Save Full Race Replay")
+
+  <br />
+
+  <motion.button
+    onClick={() => navigate('/regulation')}
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="mt-4 flex items-center gap-2 bg-red-600 text-white font-semibold px-4 py-2 rounded-xl shadow-md hover:bg-red-700 transition-all duration-300"
+  >
+    <img src="protected.png" alt="" className="w-5 h-5" />
+
+    !!Folytatás...!!
+  </motion.button>
+</motion.p>
       </motion.section>
       
     </div>
