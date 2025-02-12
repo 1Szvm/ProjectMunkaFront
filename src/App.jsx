@@ -9,6 +9,7 @@ import PwReset from './pages/Pwreset'
 import Bajnoksagok from './pages/Bajnoksagok'
 import Forum from './pages/Forum'
 import Adminpage from './pages/Adminpage'
+import Regulation from './pages/Regulation'
 
 
 const router=createBrowserRouter([
@@ -24,8 +25,8 @@ const router=createBrowserRouter([
       {path:'/pwreset',element:<PwReset/>},
       {path:'/bajnoksagok',element:<Bajnoksagok/>},
       {path:'/forum',element:<Forum/>},
-      {path:'/admin',element:<Adminpage/>}
-      
+      {path:'/admin',element:<Adminpage/>},
+      {path:'/regulation',element:<Regulation/>}
     ],
    
   }
