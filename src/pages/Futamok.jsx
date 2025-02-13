@@ -67,7 +67,7 @@ export const Futamok = () => {
               if (!category) return null;
 
               return (
-                <div className="card m-5 w-[390px] shadow-xl" key={race.id}>
+                <div className="card m-5 w-[390px] shadow-xl bg-neutral-100" key={race.id}>
                   <figure className='relative'>
                     <img src={race.imageUrl} alt={race.palya} className='transition-opacity duration-300 hover:opacity-0 rounded-xl' />
                     <div className='absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 hover:opacity-60 rounded-xl' 
@@ -145,6 +145,7 @@ export const Futamok = () => {
           <div className="modal-box">
             {selectedRace ? (
               <>
+              <div className='text-neutral-700'>
                 <img src={selectedRace.imageUrl} alt={selectedRace.palya} className='rounded mb-5' />
                 <h3 className="font-bold text-xl py-4">{selectedRace.palya}</h3>
                 <p className="py-2">
@@ -152,6 +153,7 @@ export const Futamok = () => {
                 </p>
                 <p className="py-2">Dátum: {new Date(selectedRace.idopont.seconds * 1000).toLocaleDateString()}</p>
                 <p className="py-2">Hátralévő idő: {Math.ceil((new Date(selectedRace.idopont.seconds * 1000) - today) / (1000 * 60 * 60 * 24))} nap</p>
+                </div>
               </>
             ) : (
               <p className="py-4">Nincsenek részletek.</p>

@@ -75,7 +75,7 @@ export const Header = () => {
             <div className="navbar-center flex items-center justify-center pl-16">
               <motion.button
                 className="flex items-center gap-2"
-                whileHover={{ scale: 1.1}} // rotate: 720000 csak egy kis fun xd
+                whileHover={{ scale: 1.1}} // asdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss csak egy kis fun xd
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.location.href = '/'} // Redirect on click (if needed)
               >
