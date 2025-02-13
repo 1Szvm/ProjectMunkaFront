@@ -23,7 +23,7 @@ export const Auth = () => {
   return (
     <div className="home">
       <div className="flex items-center justify-center min-h-screen">
-        <div className="w-full max-w-md bg-neutral-100 rounded-lg shadow-lg p-6 text-blue-500 bg-slate-100">
+        <div className="w-full max-w-md bg-neutral-100 rounded-lg shadow-lg p-6 text-blue-500">
           <h3 className="text-2xl font-semibold text-center mb-6">
             {isSignIn ? 'Bejelentkezés' : 'Regisztráció'}
           </h3>
