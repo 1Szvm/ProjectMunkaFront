@@ -8,7 +8,6 @@ export const Futamok = () => {
   const [admins, setAdmins] = useState(null);
   const [categories, setCategories] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [add, setAdd] = useState(false);
   const [detailsId, setDetailsId] = useState(null);
   const [races, setRaces] = useState(null);
   const today = new Date();
@@ -23,14 +22,14 @@ export const Futamok = () => {
     setSelectedCategory((prev) => (prev === categoryId ? null : categoryId));
   };
 
-  const handleAdd = () => {
-    setAdd(!add);
-  };
-
   const handleDetails = (id) => {
     setDetailsId(id);
     document.getElementById('details').showModal();
   };
+
+  const handleAdd=()=>{
+    document.getElementById('add').showModal()
+  }
 
   const selectedRace = races?.find((race) => race.id === detailsId);
 
@@ -100,16 +99,9 @@ export const Futamok = () => {
           }
         </div>
 
-        {add && admins?.some(admin => admin.Ids.includes(user.uid)) && (
-          <div className='transition-transform duration-300 float-start'>
-            <p>ADD</p>
-          </div>
-        )}
-
         {admins?.some(admin => admin.Ids.includes(user.uid)) && (
           <div
-            className={`fixed bottom-20 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 ${add ? "bg-red-600" : "bg-slate-800"}`}
-            onClick={handleAdd}
+            className={`fixed bottom-20 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 bg-red-600`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -117,12 +109,36 @@ export const Futamok = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className={`size-10 text-white transition-transform duration-300 ${add ? "rotate-[-135deg]" : ""}`}
+              className={`size-10 text-white transition-transform duration-300 `}
+              onClick={handleAdd}
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
           </div>
         )}
+
+        <dialog id="add" className="modal">
+          <div className="modal-box max-h-screen">
+            <h3 className="font-bold text-lg">Verseny létrehozása.</h3>
+            <select className="select w-full max-w-xs my-2 border input-bordered">
+              <option disabled selected>Válaszd ki a játékot</option>
+              {
+                categories&&categories.map(obj=>
+                  <option key={obj.id} style={{color:obj.color}}>{obj.nev}</option>
+                )
+              }
+            </select>
+            <input type="text" placeholder="Pálya neve" className="input input-bordered w-full max-w-xs" />
+            <p className='px-1 mt-5'>Pálya kép:</p>
+            <input type="file" className="file-input file-input-bordered w-full max-w-xs my-2" />
+            <div className="modal-action">
+              <div className='btn bg-green-600 text-white hover:bg-green-700'>Létrehozás</div>
+              <form method="dialog">
+                <button className="btn">Bezárás</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
 
         {/* Details Modal */}
         <dialog id="details" className="modal">
@@ -147,7 +163,7 @@ export const Futamok = () => {
                   <button className="btn text-yellow-600 hover:bg-yellow-400 hover:text-slate-950 ">Jeletkezés visszavonás</button>: 
                   <button className="btn text-green-600 hover:bg-green-400 hover:text-slate-950">Jelentkezek</button>}
                 <form method="dialog">
-                  <button className="btn bg-red-600 text-white">Bezárás</button>
+                  <button className="btn bg-red-600 txet-white">Bezárás</button>
                 </form>
               </div>
           </div>
