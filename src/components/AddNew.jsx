@@ -57,16 +57,18 @@ export default function AddNew() {
         }else{
           let newRaceData={
             ...data,
-            idopont,
-            kategoria,
-            palya,
+            idopont:document.getElementById("date").value,
+            kategoria:selectedCateg,
+            palya:document.getElementById("track").value,
             resztvevok:[]
           }
+          console.log(newRaceData);
+          
           try {
             const file=data.file[0]
             const {url,id}=file ? await uploadFile(file) : null
             delete newPostData.file
-            newPostData={...newPostData,imageUrl:{url,id}}
+            newPostData={...newRaceData,imageUrl:{url,id}}
             addPost(newPostData)
             setUploaded(true)
             reset()
@@ -113,12 +115,15 @@ export default function AddNew() {
                 <select className="select w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option disabled defaultValue={true}>Válaszd ki a játékot</option>
                     {categories && categories.map(obj => (
-                        <option key={obj.id} style={{ color: obj.color }}>{obj.nev}</option>
+                        <option key={obj.id} style={{ color: obj.color }}  onClick={()=>setSelectedCateg(obj.id)}>{obj.nev}</option>
                     ))}
                 </select>
                 
                 <label className="block font-medium mt-4">Pálya neve</label>
-                <input type="text" placeholder="Pálya neve" className="input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <input id="track" type="text" placeholder="Pálya neve" className="input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                              {...register('track', { required: 'A név megadása kötelező.' })}
+                />
+                <p className="text-red-600">{errors?.track?.message}</p>
                 
                 <label className="block font-medium mt-4">Pálya kép</label>
                 <div>
@@ -137,12 +142,15 @@ export default function AddNew() {
                         })}
                         onChange={(e) => setPhoto(URL.createObjectURL(e.target.files[0]))}
                     />
-                    <p className="text-danger">{errors?.file?.message}</p>
-                    <p className="text-danger">{errors?.file&&"fotó megadása kötelező"}</p>
+                    <p className="text-red-600">{errors?.file?.message}</p>
+                    <p className="text-red-600">{errors?.file&&"Fotó megadása kötelező"}</p>
                 </div>
                 
                 <label className="block font-medium mt-4">Dátum kiválasztása</label>
-                <input type="date" className="input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <input id="date" type="date" className="input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    {...register('date', { required: 'A dátum megadása kötelező.' })}
+                />
+                <p className="text-red-600">{errors?.date?.message}</p>
                 
                 <div className="modal-action flex justify-between mt-6">
                 <button className="btn bg-green-600 text-white hover:bg-green-700 px-4 py-2 rounded-lg" onClick={handleNewRace}>Létrehozás</button>
