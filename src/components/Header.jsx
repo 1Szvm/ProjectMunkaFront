@@ -45,7 +45,7 @@ export const Header = () => {
       <NavLink className="btn btn-ghost text-xl hover:text-orange-400 transition-all transform hover:scale-110" to="/futamok">Futamok</NavLink>
       <NavLink className="btn btn-ghost text-xl hover:text-orange-400 transition-all transform hover:scale-110" to="/bajnoksagok">Bajnokságok</NavLink>
       <NavLink className="btn btn-ghost text-xl hover:text-orange-400 transition-all transform hover:scale-110" to="/forum">Forum</NavLink>
-      
+     
     </>
 
   );
@@ -66,7 +66,7 @@ export const Header = () => {
   >
 
       {matches ? ( // Desktop View
-        <div className={`${darkMode ? 'bg-gradient-to-r from-gray-900 to-black' : 'bg-gradient-to-r from-teal-500 to-teal-600'} 
+        <div className={`${darkMode ? 'bg-gradient-to-r from-gray-900 to-black' : 'bg-gradient-to-r from-teal-500 to-teal-600'}
           transition-colors duration-300 ease-in-out flex items-center justify-center w-full pb-1`}>
           <motion.div
             className="navbar px-4 md:px-8 w-full max-w-screen-xl mx-auto flex items-center justify-between"
@@ -78,7 +78,7 @@ export const Header = () => {
             <div className="navbar-center flex items-center justify-center pl-16">
               <motion.button
                 className="flex items-center gap-2"
-                whileHover={{ scale: 1.1}} // asdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss csak egy kis fun xd
+                whileHover={{ scale: 1.1}}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.location.href = '/'} // Redirect on click (if needed)
               >
@@ -122,7 +122,7 @@ export const Header = () => {
                   </motion.button>
                   {/* <ProfileMenu/> */}
                   {/* <AnimatePresence>
-                    
+                   
                     {isUserDropdownOpen && (
                       <>
                       <ProfileMenu/>
@@ -150,7 +150,7 @@ export const Header = () => {
                       </motion.ul>
                       </>
                     )}
-                  </AnimatePresence> */} 
+                  </AnimatePresence> */}
                 </div>
               ) : (
                 <>
@@ -172,88 +172,92 @@ export const Header = () => {
           </motion.div>
         </div>
       ) : ( // Mobile View
-        <div>
+        <div className="relative text-neutral-900 p-1 mr-2">
+        {/* Dark Mode Toggle Button */}
+        <motion.button
+          onClick={toggleDarkMode}
+          className="absolute top-3 left-3 p-2 rounded-full bg-gray-600 text-white transition-transform duration-500 transform hover:scale-125"
+          whileHover={{ scale: 1.2 }}
+        >
+          {darkMode ? '🌙' : '🌞'}
+        </motion.button>
+     
+        {/* Mobile Menu Toggle Button */}
+        <div className="flex justify-end pb-2 pt-1 text-orange-600">
           <motion.button
-            onClick={toggleDarkMode}
-            className="absolute top-3 left-3 p-2 rounded-full bg-gray-600 text-white transition-transform duration-500 transform hover:scale-125"
-            whileHover={{ scale: 1.2 }}
+            className="md:hidden btn btn-ghost text-xl"
+            onClick={toggleMobileMenu}
+            whileHover={{ scale: 1.1 }}
           >
-            {darkMode ? '🌙' : '🌞'}
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 5h18M3 12h18M3 19h18" />
+            </svg>
           </motion.button>
-          <div className="flex justify-end pb-2 pt-1">
-            <motion.button
-              className="md:hidden btn btn-ghost text-xl"
-              onClick={toggleMobileMenu}
-              whileHover={{ scale: 1.1 }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 5h18M3 12h18M3 19h18" />
-              </svg>
-            </motion.button>
-          </div>
-
-          <AnimatePresence>
-            {isMobileMenuOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className="md:hidden flex flex-col space-y-4 mt-4 items-center"
-              >
-                <div className="navbar-center flex items-center space-x-4">
-                  <motion.img
-                    src="logo.jpg"
-                    alt="Logo"
-                    className="h-[5vh] w-[5vh] transition-all duration-300 ease-in-out transform hover:scale-110"
-                    whileHover={{ scale: 1.1, rotate: 10 }}
-                  />
-                  <NavLink className="btn btn-ghost text-xl font-bold transition-all transform hover:scale-110">HSRT</NavLink>
-                </div>
-                {navLinks}
-                {user ? (
-                  //telefon-bejelenkezes utan
-                  <>
-                <div className="rounded-lg shadow-md flex flex-col gap-1 w-40 ">
-                  <NavLink
-                    className="px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 text-center shadow-md hover:shadow-lg"
-                    to="/profile"
-                  >
-                    Profil
-                  </NavLink>
-                  <NavLink
-                    className="px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-red-600 to-rose-600 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 text-center shadow-md hover:shadow-lg"
-                    to="/"
-                    onClick={logoutUser}
-                  >
-                    Kijelentkezés
-                  </NavLink>
-                </div>
-
-                  </>
-                ) : (
-                  <>
-                  <div className="rounded-lg shadow-md flex flex-col gap-1 w-50">
-                    <NavLink
-                      className="px-4 py-3 text-lg font-medium text-white bg-gradient-to-r from-amber-600 to-yellow-500 rounded-lg transition-all duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 hover:from-amber-700 hover:to-yellow-400 text-center shadow-md hover:shadow-lg"
-                      to="/auth/in"
-                    >
-                      Bejelentkezés
-                    </NavLink>
-                    <NavLink
-                      className="px-4 py-3 text-lg font-medium text-white bg-gradient-to-r from-blue-800 to-blue-600 rounded-lg transition-all duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 hover:from-blue-900 hover:to-blue-500 text-center shadow-md hover:shadow-lg"
-                      to="/auth/up"
-                    >
-                      Regisztráció
-                    </NavLink>
-                  </div>
-                </>
-                
-                )}
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
+     
+        {/* Mobile Menu */}
+        <AnimatePresence>
+  {isMobileMenuOpen && (
+    <motion.div
+      initial={{ opacity: 0, x: 20, scale: 0.95 }}
+      animate={{ opacity: 1, x: 0, scale: 1 }}
+      exit={{ opacity: 0, x: 20, scale: 0.95 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="absolute top-[120%] right-0 mt-2 rounded-lg shadow-lg bg-white w-40 overflow-hidden z-50 border border-gray-300"
+    >
+      {/* Logo and App Name */}
+      <div className="navbar-center flex items-center space-x-4 p-2">
+        <motion.img
+          src="logo.jpg"
+          alt="Logo"
+          className="h-[5vh] w-[5vh] transition-all duration-300 ease-in-out transform hover:scale-110"
+          whileHover={{ scale: 1.1, rotate: 10 }}
+        />
+        <NavLink className="btn btn-ghost text-xl font-bold transition-all transform hover:scale-110">HSRT</NavLink>
+      </div>
+
+      {/* Navigation Links */}
+      {navLinks}
+
+      {/* Conditional User Links */}
+      {user ? (
+        <div className="rounded-lg shadow-md flex flex-col p-2">
+          <NavLink
+            className="m-1 px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 text-center shadow-md hover:shadow-lg"
+            to="/profile"
+          >
+            Profil
+          </NavLink>
+          <NavLink
+            className="m-1 px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-red-600 to-rose-600 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 text-center shadow-md hover:shadow-lg"
+            to="/"
+            onClick={logoutUser}
+          >
+            Kijelentkezés
+          </NavLink>
+        </div>
+      ) : (
+        <div className="rounded-lg shadow-md flex flex-col p-2">
+          <NavLink
+            className="m-1 px-4 py-3 text-lg font-medium text-white bg-gradient-to-r from-amber-600 to-yellow-500 rounded-lg transition-all duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 hover:from-amber-700 hover:to-yellow-400 text-center shadow-md hover:shadow-lg"
+            to="/auth/in"
+          >
+            Bejelentkezés
+          </NavLink>
+          <NavLink
+            className="m-1 px-4 py-3 text-lg font-medium text-white bg-gradient-to-r from-blue-800 to-blue-600 rounded-lg transition-all duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 hover:from-blue-900 hover:to-blue-500 text-center shadow-md hover:shadow-lg"
+            to="/auth/up"
+          >
+            Regisztráció
+          </NavLink>
+        </div>
+      )}
+    </motion.div>
+  )}
+</AnimatePresence>
+
+      </div>
+     
       )}
       <Outlet />
     </motion.div>
