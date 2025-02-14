@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { motion, AnimatePresence } from "framer-motion";
+import ProfileMenu from "./ProfileMenu";
 
 export const Header = () => {
   const { user, logoutUser } = useContext(UserContext);
@@ -44,7 +45,9 @@ export const Header = () => {
       <NavLink className="btn btn-ghost text-xl hover:text-orange-400 transition-all transform hover:scale-110" to="/futamok">Futamok</NavLink>
       <NavLink className="btn btn-ghost text-xl hover:text-orange-400 transition-all transform hover:scale-110" to="/bajnoksagok">Bajnokságok</NavLink>
       <NavLink className="btn btn-ghost text-xl hover:text-orange-400 transition-all transform hover:scale-110" to="/forum">Forum</NavLink>
+      
     </>
+
   );
 
   return (
@@ -88,6 +91,7 @@ export const Header = () => {
                   HSRT
                 </span>
               </motion.button>
+              {/* <ProfileMenu/> */}
             </div>
 
 
@@ -103,7 +107,8 @@ export const Header = () => {
 
               {user ? (
                 <div className="relative">
-                  <motion.button
+                  <ProfileMenu/>
+                  {/* <motion.button
                     onClick={toggleUserDropdown}
                     className="btn btn-ghost btn-circle avatar"
                     whileHover={{ scale: 1.1 }}
@@ -115,8 +120,12 @@ export const Header = () => {
                       </svg>
                     </div>
                   </motion.button>
-                  <AnimatePresence>
+                  {/* <ProfileMenu/> */}
+                  {/* <AnimatePresence>
+                    
                     {isUserDropdownOpen && (
+                      <>
+                      <ProfileMenu/>
                       <motion.ul
                         initial={{ opacity: 0, scale: 0.9, y: -10 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -139,8 +148,9 @@ export const Header = () => {
                           </motion.button>
                         </li>
                       </motion.ul>
+                      </>
                     )}
-                  </AnimatePresence>
+                  </AnimatePresence> */} 
                 </div>
               ) : (
                 <>
@@ -202,27 +212,43 @@ export const Header = () => {
                 </div>
                 {navLinks}
                 {user ? (
+                  //telefon-bejelenkezes utan
+                  <>
+                <div className="rounded-lg shadow-md flex flex-col gap-1 w-40 ">
                   <NavLink
-                    className="btn btn-ghost bg-orange-600 text-lg hover:bg-orange-700"
+                    className="px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 text-center shadow-md hover:shadow-lg"
                     to="/profile"
                   >
                     Profil
                   </NavLink>
+                  <NavLink
+                    className="px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-red-600 to-rose-600 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 text-center shadow-md hover:shadow-lg"
+                    to="/"
+                    onClick={logoutUser}
+                  >
+                    Kijelentkezés
+                  </NavLink>
+                </div>
+
+                  </>
                 ) : (
                   <>
+                  <div className="rounded-lg shadow-md flex flex-col gap-1 w-50">
                     <NavLink
-                      className="btn btn-ghost bg-amber-700 hover:bg-amber-600 text-xl text-white"
+                      className="px-4 py-3 text-lg font-medium text-white bg-gradient-to-r from-amber-600 to-yellow-500 rounded-lg transition-all duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 hover:from-amber-700 hover:to-yellow-400 text-center shadow-md hover:shadow-lg"
                       to="/auth/in"
                     >
                       Bejelentkezés
                     </NavLink>
                     <NavLink
-                      className="btn btn-ghost bg-blue-800 hover:bg-blue-700 text-xl text-white"
+                      className="px-4 py-3 text-lg font-medium text-white bg-gradient-to-r from-blue-800 to-blue-600 rounded-lg transition-all duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 hover:from-blue-900 hover:to-blue-500 text-center shadow-md hover:shadow-lg"
                       to="/auth/up"
                     >
                       Regisztráció
                     </NavLink>
-                  </>
+                  </div>
+                </>
+                
                 )}
               </motion.div>
             )}
