@@ -66,7 +66,7 @@ export const Header = () => {
   >
 
       {matches ? ( // Desktop View
-        <div className={`${darkMode ? 'bg-gradient-to-r from-gray-900 to-black' : 'bg-gradient-to-r from-teal-500 to-teal-600'}
+        <div className={`${darkMode ? 'bg-gradient-to-r from-gray-900 to-black' : 'bg-gradient-to-r from-teal-400 to-teal-500'}
           transition-colors duration-300 ease-in-out flex items-center justify-center w-full pb-1`}>
           <motion.div
             className="navbar px-4 md:px-8 w-full max-w-screen-xl mx-auto flex items-center justify-between"
