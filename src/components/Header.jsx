@@ -66,8 +66,15 @@ export const Header = () => {
   >
 
       {matches ? ( // Desktop View
-        <div className={`${darkMode ? 'bg-gradient-to-r from-gray-900 to-black' : 'bg-gradient-to-r from-teal-400 to-teal-500'}
+
+        <div className={`${darkMode ? 'bg-gradient-to-r from-gray-900 to-black delay-75' : ' bg-gradient-to-r delay-75 from-teal-400 to-teal-500' }
           transition-colors duration-300 ease-in-out flex items-center justify-center w-full pb-1`}>
+             <motion.button
+                onClick={toggleDarkMode}
+                className="absolute left-8 p-[11px] rounded-full bg-gray-600 text-white transition-all duration-300 transform hover:scale-125"
+              >
+                {darkMode ? '🌙' : '🌞'}
+              </motion.button>
           <motion.div
             className="navbar px-4 md:px-8 w-full max-w-screen-xl mx-auto flex items-center justify-between"
             initial={{ opacity: 0, y: -30 }}
@@ -97,13 +104,7 @@ export const Header = () => {
 
             <div className="navbar-end flex items-center gap-2">
               {/* Dark Mode Toggle Button */}
-              <motion.button
-                onClick={toggleDarkMode}
-                className="absolute left-8 p-[11px] rounded-full bg-gray-600 text-white transition-transform duration-300 transform hover:scale-125"
-                whileHover={{ scale: 1.2 }}
-              >
-                {darkMode ? '🌙' : '🌞'}
-              </motion.button>
+             
 
               {user ? (
                 <div className="relative">
