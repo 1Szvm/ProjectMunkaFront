@@ -70,9 +70,12 @@ export const Home = () => {
       >
          {matches ? (
          <div className="w-full h-full overflow-hidden flex justify-center">
-         <video autoPlay loop muted className="w-full h-auto max-h-screen object-cover">
-           <source src='Project3.mp4' type="video/mp4" />
-         </video>
+         <video autoPlay loop muted playsInline preload="auto" poster="thumbnail.jpg" className="w-full h-auto max-h-screen object-cover">
+  <source src="Project3.webm" type="video/webm" />
+  <source src="Project3.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
        </div>
          ):( <div className="w-full pt-2 overflow-hidden flex justify-center">
           <video autoPlay loop muted className="w-full h-auto max-h-screen object-cover">
