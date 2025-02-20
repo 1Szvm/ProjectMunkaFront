@@ -30,7 +30,7 @@ const Section = ({ title, children }) => {
 
 export default function Regulation() {
   return (
-    <div className="m-8 min-w-[300px] max-w-4xl w-full mx-auto p-4 min-h-screen">
+    <div className="m-8 min-w-[300px] max-w-4xl w-full mx-auto p-4">
       <div className="m-4 mx-auto p-8 bg-white shadow-xl rounded-xl">
         <h1 className="text-3xl font-bold text-center mb-6 text-indigo-700">Versenyszabályzat</h1>
         <Section title="Általános szabályzat">

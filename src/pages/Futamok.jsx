@@ -7,12 +7,13 @@ import Details from '../components/Details';
 
 export const Futamok = () => {
   const { user } = useContext(UserContext);
-  const [admins, setAdmins] = useState(null);
-  const [categories, setCategories] = useState(null);
+  const [admins, setAdmins] = useState([]); // Changed from null to []
+  const [categories, setCategories] = useState([]); // Changed from null to []
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [detailsId, setDetailsId] = useState(null);
-  const [races, setRaces] = useState(null);
+  const [races, setRaces] = useState([]); // Changed from null to []
   const today = new Date();
+  const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
     readCategories(setCategories);
@@ -26,10 +27,11 @@ export const Futamok = () => {
 
   const handleDetails = (id) => {
     setDetailsId(id);
-    document.getElementById('details').showModal();
+    setShowDetails(true);
+    document.getElementById("details").showModal(); // Ensure the modal opens
   };
 
-  const selectedRace = races?.find((race) => race?.id === detailsId);
+  const selectedRace = races.find((race) => race?.id === detailsId);
 
   return (
     <div className="home">
@@ -38,7 +40,7 @@ export const Futamok = () => {
 
         {/* Category Selector */}
         <div className="btn-group pb-4 text-center flex justify-center" role="group" aria-label="Category selection">
-          {categories && categories.map((category) => (
+          {categories.map((category) => (
             <div key={category?.id} className="p-1">
               <label 
                 className={`btn ${selectedCategory === category?.id ? 'btn-outline ' : ''}`}
@@ -53,15 +55,15 @@ export const Futamok = () => {
 
         {/* Filter and Display Races */}
         <div className='grid grid-cols-4 gap-4'>
-          {races && races
+          {races
             .filter((race) => !selectedCategory || race?.kategoria === selectedCategory)
             .map((race) => {
-              const racedate = new Date(
+              const raceDate = new Date(
                 race?.idopont.seconds * 1000 + race?.idopont.nanoseconds / 1000000
               );
-              const daysDiff = Math.ceil((racedate - today) / (1000 * 60 * 60 * 24));
+              const daysDiff = Math.ceil((raceDate - today) / (1000 * 60 * 60 * 24));
 
-              const category = categories?.find(cat => cat.id === race?.kategoria);
+              const category = categories.find(cat => cat.id === race?.kategoria);
               if (!category) return null;
 
               return (
@@ -80,7 +82,7 @@ export const Futamok = () => {
                       style={{ backgroundColor: category?.color }}>
                       {category?.nev}
                     </div>
-                    <div className='rounded-lg p-2 text-sm text-white text-center max-w-fit' style={{backgroundColor: category?.color}}>
+                    <div className='rounded-lg p-2 text-sm text-white text-center max-w-fit' style={{ backgroundColor: category?.color }}>
                       {daysDiff} nap múlva
                     </div>
                   </div>
@@ -98,7 +100,7 @@ export const Futamok = () => {
         </div>
 
         <AddNew/>
-        <Details selectedRace={selectedRace}/>
+        <Details selectedRace={selectedRace} showDetails={showDetails} setShowDetails={setShowDetails}/>
         <Footer />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import {collection,query, orderBy,onSnapshot} from "firebase/firestore";
+import {collection,query, orderBy,onSnapshot, doc, getDoc, updateDoc} from "firebase/firestore";
 import {db} from "./firebaseApp";
 
 export const readCategories = (setCategories) => {
@@ -27,3 +27,14 @@ export const readCategories = (setCategories) => {
     });
     return unsubscribe;
   };
+
+  export const toggleAplication=async (id,uid)=>{
+    const docRef= doc(db, "futamok", id);
+    const docSnap=await getDoc(docRef)
+    const appliArr=docSnap.data().resztvevok || []
+    if(appliArr.includes(uid)){
+      await updateDoc(docRef,{resztvevok:appliArr.filter(id=>id!=uid)})
+    }else{
+      await updateDoc(docRef,{resztvevok:[...appliArr,uid]})
+    }
+  }
