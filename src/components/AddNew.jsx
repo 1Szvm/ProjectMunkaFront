@@ -88,7 +88,7 @@ export default function AddNew() {
   return (
     <div>
         <div>
-            {admins?.some(admin => admin.Ids.includes(user.uid)) && (
+            {admins?.some(admin => admin.Ids.includes(user?.uid)) && (
             <div
             className={`fixed bottom-20 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 bg-red-600`}
             >
@@ -153,9 +153,9 @@ export default function AddNew() {
                 <p className="text-red-600">{errors?.date?.message}</p>
                 
                 <div className="modal-action flex justify-between mt-6">
-                <button className="btn bg-green-600 text-white hover:bg-green-700 px-4 py-2 rounded-lg" onClick={handleNewRace}>Létrehozás</button>
+                <div className="btn bg-green-600 text-white hover:bg-green-700 px-4 py-2 rounded-lg" onClick={handleNewRace}>Létrehozás</div>
                 <form method="dialog">
-                    <button className="btn bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded-lg">Bezárás</button>
+                    <div className="btn bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded-lg">Bezárás</div>
                 </form>
                 </div>
             </div>

@@ -29,7 +29,7 @@ export const Futamok = () => {
     document.getElementById('details').showModal();
   };
 
-  const selectedRace = races?.find((race) => race.id === detailsId);
+  const selectedRace = races?.find((race) => race?.id === detailsId);
 
   return (
     <div className="home">
@@ -39,13 +39,13 @@ export const Futamok = () => {
         {/* Category Selector */}
         <div className="btn-group pb-4 text-center flex justify-center" role="group" aria-label="Category selection">
           {categories && categories.map((category) => (
-            <div key={category.id} className="p-1">
+            <div key={category?.id} className="p-1">
               <label 
-                className={`btn ${selectedCategory === category.id ? 'btn-outline ' : ''}`}
-                style={{ color: category.color, opacity: "0.8" }}
-                onClick={() => handleCategoryClick(category.id)}
+                className={`btn ${selectedCategory === category?.id ? 'btn-outline ' : ''}`}
+                style={{ color: category?.color, opacity: "0.8" }}
+                onClick={() => handleCategoryClick(category?.id)}
               >
-                {category.nev}
+                {category?.nev}
               </label>
             </div>
           ))}
@@ -54,40 +54,40 @@ export const Futamok = () => {
         {/* Filter and Display Races */}
         <div className='grid grid-cols-4 gap-4'>
           {races && races
-            .filter((race) => !selectedCategory || race.kategoria === selectedCategory)
+            .filter((race) => !selectedCategory || race?.kategoria === selectedCategory)
             .map((race) => {
               const racedate = new Date(
-                race.idopont.seconds * 1000 + race.idopont.nanoseconds / 1000000
+                race?.idopont.seconds * 1000 + race?.idopont.nanoseconds / 1000000
               );
               const daysDiff = Math.ceil((racedate - today) / (1000 * 60 * 60 * 24));
 
-              const category = categories?.find(cat => cat.id === race.kategoria);
+              const category = categories?.find(cat => cat.id === race?.kategoria);
               if (!category) return null;
 
               return (
-                <div className="card m-5 w-[390px] shadow-xl bg-neutral-100" key={race.id}>
+                <div className="card m-5 w-[390px] shadow-xl bg-neutral-100" key={race?.id}>
                   <figure className='relative'>
-                    <img src={race.imageUrl} alt={race.palya} className='transition-opacity duration-300 hover:opacity-0 rounded-xl' />
+                    <img src={race?.imageUrl} alt={race?.palya} className='transition-opacity duration-300 hover:opacity-0 rounded-xl' />
                     <div className='absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 hover:opacity-60 rounded-xl' 
-                      style={{ backgroundColor: category.color }}>
+                      style={{ backgroundColor: category?.color }}>
                       <h2 className="text-4xl font-bold text-center text-white transition-transform duration-300 transform">
-                        {race.palya}
+                        {race?.palya}
                       </h2>
                     </div>
                   </figure>
                   <div className="m-2 flex justify-between">
                     <div className="rounded-lg p-2 text-sm text-white text-center max-w-fit" 
-                      style={{ backgroundColor: category.color }}>
-                      {category.nev}
+                      style={{ backgroundColor: category?.color }}>
+                      {category?.nev}
                     </div>
-                    <div className='rounded-lg p-2 text-sm text-white text-center max-w-fit' style={{backgroundColor: category.color}}>
+                    <div className='rounded-lg p-2 text-sm text-white text-center max-w-fit' style={{backgroundColor: category?.color}}>
                       {daysDiff} nap múlva
                     </div>
                   </div>
                   <div 
                     className='p-2 btn text-white text-xl text-center max-w-full m-2 rounded-lg'
-                    style={{ backgroundColor: category.color }} 
-                    onClick={() => handleDetails(race.id)}
+                    style={{ backgroundColor: category?.color }} 
+                    onClick={() => handleDetails(race?.id)}
                   >
                     Részletek
                   </div>

@@ -27,11 +27,11 @@ export default function Details({selectedRace}) {
               <p className="py-4">Nincsenek részletek.</p>
             )}
               <div className="modal-action w-full flex justify-between">
-                {selectedRace?.jelentkezesek?.includes(user.uid) ? 
-                  <button className="btn text-yellow-600 hover:bg-yellow-400 hover:text-slate-950 ">Jeletkezés visszavonás</button>: 
-                  <button className="btn text-green-600 hover:bg-green-400 hover:text-slate-950">Jelentkezek</button>}
+                {selectedRace?.jelentkezesek?.includes(user?.uid) ? 
+                  <div className="btn text-yellow-600 hover:bg-yellow-400 hover:text-slate-950 ">Jeletkezés visszavonás</div>: 
+                  <div className="btn text-green-600 hover:bg-green-400 hover:text-slate-950">Jelentkezek</div>}
                 <form method="dialog">
-                  <button className="btn bg-red-600 txet-white">Bezárás</button>
+                  <div className="btn bg-red-600 txet-white">Bezárás</div>
                 </form>
               </div>
           </div>
