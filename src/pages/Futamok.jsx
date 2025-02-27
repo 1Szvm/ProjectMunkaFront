@@ -7,7 +7,6 @@ import Details from '../components/Details';
 
 export const Futamok = () => {
   const { user } = useContext(UserContext);
-  const [admins, setAdmins] = useState([]); // Changed from null to []
   const [categories, setCategories] = useState([]); // Changed from null to []
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [detailsId, setDetailsId] = useState(null);
@@ -18,7 +17,6 @@ export const Futamok = () => {
   useEffect(() => {
     readCategories(setCategories);
     readRaces(setRaces);
-    readAuthorization(setAdmins);
   }, []);
 
   const handleCategoryClick = (categoryId) => {

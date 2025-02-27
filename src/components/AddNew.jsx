@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { readAuthorization, readCategories } from '../utility/crudUtility';
+import { addPost, readAuthorization, readCategories  } from '../utility/crudUtility';
 import { useForm } from 'react-hook-form';
 import { UserContext } from '../context/UserContext';
 import { useParams } from 'react-router-dom';
+import { uploadFile } from '../utility/uploadFile';
 
 export default function AddNew() {
     const { user } = useContext(UserContext);
@@ -37,10 +38,6 @@ export default function AddNew() {
         modalRef.current?.showModal();
     };
 
-    const handleNewRace = () => {
-        console.log();
-    };
-
     const onSubmit = async (data) => {
         setLoading(true);
         try {
@@ -52,6 +49,7 @@ export default function AddNew() {
                     ...data,
                     idopont: document.getElementById("date").value,
                     kategoria: selectedCateg,
+                    max: document.getElementById("maxracers").value,
                     palya: document.getElementById("track").value,
                     resztvevok: [],
                 };
@@ -106,13 +104,14 @@ export default function AddNew() {
                 <div className="modal-box max-h-screen p-6 rounded-2xl shadow-lg">
                     <h3 className="font-bold text-xl text-center mb-4">Verseny létrehozása</h3>
 
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    {/* Removed the <form> tag, instead using handleSubmit for custom submit */}
+                    <div>
                         <label className="block font-medium mb-2">Játék kiválasztása</label>
                         <select
                             className="select w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             onChange={(e) => setSelectedCateg(e.target.value)}
                         >
-                            <option disabled defaultValue={true}>Válaszd ki a játékot</option>
+                            <option disabled>Válaszd ki a játékot</option>
                             {categories && categories.map(obj => (
                                 <option key={obj.id} value={obj.id} style={{ color: obj.color }}>
                                     {obj.nev}
@@ -147,6 +146,19 @@ export default function AddNew() {
                             onChange={(e) => setPhoto(URL.createObjectURL(e.target.files[0]))}
                         />
                         <p className="text-red-600">{errors?.file?.message}</p>
+                        
+                        <label className='block font-medium mt-4'>Versenyzők száma</label>
+                        <input 
+                            id="maxracers" 
+                            type="number" 
+                            min="1" max="100"
+                            className="input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            {...register("maxracers", { 
+                                required: "Minimum 1 versenyző szükséges!", 
+                                min: { value: 1, message: "Minimum 1 versenyző szükséges!" } 
+                            })}
+                        />
+                        {errors.maxracers && <p className="text-red-500 text-sm mt-1">{errors.maxracers.message}</p>}
 
                         <label className="block font-medium mt-4">Dátum kiválasztása</label>
                         <input id="date" type="date"
@@ -156,14 +168,20 @@ export default function AddNew() {
                         <p className="text-red-600">{errors?.date?.message}</p>
 
                         <div className="modal-action flex justify-between mt-6">
-                            <div type="submit" className="btn bg-green-600 text-white hover:bg-green-700 px-4 py-2 rounded-lg">
+                            <div 
+                                className="btn bg-green-600 text-white hover:bg-green-700 px-4 py-2 rounded-lg cursor-pointer"
+                                onClick={handleSubmit(onSubmit)}  // Triggering the submission with handleSubmit
+                            >
                                 Létrehozás
                             </div>
-                            <div type="button" className="btn bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded-lg" onClick={() => modalRef.current?.close()}>
+                            <div 
+                                className="btn text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg cursor-pointer"
+                                onClick={() => modalRef.current?.close()}
+                            >
                                 Bezárás
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </dialog>
 

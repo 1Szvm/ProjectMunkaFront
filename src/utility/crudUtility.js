@@ -1,4 +1,4 @@
-import {collection,query, orderBy,onSnapshot, doc, getDoc, updateDoc} from "firebase/firestore";
+import {collection,query, orderBy,onSnapshot, doc, getDoc, updateDoc, arrayUnion, arrayRemove} from "firebase/firestore";
 import {db} from "./firebaseApp";
 
 export const readCategories = (setCategories) => {
@@ -28,13 +28,44 @@ export const readCategories = (setCategories) => {
     return unsubscribe;
   };
 
-  export const toggleAplication=async (id,uid)=>{
-    const docRef= doc(db, "futamok", id);
-    const docSnap=await getDoc(docRef)
-    const appliArr=docSnap.data().resztvevok || []
-    if(appliArr.includes(uid)){
-      await updateDoc(docRef,{resztvevok:appliArr.filter(id=>id!=uid)})
-    }else{
-      await updateDoc(docRef,{resztvevok:[...appliArr,uid]})
+  export const readPosts = (setPosts) => {
+    const collectionRef = collection(db, "forum");
+    const q = query(collectionRef, orderBy('Ids', 'asc'))
+    const unsubscribe = onSnapshot(collectionRef, (snapshot) => {
+      setPosts(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+    });
+    return unsubscribe;
+  };
+
+  export const toggleAplication = async (id, uid) => {
+    const docRef = doc(db, "futamok", id);
+    const docSnap = await getDoc(docRef);
+    if (!docSnap.exists()) {
+        console.error("Document does not exist");
+        return;
     }
-  }
+    const appliArr = docSnap.data().resztvevok || [];
+    if (appliArr.includes(uid)) {
+        await updateDoc(docRef, {
+            resztvevok: arrayRemove(uid)
+        });
+        console.log("Removed:", uid);
+    } else {
+        await updateDoc(docRef, {
+            resztvevok: arrayUnion(uid)
+        });
+        console.log("Added:", uid);
+    }
+};
+
+export const addPost =async (formData) => {
+  console.log(formData);
+   const collectionRef= collection(db, "posts");
+   const newItem={...formData,timestamp:serverTimestamp()}
+   const newDocRef=await addDoc(collectionRef,newItem)
+ };
+
+ export const updatePost=async (id,{title,category,story})=>{
+  const docRef= doc(db, "posts", id);
+  await updateDoc(docRef,{title,category,story})
+}
