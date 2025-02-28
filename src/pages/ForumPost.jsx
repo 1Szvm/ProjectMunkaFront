@@ -8,7 +8,6 @@ export default function ForumPost() {
     useEffect(() => {
         readPosts(setPosts);
     }, []);
-    console.log(posts);
     
   return (
     <div className='flex justify-center pt-5'>

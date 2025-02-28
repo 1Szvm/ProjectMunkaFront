@@ -58,7 +58,7 @@ export const readCategories = (setCategories) => {
     }
 };
 
-export const addPost = async (formData) => {
+export const addFutam = async (formData) => {
     try {
         const collectionRef = collection(db, "futamok");
 
@@ -80,6 +80,16 @@ export const addPost = async (formData) => {
         throw error;
     }
 };
+
+export const addPost=async (postData)=>{
+  try {
+    const collectionRef = collection(db, "forum");
+    const docRef = await addDoc(collectionRef, postData);
+  } catch (error) {
+    console.error("Error adding document:", error);
+    throw error; 
+  }
+}
 
 
 

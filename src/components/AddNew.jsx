@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { addPost, readAuthorization, readCategories  } from '../utility/crudUtility';
+import { addFutam, readAuthorization, readCategories  } from '../utility/crudUtility';
 import { useForm } from 'react-hook-form';
 import { UserContext } from '../context/UserContext';
 import { useParams } from 'react-router-dom';
@@ -19,22 +19,12 @@ export default function AddNew() {
     const [selectedCateg, setSelectedCateg] = useState("");
     const [post, setPost] = useState(null);
     const [txt,setText]=useState(null)
-
-    const modalRef = useRef(null); // Reference for the modal
+    const modalRef = useRef(null);
 
     useEffect(() => {
         readCategories(setCategories);
         readAuthorization(setAdmins);
     }, []);
-
-    useEffect(() => {
-        if (post) {
-            setValue("title", post.title);
-            setSelectedCateg(post.category);
-            setStory(post.story);
-            setPhoto(post.photo.url);
-        }
-    }, [post, setValue]);
 
     const handleAdd = () => {
         modalRef.current?.showModal();
@@ -67,7 +57,7 @@ export default function AddNew() {
                     newPostData.imageUrl = { url, id };
                 }
     
-                await addPost(newPostData); // Ensure this is awaited
+                await addFutam(newPostData); // Ensure this is awaited
                 setUploaded(true);
                 reset({ date: "", maxracers: "", track: "" }); // Reset with default values if needed
                 setPhoto(null);
@@ -78,7 +68,7 @@ export default function AddNew() {
             console.error("Error submitting form:", error);
         } finally {
             setLoading(false);
-            setTimeout(() => modalRef.current?.close(), 2000);
+            setTimeout(() => modalRef.current?.close(), 1500);
         }
     };
     

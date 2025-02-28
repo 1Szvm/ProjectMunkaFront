@@ -1,12 +1,9 @@
-import React, { useContext, useState } from 'react';
-import { Footer } from '../components/Footer';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState } from 'react';
 import { SearchForums } from './SearchForums';
 import ForumPost from './ForumPost';
-import { UserContext } from '../context/UserContext';
+import AddPost from '../components/addPost';
 
 const Forum = () => {
-  const {user}=useContext(UserContext);
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState('');
 
@@ -97,21 +94,7 @@ const Forum = () => {
         // </div>
       }
       <ForumPost/>
-      {user&&
-          <div
-            className="fixed bottom-5 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 bg-red-600"
-          >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-10 text-white transition-transform duration-300"
-            >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-          </div>}
+      <AddPost/>
     </>
   );
 };
