@@ -25,60 +25,58 @@ export default function AddNew() {
         readAuthorization(setAdmins);
     }, []);
 
-    useEffect(() => {
-        if (post) {
-            setValue("title", post.title);
-            setSelectedCateg(post.category);
-            setStory(post.story);
-            setPhoto(post.photo.url);
-        }
-    }, [post, setValue]);
-
     const handleAdd = () => {
         modalRef.current?.showModal();
     };
 
     const onSubmit = async (data) => {
         setLoading(true);
-        try {
-            if (params.id) {
+    
+        if (params.id) {
+            try {
                 await updatePost(params.id, { ...data, category: selectedCateg, story });
                 setUploaded(true);
-            } else {
+                setTimeout(() => navigate("/posts/"), 2000);
+            } catch (error) {
+                console.log("update: ", error);
+            } finally {
+                setLoading(false);
+            }
+        } else {
+            try {
                 let newRaceData = {
                     ...data,
-                    idopont: document.getElementById("date").value,
+                    idopont: document.getElementById("date")?.value, // Consider using useRef or controlled inputs
                     kategoria: selectedCateg,
-                    max: document.getElementById("maxracers").value,
-                    palya: document.getElementById("track").value,
+                    max: document.getElementById("maxracers")?.value,
+                    palya: document.getElementById("track")?.value,
                     resztvevok: [],
                 };
-
-                console.log(newRaceData);
-
-                const file = data.file[0];
-                let newPostData = { ...newRaceData };
-
+    
+                const file = data.file?.[0];
+                let photo = null;
+    
                 if (file) {
                     const { url, id } = await uploadFile(file);
-                    newPostData.imageUrl = { url, id };
+                    photo = { url, id };
                 }
-
-                addPost(newPostData);
+    
+                const newPostData = { ...newRaceData, photo };
+                await addPost(newPostData);
+    
                 setUploaded(true);
                 reset();
                 setPhoto(null);
                 setStory(null);
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setLoading(false);
             }
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setLoading(false);
-            setTimeout(() => {
-                modalRef.current?.close();
-            }, 2000);
         }
     };
+    
+    
 
     return (
         <div>
