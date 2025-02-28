@@ -17,7 +17,7 @@ export default function Details({ selectedRace, showDetails }) {
         }
     }, [showDetails]);
 
-    const handleApplication=async()=>{        
+    const handleApplication=async ()=>{        
       if(!user) setText("Jelentkezz be jelentekezéshez!")
         else await toggleAplication(selectedRace.id,user.uid)
     }
