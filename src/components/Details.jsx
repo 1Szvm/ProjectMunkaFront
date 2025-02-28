@@ -27,7 +27,7 @@ export default function Details({ selectedRace, showDetails }) {
             <div className="modal-box">
                 {selectedRace ? (
                     <>
-                        <img src={selectedRace.imageUrl} alt={selectedRace.palya} className='rounded mb-5' />
+                        <img src={selectedRace.imageUrl.url} alt={selectedRace.palya} className='rounded mb-5' />
                         <div className='flex justify-between py-4'>
                             <div>
                                 <h3 className="font-bold text-xl">{selectedRace.palya}</h3>

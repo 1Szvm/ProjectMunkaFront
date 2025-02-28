@@ -29,7 +29,7 @@ export default function AddNew() {
     const handleAdd = () => {
         modalRef.current?.showModal();
     };
-
+    //WHY IS THIS SHIT NOT FUCKING WORKING THIS IS UTTERLY FUCKING RETARDED!!!!!! (I cant belive this shit it was a fucking typo all along)
     const onSubmit = async (data) => {
         setLoading(true);
     
@@ -62,7 +62,7 @@ export default function AddNew() {
     
                 if (file) {
                     const { url, id } = await uploadFile(file);
-                    photo = { url, id };
+                    newPostData.imageUrl = { url, id };
                 }
     
                 await addFutam(newPostData); // Ensure this is awaited
@@ -72,12 +72,13 @@ export default function AddNew() {
                 setStory(null);
                 setText("Sikeresen hozzáadva!")
             }
-        } catch (error) {
+        catch (error) {
             console.error("Error submitting form:", error);
         } finally {
             setLoading(false);
-            setTimeout(() => modalRef.current?.close(), 1500);
+            setTimeout(() => modalRef.current?.close(), 800);
         }
+    }
     };
     
 

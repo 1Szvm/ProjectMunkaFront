@@ -16,7 +16,9 @@ export const uploadFile = async (file) => {
   }
 };
 
-const url = "https://blog2024server-gly7.onrender.com/post/";
+
+//const url="http://localhost:5000/post/"
+const url = "https://projectmunkaback.onrender.com/post/";
 
 export const deletePhoto = async (id) => {
   console.log("Deleting photo with ID:", id);
