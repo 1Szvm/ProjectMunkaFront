@@ -12,12 +12,12 @@ export const Futamok = () => {
   const [categories, setCategories] = useState([]); // Changed from null to []
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [detailsId, setDetailsId] = useState(null);
-  const [raceToDelete, setRaceToDelete] = useState(null);
   const [races, setRaces] = useState([]); // Changed from null to []
   const today = new Date();
   const [showDetails, setShowDetails] = useState(false);
   const selectedRace = races.find((race) => race?.id === detailsId);
   const [txt,setText]=useState(null)
+  const [addEdit,setAddEdit]=useState(false)
 
   useEffect(() => {
     readCategories(setCategories);
@@ -118,7 +118,7 @@ export const Futamok = () => {
                             </svg>
                           </div>
                           <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-fit p-2 shadow">
-                            <li><a>Szereksztés</a></li>
+                            <li onClick={()=>setAddEdit(race)}><a>Szereksztés</a></li>
                             <li onClick={() => handleDelete(race)} ><a>Törölés</a></li>
                           </ul>
                         </div>
@@ -130,7 +130,7 @@ export const Futamok = () => {
             }
           </div>
         </div>
-        <AddNew/>
+        <AddNew addEdit={addEdit} setAddEdit={setAddEdit}/>
         <Details selectedRace={selectedRace} showDetails={showDetails} setShowDetails={setShowDetails}/>
         {txt&&<Alerts txt={txt}/>}
       </div>

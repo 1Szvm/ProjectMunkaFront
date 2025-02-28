@@ -6,18 +6,15 @@ import { useParams } from 'react-router-dom';
 import { uploadFile } from '../utility/uploadFile';
 import Alerts from './Alerts';
 
-export default function AddNew() {
+export default function AddNew({addEdit, setAddEdit}) {
     const { user } = useContext(UserContext);
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
     const [admins, setAdmins] = useState(null);
     const [categories, setCategories] = useState(null);
     const params = useParams();
-    const [loading, setLoading] = useState(false);
-    const [uploaded, setUploaded] = useState(false);
     const [photo, setPhoto] = useState(null);
     const [story, setStory] = useState(null);
     const [selectedCateg, setSelectedCateg] = useState("");
-    const [post, setPost] = useState(null);
     const [txt,setText]=useState(null)
     const modalRef = useRef(null);
 
@@ -26,9 +23,25 @@ export default function AddNew() {
         readAuthorization(setAdmins);
     }, []);
 
-    const handleAdd = () => {
-        modalRef.current?.showModal();
-    };
+    //This looks awful, but it's working I guess
+    useEffect(() => {
+        if (addEdit==false) {
+            console.log("false");
+            document.getElementById("file").disabled=false
+            modalRef.current?.close()
+        }  
+        else if(addEdit==true) {
+            console.log("true");
+            modalRef.current?.showModal()
+        } 
+        else {
+            modalRef.current?.showModal()
+            console.log(addEdit);
+            setSelectedCateg(addEdit?.kategoria)
+            document.getElementById("track").innerHTML==addEdit?.palya
+            document.getElementById("file").disabled=true
+        }
+    },[addEdit])
     //WHY IS THIS SHIT NOT FUCKING WORKING THIS IS UTTERLY FUCKING RETARDED!!!!!! (I cant belive this shit it was a fucking typo all along)
     const onSubmit = async (data) => {
         setLoading(true);
@@ -87,7 +100,7 @@ export default function AddNew() {
             {admins?.some(admin => admin.Ids.includes(user?.uid)) && (
                 <div
                     className="fixed bottom-5 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 bg-red-600"
-                    onClick={handleAdd}
+                    onClick={()=>setAddEdit(true)}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -191,7 +204,7 @@ export default function AddNew() {
                             </div>
                             <div 
                                 className="btn text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg cursor-pointer"
-                                onClick={() => modalRef.current?.close()}
+                                onClick={() => setAddEdit(false)}
                             >
                                 Bezárás
                             </div>
