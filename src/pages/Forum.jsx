@@ -26,15 +26,15 @@ const Forum = () => {
 
   return (
     <>
-      <SearchForums/>
+       <SearchForums/> 
       {
         // <div className="min-h-screen flex flex-col items-center">
-        //   {/* Header */}
+       
         //   <header className="w-full py-5 shadow-md bg-white flex justify-center">
         //     <h1 className="text-4xl text-slate-900 font-semibold tracking-wide">📢 Forum</h1>
         //   </header>
 
-        //   {/* Post Form */}
+        
         //   <motion.div
         //     className="w-full max-w-2xl p-6 mt-8 bg-white rounded-xl shadow-lg border border-gray-300"
         //     initial={{ opacity: 0, y: -20 }}
@@ -60,7 +60,7 @@ const Forum = () => {
         //     </form>
         //   </motion.div>
 
-        //   {/* Posts List */}
+        
         //   <div className="w-full max-w-2xl mt-6 px-4">
         //     <AnimatePresence>
         //       {posts.length > 0 ? (
