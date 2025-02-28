@@ -26,7 +26,7 @@ export const SearchForums = () => {
   return (
     <>
     <motion.div 
-      className=" p-6 max-w-2xl mt-32 text-cyan-700 mx-auto bg-slate-300 rounded-2xl shadow-lg"
+      className=" p-6 max-w-2xl mt-32 text-cyan-700 mx-auto bg-slate-300 rounded-2xl shadow-lg mb-5 "
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -69,7 +69,9 @@ export const SearchForums = () => {
       </div>
       
     </motion.div>
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+ 
+    {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-10"> */}
+    <div className="flex justify-center flex-wrap gap-8">
     {search.map((competition) => (
       <motion.div
         key={competition.id}
@@ -77,7 +79,7 @@ export const SearchForums = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, delay: competition.id * 0.2 }}
         whileHover={{ scale: 1.05 }}
-        className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transform transition-all"
+        className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transform transition-all flex justify-center flex-wrap content-center max-w-72 "
       >
         <img src={competition.image} alt={competition.name} className="w-full h-64 object-cover" />
         <div className="p-6">
@@ -91,9 +93,13 @@ export const SearchForums = () => {
             Részletek
           </motion.button>
         </div>
+        
       </motion.div>
-    ))}
-  </div>
+      
+    ))
+    }
+    </div>
+ 
   </>
   );
 };
