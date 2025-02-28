@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Footer } from '../components/Footer';
+import { useNavigate } from 'react-router-dom';
+
 
 export const competitions = [
   { id: 1, name: 'Assetto Corsa - F4 Championship', image: 'https://images.unsplash.com/photo-1610905376670-5e7e0e8a3cfb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'Formula 4 racing series for emerging talents.' },
@@ -10,6 +12,7 @@ export const competitions = [
 ];
 
 const Bajnoksagok = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen flex flex-col items-center">
       <main className="flex-grow flex flex-col items-center justify-center px-8 py-10">
@@ -37,6 +40,7 @@ const Bajnoksagok = () => {
                 <h3 className="text-2xl font-bold text-gray-800">{competition.name}</h3>
                 <p className="text-gray-700 mt-2">{competition.description}</p>
                 <motion.button
+                onClick={()=>navigate('/championship_desc')}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   className="mt-4 py-2 px-6 bg-yellow-400 text-black rounded-lg hover:bg-yellow-500 transition"
