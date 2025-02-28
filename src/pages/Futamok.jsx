@@ -52,51 +52,52 @@ export const Futamok = () => {
         </div>
 
         {/* Filter and Display Races */}
-        <div className='grid grid-cols-4 gap-4'>
-          {races
-            .filter((race) => !selectedCategory || race?.kategoria === selectedCategory)
-            .map((race) => {
-              const raceDate = new Date(
-                race?.idopont.seconds * 1000 + race?.idopont.nanoseconds / 1000000
-              );
-              const daysDiff = Math.ceil((raceDate - today) / (1000 * 60 * 60 * 24));
+        <div className='flex justify-center'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1'>
+            {races
+              .filter((race) => !selectedCategory || race?.kategoria === selectedCategory)
+              .map((race) => {
+                const raceDate = new Date(
+                  race?.idopont.seconds * 1000 + race?.idopont.nanoseconds / 1000000
+                );
+                const daysDiff = Math.ceil((raceDate - today) / (1000 * 60 * 60 * 24));
 
-              const category = categories.find(cat => cat.id === race?.kategoria);
-              if (!category) return null;
+                const category = categories.find(cat => cat.id === race?.kategoria);
+                if (!category) return null;
 
-              return (
-                <div className="card m-5 w-[390px] shadow-xl bg-neutral-100" key={race?.id}>
-                  <figure className='relative'>
-                    <img src={race?.imageUrl} alt={race?.palya} className='transition-opacity duration-300 hover:opacity-0 rounded-xl' />
-                    <div className='absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 hover:opacity-60 rounded-xl' 
-                      style={{ backgroundColor: category?.color }}>
-                      <h2 className="text-4xl font-bold text-center text-white transition-transform duration-300 transform">
-                        {race?.palya}
-                      </h2>
+                return (
+                  <div className="card m-5 w-[390px] shadow-xl bg-neutral-100" key={race?.id}>
+                    <figure className='relative'>
+                      <img src={race?.imageUrl} alt={race?.palya} className='transition-opacity duration-300 hover:opacity-0 rounded-xl' />
+                      <div className='absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 hover:opacity-60 rounded-xl' 
+                        style={{ backgroundColor: category?.color }}>
+                        <h2 className="text-4xl font-bold text-center text-white transition-transform duration-300 transform">
+                          {race?.palya}
+                        </h2>
+                      </div>
+                    </figure>
+                    <div className="m-2 flex justify-between">
+                      <div className="rounded-lg p-2 text-sm text-white text-center max-w-fit" 
+                        style={{ backgroundColor: category?.color }}>
+                        {category?.nev}
+                      </div>
+                      <div className='rounded-lg p-2 text-sm text-white text-center max-w-fit' style={{ backgroundColor: category?.color }}>
+                        {daysDiff} nap múlva
+                      </div>
                     </div>
-                  </figure>
-                  <div className="m-2 flex justify-between">
-                    <div className="rounded-lg p-2 text-sm text-white text-center max-w-fit" 
-                      style={{ backgroundColor: category?.color }}>
-                      {category?.nev}
-                    </div>
-                    <div className='rounded-lg p-2 text-sm text-white text-center max-w-fit' style={{ backgroundColor: category?.color }}>
-                      {daysDiff} nap múlva
+                    <div 
+                      className='p-2 btn text-white text-xl text-center max-w-full m-2 rounded-lg'
+                      style={{ backgroundColor: category?.color }} 
+                      onClick={() => handleDetails(race?.id)}
+                    >
+                      Részletek
                     </div>
                   </div>
-                  <div 
-                    className='p-2 btn text-white text-xl text-center max-w-full m-2 rounded-lg'
-                    style={{ backgroundColor: category?.color }} 
-                    onClick={() => handleDetails(race?.id)}
-                  >
-                    Részletek
-                  </div>
-                </div>
-              );
-            })
-          }
+                );
+              })
+            }
+          </div>
         </div>
-
         <AddNew/>
         <Details selectedRace={selectedRace} showDetails={showDetails} setShowDetails={setShowDetails}/>
         <Footer />

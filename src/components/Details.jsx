@@ -39,7 +39,7 @@ export default function Details({ selectedRace, showDetails }) {
                                 </p>
                             </div>
                             <div>
-                                <p className='bg-red-600 rounded-xl p-2'>{selectedRace.resztvevok.length}/{selectedRace.max}</p>
+                                <p style={{backgroundColor:selectedRace?.szin}} className='rounded-xl p-2'>{selectedRace.resztvevok.length}/{selectedRace.max}</p>
                             </div>
                         </div>
                     </>
@@ -59,7 +59,7 @@ export default function Details({ selectedRace, showDetails }) {
                         onClick={selectedRace?.resztvevok?.length === selectedRace?.max ? null : handleApplication}
                         >Jelentkezek</div>
                     )}
-                    <div className="btn bg-red-600 text-white" onClick={() => modalRef.current?.close()}>Bezár</div>
+                    <div className="btn text-white" style={{backgroundColor:selectedRace?.szin}} onClick={() => modalRef.current?.close()}>Bezár</div>
                     </div>
                 </div>
             {txt &&<Alerts err={txt}/>}
