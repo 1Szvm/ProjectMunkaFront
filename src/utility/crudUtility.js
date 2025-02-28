@@ -1,4 +1,4 @@
-import {collection,query, orderBy,onSnapshot, doc, getDoc, updateDoc, arrayUnion, arrayRemove} from "firebase/firestore";
+import {collection,query, orderBy,onSnapshot, doc, getDoc, updateDoc, arrayUnion, arrayRemove, addDoc,serverTimestamp} from "firebase/firestore";
 import {db} from "./firebaseApp";
 
 export const readCategories = (setCategories) => {
@@ -58,12 +58,30 @@ export const readCategories = (setCategories) => {
     }
 };
 
-export const addPost =async (formData) => {
-  console.log(formData);
-   const collectionRef= collection(db, "posts");
-   const newItem={...formData,timestamp:serverTimestamp()}
-   const newDocRef=await addDoc(collectionRef,newItem)
- };
+export const addPost = async (formData) => {
+    try {
+        const collectionRef = collection(db, "futamok");
+
+        const newItem = { 
+            idopont: formData.idopont instanceof Date 
+                ? formData.idopont 
+                : serverTimestamp(), // Ensure valid Firestore timestamp
+            imageUrl: formData.imageUrl?.url || "", // Store only the URL as a string
+            kategoria: formData.kategoria || "", 
+            szin: formData.szin || "",
+            max: formData.max ? Number(formData.max) : 0, // Ensure numeric value
+            palya: formData.palya || "", 
+            resztvevok: Array.isArray(formData.resztvevok) ? formData.resztvevok : [], // Ensure array format
+        };
+        const docRef = await addDoc(collectionRef, newItem);
+        return docRef.id; // Return the new document ID
+    } catch (error) {
+        console.error("Error adding document:", error);
+        throw error;
+    }
+};
+
+
 
  export const updatePost=async (id,{title,category,story})=>{
   const docRef= doc(db, "posts", id);
