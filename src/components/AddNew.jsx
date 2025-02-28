@@ -87,7 +87,7 @@ export default function AddNew() {
         <div>
             {admins?.some(admin => admin.Ids.includes(user?.uid)) && (
                 <div
-                    className="fixed bottom-20 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 bg-red-600"
+                    className="fixed bottom-5 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 bg-red-600"
                     onClick={handleAdd}
                 >
                     <svg

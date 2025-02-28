@@ -100,7 +100,6 @@ export const Futamok = () => {
         </div>
         <AddNew/>
         <Details selectedRace={selectedRace} showDetails={showDetails} setShowDetails={setShowDetails}/>
-        <Footer />
       </div>
     </div>
   );
