@@ -10,6 +10,7 @@ import Bajnoksagok from './pages/Bajnoksagok'
 import Forum from './pages/Forum'
 import Adminpage from './pages/Adminpage'
 import Regulation from './pages/Regulation'
+import Bajnoksagok_Reszletek from './pages/Bajnoksagok_Reszletek'
 
 
 const router=createBrowserRouter([
@@ -26,7 +27,8 @@ const router=createBrowserRouter([
       {path:'/bajnoksagok',element:<Bajnoksagok/>},
       {path:'/forum',element:<Forum/>},
       {path:'/admin',element:<Adminpage/>},
-      {path:'/regulation',element:<Regulation/>}
+      {path:'/regulation',element:<Regulation/>},
+      {path:'/championship_desc',element:<Bajnoksagok_Reszletek/>}
     ],
    
   }
