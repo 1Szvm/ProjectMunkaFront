@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { UserContext } from '../context/UserContext';
 import { useParams } from 'react-router-dom';
 import { uploadFile } from '../utility/uploadFile';
+import Alerts from './Alerts';
 
 export default function AddNew() {
     const { user } = useContext(UserContext);
@@ -15,8 +16,9 @@ export default function AddNew() {
     const [uploaded, setUploaded] = useState(false);
     const [photo, setPhoto] = useState(null);
     const [story, setStory] = useState(null);
-    const [selectedCateg, setSelectedCateg] = useState(null);
+    const [selectedCateg, setSelectedCateg] = useState("");
     const [post, setPost] = useState(null);
+    const [txt,setText]=useState(null)
 
     const modalRef = useRef(null); // Reference for the modal
 
@@ -47,38 +49,39 @@ export default function AddNew() {
             } else {
                 let newRaceData = {
                     ...data,
-                    idopont: document.getElementById("date").value,
+                    idopont: new Date(data.date || document.getElementById("date")?.value), // Prefer form data if available
                     kategoria: selectedCateg,
-                    max: document.getElementById("maxracers").value,
-                    palya: document.getElementById("track").value,
+                    szin: categories.find(cat => cat.id === selectedCateg)?.color,
+                    max: data.maxracers || document.getElementById("maxracers")?.value,
+                    palya: data.track || document.getElementById("track")?.value,
                     resztvevok: [],
                 };
-
+    
                 console.log(newRaceData);
-
-                const file = data.file[0];
+    
                 let newPostData = { ...newRaceData };
-
+                const file = data.file?.[0];
+    
                 if (file) {
                     const { url, id } = await uploadFile(file);
                     newPostData.imageUrl = { url, id };
                 }
-
-                addPost(newPostData);
+    
+                await addPost(newPostData); // Ensure this is awaited
                 setUploaded(true);
-                reset();
+                reset({ date: "", maxracers: "", track: "" }); // Reset with default values if needed
                 setPhoto(null);
                 setStory(null);
+                setText("Sikeresen hozzáadva!")
             }
         } catch (error) {
-            console.log(error);
+            console.error("Error submitting form:", error);
         } finally {
             setLoading(false);
-            setTimeout(() => {
-                modalRef.current?.close();
-            }, 2000);
+            setTimeout(() => modalRef.current?.close(), 2000);
         }
     };
+    
 
     return (
         <div>
@@ -106,18 +109,30 @@ export default function AddNew() {
 
                     {/* Removed the <form> tag, instead using handleSubmit for custom submit */}
                     <div>
-                        <label className="block font-medium mb-2">Játék kiválasztása</label>
-                        <select
-                            className="select w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            onChange={(e) => setSelectedCateg(e.target.value)}
+                        <label 
+                            className="block font-medium mb-2"
+                            htmlFor="category"
                         >
-                            <option disabled>Válaszd ki a játékot</option>
+                            Játék kiválasztása
+                        </label>
+                        <select
+                            id="category"
+                            className="select w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            value={selectedCateg}
+                            onClick={(e) => {
+                                setSelectedCateg(e.target.value);
+                            }}
+                            {...register('category', { required: 'A kategória kiválasztása kötelező.' })}
+                        >
+                            <option value="" disabled>Válaszd ki a játékot</option>
                             {categories && categories.map(obj => (
                                 <option key={obj.id} value={obj.id} style={{ color: obj.color }}>
                                     {obj.nev}
                                 </option>
                             ))}
                         </select>
+                        <p className="text-red-600">{errors?.category?.message}</p>
+
 
                         <label className="block font-medium mt-4">Pálya neve</label>
                         <input id="track" type="text" placeholder="Pálya neve"
@@ -145,6 +160,7 @@ export default function AddNew() {
                             })}
                             onChange={(e) => setPhoto(URL.createObjectURL(e.target.files[0]))}
                         />
+                        {photo && <img src={photo} alt="Preview" className="img-thumbnail mt-3" />}
                         <p className="text-red-600">{errors?.file?.message}</p>
                         
                         <label className='block font-medium mt-4'>Versenyzők száma</label>
@@ -184,9 +200,7 @@ export default function AddNew() {
                     </div>
                 </div>
             </dialog>
-
-            {uploaded && <p className="text-green-500">Sikeres feltöltés!</p>}
-            {photo && <img src={photo} alt="Preview" className="img-thumbnail mt-3" />}
+            {txt&&<Alerts txt={txt}/>}
         </div>
     );
 }

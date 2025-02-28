@@ -4,7 +4,7 @@ import { Footer } from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
 
 
-const competitions = [
+export const competitions = [
   { id: 1, name: 'Assetto Corsa - F4 Championship', image: 'https://images.unsplash.com/photo-1610905376670-5e7e0e8a3cfb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'Formula 4 racing series for emerging talents.' },
   { id: 2, name: 'Assetto Corsa Competizione - Porsche Cup', image: 'https://images.unsplash.com/photo-1706177357152-611d8d76b64d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'A prestigious cup for Porsche racing enthusiasts.' },
   { id: 3, name: 'F1 23', image: 'https://i.pinimg.com/736x/b6/75/74/b6757464caf3a48c84f6cabd6be503a7.jpg', description: 'The latest installment in the F1 racing series.' },
