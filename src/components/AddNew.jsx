@@ -32,11 +32,19 @@ export default function AddNew() {
 
     const onSubmit = async (data) => {
         setLoading(true);
-        try {
-            if (params.id) {
+    
+        if (params.id) {
+            try {
                 await updatePost(params.id, { ...data, category: selectedCateg, story });
                 setUploaded(true);
-            } else {
+                setTimeout(() => navigate("/posts/"), 2000);
+            } catch (error) {
+                console.log("update: ", error);
+            } finally {
+                setLoading(false);
+            }
+        } else {
+            try {
                 let newRaceData = {
                     ...data,
                     idopont: new Date(data.date || document.getElementById("date")?.value), // Prefer form data if available
@@ -54,7 +62,7 @@ export default function AddNew() {
     
                 if (file) {
                     const { url, id } = await uploadFile(file);
-                    newPostData.imageUrl = { url, id };
+                    photo = { url, id };
                 }
     
                 await addFutam(newPostData); // Ensure this is awaited
