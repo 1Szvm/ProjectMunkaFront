@@ -10,13 +10,18 @@ export default function AddNew({addEdit, setAddEdit}) {
     const { user } = useContext(UserContext);
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
     const [admins, setAdmins] = useState(null);
-    const [categories, setCategories] = useState(null);
     const params = useParams();
-    const [photo, setPhoto] = useState(null);
-    const [story, setStory] = useState(null);
-    const [selectedCateg, setSelectedCateg] = useState("");
+    const [categories, setCategories] = useState(null);    
     const [txt,setText]=useState(null)
+    const [erro, setErr] = useState(null);
     const modalRef = useRef(null);
+    const [isEditMode, setIsEditMode] = useState(false);
+
+    const [idopont, setIdopont] = useState("");
+    const [selectedCateg, setSelectedCateg] = useState("");
+    const [palya,setPalya]=useState(null)
+    const [max,setMax]=useState(null)
+    const [photo, setPhoto] = useState(null);
 
     useEffect(() => {
         readCategories(setCategories);
@@ -25,73 +30,62 @@ export default function AddNew({addEdit, setAddEdit}) {
 
     //This looks awful, but it's working I guess
     useEffect(() => {
-        if (addEdit==false) {
+        if (addEdit === false) {
             console.log("false");
-            document.getElementById("file").disabled=false
-            modalRef.current?.close()
-        }  
-        else if(addEdit==true) {
-            console.log("true");
-            modalRef.current?.showModal()
+            setIsEditMode(false);
+            document.getElementById("file").disabled = false;
+            modalRef.current?.close();
         } 
-        else {
-            modalRef.current?.showModal()
-            console.log(addEdit);
-            setSelectedCateg(addEdit?.kategoria)
-            document.getElementById("track").innerHTML==addEdit?.palya
-            document.getElementById("file").disabled=true
+        else if (addEdit === true) {
+            console.log("true");
+            setIsEditMode(false);
+            modalRef.current?.showModal();
+        } 
+        else if (typeof addEdit === "object") {
+            console.log("edit mode");
+            setIsEditMode(true);
+            document.getElementById("file").disabled = true;
+            modalRef.current?.showModal();
+            
+            setSelectedCateg(addEdit?.kategoria);
+            document.getElementById("track").value = addEdit?.palya;
+            document.getElementById("maxracers").value = addEdit?.max;
+            document.getElementById("date").value = new Date(addEdit?.idopont.seconds * 1000)
+                .toISOString()
+                .split('T')[0];
         }
-    },[addEdit])
+    }, [addEdit]);
+    
+
     //WHY IS THIS SHIT NOT FUCKING WORKING THIS IS UTTERLY FUCKING RETARDED!!!!!! (I cant belive this shit it was a fucking typo all along)
     const onSubmit = async (data) => {
-        setLoading(true);
-    
-        if (params.id) {
-            try {
-                await updatePost(params.id, { ...data, category: selectedCateg, story });
-                setUploaded(true);
-                setTimeout(() => navigate("/posts/"), 2000);
-            } catch (error) {
-                console.log("update: ", error);
-            } finally {
-                setLoading(false);
+        try {
+            let newRaceData = {
+                ...data,
+                idopont:new Date(idopont),
+                kategoria: selectedCateg,
+                max,
+                palya,
+                resztvevok: [],
+            };
+            console.log(newRaceData);
+            let newPostData = { ...newRaceData };
+            const file = data.file?.[0];
+            if (file) {
+                const { url, id } = await uploadFile(file);
+                newPostData.imageUrl = { url, id };
             }
-        } else {
-            try {
-                let newRaceData = {
-                    ...data,
-                    idopont: new Date(data.date || document.getElementById("date")?.value), // Prefer form data if available
-                    kategoria: selectedCateg,
-                    szin: categories.find(cat => cat.id === selectedCateg)?.color,
-                    max: data.maxracers || document.getElementById("maxracers")?.value,
-                    palya: data.track || document.getElementById("track")?.value,
-                    resztvevok: [],
-                };
-    
-                console.log(newRaceData);
-    
-                let newPostData = { ...newRaceData };
-                const file = data.file?.[0];
-    
-                if (file) {
-                    const { url, id } = await uploadFile(file);
-                    newPostData.imageUrl = { url, id };
-                }
-    
-                await addFutam(newPostData); // Ensure this is awaited
-                setUploaded(true);
-                reset({ date: "", maxracers: "", track: "" }); // Reset with default values if needed
-                setPhoto(null);
-                setStory(null);
-                setText("Sikeresen hozzáadva!")
-            }
+            await addFutam(newPostData);
+            reset({ date: "", maxracers: "", track: "" });
+            setPhoto(null);
+            setText("Sikeresen hozzáadva!")
+        }
         catch (error) {
             console.error("Error submitting form:", error);
+            setErr("Sikertelen")
         } finally {
-            setLoading(false);
             setTimeout(() => modalRef.current?.close(), 800);
         }
-    }
     };
     
 
@@ -118,8 +112,6 @@ export default function AddNew({addEdit, setAddEdit}) {
             <dialog ref={modalRef} id="add" className="modal">
                 <div className="modal-box max-h-screen p-6 rounded-2xl shadow-lg">
                     <h3 className="font-bold text-xl text-center mb-4">Verseny létrehozása</h3>
-
-                    {/* Removed the <form> tag, instead using handleSubmit for custom submit */}
                     <div>
                         <label 
                             className="block font-medium mb-2"
@@ -150,6 +142,7 @@ export default function AddNew({addEdit, setAddEdit}) {
                         <input id="track" type="text" placeholder="Pálya neve"
                             className="input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             {...register('track', { required: 'A név megadása kötelező.' })}
+                            onChange={(e) => setPalya(e.target.value)}
                         />
                         <p className="text-red-600">{errors?.track?.message}</p>
 
@@ -185,6 +178,7 @@ export default function AddNew({addEdit, setAddEdit}) {
                                 required: "Minimum 1 versenyző szükséges!", 
                                 min: { value: 1, message: "Minimum 1 versenyző szükséges!" } 
                             })}
+                            onChange={(e) => setMax(e.target.value)}
                         />
                         {errors.maxracers && <p className="text-red-500 text-sm mt-1">{errors.maxracers.message}</p>}
 
@@ -192,16 +186,30 @@ export default function AddNew({addEdit, setAddEdit}) {
                         <input id="date" type="date"
                             className="input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             {...register('date', { required: 'A dátum megadása kötelező.' })}
+                            onChange={(e) => setIdopont(e.target.value)
+                            }
                         />
                         <p className="text-red-600">{errors?.date?.message}</p>
 
                         <div className="modal-action flex justify-between mt-6">
-                            <div 
-                                className="btn bg-green-600 text-white hover:bg-green-700 px-4 py-2 rounded-lg cursor-pointer"
-                                onClick={handleSubmit(onSubmit)}  // Triggering the submission with handleSubmit
-                            >
-                                Létrehozás
-                            </div>
+                            {!isEditMode && (
+                                <div 
+                                    id='addBtn'
+                                    className="btn bg-green-600 text-white hover:bg-green-700 px-4 py-2 rounded-lg cursor-pointer"
+                                    onClick={handleSubmit(onSubmit)}
+                                >
+                                    Létrehozás
+                                </div>
+                            )}
+                            {isEditMode && (
+                                <div 
+                                    id='saveBtn'
+                                    className="btn bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-lg cursor-pointer"
+                                    onClick={() => console.log("save")}
+                                >
+                                    Szerkesztés mentése
+                                </div>
+                            )}
                             <div 
                                 className="btn text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg cursor-pointer"
                                 onClick={() => setAddEdit(false)}

@@ -69,7 +69,6 @@ export const addFutam = async (formData) => {
                 : serverTimestamp(), // Ensure valid Firestore timestamp
             imageUrl: formData.imageUrl || "", // Store only the URL as a string
             kategoria: formData.kategoria || "", 
-            szin: formData.szin || "",
             max: formData.max ? Number(formData.max) : 0, // Ensure numeric value
             palya: formData.palya || "", 
             resztvevok: Array.isArray(formData.resztvevok) ? formData.resztvevok : [], // Ensure array format
