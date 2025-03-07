@@ -81,6 +81,34 @@ export const addFutam = async (formData) => {
     }
 };
 
+export const updatePost = async (id, { idopont, kategoria, max, palya }) => {
+  try {
+    console.log("Updating post with:", idopont, kategoria, max, palya);
+
+    const docRef = doc(db, "futamok", id);
+
+    // Prepare update data
+    const updatedData = {
+      kategoria: kategoria || "",
+      max: max ? Number(max) : 1,
+      palya: palya || "",
+    };
+
+    console.log(idopont);
+    
+    // Ensure idopont is properly formatted and included only if valid
+    if (idopont) {
+      updatedData.idopont = new Date(idopont);
+    }
+
+    await updateDoc(docRef, updatedData);
+    console.log("Post updated successfully!");
+  } catch (error) {
+    console.error("Error updating post:", error);
+  }
+};
+
+
 export const deleteFutam=async (id)=>{
   const docRef= doc(db, "futamok", id);
   await deleteDoc(docRef)

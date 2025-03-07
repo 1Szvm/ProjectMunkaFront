@@ -13,9 +13,9 @@ export const Home = () => {
   const [matches, setMatches] = useState(window.matchMedia("(min-width: 1168px)").matches);
   const [isLoading, setIsLoading] = useState(true); // State for intro animation
 
-  window.onresize = function () {
-    document.location.reload(true);
-  };
+  // window.onresize = function () {
+  //   document.location.reload(true);
+  // };
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 1168px)");

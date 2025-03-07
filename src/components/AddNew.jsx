@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { addFutam, readAuthorization, readCategories  } from '../utility/crudUtility';
+import { addFutam, readAuthorization, readCategories, updatePost  } from '../utility/crudUtility';
 import { useForm } from 'react-hook-form';
 import { UserContext } from '../context/UserContext';
 import { useParams } from 'react-router-dom';
@@ -28,65 +28,75 @@ export default function AddNew({addEdit, setAddEdit}) {
         readAuthorization(setAdmins);
     }, []);
 
-    //This looks awful, but it's working I guess
     useEffect(() => {
-        if (addEdit === false) {
-            console.log("false");
-            setIsEditMode(false);
-            document.getElementById("file").disabled = false;
-            modalRef.current?.close();
-        } 
-        else if (addEdit === true) {
-            console.log("true");
-            setIsEditMode(false);
-            modalRef.current?.showModal();
-        } 
-        else if (typeof addEdit === "object") {
+        if (typeof addEdit === "object") {
             console.log("edit mode");
             setIsEditMode(true);
             document.getElementById("file").disabled = true;
             modalRef.current?.showModal();
-            
+    
             setSelectedCateg(addEdit?.kategoria);
-            document.getElementById("track").value = addEdit?.palya;
-            document.getElementById("maxracers").value = addEdit?.max;
-            document.getElementById("date").value = new Date(addEdit?.idopont.seconds * 1000)
-                .toISOString()
-                .split('T')[0];
+            setValue("track", addEdit?.palya);
+            setValue("maxracers", addEdit?.max);
+            
+            // Ensure idopont is correctly set
+            if (addEdit?.idopont?.seconds) {
+                const formattedDate = new Date(addEdit.idopont.seconds * 1000).toISOString().split('T')[0];
+                setIdopont(formattedDate);
+                setValue("date", formattedDate); // Update the form as well
+            }
         }
-    }, [addEdit]);
+    }, [addEdit, reset, setValue]);
+    
+    const editPost = (data) => {
+        try {
+            updatePost(data.id,{...data,idopont: new Date(idopont),kategoria:selectedCateg,max,palya})
+            setTimeout(() => modalRef.current?.close(), 800);
+            setText("Sikeresen mentés!")
+            setIsEditMode(false);
+          } catch (error) {
+            console.log("update: ",error);
+          }
+    }
     
 
     //WHY IS THIS SHIT NOT FUCKING WORKING THIS IS UTTERLY FUCKING RETARDED!!!!!! (I cant belive this shit it was a fucking typo all along)
     const onSubmit = async (data) => {
         try {
-            let newRaceData = {
+            let updatedData = {
                 ...data,
-                idopont:new Date(idopont),
+                idopont: idopont ? new Date(idopont) : addEdit.idopont, // Keep original if unchanged
                 kategoria: selectedCateg,
                 max,
-                palya,
-                resztvevok: [],
+                palya
             };
-            console.log(newRaceData);
-            let newPostData = { ...newRaceData };
-            const file = data.file?.[0];
-            if (file) {
-                const { url, id } = await uploadFile(file);
-                newPostData.imageUrl = { url, id };
+    
+            if (typeof addEdit === "object") {
+                await updatePost(addEdit.id, updatedData);
+                setText("Sikeresen mentve!");
+            } else {
+                let newRaceData = { ...updatedData, resztvevok: [] };
+                let newPostData = { ...newRaceData };
+    
+                if (data.file?.[0]) {
+                    const { url, id } = await uploadFile(data.file[0]);
+                    newPostData.imageUrl = { url, id };
+                }
+    
+                await addFutam(newPostData);
+                reset({ date: "", maxracers: "", track: "" });
+                setPhoto(null);
+                setText("Sikeresen hozzáadva!");
             }
-            await addFutam(newPostData);
-            reset({ date: "", maxracers: "", track: "" });
-            setPhoto(null);
-            setText("Sikeresen hozzáadva!")
-        }
-        catch (error) {
+        } catch (error) {
             console.error("Error submitting form:", error);
-            setErr("Sikertelen")
+            setErr("Sikertelen");
         } finally {
             setTimeout(() => modalRef.current?.close(), 800);
         }
     };
+    
+    
     
 
     return (
@@ -205,7 +215,7 @@ export default function AddNew({addEdit, setAddEdit}) {
                                 <div 
                                     id='saveBtn'
                                     className="btn bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-lg cursor-pointer"
-                                    onClick={() => console.log("save")}
+                                    onClick={()=> editPost(addEdit)}
                                 >
                                     Szerkesztés mentése
                                 </div>
