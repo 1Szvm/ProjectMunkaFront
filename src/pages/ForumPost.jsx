@@ -12,7 +12,7 @@ export default function ForumPost() {
   return (
     <div className='flex justify-center pt-5'>
       {posts?.map(post=>(
-        <div className='cursor-pointer' key={post.id} onClick={()=>console.log(post)} >
+        <div className='cursor-pointer' key={post.id} onClick={()=>console.log(post,user.displayName)} >
             <div className="card w-96 shadow-xl">
                 <div className="card-body">
                     <div className='flex justify-between'>
