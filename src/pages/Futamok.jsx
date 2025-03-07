@@ -69,7 +69,7 @@ export const Futamok = () => {
           ))}
         </div>
 
-        <div className='flex justify-center'>
+        <div className='flex justify-center '>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1'>
             {races
               .filter((race) => !selectedCategory || race?.kategoria === selectedCategory)
@@ -83,7 +83,15 @@ export const Futamok = () => {
                 if (!category) return null;
 
                 return (
-                  <div className="card m-5 w-[390px] shadow-xl bg-neutral-100" key={race?.id}>
+                  <div
+                  className="card m-5 w-[390px] bg-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                  style={{
+                    border: "2px solid",
+                    borderColor: category?.color,
+                    boxShadow: `0px 4px 15px ${category?.color || "rgba(0,0,0,0.2)"}`, // Dynamic shadow color
+                  }}
+                  key={race?.id}
+                >
                     <figure className='relative'>
                       <img src={race?.imageUrl.url} alt={race?.palya} className='transition-opacity duration-300 hover:opacity-0 rounded-xl' />
                       <div className='absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 hover:opacity-60 rounded-xl' 

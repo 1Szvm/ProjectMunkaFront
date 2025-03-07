@@ -34,18 +34,18 @@ export default function Details({ selectedRace, showDetails }) {
                 {selectedRace ? (
                     <>
                         <img src={selectedRace.imageUrl.url} alt={selectedRace.palya} className='rounded mb-5' />
-                        <div className='flex justify-between py-4'>
+                        <div className='flex justify-between py-4 text-slate-700'>
                             <div>
-                                <h3 className="font-bold text-xl">{selectedRace.palya}</h3>
+                                <h3 className="font-bold text-xl ">{selectedRace.palya}</h3>
                                 <p className="py-2">
                                     Kategória: {category?.nev}
                                 </p>
-                                <p className="py-2">
+                                <p className=" py-2">
                                     Dátum: {new Date(selectedRace.idopont.seconds * 1000).toLocaleDateString()}
                                 </p>
                             </div>
                             <div>
-                                <p style={{backgroundColor:category?.color}} className='rounded-xl p-2'>{selectedRace.resztvevok.length}/{selectedRace.max}</p>
+                                <p style={{backgroundColor:category?.color}} className='text-neutral-100 rounded-xl p-2'>{selectedRace.resztvevok.length}/{selectedRace.max}</p>
                             </div>
                         </div>
                     </>
