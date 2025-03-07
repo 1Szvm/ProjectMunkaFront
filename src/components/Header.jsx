@@ -90,9 +90,9 @@ export const Header = () => {
                 onClick={() => window.location.href = '/'} // Redirect on click (if needed)
               >
                 <motion.img
-                  src="logo.jpg"
+                  src="hsrtlogov1.jpg"
                   alt="Logo"
-                  className="h-[5vh] w-[5vh] transition-all duration-300 ease-in-out"
+                  className="rounded-xl h-[5vh] w-[5vh] transition-all duration-300 ease-in-out"
                 />
                 <span className="text-xl font-bold transition-all transform hover:scale-110 hover:text-amber-500">
                   HSRT
@@ -209,9 +209,9 @@ export const Header = () => {
       {/* Logo and App Name */}
       <div className="navbar-center flex items-center space-x-4 p-2">
         <motion.img
-          src="logo.jpg"
+          src="hsrtlogov1.jpg"
           alt="Logo"
-          className="h-[5vh] w-[5vh] transition-all duration-300 ease-in-out transform hover:scale-110"
+          className="rounded-xl h-[5vh] w-[5vh] transition-all duration-300 ease-in-out transform hover:scale-110"
           whileHover={{ scale: 1.1, rotate: 10 }}
         />
         <NavLink className="btn btn-ghost text-xl font-bold transition-all transform hover:scale-110">HSRT</NavLink>
