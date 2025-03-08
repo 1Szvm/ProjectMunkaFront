@@ -66,15 +66,15 @@ export const addFutam = async (formData) => {
         const newItem = { 
             idopont: formData.idopont instanceof Date 
                 ? formData.idopont 
-                : serverTimestamp(), // Ensure valid Firestore timestamp
-            imageUrl: formData.imageUrl || "", // Store only the URL as a string
+                : serverTimestamp(),
+            imageUrl: formData.imageUrl || "",
             kategoria: formData.kategoria || "", 
-            max: formData.max ? Number(formData.max) : 0, // Ensure numeric value
+            max: formData.max ? Number(formData.max) : 0,
             palya: formData.palya || "", 
-            resztvevok: Array.isArray(formData.resztvevok) ? formData.resztvevok : [], // Ensure array format
+            resztvevok: Array.isArray(formData.resztvevok) ? formData.resztvevok : [],
         };
         const docRef = await addDoc(collectionRef, newItem);
-        return docRef.id; // Return the new document ID
+        return docRef.id;
     } catch (error) {
         console.error("Error adding document:", error);
         throw error;
@@ -83,24 +83,13 @@ export const addFutam = async (formData) => {
 
 export const updatePost = async (id, { idopont, kategoria, max, palya }) => {
   try {
-    console.log("Updating post with:", idopont, kategoria, max, palya);
-
     const docRef = doc(db, "futamok", id);
-
-    // Prepare update data
     const updatedData = {
-      kategoria: kategoria || "",
-      max: max ? Number(max) : 1,
-      palya: palya || "",
+      idopont,
+      kategoria,
+      max,
+      palya
     };
-
-    console.log(idopont);
-    
-    // Ensure idopont is properly formatted and included only if valid
-    if (idopont) {
-      updatedData.idopont = new Date(idopont);
-    }
-
     await updateDoc(docRef, updatedData);
     console.log("Post updated successfully!");
   } catch (error) {

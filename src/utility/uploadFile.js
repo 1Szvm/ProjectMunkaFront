@@ -20,6 +20,7 @@ export const uploadFile = async (file) => {
 //const url="http://localhost:5000/post/"
 const url = "https://projectmunkaback.onrender.com/post/";
 
+//This is broken for some fucking reason
 export const deletePhoto = async (id) => {
   console.log("Deleting photo with ID:", id);
   

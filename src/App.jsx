@@ -12,7 +12,6 @@ import Adminpage from './pages/Adminpage'
 import Regulation from './pages/Regulation'
 import Bajnoksagok_Reszletek from './pages/Bajnoksagok_Reszletek'
 
-
 const router=createBrowserRouter([
   {element:<Header/>,
     
