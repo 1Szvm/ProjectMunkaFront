@@ -14,4 +14,4 @@ Currently, two official plugins are available:
 - admin user editor
 - forum in general
 - bajnokság felhasználok megjelenítése
-- button warnings
+- az isten szerelmére ne használjatok "button-t" vagy "form-ot"

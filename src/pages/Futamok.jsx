@@ -93,7 +93,7 @@ export const Futamok = () => {
                     key={race?.id}
                   >
                     <figure className='relative'>
-                      <img src={race?.imageUrl.url} alt={race?.palya} className='transition-opacity duration-300 hover:opacity-0 rounded-xl' />
+                      <img src={race?.imageUrl.url} alt={race?.palya} className='transition-opacity duration-300 hover:opacity-0 rounded-xl w-full object-cover' />
                       <div className='absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 hover:opacity-60 rounded-xl' 
                         style={{ backgroundColor: category?.color }}>
                         <h2 className="text-4xl font-bold text-center text-white transition-transform duration-300 transform">

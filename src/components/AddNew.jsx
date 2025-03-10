@@ -43,7 +43,6 @@ export default function AddNew({ addEdit, setAddEdit }) {
             reset();
             modalRef.current?.showModal();
         } else if (typeof addEdit === "object") {
-            console.log("addEdit: ", addEdit);
             setSelectedCateg(addEdit?.kategoria);
             setPalya(addEdit?.palya);
             setMax(addEdit?.max);
@@ -60,16 +59,11 @@ export default function AddNew({ addEdit, setAddEdit }) {
 
 
     const onSubmit = async (data) => {
-        console.log("onSubmit");
-        console.log(isEditMode);
-        console.log(data);
-        
-        
         if(isEditMode){
             try {
-                await updatePost(addEdit.id, {  // ✅ Use addEdit.id to update the correct post
+                await updatePost(addEdit.id, {
                     ...data,
-                    idopont: new Date(data.date),  // ✅ Use form data instead of component state
+                    idopont: new Date(data.date),
                     kategoria: data.category,  
                     max: data.maxracers,
                     palya: data.track
