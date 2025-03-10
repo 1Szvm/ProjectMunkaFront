@@ -66,9 +66,7 @@ export default function AddNew({ addEdit, setAddEdit }) {
         
         
         if(isEditMode){
-            console.log("ihatemylife");
             try {
-                //nah dis shit is cursed (I swear to god now it randomly does work wtf)
                 await updatePost(addEdit.id, {  // ✅ Use addEdit.id to update the correct post
                     ...data,
                     idopont: new Date(data.date),  // ✅ Use form data instead of component state
@@ -86,7 +84,6 @@ export default function AddNew({ addEdit, setAddEdit }) {
                 setAddEdit(false);
             }
         }else{
-            console.log("balls");
             try {
                 let newRaceData = {
                     ...data,
@@ -223,7 +220,7 @@ export default function AddNew({ addEdit, setAddEdit }) {
                         <div 
                             id='addBtn'
                             className={`btn text-white px-4 py-2 rounded-lg cursor-pointer ${isEditMode?"bg-blue-600 hover:bg-blue-700":"bg-green-600 hover:bg-green-700"}`}
-                            onClick={handleSubmit(onSubmit)}
+                            onClick={()=>handleSubmit(onSubmit)()}
                         >
                             {isEditMode?"Szerkesztés mentése":"Létrehozás"}
                         </div>
