@@ -16,3 +16,4 @@ Currently, two official plugins are available:
 - bajnokság felhasználok megjelenítése
 - az isten szerelmére ne használjatok "button-t" vagy "form-ot"
 - hehe
+- nohehe
