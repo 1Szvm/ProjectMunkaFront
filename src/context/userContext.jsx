@@ -19,6 +19,9 @@ export const UserProvider=({children})=>{
         return ()=>unsubscribe()
     },[])
 
+    console.log(auth);
+    
+
     const updateUser=async (displayName,photoURL)=>{
         try {
             if(displayName&&photoURL) await updateProfile(auth.currentUser,{displayName,photoURL})
@@ -60,12 +63,13 @@ export const UserProvider=({children})=>{
         try {
             await createUserWithEmailAndPassword(auth,email,password)
             await updateProfile(auth.currentUser,{displayName})
-            setMsg({})
             setMsg({signup:"Sikeres Regisztráció!"})
+            
         } catch (error) {
             console.log(error);
             
         }
+
     }
 
     const deletAccount=async ()=>{
