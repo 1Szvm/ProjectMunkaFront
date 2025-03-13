@@ -7,6 +7,7 @@ export default function ForumPost() {
     const { user } = useContext(UserContext);
     const [post,setPost]=useState(null)
     const [txt,setTxt]=useState("")
+    const [comment,setComment]=useState("")
     const param = useParams();
     const navigate=useNavigate()
 
@@ -14,7 +15,11 @@ export default function ForumPost() {
       readPost(param.id, setPost);
   }, [param.id]);
 
-  console.log(post);
+  const sendCommetn=()=>{
+    console.log(user.uid);
+    console.log(comment);
+  }
+
   
   return (
     <>
@@ -28,7 +33,6 @@ export default function ForumPost() {
                     <div className='mx-2'>
                       <div>
                         <h1 className="text-4xl font-bold">{post.title}</h1>
-                        {console.log(user.displayName)}
                         <div>{post.uid}</div>
                         <div>{new Date(post.letrehozas.toDate()).toLocaleDateString()}</div>
                       </div>
@@ -37,9 +41,19 @@ export default function ForumPost() {
                       </div>
                     </div>
                   </div>
-                  <div className='mx-2'>
-                    comments:
+                  <div className='w-full'>
+                    {user?
+                      <input type="text" placeholder="" className="input w-full" onChange={(e)=>setComment(e.target.value)}/>:
+                      <input type="text" placeholder="" className="input w-full" disabled/>  
+                    } 
+                    <div className='btn bg-blue-500 text-white my-2' onClick={()=>sendCommetn()}>Küldés</div>
                   </div>
+                    {post.comments?.map(obj=>
+                      <div className='mx-2 bg-slate-800 rounded-xl p-3'>
+                        <p className='opacity-70 '>uid/username:</p>
+                        <div key={obj} className='m-3 text-lg'>{obj}</div>
+                      </div>
+                    )}
                 </div>
             ) : (
                 <div className="text-center my-5">

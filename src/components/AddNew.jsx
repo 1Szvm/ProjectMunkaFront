@@ -3,8 +3,8 @@ import { addFutam, readAuthorization, readCategories, updatePost } from '../util
 import { useForm } from 'react-hook-form';
 import { UserContext } from '../context/UserContext';
 import { useParams } from 'react-router-dom';
-import { uploadFile } from '../utility/uploadFile';
 import Alerts from './Alerts';
+import { uploadFile } from '../utility/uploadfile';
 
 export default function AddNew({ addEdit, setAddEdit }) {
     const { user } = useContext(UserContext);
