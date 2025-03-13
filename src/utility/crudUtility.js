@@ -88,18 +88,6 @@ export const addFutam = async (formData) => {
         throw error;
     }
 };
-export const addComment = async (id,{uid,comment}) => {
-  try{
-    const docRef = doc(db, "forum", id);
-    const commetnData={
-      uid,
-      comment
-    }
-    await updateDoc(docRef, commetnData);
-  } catch (error) {
-    console.error("Error updating post:", error);
-  }
-}
 
 export const updatePost = async (id, { idopont, kategoria, max, palya }) => {
   try {
@@ -116,6 +104,18 @@ export const updatePost = async (id, { idopont, kategoria, max, palya }) => {
     console.error("Error updating post:", error);
   }
 };
+
+export const addComment=async (id,{uid,comment})=>{
+  const docRef= doc(db, "forum", id);
+  const docSnap=await getDoc(docRef)
+
+  const commentsMap = docSnap.data().comment || {};
+  const userComments = commentsMap[uid] || [];
+  userComments.push(comment);
+  await updateDoc(docRef, {
+    [`comment.${uid}`]: userComments,
+  });
+}
 
 export const deleteFutam=async (id)=>{
   const docRef= doc(db, "futamok", id);
