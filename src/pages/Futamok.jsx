@@ -55,28 +55,21 @@ export const Futamok = () => {
     <div className="home">
       <div className='min-h-screen'>
         <h1 className='text-3xl m-3 text-center font-bold w-100'>Futamok</h1>
-        <div className="flex justify-center pb-4">
-        <div className="inline-flex space-x-2" role="group" aria-label="Category selection">
+        <div className="btn-group pb-4 text-center flex justify-center" role="group" aria-label="Category selection">
           {categories.map((category) => (
-            <button
-              key={category?.id}
-              className={`px-5 py-2.5 rounded-lg border font-medium transition-all duration-300 
-                ${selectedCategory === category?.id 
-                  ? 'border-gray-800 bg-gray-700 text-white shadow-lg scale-105' 
-                  : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-100 hover:shadow-md'}
-              `}
-              style={{ color: selectedCategory === category?.id ? '#fff' : category?.color }}
-              onClick={() => handleCategoryClick(category?.id)}
-              aria-pressed={selectedCategory === category?.id}
-            >
-              {category?.nev}
-            </button>
+            <div key={category?.id} className="p-1">
+              <label 
+                className={`btn ${selectedCategory === category?.id ? 'btn-outline ' : ''}`}
+                style={{ color: category?.color, opacity: "0.8" }}
+                onClick={() => handleCategoryClick(category?.id)}
+              >
+                {category?.nev}
+              </label>
+            </div>
           ))}
         </div>
-      </div>
 
-
-        <div className='flex justify-center '>
+        <div className='flex justify-center'>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1'>
             {races
               .filter((race) => !selectedCategory || race?.kategoria === selectedCategory)
@@ -91,16 +84,16 @@ export const Futamok = () => {
 
                 return (
                   <div
-                  className="card m-2 max-w-[380px] bg-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-                  style={{
-                    border: "2px solid",
-                    borderColor: category?.color,
-                    boxShadow: `0px 4px 15px ${category?.color || "rgba(0,0,0,0.2)"}`, 
-                  }}
-                  key={race?.id}
-                >
+                    className="card m-2 max-w-[380px] bg-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                    style={{
+                      border: "2px solid",
+                      borderColor: category?.color,
+                      boxShadow: `0px 4px 15px ${category?.color || "rgba(0,0,0,0.2)"}`, 
+                    }}
+                    key={race?.id}
+                  >
                     <figure className='relative'>
-                      <img src={race?.imageUrl.url} alt={race?.palya} className='transition-opacity duration-300 hover:opacity-0 rounded-xl' />
+                      <img src={race?.imageUrl.url} alt={race?.palya} className='transition-opacity duration-300 hover:opacity-0 rounded-xl w-full object-cover' />
                       <div className='absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 hover:opacity-60 rounded-xl' 
                         style={{ backgroundColor: category?.color }}>
                         <h2 className="text-4xl font-bold text-center text-white transition-transform duration-300 transform">
@@ -134,7 +127,7 @@ export const Futamok = () => {
                           </div>
                           <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-fit p-2 shadow">
                             <li onClick={()=>setAddEdit(race)}><a>Szereksztés</a></li>
-                            <li onClick={() => handleDelete(race)} ><a>Törölés</a></li>
+                            <li onClick={()=>handleDelete(race)} ><a>Törölés</a></li>
                           </ul>
                         </div>
                       </div>

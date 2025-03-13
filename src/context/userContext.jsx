@@ -19,6 +19,9 @@ export const UserProvider=({children})=>{
         return ()=>unsubscribe()
     },[])
 
+    console.log(auth);
+    
+
     const updateUser=async (displayName,photoURL)=>{
         try {
             if(displayName&&photoURL) await updateProfile(auth.currentUser,{displayName,photoURL})
