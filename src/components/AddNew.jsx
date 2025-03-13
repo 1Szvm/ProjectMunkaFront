@@ -93,7 +93,7 @@ export default function AddNew({addEdit, setAddEdit}) {
         <div>
             {admins?.some(admin => admin.Ids.includes(user?.uid)) && (
                 <div
-                    className="fixed bottom-5 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 bg-red-600"
+                    className="fixed bottom-5 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 bg-rose-600"
                     onClick={()=>setAddEdit(true)}
                 >
                     <svg
@@ -110,7 +110,7 @@ export default function AddNew({addEdit, setAddEdit}) {
             )}
 
             <dialog ref={modalRef} id="add" className="modal">
-                <div className="modal-box max-h-screen p-6 rounded-2xl shadow-lg">
+                <div className="modal-box max-h-screen p-6 rounded-2xl shadow-lg bg-emerald-600">
                     <h3 className="font-bold text-xl text-center mb-4">Verseny létrehozása</h3>
                     <div>
                         <label 
@@ -121,7 +121,7 @@ export default function AddNew({addEdit, setAddEdit}) {
                         </label>
                         <select
                             id="category"
-                            className="select w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="select text-black w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             value={selectedCateg}
                             onClick={(e) => {
                                 setSelectedCateg(e.target.value);
@@ -138,9 +138,9 @@ export default function AddNew({addEdit, setAddEdit}) {
                         <p className="text-red-600">{errors?.category?.message}</p>
 
 
-                        <label className="block font-medium mt-4">Pálya neve</label>
+                        <label className="block  font-medium mt-4">Pálya neve</label>
                         <input id="track" type="text" placeholder="Pálya neve"
-                            className="input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="input text-black w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             {...register('track', { required: 'A név megadása kötelező.' })}
                             onChange={(e) => setPalya(e.target.value)}
                         />
@@ -151,7 +151,7 @@ export default function AddNew({addEdit, setAddEdit}) {
                             disabled={params.id}
                             id="file"
                             type="file"
-                            className="file-input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="file-input text-black w-full border border-gray-400 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             {...register("file", params.id ? {} : {
                                 required: !params.id,
                                 validate: (value) => {
@@ -173,7 +173,7 @@ export default function AddNew({addEdit, setAddEdit}) {
                             id="maxracers" 
                             type="number" 
                             min="1" max="100"
-                            className="input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="input text-black  w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             {...register("maxracers", { 
                                 required: "Minimum 1 versenyző szükséges!", 
                                 min: { value: 1, message: "Minimum 1 versenyző szükséges!" } 
@@ -184,7 +184,7 @@ export default function AddNew({addEdit, setAddEdit}) {
 
                         <label className="block font-medium mt-4">Dátum kiválasztása</label>
                         <input id="date" type="date"
-                            className="input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="text-black input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             {...register('date', { required: 'A dátum megadása kötelező.' })}
                             onChange={(e) => setIdopont(e.target.value)
                             }
@@ -195,7 +195,7 @@ export default function AddNew({addEdit, setAddEdit}) {
                             {!isEditMode && (
                                 <div 
                                     id='addBtn'
-                                    className="btn bg-green-600 text-white hover:bg-green-700 px-4 py-2 rounded-lg cursor-pointer"
+                                    className="btn bg-green-400  hover:bg-green-500 px-4 py-2 rounded-lg cursor-pointer"
                                     onClick={handleSubmit(onSubmit)}
                                 >
                                     Létrehozás
