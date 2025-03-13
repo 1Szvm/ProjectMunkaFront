@@ -30,6 +30,7 @@ export default function AddNew({ addEdit, setAddEdit }) {
 
     useEffect(() => {
         if (addEdit === false) {
+            setIsEditMode(false);
             modalRef.current?.close();
             document.getElementById("file").disabled = false;
             reset();
@@ -38,16 +39,19 @@ export default function AddNew({ addEdit, setAddEdit }) {
             setPalya("");
             setMax(1);
             setIdopont("");
-        } else if (addEdit === true) {
+        } 
+        if (addEdit === true) {
             setIsEditMode(false);
             reset();
             modalRef.current?.showModal();
-        } else if (typeof addEdit === "object") {
+        }
+        if (typeof addEdit === "object") {
+            setIsEditMode(true);
+            setPhoto(addEdit?.imageUrl.url)
             setSelectedCateg(addEdit?.kategoria);
             setPalya(addEdit?.palya);
             setMax(addEdit?.max);
             setIdopont(new Date(addEdit?.idopont.seconds * 1000).toISOString().split('T')[0]);
-            setIsEditMode(true);
             document.getElementById("file").disabled = true;
             modalRef.current?.showModal();
 
@@ -55,20 +59,20 @@ export default function AddNew({ addEdit, setAddEdit }) {
             setValue('maxracers', addEdit?.max);
             setValue('date', new Date(addEdit?.idopont.seconds * 1000).toISOString().split('T')[0]);
         }
+        
     }, [addEdit, reset, setValue]);
 
 
     const onSubmit = async (data) => {
         if(isEditMode){
             try {
-                await updatePost(addEdit.id, {
+                updatePost(addEdit.id, {
                     ...data,
                     idopont: new Date(data.date),
                     kategoria: data.category,  
                     max: data.maxracers,
                     palya: data.track
                 });
-        
                 setText("Sikeresen mentés!");
                 setTimeout(() => modalRef.current?.close(), 800);
             } catch (error) {
@@ -110,7 +114,7 @@ export default function AddNew({ addEdit, setAddEdit }) {
         <div>
             {admins?.some(admin => admin.Ids.includes(user?.uid)) && (
                 <div
-                    className="fixed bottom-5 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 bg-red-600"
+                    className="fixed bottom-5 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 bg-rose-600"
                     onClick={() => setAddEdit(true)}
                 >
                     <svg
@@ -126,7 +130,7 @@ export default function AddNew({ addEdit, setAddEdit }) {
                 </div>
             )}
         <dialog ref={modalRef} id="add" className="modal">
-            <div className="modal-box max-h-screen p-6 rounded-2xl shadow-lg">
+            <div className="modal-box max-h-screen p-6 rounded-2xl shadow-lg bg-emerald-600">
                 <h3 className="font-bold text-xl text-center mb-4">Verseny létrehozása</h3>
                 <div>
                     <label 
@@ -169,12 +173,12 @@ export default function AddNew({ addEdit, setAddEdit }) {
                         id="file"
                         type="file"
                         className="file-input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        {...register("file", params.id ? {} : {
-                            required: !params.id,
+                        {...register("file", {
                             validate: (value) => {
-                                if (!value[0]) return true;
+                                if (isEditMode) return true; // Skip validation when editing
+                                if (!value[0]) return "Kép feltöltése kötelező!"; // Show error if missing in create mode
                                 const fileExtension = value[0]?.name.split(".").pop().toLowerCase();
-                                const acceptedFormats = ['jpg', 'png'];
+                                const acceptedFormats = ["jpg", "png"];
                                 if (!acceptedFormats.includes(fileExtension)) return "Invalid fájl formátum!";
                                 if (value[0].size > 1 * 1000 * 1024) return "Az engedélyezett fájl mérete 1MB";
                                 return true;
