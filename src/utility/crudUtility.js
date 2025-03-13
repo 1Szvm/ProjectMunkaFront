@@ -88,6 +88,18 @@ export const addFutam = async (formData) => {
         throw error;
     }
 };
+export const addComment = async (id,{uid,comment}) => {
+  try{
+    const docRef = doc(db, "forum", id);
+    const commetnData={
+      uid,
+      comment
+    }
+    await updateDoc(docRef, commetnData);
+  } catch (error) {
+    console.error("Error updating post:", error);
+  }
+}
 
 export const updatePost = async (id, { idopont, kategoria, max, palya }) => {
   try {
