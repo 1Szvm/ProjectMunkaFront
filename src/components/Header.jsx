@@ -69,7 +69,7 @@ export const Header = () => {
 
       {matches ? ( // Desktop View
 
-        <div className={`${darkMode ? 'bg-gradient-to-r from-gray-900 to-black delay-75' : ' bg-gradient-to-r delay-75 from-teal-400 to-teal-500' }
+        <div className={`${darkMode ? 'bg-gradient-to-r from-violet-800 to-violet-900 delay-75 ' : ' bg-gradient-to-r delay-75 from-blue-500 to-rose-500  text-fuchsia-50' }
           transition-colors duration-300 ease-in-out flex items-center justify-center w-full pb-1`}>
              <motion.button
                 onClick={toggleDarkMode}
