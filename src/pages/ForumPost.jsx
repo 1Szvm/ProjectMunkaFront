@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../context/UserContext';
-import { addComment, readPost, readPosts } from '../utility/crudUtility';
+import { addComment, readPost, readUsers } from '../utility/crudUtility';
 import { useNavigate, useParams } from 'react-router-dom';
+import { UserContext } from '../context/userContext';
 
 export default function ForumPost() {
     const { user } = useContext(UserContext);
+    const [users,setUsers]=useState([])
     const [post,setPost]=useState(null)
     const [txt,setTxt]=useState("")
     const [comment,setComment]=useState("")
@@ -13,16 +14,12 @@ export default function ForumPost() {
 
     useEffect(() => {
       readPost(param.id, setPost);
+      readUsers(setUsers)
   }, [param.id]);
 
   const sendCommetn=async()=>{
-    console.log(post.comment);
-    console.log(post);
-    
-    console.log(user.uid);
-    console.log(comment);
-    console.log(new Date);
-    addComment(user.id,comment)
+    addComment(param.id,{uid:user.uid,comment,date:new Date})
+    setComment("")
   }
   
   return (
@@ -49,19 +46,22 @@ export default function ForumPost() {
                   <div className='w-full my-10'>
                     {/*Add comment*/}
                     {user?
-                      <textarea type="text" placeholder="Írj valamit..." className="textarea w-full" onChange={(e)=>setComment(e.target.value)}/>:
+                      <textarea type="text" placeholder="Írj valamit..." className="textarea w-full" value={comment} onChange={(e)=>setComment(e.target.value)}/>:
                       <textarea type="text" placeholder="" className="textarea w-full" disabled/>  
                     } 
                     <div className='btn bg-blue-500 text-white my-2' onClick={()=>sendCommetn()}>Küldés</div>
                   </div>
                   <div>
                     {/*comment section*/}
-                    {post.comments?.map(obj=>
-                      <div className='mx-2 bg-slate-800 rounded-xl p-3'>
-                        <p className='opacity-70 '>uid/username:</p>
-                        <div key={obj} className='m-3 text-lg'>{obj}</div>
+                    {Object.entries(post.comments || {}).map(([commentId, commentsArray]) => (
+                      <div key={commentId} className='m-2 bg-slate-800 rounded-xl p-3'>
+                        <div className='flex justify-between'>
+                          <h4 className='opacity-70'>{commentsArray[0]}</h4>
+                          <div className='opacity-70'>{new Date(commentsArray[2].toDate()).toLocaleDateString()}</div>
+                        </div>
+                        <div className='m-3 text-lg'>{commentsArray[1]}</div>
                       </div>
-                    )}
+                    ))}
                   </div>
                 </div>
             ) : (
