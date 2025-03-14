@@ -25,6 +25,8 @@ const Forum = () => {
       timestamp: new Date().toLocaleString(),
     };
     console.log(users);
+    console.log();
+    
   };
 
   return (
@@ -36,10 +38,10 @@ const Forum = () => {
               <div className="card w-96 shadow-xl">
                   <div className="card-body">
                       <div className='flex justify-between'>
-                          <h2 className="card-title">{post.title}</h2>
+                          <h2 className="card-title">{post.title.length>70?`${post.title.slice(0,70)}...`:post.title}</h2>
                           <div>{new Date(post.letrehozas.toDate()).toLocaleDateString()}</div>
                       </div>
-                      <p>{post.content}</p>
+                      <p>{post.content.length>30?`${post.content.slice(0,30)}...`:post.content}</p>
                   </div>
               </div>
           </div>

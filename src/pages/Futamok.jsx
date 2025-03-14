@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { deleteFutam, readAuthorization, readCategories, readRaces } from '../utility/crudUtility';
-import { UserContext } from '../context/UserContext';
 import AddNew from '../components/AddNew';
 import Details from '../components/Details';
 import Alerts from '../components/Alerts';
 import { deletePhoto } from '../utility/uploadFile';
+import { UserContext } from '../context/userContext';
 
 export const Futamok = () => {
   const { user } = useContext(UserContext);

@@ -131,6 +131,28 @@ export const addComment = async (id, { uid, comment, date}) => {
   console.log("Comment added successfully!");
 };
 
+export const deleteComment = async (postId, commentId) => {
+  try {
+    const docRef = doc(db, "forum", postId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const commentsObj = docSnap.data().comments || {};
+      // Check if the comment exists in the object
+      if (!(commentId in commentsObj)) {
+        return;
+      }
+      // Create a shallow copy without the deleted comment
+      const updatedComments = { ...commentsObj };
+      delete updatedComments[commentId];
+      // Update Firestore with the new object
+      await updateDoc(docRef, { comments: updatedComments });
+    } else {
+    }
+  } catch (error) {
+    console.error("Error deleting comment:", error);
+  }
+};
 
 export const deleteFutam=async (id)=>{
   const docRef= doc(db, "futamok", id);
