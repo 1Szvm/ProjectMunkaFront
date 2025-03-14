@@ -125,10 +125,28 @@ export const Futamok = () => {
                               <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
                             </svg>
                           </div>
-                          <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-fit p-2 shadow">
-                            <li onClick={()=>setAddEdit(race)}><a>Szereksztés</a></li>
-                            <li onClick={()=>handleDelete(race)} ><a>Törölés</a></li>
+                          <ul
+                            tabIndex={0}
+                            className="dropdown-content menu bg-slate-50 rounded-lg shadow-md w-fit p-2 text-gray-800"
+                          >
+                            <li>
+                              <button
+                                onClick={() => setAddEdit(race)}
+                                className="block px-4 py-2 w-full text-left hover:bg-gray-100 rounded-md transition"
+                              >
+                                Szerkesztés
+                              </button>
+                            </li>
+                            <li>
+                              <button
+                                onClick={() => handleDelete(race)}
+                                className="block px-4 py-2 w-full text-left hover:bg-red-100 text-red-600 rounded-md transition"
+                              >
+                                Törlés
+                              </button>
+                            </li>
                           </ul>
+
                         </div>
                       </div>
                     )}
