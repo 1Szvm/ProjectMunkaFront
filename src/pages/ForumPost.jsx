@@ -50,7 +50,10 @@ export default function ForumPost() {
                               ? <div className="text-lg">Te</div>
                               : <div className="text-lg">
                                   {users?.find(obj => obj.uid === post.uid)?.displayName || 
-                                    <span className="text-red-600">törölt felhasználó</span>
+                                    <div className='flex'>
+                                      <span className="text-red-600">törölt felhasználó</span>
+                                      <div className='text-xs m-1'>({post.uid})</div>
+                                    </div>
                                   }
                                 </div>
                         }
@@ -74,17 +77,20 @@ export default function ForumPost() {
                     {Object.entries(post.comments || {}).map(([commentId, commentsArray]) => (
                       <div key={commentId} className='m-2 bg-slate-800 rounded-xl p-3'>
                         <div className='flex justify-between'>
-                          <div className='flex'>
+                          <div>
                             {user?.uid === commentsArray[0] 
                               ? <div className="text-lg">Te</div>
                               : <div className="text-lg">
                                   {users?.find(obj => obj.uid === commentsArray[0])?.displayName || 
-                                    <span className="text-red-600">törölt felhasználó</span>
+                                    <div className='flex'>
+                                      <span className="text-red-600">törölt felhasználó</span>
+                                      <div className='text-xs m-1'>({commentsArray[0]})</div>
+                                    </div>
                                   }
                                 </div>
                             }
                             {post.uid==commentsArray[0]?
-                            <div className='text-lg bg-blue-700 rounded-xl mx-2 px-2'>{post.uid==commentsArray[0]?"Posztoló":""}</div>:null
+                            <div className='text-lg bg-blue-700 rounded-xl text-center w-fit px-2'>{post.uid==commentsArray[0]?"Posztoló":""}</div>:null
                             }
                           </div>
                           <div className='opacity-70'>{new Date(commentsArray[2].toDate()).toLocaleDateString()}</div>
