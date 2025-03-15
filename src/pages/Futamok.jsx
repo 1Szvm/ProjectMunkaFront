@@ -59,7 +59,7 @@ export const Futamok = () => {
           {categories.map((category) => (
             <div key={category?.id} className="p-1">
               <label 
-                className={`btn ${selectedCategory === category?.id ? 'btn-outline ' : ''}`}
+                className={` bg-slate-50 btn ${selectedCategory === category?.id ? 'btn-outline  ' : ''}`}
                 style={{ color: category?.color, opacity: "0.8" }}
                 onClick={() => handleCategoryClick(category?.id)}
               >
