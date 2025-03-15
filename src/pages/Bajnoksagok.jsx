@@ -22,7 +22,7 @@ const Bajnoksagok = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-2"
         >
-          <p className="text-xl italic text-gray-500 mb-8 pt-5 ">Fedezd fel a legnagyobb versenyeket a virtuális világban!</p>
+          <p className="text-xl italic text-sky-500 mb-8 pt-5 font-semibold ">Fedezd fel a legnagyobb versenyeket a virtuális világban!</p>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8  p-2">

@@ -61,7 +61,7 @@ export const Header = () => {
     }`}
     animate={{
       background: darkMode
-        ? "linear-gradient(to right, #1f2937, #000000)" // Dark mode gradient
+        ? "linear-gradient(to right, #1f2937,rgb(13, 9, 26))" // Dark mode gradient
         : "linear-gradient(to right, #f3f4f6, #d1d5db)", // Light mode gradient
     }}
     transition={{ duration: 0.5, ease: "easeInOut" }}
