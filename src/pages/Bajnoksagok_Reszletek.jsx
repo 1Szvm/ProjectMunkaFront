@@ -164,7 +164,7 @@ const ChampionshipDetails = () => {
         <section ref={aboutRef} className={`transition-opacity duration-1000 ${isInView ? 'opacity-100' : 'opacity-0'}`}>
           <div className="section-header flex justify-center mx-auto p-4">
              {/* In the future read this from firebase aswell*/}
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-8">
               Formula 1 Bajnokság - Részletes Áttekintés
             </h2>
           </div>
