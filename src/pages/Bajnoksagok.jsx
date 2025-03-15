@@ -14,18 +14,18 @@ export const competitions = [
 const Bajnoksagok = () => {
   const navigate = useNavigate();
   return (
-    <div className="min-h-screen flex flex-col items-center">
-      <main className="flex-grow flex flex-col items-center justify-center px-8 py-10">
+    <div className="min-h-screen">
+      <main className="flex-grow flex flex-col items-center justify-center px-6 py-10">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-8"
+          className="text-center mb-2"
         >
-          <p className="text-lg italic text-gray-500 mb-6">Fedezd fel a legnagyobb versenyeket a virtuális világban!</p>
+          <p className="text-xl italic text-gray-500 mb-8 pt-5 ">Fedezd fel a legnagyobb versenyeket a virtuális világban!</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8  p-2">
           {competitions.map((competition) => (
             <motion.div
               key={competition.id}
