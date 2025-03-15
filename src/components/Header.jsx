@@ -31,10 +31,12 @@ export const Header = () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
     };
   }, [darkMode]);
+  
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
   };
+
 
   const toggleUserDropdown = () => {
     setIsUserDropdownOpen((prev) => !prev);
@@ -67,7 +69,7 @@ export const Header = () => {
 
       {matches ? ( // Desktop View
 
-        <div className={`${darkMode ? 'bg-gradient-to-r from-gray-900 to-black delay-75' : ' bg-gradient-to-r delay-75 from-teal-400 to-teal-500' }
+        <div className={`${darkMode ? 'bg-gradient-to-r from-violet-800 to-violet-900 delay-75 ' : ' bg-gradient-to-r delay-75 from-blue-500 to-rose-500  text-fuchsia-50' }
           transition-colors duration-300 ease-in-out flex items-center justify-center w-full pb-1`}>
              <motion.button
                 onClick={toggleDarkMode}
@@ -109,49 +111,7 @@ export const Header = () => {
               {user ? (
                 <div className="relative">
                   <ProfileMenu/>
-                  {/* <motion.button
-                    onClick={toggleUserDropdown}
-                    className="btn btn-ghost btn-circle avatar"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <div className="w-10 rounded-full">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-10">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                      </svg>
-                    </div>
-                  </motion.button>
-                  {/* <ProfileMenu/> */}
-                  {/* <AnimatePresence>
-                   
-                    {isUserDropdownOpen && (
-                      <>
-                      <ProfileMenu/>
-                      <motion.ul
-                        initial={{ opacity: 0, scale: 0.9, y: -10 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.9, y: -10 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="absolute right-0 bg-gray-800 rounded-box z-[1] mt-3 w-52 p-2 shadow flex flex-col items-center"
-                      >
-                        <li>
-                          <NavLink className="btn btn-ghost bg-orange-600 text-lg hover:bg-orange-700 w-[118px]" to="/profile">
-                            Profil
-                          </NavLink>
-                        </li>
-                        <li>
-                          <motion.button
-                            className="btn bg-red-700 mt-2 hover:bg-red-600 text-slate-100"
-                            whileHover={{ scale: 1.1 }}
-                            onClick={logoutUser}
-                          >
-                            Kijelentkezés
-                          </motion.button>
-                        </li>
-                      </motion.ul>
-                      </>
-                    )}
-                  </AnimatePresence> */}
+             
                 </div>
               ) : (
                 <>
@@ -188,6 +148,7 @@ export const Header = () => {
           <motion.button
             className="md:hidden btn btn-ghost text-xl"
             onClick={toggleMobileMenu}
+            onBlur={() => setIsMobileMenuOpen(false)}
             whileHover={{ scale: 1.1 }}
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -200,6 +161,7 @@ export const Header = () => {
         <AnimatePresence>
   {isMobileMenuOpen && (
     <motion.div
+    onClick={toggleMobileMenu}
       initial={{ opacity: 0, x: 20, scale: 0.95 }}
       animate={{ opacity: 1, x: 0, scale: 1 }}
       exit={{ opacity: 0, x: 20, scale: 0.95 }}

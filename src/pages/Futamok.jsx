@@ -3,16 +3,16 @@ import { deleteFutam, readAuthorization, readCategories, readRaces } from '../ut
 import { UserContext } from '../context/UserContext';
 import AddNew from '../components/AddNew';
 import Details from '../components/Details';
-import { deletePhoto } from '../utility/uploadFile';
 import Alerts from '../components/Alerts';
+import { deletePhoto } from '../utility/uploadFile';
 
 export const Futamok = () => {
   const { user } = useContext(UserContext);
   const [admins,setAdmins]=useState([]);
-  const [categories, setCategories] = useState([]); // Changed from null to []
+  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [detailsId, setDetailsId] = useState(null);
-  const [races, setRaces] = useState([]); // Changed from null to []
+  const [races, setRaces] = useState([]);
   const today = new Date();
   const [showDetails, setShowDetails] = useState(false);
   const selectedRace = races.find((race) => race?.id === detailsId);
@@ -32,7 +32,7 @@ export const Futamok = () => {
   const handleDetails = (id) => {
     setDetailsId(id);
     setShowDetails(true);
-    document.getElementById("details").showModal(); // Ensure the modal opens
+    document.getElementById("details").showModal();
   };
 
   const handleDelete= async (race)=>{
@@ -119,16 +119,34 @@ export const Futamok = () => {
                     </div>
                     {admins?.some(admin => admin.Ids.includes(user?.uid)) && (
                       <div className='absolute top-0 right-0 m-2'>
-                        <div className="dropdown dropdown-right">
+                        <div className="dropdown dropdown-end">
                           <div tabIndex={0} role="button" className="btn m-1">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                               <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
                             </svg>
                           </div>
-                          <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-fit p-2 shadow">
-                            <li onClick={()=>setAddEdit(race)}><a>Szereksztés</a></li>
-                            <li onClick={()=>handleDelete(race)} ><a>Törölés</a></li>
+                          <ul
+                            tabIndex={0}
+                            className="dropdown-content menu bg-slate-50 rounded-lg shadow-md w-fit p-2 text-gray-800"
+                          >
+                            <li>
+                              <button
+                                onClick={() => setAddEdit(race)}
+                                className="block px-4 py-2 w-full text-left hover:bg-gray-100 rounded-md transition"
+                              >
+                                Szerkesztés
+                              </button>
+                            </li>
+                            <li>
+                              <button
+                                onClick={() => handleDelete(race)}
+                                className="block px-4 py-2 w-full text-left hover:bg-red-100 text-red-600 rounded-md transition"
+                              >
+                                Törlés
+                              </button>
+                            </li>
                           </ul>
+
                         </div>
                       </div>
                     )}

@@ -1,7 +1,7 @@
 import {collection,query, orderBy,onSnapshot, doc, getDoc, updateDoc, arrayUnion, arrayRemove, addDoc,serverTimestamp, deleteDoc} from "firebase/firestore";
 import {db} from "./firebaseApp";
 
-export const readCategories = (setCategories) => {
+  export const readCategories = (setCategories) => {
     const collectionRef = collection(db, "kategoriak");
     const q = query(collectionRef, orderBy('nev', 'asc'))                                       
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -36,6 +36,14 @@ export const readCategories = (setCategories) => {
     });
     return unsubscribe;
   };
+
+  export const readPost=async(id,setPost)=>{
+    const docRef=doc(db,"forum",id)  
+    const unsubscribe=onSnapshot(docRef,(snapshot)=>{
+      setPost({...snapshot.data(),id:snapshot.id})
+    })
+    return unsubscribe
+  }
 
   export const toggleAplication = async (id, uid) => {
     const docRef = doc(db, "futamok", id);
@@ -97,6 +105,17 @@ export const updatePost = async (id, { idopont, kategoria, max, palya }) => {
   }
 };
 
+export const addComment=async (id,{uid,comment})=>{
+  const docRef= doc(db, "forum", id);
+  const docSnap=await getDoc(docRef)
+
+  const commentsMap = docSnap.data().comment || {};
+  const userComments = commentsMap[uid] || [];
+  userComments.push(comment);
+  await updateDoc(docRef, {
+    [`comment.${uid}`]: userComments,
+  });
+}
 
 export const deleteFutam=async (id)=>{
   const docRef= doc(db, "futamok", id);
