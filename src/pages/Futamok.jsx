@@ -84,7 +84,7 @@ export const Futamok = () => {
 
                 return (
                   <div
-                    className="card m-2 max-w-[380px] bg-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                    className="card m-1 p-2 max-w-[380px] bg-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
                     style={{
                       border: "2px solid",
                       borderColor: category?.color,
