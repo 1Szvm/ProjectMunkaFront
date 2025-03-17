@@ -112,6 +112,24 @@ export const updatePost = async (id, { idopont, kategoria, max, palya }) => {
   }
 };
 
+export const addPost=async({uid,letrehozas,content,title})=>{
+  console.log(uid,letrehozas,content,title);
+  try {
+    const collectionRef = collection(db, "forum");
+    const newItem = { 
+      uid,
+      letrehozas,
+      content,
+      title,
+      comments: {}
+    }
+    await addDoc(collectionRef, newItem);
+  } catch (error) {
+    console.error("Error adding post:", error);
+    throw error;
+  }
+}
+
 export const addComment = async (id, { uid, comment, date}) => {
   const docRef = doc(db, "forum", id);
   const docSnap = await getDoc(docRef);
