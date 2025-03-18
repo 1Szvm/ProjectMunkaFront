@@ -5,6 +5,7 @@ import AddNew from '../components/AddNew';
 import Details from '../components/Details';
 import Alerts from '../components/Alerts';
 import { deletePhoto } from '../utility/uploadFile';
+import { Footer } from '../components/Footer';
 
 export const Futamok = () => {
   const { user } = useContext(UserContext);
@@ -54,13 +55,13 @@ export const Futamok = () => {
   return (
     <div className="home">
       <div className='min-h-screen'>
-        <h1 className='text-3xl m-3 text-center font-bold w-100'>Futamok</h1>
+        <h1 className='text-3xl m-2 text-center font-bold w-100'>Futamok</h1>
         <div className="btn-group pb-4 text-center flex justify-center" role="group" aria-label="Category selection">
           {categories.map((category) => (
             <div key={category?.id} className="p-1">
               <label 
-                className={` bg-slate-50 btn ${selectedCategory === category?.id ? 'btn-outline  ' : ''}`}
-                style={{ color: category?.color, opacity: "0.8" }}
+                className={` bg-white btn ${selectedCategory === category?.id ? 'btn-outline opacity-55 bg-emerald-200' : 'btn-primary'}`}
+                style={{ color: category?.color }}
                 onClick={() => handleCategoryClick(category?.id)}
               >
                 {category?.nev}
@@ -84,7 +85,7 @@ export const Futamok = () => {
 
                 return (
                   <div
-                    className="card m-1 p-1 max-w-[380px] bg-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                    className="card m-1 p-1 max-w-[375px] bg-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
                     style={{
                       border: "2px solid",
                       borderColor: category?.color,
@@ -159,6 +160,8 @@ export const Futamok = () => {
         <AddNew addEdit={addEdit} setAddEdit={setAddEdit}/>
         <Details selectedRace={selectedRace} showDetails={showDetails} setShowDetails={setShowDetails}/>
         {txt&&<Alerts txt={txt}/>}
+        <p className="h-[80px]"> </p>
+          <Footer />
       </div>
     </div>
   );

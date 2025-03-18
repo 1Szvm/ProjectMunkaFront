@@ -95,8 +95,7 @@ export const Home = () => {
         <AboutUs />
         
       </motion.div>
-    
-   
+
       <Footer />
       <p className="h-[130px]"></p>
     </div>
