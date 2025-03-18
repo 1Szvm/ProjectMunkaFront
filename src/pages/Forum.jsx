@@ -19,7 +19,7 @@ const Forum = () => {
       <SearchForums/> 
       <div className='grid  pt-5'>
         {posts?.map(post=>(
-          <div className={`cursor-pointer rounded-lg ${user.uid==post.uid?"border border-yellow-400":""}`} key={post.id} onClick={() => navigate("/post/" + post.id)} >
+          <div className={`cursor-pointer rounded-lg ${user?.uid==post.uid?"border border-yellow-400":""}`} key={post.id} onClick={() => navigate("/post/" + post.id)} >
               <div className="card w-fit shadow-xl">
                   <div className="card-body">
                       <div className='flex justify-between'>

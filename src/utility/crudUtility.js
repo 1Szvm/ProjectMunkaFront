@@ -130,6 +130,12 @@ export const addPost=async({uid,letrehozas,content,title})=>{
   }
 }
 
+export const deletePost=async(id)=>{
+  console.log(id);
+  const docRef= doc(db, "forum", id);
+  await deleteDoc(docRef)
+}
+
 export const addComment = async (id, { uid, comment, date}) => {
   const docRef = doc(db, "forum", id);
   const docSnap = await getDoc(docRef);
