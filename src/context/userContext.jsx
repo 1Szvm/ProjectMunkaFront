@@ -4,6 +4,8 @@ import {createUserWithEmailAndPassword, deleteUser, onAuthStateChanged,sendPassw
 import { createContext } from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import {db} from "../utility/firebaseApp";
+import { doc, setDoc, updateDoc } from 'firebase/firestore'
 
 
 export const UserContext=createContext()
@@ -19,13 +21,15 @@ export const UserProvider=({children})=>{
         return ()=>unsubscribe()
     },[])
 
-    console.log(auth);
-    
-
     const updateUser=async (displayName,photoURL)=>{
         try {
             if(displayName&&photoURL) await updateProfile(auth.currentUser,{displayName,photoURL})
-            else if(displayName) await updateProfile(auth.currentUser,{displayName})
+            else if(displayName){
+                await updateProfile(auth.currentUser,{displayName})
+                await updateDoc(doc(db, "users", auth.currentUser.uid), {
+                    displayName:auth.currentUser.displayName,
+                })
+            }
             else if(photoURL) await updateProfile(auth.currentUser,{photoURL})
             setMsg({})
             setMsg({update:"Sikeres modosítás"})
@@ -63,11 +67,14 @@ export const UserProvider=({children})=>{
         try {
             await createUserWithEmailAndPassword(auth,email,password)
             await updateProfile(auth.currentUser,{displayName})
+            await setDoc(doc(db, "users", auth.currentUser.uid), {
+                uid:auth.currentUser.uid,
+                displayName:auth.currentUser.displayName,
+                email:auth.currentUser.email
+            })
             setMsg({signup:"Sikeres Regisztráció!"})
-            
         } catch (error) {
             console.log(error);
-            
         }
 
     }
@@ -75,8 +82,8 @@ export const UserProvider=({children})=>{
     const deletAccount=async ()=>{
         try {
             await deleteUser(auth.currentUser)
+            await deleteDoc(doc(db, "users", auth.currentUser.uid))
             console.log("Sikeres tőrlés");
-            
         } catch (error) {
             console.log(error);
         }

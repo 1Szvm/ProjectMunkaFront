@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { deleteFutam, readAuthorization, readCategories, readRaces } from '../utility/crudUtility';
-import { UserContext } from '../context/UserContext';
 import AddNew from '../components/AddNew';
 import Details from '../components/Details';
 import Alerts from '../components/Alerts';
 import { deletePhoto } from '../utility/uploadFile';
+import { UserContext } from '../context/userContext';
 import { Footer } from '../components/Footer';
 
 export const Futamok = () => {
@@ -37,18 +37,20 @@ export const Futamok = () => {
   };
 
   const handleDelete= async (race)=>{
-    try {
-      await confirm({
-        description:"Ez egy visszavonhatatlan művelet",
-        confirmationText:"Igen",
-        cancellationText:"Mégsem",
-        title:"Biztos ki szeretnéd törölni a posztot?"
-      })
-      deleteFutam(race.id)
-      deletePhoto(race.imageUrl.id)
-      setText("Sikeres törlés")
-    } catch (error) {
-      console.log("mégsem:",error);
+    const { confirmed }=await confirm({
+      description: String("Ez egy visszavonhatatlan művelet"),
+      confirmationText:"Igen",
+      cancellationText:"Mégsem",
+      title:"Biztos ki szeretnéd törölni a futamot?"
+    })
+    if(confirmed){
+      try {
+        deleteFutam(race.id)
+        deletePhoto(race.imageUrl.id)
+        setText("Sikeres törlés")        
+      } catch (error) {
+        console.log("mégsem:",error);
+      }
     }
   }
 

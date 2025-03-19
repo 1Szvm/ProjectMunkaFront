@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { addFutam, readAuthorization, readCategories, updatePost } from '../utility/crudUtility';
 import { useForm } from 'react-hook-form';
-import { UserContext } from '../context/UserContext';
 import { useParams } from 'react-router-dom';
 import { uploadFile } from '../utility/uploadFile';
 import Alerts from './Alerts';
+import { UserContext } from '../context/userContext';
 
 export default function AddNew({ addEdit, setAddEdit }) {
     const { user } = useContext(UserContext);

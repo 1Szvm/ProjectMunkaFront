@@ -1,32 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { SearchForums } from './SearchForums';
-import ForumPost from './ForumPost';
 import AddPost from '../components/addPost';
-import { UserContext } from '../context/UserContext';
 import { readPosts } from '../utility/crudUtility';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/userContext';
 
 const Forum = () => {
   const { user } = useContext(UserContext);
   const [posts,setPosts]=useState(null)
-  const [newPost, setNewPost] = useState('');
   const navigate=useNavigate()
 
   useEffect(() => {
     readPosts(setPosts);
   }, []);
-
-  const handlePostSubmit = (e) => {
-    e.preventDefault();
-    if (newPost.trim() === '') return;
-
-    const post = {
-      id: Date.now(),
-      text: newPost,
-      timestamp: new Date().toLocaleString(),
-    };
-    setNewPost('');
-  };
 
   return (
     <>
