@@ -61,7 +61,7 @@ export const Header = () => {
     }`}
     animate={{
       background: darkMode
-        ? "linear-gradient(to right, #1f2937, #000000)" // Dark mode gradient
+        ? "linear-gradient(to right, #1f2937,rgb(13, 9, 26))" // Dark mode gradient
         : "linear-gradient(to right, #f3f4f6, #d1d5db)", // Light mode gradient
     }}
     transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -69,7 +69,7 @@ export const Header = () => {
 
       {matches ? ( // Desktop View
 
-        <div className={`${darkMode ? 'bg-gradient-to-r from-gray-900 to-black delay-75' : ' bg-gradient-to-r delay-75 from-teal-400 to-teal-500' }
+        <div className={`${darkMode ? 'bg-gradient-to-r from-violet-800 to-violet-900 delay-75 ' : ' bg-gradient-to-r delay-75 from-blue-500 to-rose-500  text-fuchsia-50' }
           transition-colors duration-300 ease-in-out flex items-center justify-center w-full pb-1`}>
              <motion.button
                 onClick={toggleDarkMode}

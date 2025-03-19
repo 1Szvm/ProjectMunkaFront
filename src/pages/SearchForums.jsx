@@ -25,8 +25,9 @@ export const SearchForums = () => {
 
   return (
     <>
+    <div className="pl-2 pr-2">
     <motion.div 
-      className=" p-6 max-w-2xl mt-32 text-cyan-700 mx-auto bg-slate-300 rounded-2xl shadow-lg mb-5 "
+      className=" p-3 max-w-2xl mt-4 text-cyan-700 mx-auto bg-slate-300 rounded-2xl shadow-lg mb-1"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -99,7 +100,7 @@ export const SearchForums = () => {
     ))
     }
     </div>
- 
+    </div>
   </>
   );
 };

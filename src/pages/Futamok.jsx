@@ -5,6 +5,7 @@ import Details from '../components/Details';
 import Alerts from '../components/Alerts';
 import { deletePhoto } from '../utility/uploadFile';
 import { UserContext } from '../context/userContext';
+import { Footer } from '../components/Footer';
 
 export const Futamok = () => {
   const { user } = useContext(UserContext);
@@ -56,13 +57,13 @@ export const Futamok = () => {
   return (
     <div className="home">
       <div className='min-h-screen'>
-        <h1 className='text-3xl m-3 text-center font-bold w-100'>Futamok</h1>
+        <h1 className='text-3xl m-2 text-center font-bold w-100'>Futamok</h1>
         <div className="btn-group pb-4 text-center flex justify-center" role="group" aria-label="Category selection">
           {categories.map((category) => (
             <div key={category?.id} className="p-1">
               <label 
-                className={`btn ${selectedCategory === category?.id ? 'btn-outline ' : ''}`}
-                style={{ color: category?.color, opacity: "0.8" }}
+                className={` bg-white btn ${selectedCategory === category?.id ? 'btn-outline opacity-55 bg-emerald-200' : 'btn-primary'}`}
+                style={{ color: category?.color }}
                 onClick={() => handleCategoryClick(category?.id)}
               >
                 {category?.nev}
@@ -86,7 +87,7 @@ export const Futamok = () => {
 
                 return (
                   <div
-                    className="card m-2 max-w-[380px] bg-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                    className="card m-1 p-1 max-w-[375px] bg-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
                     style={{
                       border: "2px solid",
                       borderColor: category?.color,
@@ -127,10 +128,28 @@ export const Futamok = () => {
                               <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
                             </svg>
                           </div>
-                          <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-fit p-2 shadow">
-                            <li onClick={()=>setAddEdit(race)}><a>Szereksztés</a></li>
-                            <li onClick={()=>handleDelete(race)} ><a>Törölés</a></li>
+                          <ul
+                            tabIndex={0}
+                            className="dropdown-content menu bg-slate-50 rounded-lg shadow-md w-fit p-2 text-gray-800"
+                          >
+                            <li>
+                              <button
+                                onClick={() => setAddEdit(race)}
+                                className="block px-4 py-2 w-full text-left hover:bg-gray-100 rounded-md transition"
+                              >
+                                Szerkesztés
+                              </button>
+                            </li>
+                            <li>
+                              <button
+                                onClick={() => handleDelete(race)}
+                                className="block px-4 py-2 w-full text-left hover:bg-red-100 text-red-600 rounded-md transition"
+                              >
+                                Törlés
+                              </button>
+                            </li>
                           </ul>
+
                         </div>
                       </div>
                     )}
@@ -143,6 +162,8 @@ export const Futamok = () => {
         <AddNew addEdit={addEdit} setAddEdit={setAddEdit}/>
         <Details selectedRace={selectedRace} showDetails={showDetails} setShowDetails={setShowDetails}/>
         {txt&&<Alerts txt={txt}/>}
+        <p className="h-[80px]"> </p>
+          <Footer />
       </div>
     </div>
   );

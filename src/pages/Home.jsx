@@ -49,7 +49,7 @@ export const Home = () => {
           transition={{ duration: 1.5, ease: "easeOut" }}
           exit={{ opacity: 0 }}
         >
-          <h1 className="text-4xl md:text-6xl font-bold text-center">Welcome to HUN-SRT 🏁</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-center">Üdvözlünk a HUN-SRT-nél 🏁</h1>
         </motion.div>
       )}
 
@@ -71,9 +71,8 @@ export const Home = () => {
          {matches ? (
          <div className="w-full h-full overflow-hidden flex justify-center">
          <video autoPlay loop muted playsInline preload="auto" poster="thumbnail.jpg" className="w-full h-auto max-h-screen object-cover">
-  <source src="Project3.webm" type="video/webm" />
-  <source src="Project3.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
+        <source src="Project3.mp4" type="video/mp4" />
+         Your browser does not support the video tag.
 </video>
 
        </div>
@@ -90,14 +89,13 @@ export const Home = () => {
         ref={aboutRef}
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 1 }}
+        transition={{ duration: 2 }}
         className="w-full px-4 md:px-8"
       >
         <AboutUs />
         
       </motion.div>
-    
-   
+
       <Footer />
       <p className="h-[130px]"></p>
     </div>
