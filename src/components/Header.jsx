@@ -37,7 +37,6 @@ export const Header = () => {
     setIsMobileMenuOpen((prev) => !prev);
   };
 
-
   const toggleUserDropdown = () => {
     setIsUserDropdownOpen((prev) => !prev);
   };
@@ -109,20 +108,20 @@ export const Header = () => {
              
 
               {user ? (
-                <div className="relative">
+                <div className="flex justify-end items-center space-x-2">
                   <ProfileMenu/>
              
                 </div>
               ) : (
                 <>
                   <NavLink
-                    className="btn btn-ghost bg-amber-700 p-1 hover:bg-amber-600 text-l text-white ml-1"
+                    className=" btn btn-ghost bg-blue-500 p-1 hover:bg-sky-600 text-l text-white ml-1"
                     to="/auth/in"
                   >
                     Bejelentkezés
                   </NavLink>
                   <NavLink
-                    className="btn btn-ghost bg-blue-800 p-1 hover:bg-blue-700 text-l text-white mr-6"
+                    className="btn btn-ghost bg-green-600 p-1 hover:bg-emerald-700 text-l text-white mr-6"
                     to="/auth/up"
                   >
                     Regisztráció
