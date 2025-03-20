@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
+// import { UserContext } from "../context/UserContext";
 import { motion, AnimatePresence } from "framer-motion";
 import ProfileMenu from "./ProfileMenu";
 
