@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
 import { motion, AnimatePresence } from "framer-motion";
 import ProfileMenu from "./ProfileMenu";
+import { UserContext } from "../context/userContext";
 
 export const Header = () => {
   const { user, logoutUser } = useContext(UserContext);

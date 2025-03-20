@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import { readCategories, toggleAplication } from '../utility/crudUtility';
-import { UserContext } from '../context/UserContext';
 import Alerts from './Alerts';
+import { UserContext } from '../context/userContext';
 
 export default function Details({ selectedRace, showDetails }) {
     const { user } = useContext(UserContext);
