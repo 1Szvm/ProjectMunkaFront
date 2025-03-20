@@ -3,23 +3,35 @@ import { motion } from "framer-motion";
 
 import { competitions } from "./Bajnoksagok";
 import { useState } from "react";
+import { readPosts } from "../utility/crudUtility";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 export const SearchForums = () => {
-  
+  const [posts,setPosts]=useState([])
   const [search,setSearch] = useState([])
+  const navigate = useNavigate()
+  
   const searchWord =async ()=>{
     let input = document.getElementById("keyWord").value
     console.log(input);
     console.log(competitions);
-    const filtered = competitions.filter(e => e.name.includes(input) || e.description.includes(input))
+    /*const filtered = competitions.filter(e => e.name.includes(input) || e.description.includes(input))
     console.log(filtered);
-    setSearch(filtered)
+    setSearch(filtered)*/
+    const filtered = posts.filter(e=>e.title.includes(input) || e.content.includes(input))
+    console.log(posts);
+    setPosts(filtered)
+    
     
   }
   const reset =async ()=>{
     window.location.reload()
   }
+  useEffect(() => {
+    readPosts(setPosts);
+  }, []);
 
 
 
@@ -70,10 +82,11 @@ export const SearchForums = () => {
       </div>
       
     </motion.div>
+    
  
     {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-10"> */}
     <div className="flex justify-center flex-wrap gap-8">
-    {search.map((competition) => (
+    {/*search.map((competition) => (
       <motion.div
         key={competition.id}
         initial={{ opacity: 0, scale: 0.9 }}
@@ -98,7 +111,56 @@ export const SearchForums = () => {
       </motion.div>
       
     ))
-    }
+    */}
+    { <div className='flex justify-center pt-5 p-2 m-3'>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl">
+        {posts?.map(post => (
+            <div
+              className='cursor-pointer grou p'
+              key={post.id}
+              onClick={() => navigate("/post/" + post.id)}
+            >
+        <div className=" bg-slate-200 card w-full shadow-xl rounded-lg overflow-hidden transform transition-all duration-500 hover: text-red-300 scale-105 hover:rotate-2 hover:shadow-2xl hover:shadow-red-500 group-hover:opacity-90">
+          <div className="card-body p-5 flex flex-col justify-between h-full">
+            <div className='flex justify-between mb-3'>
+              <h2 className="card-title text-xl font-semibold text-gray-800 group-hover:text-red-600 transition-all duration-300">{post.title}</h2>
+              <div className="text-sm text-gray-500">{new Date(post.letrehozas.toDate()).toLocaleDateString()}</div>
+            </div>
+            <p className="text-gray-700 text-base line-clamp-3 group-hover:text-gray-900 transition-all duration-300">{post.content}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+
+
+}
+    {/*posts.map((post) => (
+      <motion.div
+        key={post.id}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: post.id * 0.2 }}
+        whileHover={{ scale: 1.05 }}
+        className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transform transition-all flex justify-center flex-wrap content-center max-w-72 "
+      >
+        <div className="p-6">
+          <h3 className="text-2xl font-bold text-gray-800">{post.title}</h3>
+          <p className="text-gray-700 mt-2">{post.content}</p>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="mt-4 py-2 px-6 bg-yellow-400 text-black rounded-lg hover:bg-yellow-500 transition"
+          >
+            Részletek
+          </motion.button>
+        </div>
+        
+      </motion.div>
+      
+    ))*/}
     </div>
     </div>
   </>

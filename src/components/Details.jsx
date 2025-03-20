@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import { readCategories, toggleAplication } from '../utility/crudUtility';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../context/userContext';
 import Alerts from './Alerts';
+
+
 
 export default function Details({ selectedRace, showDetails }) {
     const { user } = useContext(UserContext);
@@ -9,6 +11,8 @@ export default function Details({ selectedRace, showDetails }) {
     const [category, setCategory] = useState([]);
     const modalRef = useRef(null); // Reference for the modal
     const [txt,setText]=useState(null)
+
+    
 
     useEffect(() => {
         readCategories(setCategories);
@@ -26,7 +30,7 @@ export default function Details({ selectedRace, showDetails }) {
             setCategory(categories.find(cat => cat.id === selectedRace.kategoria));
         }
     }, [categories, selectedRace]); 
-
+     
     return (
         <dialog ref={modalRef} id="details" className="modal">
             <div className="modal-box">
@@ -63,6 +67,8 @@ export default function Details({ selectedRace, showDetails }) {
                         className={`btn text-green-600 hover:bg-green-400 hover:text-slate-950 
                         ${selectedRace?.resztvevok?.length === selectedRace?.max ? "cursor-not-allowed opacity-50" : ""}`} 
                         onClick={selectedRace?.resztvevok?.length === selectedRace?.max ? null : handleApplication}
+                        
+                        
                         >Jelentkezek</div>
                     )}
                     <div className="btn text-white" style={{backgroundColor:category?.color}} onClick={() => modalRef.current?.close()}>Bezár</div>
