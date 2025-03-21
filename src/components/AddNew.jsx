@@ -114,7 +114,7 @@ export default function AddNew({ addEdit, setAddEdit }) {
         <div>
             {admins?.some(admin => admin.Ids.includes(user?.uid)) && (
                 <div
-                    className="fixed bottom-5 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 bg-rose-600"
+                    className="fixed bottom-20 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 bg-rose-600"
                     onClick={() => setAddEdit(true)}
                 >
                     <svg
@@ -123,7 +123,7 @@ export default function AddNew({ addEdit, setAddEdit }) {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="size-10 text-white transition-transform duration-300"
+                        className="size-10 text-white  transition-transform duration-300"
                     >
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
@@ -141,8 +141,9 @@ export default function AddNew({ addEdit, setAddEdit }) {
                     </label>
                     <select
                         id="category"
-                        className="select w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="select w-full border text-slate-800 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value={selectedCateg}
+
                         onClick={(e) => {
                             setSelectedCateg(e.target.value);
                         }}
@@ -160,19 +161,19 @@ export default function AddNew({ addEdit, setAddEdit }) {
 
                     <label className="block font-medium mt-4">Pálya neve</label>
                     <input id="track" type="text" placeholder="Pálya neve"
-                        className="input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="input  text-slate-800 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         {...register('track', { required: 'A név megadása kötelező.' })}
                         onChange={(e) => setPalya(e.target.value)}
                         value={palya}
                     />
                     <p className="text-red-600">{errors?.track?.message}</p>
 
-                    <label className="block font-medium mt-4">Pálya kép</label>
+                    <label className="block font-medium mt-4 ">Pálya kép</label>
                     <input
                         disabled={params.id}
                         id="file"
                         type="file"
-                        className="file-input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="file-input  text-slate-800  w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         {...register("file", {
                             validate: (value) => {
                                 if (isEditMode) return true; // Skip validation when editing
@@ -189,12 +190,12 @@ export default function AddNew({ addEdit, setAddEdit }) {
                     {photo && <img src={photo} alt="Preview" className="img-thumbnail mt-3" />}
                     <p className="text-red-600">{errors?.file?.message}</p>
                     
-                    <label className='block font-medium mt-4'>Versenyzők száma</label>
+                    <label className=' block font-medium mt-4'>Versenyzők száma</label>
                     <input 
                         id="maxracers" 
                         type="number" 
                         min="1" max="100"
-                        className="input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="input w-full border text-slate-800 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         {...register("maxracers", { 
                             required: "Minimum 1 versenyző szükséges!", 
                             min: { value: 1, message: "Minimum 1 versenyző szükséges!" } 
@@ -206,7 +207,7 @@ export default function AddNew({ addEdit, setAddEdit }) {
 
                     <label className="block font-medium mt-4">Dátum kiválasztása</label>
                     <input id="date" type="date"
-                        className="input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="text-slate-800 input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         {...register('date', { required: 'A dátum megadása kötelező.' })}
                         onChange={(e) => setIdopont(e.target.value)
                         }

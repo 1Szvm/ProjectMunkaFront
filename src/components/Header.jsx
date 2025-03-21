@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
+
 import { motion, AnimatePresence } from "framer-motion";
 import ProfileMenu from "./ProfileMenu";
+import { UserContext } from "../context/userContext";
 
 export const Header = () => {
   const { user, logoutUser } = useContext(UserContext);
@@ -37,7 +38,6 @@ export const Header = () => {
     setIsMobileMenuOpen((prev) => !prev);
   };
 
-
   const toggleUserDropdown = () => {
     setIsUserDropdownOpen((prev) => !prev);
   };
@@ -60,7 +60,7 @@ export const Header = () => {
     }`}
     animate={{
       background: darkMode
-        ? "linear-gradient(to right, #1f2937, #000000)" // Dark mode gradient
+        ? "linear-gradient(to right, #1f2937,rgb(13, 9, 26))" // Dark mode gradient
         : "linear-gradient(to right, #f3f4f6, #d1d5db)", // Light mode gradient
     }}
     transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -68,7 +68,7 @@ export const Header = () => {
 
       {matches ? ( // Desktop View
 
-        <div className={`${darkMode ? 'bg-gradient-to-r from-gray-900 to-black delay-75' : ' bg-gradient-to-r delay-75 from-teal-400 to-teal-500' }
+        <div className={`${darkMode ? 'bg-gradient-to-r from-violet-800 to-violet-900 delay-75 ' : ' bg-gradient-to-r delay-75 from-blue-500 to-rose-500  text-fuchsia-50' }
           transition-colors duration-300 ease-in-out flex items-center justify-center w-full pb-1`}>
              <motion.button
                 onClick={toggleDarkMode}
@@ -108,20 +108,20 @@ export const Header = () => {
              
 
               {user ? (
-                <div className="relative">
+                <div className="flex justify-end items-center space-x-2">
                   <ProfileMenu/>
              
                 </div>
               ) : (
                 <>
                   <NavLink
-                    className="btn btn-ghost bg-amber-700 p-1 hover:bg-amber-600 text-l text-white ml-1"
+                    className=" btn btn-ghost bg-blue-500 p-1 hover:bg-sky-600 text-l text-white ml-1"
                     to="/auth/in"
                   >
                     Bejelentkezés
                   </NavLink>
                   <NavLink
-                    className="btn btn-ghost bg-blue-800 p-1 hover:bg-blue-700 text-l text-white mr-6"
+                    className="btn btn-ghost bg-green-600 p-1 hover:bg-emerald-700 text-l text-white mr-6"
                     to="/auth/up"
                   >
                     Regisztráció
