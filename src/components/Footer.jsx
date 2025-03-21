@@ -15,7 +15,7 @@ export const Footer = () => {
         position: 'fixed', // Make the footer stick to the bottom
         bottom: 0, // Stick to the bottom
         left: 0,
-        borderBottom:'#34E4CB solid 2px',
+        borderBottom:'#34E4CB solid 1px',
         width: '100%',
         boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.5)', // Slight shadow for separation
       }}
