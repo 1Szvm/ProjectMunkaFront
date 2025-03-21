@@ -24,13 +24,11 @@ export const UserProvider=({children})=>{
     const updateUser=async (displayName,photoURL)=>{
         try {
             if(displayName&&photoURL) await updateProfile(auth.currentUser,{displayName,photoURL})
-            else if(displayName){
-                await updateProfile(auth.currentUser,{displayName})
-                await updateDoc(doc(db, "users", auth.currentUser.uid), {
-                    displayName:auth.currentUser.displayName,
-                })
-            }
+            else if(displayName){await updateProfile(auth.currentUser,{displayName})}
             else if(photoURL) await updateProfile(auth.currentUser,{photoURL})
+            await updateDoc(doc(db, "users", auth.currentUser.uid), {
+                displayName:auth.currentUser.displayName,
+            })
             setMsg({})
             setMsg({update:"Sikeres modosítás"})
         } catch (error) {

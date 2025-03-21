@@ -4,6 +4,7 @@ import AddPost from '../components/addPost';
 import { readPosts } from '../utility/crudUtility';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/userContext';
+import { generateSchema } from '../utility/generareFirebaseSchema';
 
 const Forum = () => {
   const { user } = useContext(UserContext);
@@ -13,6 +14,8 @@ const Forum = () => {
   useEffect(() => {
     readPosts(setPosts);
   }, []);
+
+  generateSchema("forum");
 
   return (
     <>
