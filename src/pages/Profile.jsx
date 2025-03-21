@@ -1,9 +1,42 @@
 import React, { useState } from 'react';
 import { Footer } from '../components/Footer';
 import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+import { UserContext } from '../context/userContext';
+import { deletePhoto, uploadFile } from '../utility/backendHandling';
+import { extractUrlAndId } from '../utility/utils';
+import { useNavigate } from 'react-router-dom';
 
 export default function Profile() {
-  const [hovered, setHovered] = useState(false);
+  const { user,updateUser } = useContext(UserContext);
+  const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
+  const navigate=useNavigate()
+  const [text,setText] =useState("")
+  const [photo,setPhoto]=useState("");
+  const [name,setName]=useState("")
+
+  useEffect(() => {
+    if (user) {
+      setPhoto(user.photoURL ? extractUrlAndId(user.photoURL)?.url : "");
+      setName(user?.displayName);
+    }
+  }, [user]);
+
+  const onSubmit=async(data)=>{
+    if(data?.file[0]){
+      try {
+        deletePhoto(extractUrlAndId(user.photoURL).id)
+      } catch (error) {
+        console.log("no pfp or something shit itself");
+      }
+      const file=data?.file ? data.file[0]:null
+      const {url,id}=file ? await uploadFile(file) : null
+      updateUser(data.displayName,url+'/'+id)
+    }else{
+      updateUser(data.displayName)
+    }
+    setTimeout(() => navigate("/"), 1000);
+  }
 
   return (
     <div className="home h-screen flex items-center justify-center">

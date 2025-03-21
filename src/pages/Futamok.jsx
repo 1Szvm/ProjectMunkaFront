@@ -3,8 +3,9 @@ import { deleteFutam, readAuthorization, readCategories, readRaces } from '../ut
 import AddNew from '../components/AddNew';
 import Details from '../components/Details';
 import Alerts from '../components/Alerts';
-import { deletePhoto } from '../utility/uploadFile';
 import { UserContext } from '../context/userContext';
+import { Footer } from '../components/Footer';
+import { deletePhoto } from '../utility/backendHandling';
 
 export const Futamok = () => {
   const { user } = useContext(UserContext);

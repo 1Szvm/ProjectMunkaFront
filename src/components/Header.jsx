@@ -47,7 +47,6 @@ export const Header = () => {
       <NavLink className="btn btn-ghost text-xl hover:text-orange-400 transition-all transform hover:scale-110" to="/futamok">Futamok</NavLink>
       <NavLink className="btn btn-ghost text-xl hover:text-orange-400 transition-all transform hover:scale-110" to="/bajnoksagok">Bajnokságok</NavLink>
       <NavLink className="btn btn-ghost text-xl hover:text-orange-400 transition-all transform hover:scale-110" to="/forum">Forum</NavLink>
-     
     </>
 
   );

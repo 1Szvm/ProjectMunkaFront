@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { addComment, deleteComment, deletePost, readAuthorization, readPost, readUsers } from '../utility/crudUtility';
+import { addComment, deleteComment, deletePost, readAuthorization, readPost } from '../utility/crudUtility';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { UserContext } from '../context/userContext';
 import { useConfirm } from "material-ui-confirm";
 import Alerts from '../components/Alerts';
+import { readUsers } from '../utility/backendHandling';
+import { extractUrlAndId } from '../utility/utils';
 
 export default function ForumPost() {
     const { user } = useContext(UserContext);
-    const [users,setUsers]=useState([])
+    const [users, setUsers] = useState([]);
     const [admins,setAdmins]=useState([]);
     const [post,setPost]=useState(null)
     const [err,setErr]=useState("")
@@ -22,8 +24,23 @@ export default function ForumPost() {
       readPost(param.id, setPost);
       readUsers(setUsers)
       readAuthorization(setAdmins);
+      readUsers(setUsers);
   }, [param.id]);
 
+  const LoadingUsers=()=> {
+    const [dots, setDots] = useState("");
+  
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setDots((prev) => (prev.length < 3 ? prev + "." : ""));
+      }, 400);
+  
+      return () => clearInterval(interval);
+    }, []);
+  
+    return <p className="text-center text-lg font-semibold">Loading{dots}</p>;
+  }
+  
   const onSubmit=async()=>{
     if(user){
     addComment(param.id,{uid:user.uid,comment,date:new Date})
@@ -68,7 +85,13 @@ export default function ForumPost() {
 
   return (
     <>
-       <div className="container m-auto px-10 py-5 page rounded-xl bg-slate-700 w-2/3">
+      {users.length === 0 ? (
+        <>
+          <div className="text-center text-lg font-semibold">Loading users or server is offline</div>
+          <LoadingUsers />
+        </>
+      ) :(
+       <div className="container m-auto px-5 py-2 page rounded-xl bg-slate-700 w-2/3">
             {post ? (
                 <div className='py-4'>
                   {/*Post*/}
@@ -90,18 +113,28 @@ export default function ForumPost() {
                     <div className='mx-2'>
                       <div className='flex justify-between'>
                         <div>
-                          <h1 className="text-4xl font-bold">{post.title}</h1>
-                          {user?.uid === post.uid 
-                            ? <div className="text-lg">Te</div>
-                            : <div className="text-lg">
+                          <div className='flex justify-start items-center mb-4'>
+                            {users?.find(obj => obj.uid === post?.uid)?.photoURL 
+                                ? (
+                                  <img src={extractUrlAndId(users.find(obj => obj.uid === post?.uid)?.photoURL)?.url} alt="Preview" className="img-thumbnail w-20 rounded-full border-2 border-blue-600" />
+                                ) : (
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-10">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                  </svg>
+                                )
+                            }
+                            {user?.uid === post.uid 
+                            ? <div className="text-3xl m-2">Te</div>
+                            : <div className="text-3xl m-2">
                                 {users?.find(obj => obj.uid === post.uid)?.displayName || 
                                 <>
-                                  <div className="text-red-600">törölt felhasználó</div>
-                                  <div className='text-xs m-1'>({post.uid})</div>
+                                  <div className='text-3xl m-2 text-red-600'>({post.uid})</div>
                                 </>
                                 }
                               </div>
                           }
+                          </div>
+                          <div className="text-2xl font-bold">{post.title}</div>
                         </div>
                         <div>
                           <div>{new Date(post.letrehozas.toDate()).toLocaleDateString()}</div>
@@ -133,21 +166,30 @@ export default function ForumPost() {
                     {Object.entries(post?.comments || {}).map(([commentId, commentsArray]) => (
                       <div key={commentId} className='m-2 bg-slate-800 rounded-xl p-3'>
                         <div className='flex justify-between'>
-                          <div>
-                            {user?.uid === commentsArray[0] 
-                              ? <div className="text-lg">Te</div>
-                              : <div className="text-lg">
-                                  {users?.find(obj => obj.uid === commentsArray[0])?.displayName || 
-                                  <>
-                                    <div className="text-red-600">törölt felhasználó</div>
-                                    <div className='text-xs m-1'>({commentsArray[0]})</div>
-                                  </>
-                                  }
-                                </div>
-                            }
-                            {post.uid==commentsArray[0]?
-                              <div className='text-lg bg-blue-700 rounded-xl text-center w-fit px-2'>{post.uid==commentsArray[0]?"Posztoló":""}</div>:null
-                            }
+                          <div className='flex justify-start'>
+                            <div className={`mr-2 rounded-full ${post.uid==commentsArray[0]?"border-2 border-blue-600":""}`}>
+                              {users?.find(obj => obj.uid === commentsArray?.[0])?.photoURL 
+                                  ? (
+                                    <img src={extractUrlAndId(users.find(obj => obj.uid === commentsArray[0])?.photoURL)?.url || ""} alt="Preview" className="img-thumbnail w-10 rounded-full" />
+                                  ) : (
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-10">
+                                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    </svg>
+                                  )
+                              }
+                            </div>
+                            <div className='my-1'>
+                              {user?.uid === commentsArray[0] 
+                                ? <div className="text-lg">Te</div>
+                                : <div className="text-lg">
+                                    {users?.find(obj => obj.uid === commentsArray[0])?.displayName || 
+                                    <>
+                                      <div className='text-red-600 text-lg'>{commentsArray[0]}</div>
+                                    </>
+                                    }
+                                  </div>
+                              }
+                            </div>
                           </div>
                           <div className='opacity-70'>{new Date(commentsArray[2].toDate()).toLocaleDateString()}</div>
                         </div>
@@ -171,7 +213,7 @@ export default function ForumPost() {
                 </div>
             )}
             {err &&<Alerts err={err}/>}
-        </div>
+        </div>)}
     </>
   )
 }
