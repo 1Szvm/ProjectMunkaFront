@@ -3,8 +3,6 @@ import { readCategories, toggleAplication } from '../utility/crudUtility';
 import { UserContext } from '../context/userContext';
 import Alerts from './Alerts';
 
-
-
 export default function Details({ selectedRace, showDetails }) {
     const { user } = useContext(UserContext);
     const [categories, setCategories] = useState(null);
