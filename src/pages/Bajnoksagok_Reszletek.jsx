@@ -189,7 +189,7 @@ const ChampionshipDetails = () => {
           {renderDriverStats()}
 
           {/* Event Calendar */}
-          <div className="calendar bg-slate-700 p-6 rounded-lg shadow-lg mt-6 md:mt-8">
+          <div className="calendar  bg-slate-700 p-6 rounded-lg shadow-lg mt-6 md:mt-8">
             <h3 className="text-lg sm:text-xl font-bold text-white mb-4">Eseménynaptár</h3>
             <ul className="text-slate-300">
               {calendarEvents.map((event, index) => (
@@ -203,8 +203,7 @@ const ChampionshipDetails = () => {
               ))}
             </ul>
           </div>
-
-          {/* Footer */}
+          <p style={{height:'100px'}}></p>
           <Footer />
         </section>
       </div>

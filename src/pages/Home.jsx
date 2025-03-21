@@ -69,12 +69,15 @@ export const Home = () => {
         transition={{ duration: 1, delay: 1 }}
       >
          {matches ? (
-         <div className="w-full h-full overflow-hidden flex justify-center">
+          <div className='w-full flex justify-center'>
+           
+         <div className="mt-3 m-3  border-4  w-[99%] h-[700px] overflow-hidden flex justify-center" style={{borderColor:"rgba(50, 208, 330, 0.3)"}}>
+          
          <video autoPlay loop muted playsInline preload="auto" poster="thumbnail.jpg" className="w-full h-auto max-h-screen object-cover">
         <source src="Project3.mp4" type="video/mp4" />
          Your browser does not support the video tag.
 </video>
-
+</div>
        </div>
          ):( <div className="w-full pt-2 overflow-hidden flex justify-center">
           <video autoPlay loop muted className="w-full h-auto max-h-screen object-cover">
