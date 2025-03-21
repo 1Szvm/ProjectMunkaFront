@@ -1,7 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-
-import { competitions } from "./Bajnoksagok";
 import { useState } from "react";
 import { readPosts } from "../utility/crudUtility";
 import { useEffect } from "react";
@@ -10,33 +8,61 @@ import { useNavigate } from "react-router-dom";
 
 export const SearchForums = () => {
   const [posts,setPosts]=useState([])
-  const [search,setSearch] = useState([])
+  const [search,setSearch] = useState("")
+  const [src,setSrc] = useState(true)
   const navigate = useNavigate()
+  const handleClick = () => {
+    if (!search.trim()) {
+      console.log("Search input is empty");
+      return;
+    }
   
-  const searchWord =async ()=>{
-    let input = document.getElementById("keyWord").value
-    console.log(input);
-    console.log(competitions);
-    /*const filtered = competitions.filter(e => e.name.includes(input) || e.description.includes(input))
-    console.log(filtered);
-    setSearch(filtered)*/
-    const filtered = posts.filter(e=>e.title.includes(input) || e.content.includes(input))
-    console.log(posts);
-    setPosts(filtered)
+    const found = posts.some(post =>
+      post.title.toLowerCase().includes(search.toLowerCase()) ||
+      post.content.toLowerCase().includes(search.toLowerCase())
+    );
     
+    if (found) {
+      setSrc(true);
+      searchWord(); 
+      console.log("Found");
+    } else {
+      setSrc(false);
+      console.log("Not Found");
+    }
+  };
+  
+  const searchWord = async () => {
+    let input = document.getElementById("keyWord").value.trim();
     
-  }
+    if (!input) {
+      console.log("Search input is empty");
+      return;
+    }
+  
+    console.log("Search Input:", input);
+    console.log("All Posts:", posts);
+  
+    // Filter posts based on title or content
+    const filtered = posts.filter(e => e.title.includes(input) || e.content.includes(input));
+    
+    console.log("Filtered Posts:", filtered);
+    setPosts(filtered); // Update state with filtered posts
+  };
+  
   const reset =async ()=>{
     window.location.reload()
   }
   useEffect(() => {
     readPosts(setPosts);
+  
   }, []);
 
 
 
   return (
     <>
+  
     <div className="pl-2 pr-2">
     <motion.div 
       className=" p-3 max-w-2xl mt-4 text-cyan-700 mx-auto bg-slate-300 rounded-2xl shadow-lg mb-1"
@@ -47,6 +73,8 @@ export const SearchForums = () => {
       <h2 className="text-xl font-bold mb-4">Search Threads</h2>
       <input 
         type="text" 
+        value={search} 
+        onChange={(e) => setSearch(e.target.value)} 
         placeholder="Enter keywords" 
         className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         id="keyWord"
@@ -68,7 +96,7 @@ export const SearchForums = () => {
       </div> */}
      
       <div className="mt-4 flex gap-2">
-        <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600" onClick={searchWord} >
+        <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600" onClick={handleClick} >
           Search
         </button>
         <motion.button 
@@ -112,31 +140,43 @@ export const SearchForums = () => {
       
     ))
     */}
-    { <div className='flex justify-center pt-5 p-2 m-3'>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl">
-        {posts?.map(post => (
-            <div
-              className='cursor-pointer grou p'
-              key={post.id}
-              onClick={() => navigate("/post/" + post.id)}
-            >
-        <div className=" bg-slate-200 card w-full shadow-xl rounded-lg overflow-hidden transform transition-all duration-500 hover: text-red-300 scale-105 hover:rotate-2 hover:shadow-2xl hover:shadow-red-500 group-hover:opacity-90">
-          <div className="card-body p-5 flex flex-col justify-between h-full">
-            <div className='flex justify-between mb-3'>
-              <h2 className="card-title text-xl font-semibold text-gray-800 group-hover:text-red-600 transition-all duration-300">{post.title}</h2>
-              <div className="text-sm text-gray-500">{new Date(post.letrehozas.toDate()).toLocaleDateString()}</div>
+    {!src ? (
+  <div>Nincs talalat</div>
+) : (
+
+  <div className='flex justify-center pt-5 p-2 m-3'>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl">
+      {posts?.map(post => (
+        <div
+          className='cursor-pointer group p'
+          key={post.id}
+          onClick={() => navigate("/post/" + post.id)}
+        >
+          <div className="bg-slate-200 card w-full shadow-xl rounded-lg overflow-hidden transform transition-all duration-500 hover:scale-105 hover:rotate-2 hover:shadow-2xl hover:shadow-red-500 group-hover:opacity-90">
+            <div className="card-body p-5 flex flex-col justify-between h-full">
+              <div className='flex justify-between mb-3'>
+                <h2 className="card-title text-xl font-semibold text-gray-800 group-hover:text-red-600 transition-all duration-300">
+                  {post.title}
+                </h2>
+                <div className="text-sm text-gray-500">
+                  {new Date(post.letrehozas.toDate()).toLocaleDateString()}
+                </div>
+              </div>
+              <p className="text-gray-700 text-base line-clamp-3 group-hover:text-gray-900 transition-all duration-300">
+                {post.content}
+              </p>
             </div>
-            <p className="text-gray-700 text-base line-clamp-3 group-hover:text-gray-900 transition-all duration-300">{post.content}</p>
           </div>
         </div>
-      </div>
-    ))}
+      ))}  
+    </div>
   </div>
-</div>
+)}
+
+  
 
 
 
-}
     {/*posts.map((post) => (
       <motion.div
         key={post.id}
