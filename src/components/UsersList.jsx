@@ -24,7 +24,7 @@ function UsersList() {
   }
     
   return (
-    <div>
+    <>
       <h2>User List</h2>
       {users.length === 0 ? (
         <>
@@ -44,7 +44,7 @@ function UsersList() {
           </li>
         ))}
       </ul>)}
-    </div>
+    </>
   );
 }
 

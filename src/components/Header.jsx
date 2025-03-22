@@ -7,12 +7,14 @@ import { UserContext } from "../context/userContext";
 
 export const Header = () => {
   const { user, logoutUser } = useContext(UserContext);
+  const [admins,setAdmins]=useState([]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const [matches, setMatches] = useState(window.matchMedia("(min-width: 768px)").matches);
   const [darkMode, setDarkMode] = useState(true);
 
   const toggleDarkMode = () => {
+    readAuthorization(setAdmins);
     setDarkMode(!darkMode);
   };
 
@@ -110,7 +112,6 @@ export const Header = () => {
               {user ? (
                 <div className="flex justify-end items-center space-x-2">
                   <ProfileMenu/>
-             
                 </div>
               ) : (
                 <>
@@ -184,6 +185,14 @@ export const Header = () => {
       {/* Conditional User Links */}
       {user ? (
         <div className="rounded-lg shadow-md flex flex-col p-2">
+          {admins?.some(admin => admin.Ids.includes(user?.uid))?(
+            <NavLink
+              className="m-1 px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 text-center shadow-md hover:shadow-lg"
+              to="/admin"
+            >
+              Admin Page
+            </NavLink>
+          ):null}
           <NavLink
             className="m-1 px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 text-center shadow-md hover:shadow-lg"
             to="/profile"
