@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { deleteFutam, readAuthorization, readCategories, readRaces } from '../utility/crudUtility';
-import AddNew from '../components/AddNew';
+import AddNew from '../components/AddRace';
 import Details from '../components/Details';
 import Alerts from '../components/Alerts';
 import { UserContext } from '../context/userContext';

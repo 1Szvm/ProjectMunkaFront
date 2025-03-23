@@ -10,7 +10,7 @@ import { readAuthorization } from "../utility/crudUtility";
 export default function ProfileMenu() {
   const [open, setOpen] = useState(false); // Track if the dropdown is open
   const toggleMenu = () => setOpen(!open);
-    const [admins,setAdmins]=useState([]);
+  const [admins,setAdmins]=useState([]);
   const { user, logoutUser } = useContext(UserContext);
 
     useEffect(() => {
