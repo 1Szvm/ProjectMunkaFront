@@ -4,6 +4,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { readAuthorization } from '../utility/crudUtility';
 import { extractUrlAndId } from '../utility/utils';
+import { deletePhoto } from '../utility/backendHandling';
 
 export default function EidtUser({modalRef,selectedUser}) {
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
@@ -14,13 +15,23 @@ export default function EidtUser({modalRef,selectedUser}) {
 
     const [displayName,setDisplayName]=useState("")
     const [isAdmin,setIsAdmin]=useState(false)
-    const [photo,setPhoto]=useState("")
+    const [photo,setPhoto]=useState("../NoPFP.jpg")
 
     useEffect(() => {
         setDisplayName(selectedUser.displayName||"")
         setIsAdmin(admins?.some(admin => admin.Ids.includes(selectedUser?.uid)))
         setPhoto(selectedUser?.photoURL ? extractUrlAndId(selectedUser.photoURL)?.url : "../NoPFP.jpg")
     },[selectedUser])
+
+    const handleDeletePfp= async()=>{
+        try {
+            deletePhoto(extractUrlAndId(selectedUser.photoURL).id)
+            //V needs a function that removes the photo from the user by id
+            updateUser(selectedUser.displayName,"" )   
+        } catch (error) {
+            console.log(error);
+        }
+    }
     
 
     const onSubmit = async (data) => {
@@ -36,13 +47,14 @@ export default function EidtUser({modalRef,selectedUser}) {
                     <p className='text-xl'>Profil szerkesztése</p>
                 </div>
                 <div className='my-2'>
-                    {selectedUser?.photoURL?(
+ 
                     <div className="flex justify-center relative">
                         <img src={photo} className="rounded-box z-0 size-60" />
-                        <div className="btn rounded-box absolute z-10 size-60 opacity-0 hover:opacity-70 text-lg" >
+                        {selectedUser?.photoURL?(
+                        <div className="btn rounded-box absolute z-10 size-60 opacity-0 hover:opacity-70 text-lg" onClick={()=>handleDeletePfp()}>
                             <DeleteIcon/>
-                        </div>
-                    </div>):null}
+                        </div>):null}
+                    </div>
                     <div>
                         <label className="block font-medium mt-4">Név</label>
                         <input id="dname" type="text" placeholder="Pálya neve"

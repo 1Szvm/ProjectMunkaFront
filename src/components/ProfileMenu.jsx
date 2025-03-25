@@ -17,7 +17,6 @@ export default function ProfileMenu() {
       readAuthorization(setAdmins);
   }, []);
 
-  //honestly what's this dogshit like It's a fucking mess
 
   return (
     <div className=" flex items-center justify-center">
