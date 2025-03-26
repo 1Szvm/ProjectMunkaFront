@@ -8,9 +8,11 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useForm } from 'react-hook-form';
 import EidtUser from '../components/EditUser';
+import { useConfirm } from 'material-ui-confirm';
 
 export default function Adminpage() {
       const navigate=useNavigate()
+      const confirm=useConfirm()
       const { user } = useContext(UserContext);
       const [admins,setAdmins]=useState([])
       const [users, setUsers] = useState([]);
@@ -47,6 +49,19 @@ export default function Adminpage() {
       
         return <p className="text-center text-lg font-semibold">Betöltés{dots}</p>;
       }
+
+      const handleDeleteUser=async(uid)=>{
+        const { confirmed }=await confirm({
+          description: String("Ez egy visszavonhatatlan művelet"),
+          confirmationText:"Igen",
+          cancellationText:"Mégsem",
+          title:"Biztos ki szeretnéd törölni a posztot?"
+        })
+      if(confirmed) {
+        console.log("delete user",uid);
+        //this dosent work yet
+      }
+      }
         
   return (
     <>
@@ -62,11 +77,14 @@ export default function Adminpage() {
                 <div className="flex justify-between px-2 items-center bg-slate-800 rounded-xl border">
                   <div className='flex justify-start items-center'>
                     <div><img className="size-20 rounded-box mx-2" src={fetchedUser.photoURL ? extractUrlAndId(fetchedUser.photoURL)?.url : "../NoPFP.jpg"}/></div>
-                    <div className={`${admins?.some(admin => admin.Ids.includes(fetchedUser?.uid))?"text-yellow-400":""}`}>{fetchedUser.displayName}</div>
+                    <div>
+                      <div className={`${admins?.some(admin => admin.Ids.includes(fetchedUser?.uid))?"text-yellow-400":""}`}>{fetchedUser.displayName}</div>
+                      <div className='text-sm opacity-70'>{fetchedUser.email}</div>
+                    </div>
                   </div>
                   <div className='flex justify-center items-center'>
                     <div className='btn mx-1 bg-ghost text-white' onClick={()=>handleEdit(fetchedUser)}><EditIcon/></div>
-                    <div className='btn mx-1 bg-red-600 text-white'><DeleteIcon/></div>
+                    <div className='btn mx-1 bg-red-600 text-white' onClick={()=>handleDeleteUser(fetchedUser.uid)}><DeleteIcon/></div>
                   </div>
                 </div>
               </div>

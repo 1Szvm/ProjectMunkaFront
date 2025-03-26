@@ -14,8 +14,8 @@ export const uploadFile = async (file) => {
     }
 };
 
-//const local_url="http://localhost:5000"
-const url = "https://projectmunkaback.onrender.com";
+const url="http://localhost:5000"
+//const url = "https://projectmunkaback.onrender.com";
 
 export const deletePhoto = async (id) => {
   console.log("Deleting photo with ID:", id);
@@ -27,10 +27,40 @@ export const deletePhoto = async (id) => {
   }
 };
 
-export const readUsers = (setUsers) => {
+export const readUsers = async(setUsers) => {
   axios.get(url+"/api/users")
     .then(response => {
       setUsers(response.data);
+    })
+    .catch(error => {
+      console.error("Error fetching users:", error);
+    });
+}
+
+export const getUserById = async(id) => {
+  axios.get(url+"/api/users/"+id)
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error("Error fetching users:", error);
+    });
+}
+
+export const deleteUserPfp = async(id) => {
+  axios.delete(url+"/api/users/"+id+"/photo")
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error("Error fetching users:", error);
+    });
+}
+
+export const editUserDName = async(id,displayName) => {
+  axios.put(url+"/api/users/"+id+"/displayName",{displayName})
+    .then(response => {
+      console.log(response.data);
     })
     .catch(error => {
       console.error("Error fetching users:", error);

@@ -178,6 +178,25 @@ export const deleteComment = async (postId, commentId) => {
   }
 };
 
+export const toggelAdmin = async (id,isAdmin) => {
+  const docRef = doc(db, "adminIds");
+  const docSnap = await getDoc(docRef);
+
+  const adminsArr = docSnap.data().Ids || [];
+  if (!adminsArr.includes(id)&&isAdmin) {
+      await updateDoc(docRef, {
+        Ids: arrayUnion(id)
+      });
+      console.log("added:", id);
+  } else {
+      await updateDoc(docRef, {
+          Ids: arrayRemove(id)
+      });
+      console.log("Removed:", id);
+  }
+  console.log("Comment added successfully!");
+};
+
 export const deleteFutam=async (id)=>{
   const docRef= doc(db, "futamok", id);
   await deleteDoc(docRef)

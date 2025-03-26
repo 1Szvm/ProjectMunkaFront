@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { readAuthorization } from '../utility/crudUtility';
+import { readAuthorization, toggelAdmin } from '../utility/crudUtility';
 import { extractUrlAndId } from '../utility/utils';
-import { deletePhoto } from '../utility/backendHandling';
+import { deletePhoto, deleteUserPfp, editUserDName, getUserById } from '../utility/backendHandling';
+import { useConfirm } from 'material-ui-confirm';
 
 export default function EidtUser({modalRef,selectedUser}) {
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
     const [admins,setAdmins]=useState([])
+    const confirm=useConfirm()
     useEffect(() => {
         readAuthorization(setAdmins)
     }, []);
@@ -24,18 +26,34 @@ export default function EidtUser({modalRef,selectedUser}) {
     },[selectedUser])
 
     const handleDeletePfp= async()=>{
-        try {
-            deletePhoto(extractUrlAndId(selectedUser.photoURL).id)
-            //V needs a function that removes the photo from the user by id
-            updateUser(selectedUser.displayName,"" )   
-        } catch (error) {
-            console.log(error);
+        const { confirmed }=await confirm({
+            description: String("Ez egy visszavonhatatlan művelet"),
+            confirmationText:"Igen",
+            cancellationText:"Mégsem",
+            title:"Biztos ki szeretnéd törölni a posztot?"
+          })
+        if(confirmed){
+            try {
+                deletePhoto(extractUrlAndId(selectedUser.photoURL).id)
+                deleteUserPfp(selectedUser.uid) 
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
     
 
     const onSubmit = async (data) => {
-        console.log("I'll make you submit father");
+        try {
+            editUserDName(selectedUser.uid,data.dname)   
+            toggelAdmin(selectedUser.uid,isAdmin)
+            // needs a function wicth edits the admin collection 
+            //aslo disable save button if no changes were made
+        } catch (error) {
+            console.log(error);
+        }finally{
+            setTimeout(() => modalRef.current?.close(), 800);
+        }
     }
     
     
@@ -52,7 +70,7 @@ export default function EidtUser({modalRef,selectedUser}) {
                         <img src={photo} className="rounded-box z-0 size-60" />
                         {selectedUser?.photoURL?(
                         <div className="btn rounded-box absolute z-10 size-60 opacity-0 hover:opacity-70 text-lg" onClick={()=>handleDeletePfp()}>
-                            <DeleteIcon/>
+                            <DeleteIcon fontSize='large'/>
                         </div>):null}
                     </div>
                     <div>
@@ -71,7 +89,7 @@ export default function EidtUser({modalRef,selectedUser}) {
                             id="authorization"
                             className="select w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             {...register('authorization', { required: 'A kategória kiválasztása kötelező.' })}
-                            onChange={(e) => console.log(e.target.value)}
+                            onChange={(e) => setIsAdmin(e.target.value)}
                             value={isAdmin}
                         >
                             <option value={false} >
@@ -84,6 +102,7 @@ export default function EidtUser({modalRef,selectedUser}) {
                     </div>
                 </div>
                 <div className='flex justify-end'>
+                    <div className='btn mx-2 bg-blue-600' onClick={()=>getUserById(selectedUser.uid)}>getUserInfo</div>
                     <div className='btn mx-2 bg-blue-600' onClick={()=>handleSubmit(onSubmit)()}><SaveIcon/></div>
                     <div className='btn bg-red-600' onClick={()=>modalRef.current?.close()}>Bezárás</div>
                 </div>
