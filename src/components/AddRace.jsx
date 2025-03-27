@@ -112,7 +112,7 @@ export default function AddNew({ addEdit, setAddEdit }) {
 
     return (
         <div>
-            {admins?.some(admin => admin.Ids.includes(user?.uid)) && (
+            {admins?.includes(user?.uid)     && (
                 <div
                     className="fixed bottom-20 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 bg-rose-600"
                     onClick={() => setAddEdit(true)}

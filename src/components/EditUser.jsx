@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { set, useForm } from 'react-hook-form';
+import {  useForm } from 'react-hook-form';
 import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { readAuthorization, toggelAdmin } from '../utility/crudUtility';
+import { readAuthorization, toggleAdmin } from '../utility/crudUtility';
 import { extractUrlAndId } from '../utility/utils';
 import { deletePhoto, deleteUserPfp, editUserDName, getUserById } from '../utility/backendHandling';
 import { useConfirm } from 'material-ui-confirm';
@@ -21,7 +21,7 @@ export default function EidtUser({modalRef,selectedUser}) {
 
     useEffect(() => {
         setDisplayName(selectedUser.displayName||"")
-        setIsAdmin(admins?.some(admin => admin.Ids.includes(selectedUser?.uid)))
+        setIsAdmin(admins?.includes(selectedUser?.uid))
         setPhoto(selectedUser?.photoURL ? extractUrlAndId(selectedUser.photoURL)?.url : "../NoPFP.jpg")
     },[selectedUser])
 
@@ -46,8 +46,7 @@ export default function EidtUser({modalRef,selectedUser}) {
     const onSubmit = async (data) => {
         try {
             editUserDName(selectedUser.uid,data.dname)   
-            toggelAdmin(selectedUser.uid,isAdmin)
-            // needs a function wicth edits the admin collection 
+            toggleAdmin(selectedUser.uid,isAdmin)
             //aslo disable save button if no changes were made
         } catch (error) {
             console.log(error);

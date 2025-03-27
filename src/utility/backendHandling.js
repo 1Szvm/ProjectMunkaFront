@@ -66,3 +66,13 @@ export const editUserDName = async(id,displayName) => {
       console.error("Error fetching users:", error);
     });
 }
+
+export const deleteUserById = async(id,) => {
+  axios.delete(url+"/api/users/"+id)
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error("Error fetching users:", error);
+    });
+}

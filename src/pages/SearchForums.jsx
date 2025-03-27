@@ -156,14 +156,14 @@ export const SearchForums = () => {
             <div className="card-body p-5 flex flex-col justify-between h-full">
               <div className='flex justify-between mb-3'>
                 <h2 className="card-title text-xl font-semibold text-gray-800 group-hover:text-red-600 transition-all duration-300">
-                  {post.title}
+                  {post.title.length>70?`${post.title.slice(0,25)}...`:post.title}
                 </h2>
                 <div className="text-sm text-gray-500">
                   {new Date(post.letrehozas.toDate()).toLocaleDateString()}
                 </div>
               </div>
               <p className="text-gray-700 text-base line-clamp-3 group-hover:text-gray-900 transition-all duration-300">
-                {post.content}
+                {post.content.length>30?`${post.content.slice(0,30)}...`:post.content}
               </p>
             </div>
           </div>

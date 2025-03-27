@@ -49,7 +49,7 @@ export default function ProfileMenu() {
   style={{ originY: "top", translateX: "-50%", zIndex: 50 }} // Added zIndex
   className="flex flex-col gap-2 p-2 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] w-48 overflow-hidden"
  >
-          {admins?.some(admin => admin.Ids.includes(user?.uid))? (
+          {admins?.includes(user?.uid)? (
             <NavLink to="/admin" > <Option setOpen={setOpen} Icon={FiEdit} text="Admin Page" /> </NavLink>
           ):null}
           <NavLink to="/profile" > <Option setOpen={setOpen} Icon={FiEdit} text="Profil" /> </NavLink>

@@ -4,6 +4,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ProfileMenu from "./ProfileMenu";
 import { UserContext } from "../context/userContext";
+import { readAuthorization } from "../utility/crudUtility";
 
 export const Header = () => {
   const { user, logoutUser } = useContext(UserContext);
@@ -14,9 +15,12 @@ export const Header = () => {
   const [darkMode, setDarkMode] = useState(true);
 
   const toggleDarkMode = () => {
-    readAuthorization(setAdmins);
     setDarkMode(!darkMode);
   };
+
+  useEffect(() => {
+    readAuthorization(setAdmins);
+  },[])
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 768px)");
@@ -34,6 +38,8 @@ export const Header = () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
     };
   }, [darkMode]);
+
+  
   
 
   const toggleMobileMenu = () => {
@@ -185,7 +191,7 @@ export const Header = () => {
       {/* Conditional User Links */}
       {user ? (
         <div className="rounded-lg shadow-md flex flex-col p-2">
-          {admins?.some(admin => admin.Ids.includes(user?.uid))?(
+          {admins?.includes(user?.uid)?(
             <NavLink
               className="m-1 px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 text-center shadow-md hover:shadow-lg"
               to="/admin"

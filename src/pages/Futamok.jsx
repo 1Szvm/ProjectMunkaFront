@@ -120,7 +120,7 @@ export const Futamok = () => {
                     >
                       Részletek
                     </div>
-                    {admins?.some(admin => admin.Ids.includes(user?.uid)) && (
+                    {admins?.includes(user?.uid) && (
                       <div className='absolute top-0 right-0 m-2'>
                         <div className="dropdown dropdown-end">
                           <div tabIndex={0} role="button" className="btn m-1">
