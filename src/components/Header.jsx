@@ -81,7 +81,7 @@ export const Header = () => {
           transition-colors duration-300 ease-in-out flex items-center justify-center w-full pb-1`}>
              <motion.button
                 onClick={toggleDarkMode}
-                className="absolute left-8 p-[11px] rounded-full bg-gray-600 text-white transition-all duration-300 transform hover:scale-125"
+                className="absolute left-8 p-[11px] rounded-full bg-slate-700 text-white transition-all duration-300 transform hover:scale-125"
               >
                 {darkMode ? '🌙' : '🌞'}
               </motion.button>
