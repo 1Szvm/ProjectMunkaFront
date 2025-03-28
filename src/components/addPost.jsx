@@ -50,10 +50,11 @@ export default function () {
             </svg>
           </div>}
         <dialog ref={modalRef} id="add" className="modal">
-          <div className='bg-slate-600 rounded-lg'>
-            <div className='m-4'>
+          <div className='bg-slate-800 gap-2 min-w-[200px] max-w-[700px] w-[60%] h-[60%]  flex flex-col justify-center items-center rounded-lg'>
+          
+            <div className='m-4 w-[90%]'>
               <input id="title" type="text" placeholder="Cím"
-                className="input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="input w-[100%] border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 {...register('title',                
                   {validate: (value) => {
                   if (value.length>50) return "A cím maximum 50 karakter lehet!";
@@ -64,7 +65,7 @@ export default function () {
               />
               <p className="text-red-600">{errors?.title?.message}</p>
             </div>
-            <div className='m-4'>
+            <div className='m-4  w-[90%]'>
               <textarea id="post" type="text" placeholder="Írj valamit..."
                 className="textarea w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 {...register('post',                   
@@ -79,7 +80,7 @@ export default function () {
             </div>
             <div className='flex justify-between m-4'>
               <div className='btn bg-blue-600' onClick={()=> handleSubmit(onSubmit)()}>Post</div>
-              <div className='btn bg-red-600' onClick={() => modalRef.current?.close()}>close</div>
+              <div className='btn bg-pink-600' onClick={() => modalRef.current?.close()}>close</div>
             </div>
           </div>
         </dialog>
