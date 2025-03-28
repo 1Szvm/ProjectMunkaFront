@@ -18,10 +18,8 @@ export const uploadFile = async (file) => {
 const url = "https://projectmunkaback.onrender.com";
 
 export const deletePhoto = async (id) => {
-  console.log("Deleting photo with ID:", id);
   try {
     await axios.delete(url+"/post/"+id);
-    console.log("Successfully deleted the photo.");
   } catch (error) {
     console.error("Error deleting photo:", error);
   }
@@ -37,42 +35,26 @@ export const readUsers = async(setUsers) => {
     });
 }
 
-export const getUserById = async(id) => {
-  axios.get(url+"/api/users/"+id)
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.error("Error fetching users:", error);
-    });
-}
-
 export const deleteUserPfp = async(id) => {
-  axios.delete(url+"/api/users/"+id+"/photo")
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.error("Error fetching users:", error);
-    });
+  try {
+    await axios.delete(url+"/api/users/"+id+"/photo")
+  } catch (error) {
+    console.error("Error deleting user:", error);
+  }
 }
 
 export const editUserDName = async(id,displayName) => {
-  axios.put(url+"/api/users/"+id+"/displayName",{displayName})
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.error("Error fetching users:", error);
-    });
+ try {
+    await axios.put(url+"/api/users/"+id+"/displayName",{displayName})
+  } catch (error) {
+    console.error("Error editing user:", error);
+  }
 }
 
 export const deleteUserById = async(id) => {
-  axios.delete(url+"/api/users/"+id)
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.error("Error fetching users:", error);
-    });
+  try {
+    await axios.delete(url+"/api/users/"+id)
+  } catch (error) {
+    console.error("Error deleting user:", error);
+  }
 }

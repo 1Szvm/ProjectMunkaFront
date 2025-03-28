@@ -9,7 +9,6 @@ import { deletePhoto, deleteUserPfp, editUserDName } from '../utility/backendHan
 export default function EidtUser({modalRef,selectedUser}) {
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
     const [admins,setAdmins]=useState([])
-    const [saveBtn,setSaveBtn]=useState(true)
     useEffect(() => {
         readAuthorization(setAdmins)
     }, []);
@@ -35,10 +34,14 @@ export default function EidtUser({modalRef,selectedUser}) {
     }
 
     const onSubmit = async (data) => {
+        console.log(data);
         try {
-            editUserDName(selectedUser.uid,data.dname)   
-            toggleAdmin(selectedUser.uid,isAdmin)
-            //aslo disable save button if no changes were made
+            if(admins?.includes(selectedUser?.uid) !== isAdmin){
+                toggleAdmin(selectedUser.uid,isAdmin)
+            }
+            if(selectedUser.displayName !== displayName){
+                editUserDName(selectedUser.uid,displayName)
+            }
         } catch (error) {
             console.log(error);
         }finally{
@@ -86,7 +89,6 @@ export default function EidtUser({modalRef,selectedUser}) {
                             {...register('authorization', { required: 'A kategória kiválasztása kötelező.' })}
                             onChange={(e) =>{
                                 const value = e.target.value === "true"; // Convert string to boolean
-                                console.log(typeof value, value)
                                 setIsAdmin(value)}}
                             value={isAdmin}
                         >

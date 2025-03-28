@@ -67,12 +67,10 @@ import { v4 as uuidv4 } from 'uuid'; // Correct import for UUID v4
         await updateDoc(docRef, {
             resztvevok: arrayRemove(uid)
         });
-        console.log("Removed:", uid);
     } else {
         await updateDoc(docRef, {
             resztvevok: arrayUnion(uid)
         });
-        console.log("Added:", uid);
     }
 };
 
