@@ -55,7 +55,7 @@ export const SearchForums = () => {
   }
   useEffect(() => {
     readPosts(setPosts);
-  
+    
   }, []);
 
 
@@ -65,27 +65,33 @@ export const SearchForums = () => {
   
     <div className="pl-2 pr-2">
     <motion.div 
-      className=" p-3 max-w-2xl mt-4 text-cyan-700 mx-auto bg-slate-300 rounded-2xl shadow-lg mb-1"
+      className=" p-2 max-w-2xl mt-10 mb-5 text-cyan-700 mx-auto bg-slate-100 rounded-2xl shadow-lg "
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h2 className="text-xl font-bold mb-4">Search Threads</h2>
+      <h2 className="text-xl font-bold mb-2">Beszélgetések keresése</h2>
+      <div className="flex gap-2">
       <input 
         type="text" 
         value={search} 
         onChange={(e) => setSearch(e.target.value)} 
-        placeholder="Enter keywords" 
+        placeholder="Mire szeretnél rá keresni?" 
         className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         id="keyWord"
       />
-      <div className="mt-4">
-        
-      </div>
-      <div className="mt-4 grid grid-cols-2 gap-4">
-        
-       
-      </div>
+         <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600" onClick={handleClick} >
+          Keresés
+        </button>
+        <motion.button 
+          whileHover={{ scale: 1.1 }} 
+          whileTap={{ scale: 0.9 }}
+          className="px-4 py-2 bg-gray-300 rounded-lg"
+          onClick={reset}
+        >
+          Vissza
+        </motion.button>
+        </div>
       {/* <div className="mt-4">
         <input 
           type="number" 
@@ -95,27 +101,15 @@ export const SearchForums = () => {
         />
       </div> */}
      
-      <div className="mt-4 flex gap-2">
-        <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600" onClick={handleClick} >
-          Search
-        </button>
-        <motion.button 
-          whileHover={{ scale: 1.1 }} 
-          whileTap={{ scale: 0.9 }}
-          className="px-4 py-2 bg-gray-300 rounded-lg"
-          onClick={reset}
-        >
-          Reset
-        </motion.button>
-      </div>
+      {/* <div className="mt-4 flex gap-2">
+        //régi helye a keresesnek es a resetnek
+        
+      </div> */}
       
     </motion.div>
-    
- 
-    {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-10"> */}
     <div className="flex justify-center flex-wrap gap-8">
-    {/*search.map((competition) => (
-    {/*search.map((competition) => (
+    {/* search.map((competition) => (
+    search.map((competition) => (
       <motion.div
         key={competition.id}
         initial={{ opacity: 0, scale: 0.9 }}
@@ -140,7 +134,7 @@ export const SearchForums = () => {
       </motion.div>
       
     ))
-    */}
+       */}
     {!src ? (
   <div>Nincs talalat</div>
 ) : (
@@ -153,10 +147,10 @@ export const SearchForums = () => {
           key={post.id}
           onClick={() => navigate("/post/" + post.id)}
         >
-          <div className="bg-slate-200 card w-full shadow-xl rounded-lg overflow-hidden transform transition-all duration-500 hover:scale-105 hover:rotate-2 hover:shadow-2xl hover:shadow-red-500 group-hover:opacity-90">
+          <div className="bg-slate-100 card w-full border-slate-300 border shadow-xl opacity-95 rounded-lg overflow-hidden transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-sky-600 group-hover:opacity-100">
             <div className="card-body p-5 flex flex-col justify-between h-full">
               <div className='flex justify-between mb-3'>
-                <h2 className="card-title text-xl font-semibold text-gray-800 group-hover:text-red-600 transition-all duration-300">
+                <h2 className="card-title text-xl font-semibold text-gray-800 group-hover:text-blue-700 transition-all duration-300">
                   {post.title.length>70?`${post.title.slice(0,25)}...`:post.title}
                 </h2>
                 <div className="text-sm text-gray-500">
@@ -178,30 +172,7 @@ export const SearchForums = () => {
 
 
 
-    {/*posts.map((post) => (
-      <motion.div
-        key={post.id}
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: post.id * 0.2 }}
-        whileHover={{ scale: 1.05 }}
-        className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transform transition-all flex justify-center flex-wrap content-center max-w-72 "
-      >
-        <div className="p-6">
-          <h3 className="text-2xl font-bold text-gray-800">{post.title}</h3>
-          <p className="text-gray-700 mt-2">{post.content}</p>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="mt-4 py-2 px-6 bg-yellow-400 text-black rounded-lg hover:bg-yellow-500 transition"
-          >
-            Részletek
-          </motion.button>
-        </div>
-        
-      </motion.div>
-      
-    ))*/}
+    
     </div>
     </div>
   </>

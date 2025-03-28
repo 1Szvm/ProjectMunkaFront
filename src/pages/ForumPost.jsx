@@ -88,7 +88,7 @@ export default function ForumPost() {
       {users.length === 0 ? (
           <LoadingUsers />
       ) :(
-       <div className="container m-auto px-5 py-2 page rounded-xl mt-3 bg-slate-700  min-w-[250px] max-w-[60%]">
+        <div className="container m-auto px-5 py-2 page rounded-xl mt-4 opacity-200 border-sky-600 border-2 min-w-[250px] w-[85%] max-w-[900px] shadow-lg">
             {post ? (
                 <div className='py-4'>
                   {/*Post*/}
@@ -125,7 +125,7 @@ export default function ForumPost() {
                             : <div className="text-3xl m-2">
                                 {users?.find(obj => obj.uid === post.uid)?.displayName || 
                                 <>
-                                  <div className='text-3xl m-2 text-red-600'>({post.uid})</div>
+                                  <div className='text-3xl m-2 text-red-700'>({post.uid})</div>
                                 </>
                                 }
                               </div>
@@ -162,7 +162,7 @@ export default function ForumPost() {
                   <div>
                     {/*comment section*/}
                     {Object.entries(post?.comments || {}).map(([commentId, commentsArray]) => (
-                      <div key={commentId} className='m-2 bg-slate-800 rounded-xl p-3'>
+                      <div key={commentId} className='m-2 bg-slate-700 text-white rounded-xl p-3'>
                         <div className='flex justify-between'>
                           <div className='flex justify-start'>
                             <div className={`mr-2 rounded-full ${post.uid==commentsArray[0]?"border-2 border-blue-600":""}`}>
