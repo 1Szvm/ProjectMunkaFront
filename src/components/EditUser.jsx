@@ -1,16 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {  useForm } from 'react-hook-form';
 import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { readAuthorization, toggleAdmin } from '../utility/crudUtility';
 import { extractUrlAndId } from '../utility/utils';
-import { deletePhoto, deleteUserPfp, editUserDName, getUserById } from '../utility/backendHandling';
-import { useConfirm } from 'material-ui-confirm';
+import { deletePhoto, deleteUserPfp, editUserDName } from '../utility/backendHandling';
 
 export default function EidtUser({modalRef,selectedUser}) {
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
     const [admins,setAdmins]=useState([])
-    const confirm=useConfirm()
+    const [saveBtn,setSaveBtn]=useState(true)
     useEffect(() => {
         readAuthorization(setAdmins)
     }, []);
@@ -27,22 +26,13 @@ export default function EidtUser({modalRef,selectedUser}) {
 
     
     const handleDeletePfp= async()=>{
-        const { confirmed }=await confirm({
-            description: String("Ez egy visszavonhatatlan művelet"),
-            confirmationText:"Igen",
-            cancellationText:"Mégsem",
-            title:"Biztos ki szeretnéd törölni a posztot?"
-          })
-        if(confirmed){
-            try {
-                deletePhoto(extractUrlAndId(selectedUser.photoURL).id)
-                deleteUserPfp(selectedUser.uid) 
-            } catch (error) {
-                console.log(error);
-            }
+        try {
+            deletePhoto(extractUrlAndId(selectedUser.photoURL).id)
+            deleteUserPfp(selectedUser.uid) 
+        } catch (error) {
+            console.log(error);
         }
     }
-    
 
     const onSubmit = async (data) => {
         try {
@@ -75,9 +65,14 @@ export default function EidtUser({modalRef,selectedUser}) {
                     </div>
                     <div>
                         <label className="block font-medium mt-4">Név</label>
-                        <input id="dname" type="text" placeholder="Pálya neve"
+                        <input id="dname" type="text" placeholder="Néve"
                             className="input  w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            {...register('dname', { required: 'A név megadása kötelező.' })}
+                            {...register('dname',                 
+                                {validate: (value) => {
+                                if (value.length>30) return "Maximum 30 karakter lehet a név!";
+                                if (!value) return "Név megadása kötelező!"
+                                return true;}})
+                            }
                             onChange={(e) => setDisplayName(e.target.value)}
                             value={displayName}
                         />
@@ -105,8 +100,7 @@ export default function EidtUser({modalRef,selectedUser}) {
                     </div>
                 </div>
                 <div className='flex justify-end'>
-                    <div className='btn mx-2 bg-blue-600' onClick={()=>getUserById(selectedUser.uid)}>getUserInfo</div>
-                    <div className='btn mx-2 bg-blue-600' onClick={()=>handleSubmit(onSubmit)()}><SaveIcon/></div>
+                    <div className='btn mx-2 bg-blue-600'  onClick={()=>handleSubmit(onSubmit)()}><SaveIcon/></div>
                     <div className='btn bg-red-600' onClick={()=>modalRef.current?.close()}>Bezárás</div>
                 </div>
             </div>

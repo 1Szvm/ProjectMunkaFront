@@ -54,7 +54,11 @@ export default function () {
             <div className='m-4'>
               <input id="title" type="text" placeholder="Cím"
                 className="input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                {...register('title', { required: 'A cím megadása kötelező.' })}
+                {...register('title',                
+                  {validate: (value) => {
+                  if (value.length>50) return "A cím maximum 50 karakter lehet!";
+                  if (!value) return "A cím megadása kötelező!"
+                  return true;}})}
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
               />
@@ -63,7 +67,11 @@ export default function () {
             <div className='m-4'>
               <textarea id="post" type="text" placeholder="Írj valamit..."
                 className="textarea w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                {...register('post', { required: 'A szöveg megadása kötelező.' })}
+                {...register('post',                   
+                  {validate: (value) => {
+                  if (value.length>200) return "A szöveg maximum 200 karakter lehet!";
+                  if (!value) return "A szöveg megadása kötelező!"
+                  return true;}})}
                 onChange={(e) => setPost(e.target.value)}
                 value={post}
               />

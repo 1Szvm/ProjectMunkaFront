@@ -72,12 +72,18 @@ export default function Profile() {
             <p className="text-red-600">{errors?.file?.message}</p>
           </div>
           <div className="my-4">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Név</label>
+            <label className="block text-sm font-medium text-gray-700">Név</label>
             <input type="text" id="displayName" className="text-slate-900 bg-slate-100 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition" 
-              {...register('displayName')}
+              {...register('displayName',                 
+                {validate: (value) => {
+                if (value.length>30) return "Maximum 30 karakter lehet a név!";
+                if (!value) return "Név megadása kötelező!"
+                return true;}}
+              )}
               onChange={(e)=>setName(e.target.value)}
               value={name}
               />
+              <p className="text-red-600">{errors?.displayName?.message}</p>
           </div>
           <div className="btn w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition"
             onClick={()=>handleSubmit(onSubmit)()}
