@@ -41,7 +41,7 @@ export const AboutUs = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: 0.4 }}
         >
-          A HUNSRT 2018-ban alakult, célunk, hogy profi és tisztességes versenyeket rendezzünk minden szimulátoros számára. Azóta számos eseményt szerveztünk, és sikeresen növeltük közösségünket.
+          A HUNSRT 2022-ban alakult, célunk, hogy profi és tisztességes versenyeket rendezzünk minden szimulátoros számára. Azóta számos eseményt szerveztünk, és sikeresen növeltük közösségünket.
         </motion.p>
       </motion.section>
 
@@ -69,6 +69,36 @@ export const AboutUs = () => {
           A küldetésünk, hogy minden szimulátoros számára elérhető versenyközösséget hozzunk létre, függetlenül a tapasztalati szinttől. Mindenkinek lehetőséget biztosítunk, hogy profi versenyeken vegyen részt.
         </motion.p>
       </motion.section>
+  {/* social */}
+  <motion.section
+        className="max-w-6xl mx-auto mb-16 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, delay: 0.8 }}
+      >
+        <motion.h2
+          className="text-3xl font-bold text-rose-600 dark:text-green-400 mb-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.8 }}
+        >
+          📩 Közösségi oldal  
+        </motion.h2>
+        <motion.p
+          className="text-lg text-gray-900 dark:text-slate-300"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2, delay: 1 }}
+        >
+          <strong >📸 Instagram:</strong> @hun_sim_racing_team  
+          <br />
+          <strong>🎥 Youtube:</strong> https://www.youtube.com/@HUNSRT  
+          <br />
+          <strong>🎬 Tik Tok:</strong> Hun Sim Racing Team
+          <br />
+          <strong>📘 Facebook:</strong> Hun Sim Racing Team
+        </motion.p>
+      </motion.section>
 
       {/* Championships */}
       <motion.section
@@ -91,11 +121,17 @@ export const AboutUs = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: 0.6 }}
         >
-          <motion.li whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
-            Assetto Corsa Competizione – GT3 és GT4
+          <motion.li whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
+           Assetto Corsa
           </motion.li>
-          <motion.li whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
-            iRacing – Endurance és Sprint versenyek
+          <motion.li whileHover={{ scale: 1.02  }} transition={{ duration: 0.3 }}>
+            Assetto Corsa Competizione – GT2, GT3 és GT4
+          </motion.li>
+          <motion.li whileHover={{ scale: 1.02 }}  transition={{ duration: 0.3 }}>
+           F1 23
+          </motion.li>
+          <motion.li whileHover={{ scale: 1.02  }} transition={{ duration: 0.3 }}>
+           F1 24
           </motion.li>
         </motion.ul>
       </motion.section>
@@ -121,11 +157,11 @@ export const AboutUs = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: 0.8 }}
         >
-          <motion.li whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
-            <strong>Varga Ádám</strong> – Alapító
+          <motion.li whileHover={{ scale: 1.02  }} transition={{ duration: 0.3 }}>
+            <strong>Craftmand</strong> – Alapító
           </motion.li>
-          <motion.li whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
-            <strong>Limpár Bertold</strong> – Versenyigazgató
+          <motion.li whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
+            <strong>Craftmand</strong> – Versenyigazgató
           </motion.li>
         </motion.ul>
       </motion.section>
@@ -151,10 +187,10 @@ export const AboutUs = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: 0.9 }}
         >
-          Több mint <span className="text-yellow-600 dark:text-yellow-400 font-bold">500 verseny</span> és <span className="text-yellow-600 dark:text-yellow-400 font-bold">2000+ pilóta</span>!
+          Több mint <span className="text-yellow-600 dark:text-yellow-400 font-bold">100 verseny</span> és <span className="text-yellow-600 dark:text-yellow-400 font-bold">200+ pilóta</span>!
         </motion.p>
       </motion.section>
-
+    
       {/* Contact */}
       <motion.section
         className="max-w-6xl mx-auto mb-16 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
