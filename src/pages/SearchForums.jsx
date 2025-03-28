@@ -115,6 +115,7 @@ export const SearchForums = () => {
     {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-10"> */}
     <div className="flex justify-center flex-wrap gap-8">
     {/*search.map((competition) => (
+    {/*search.map((competition) => (
       <motion.div
         key={competition.id}
         initial={{ opacity: 0, scale: 0.9 }}
