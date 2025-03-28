@@ -97,6 +97,16 @@ export const AboutUs = () => {
           <strong>🎬 Tik Tok:</strong> Hun Sim Racing Team
           <br />
           <strong>📘 Facebook:</strong> Hun Sim Racing Team
+          <br />
+          <motion.button
+    className="px-2 py-1 bg-lime-400 border-slate-800 border-2 mt-2 text-slate-800 rounded-full hover:bg-green-400 transition duration-300"
+    onClick={() => window.open('https://www.youtube.com/@HUNSRT', '_blank')}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 1.1, delay: 1 }}
+  >
+    Nézd meg a YouTube Videókat 🎥
+  </motion.button>
         </motion.p>
       </motion.section>
 
