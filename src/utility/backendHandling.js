@@ -14,8 +14,8 @@ export const uploadFile = async (file) => {
     }
 };
 
-const url="http://localhost:5000"
-//const url = "https://projectmunkaback.onrender.com";
+//const url="http://localhost:5000"
+const url = "https://projectmunkaback.onrender.com";
 
 export const deletePhoto = async (id) => {
   console.log("Deleting photo with ID:", id);
