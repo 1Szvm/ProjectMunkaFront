@@ -80,14 +80,15 @@ export const SearchForums = () => {
         className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         id="keyWord"
       />
-         <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600" onClick={handleClick} >
+         <button className="px-4 py-2 bg-blue-500 min-w-[55px]  w-[25%] max-w-[100px] justify-center flex text-white rounded-lg hover:bg-blue-600" onClick={handleClick} >
           Keresés
         </button>
         <motion.button 
           whileHover={{ scale: 1.1 }} 
           whileTap={{ scale: 0.9 }}
-          className="px-4 py-2 bg-gray-300 rounded-lg"
+          className="px-4 py-2 bg-gray-300 rounded-lg  min-w-[55px]  w-[25%] max-w-[100px] justify-center flex"
           onClick={reset}
+
         >
           Vissza
         </motion.button>
