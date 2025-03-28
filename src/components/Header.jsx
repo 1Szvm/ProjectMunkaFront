@@ -1,12 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
+
 import { motion, AnimatePresence } from "framer-motion";
 import ProfileMenu from "./ProfileMenu";
+import { readAuthorization } from "../utility/crudUtility";
 import { UserContext } from "../context/userContext";
 
 export const Header = () => {
   const { user, logoutUser } = useContext(UserContext);
+  const [admins,setAdmins]=useState([]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const [matches, setMatches] = useState(window.matchMedia("(min-width: 768px)").matches);
@@ -15,6 +18,10 @@ export const Header = () => {
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
+
+  useEffect(() => {
+    readAuthorization(setAdmins);
+  },[])
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 768px)");
@@ -32,6 +39,8 @@ export const Header = () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
     };
   }, [darkMode]);
+
+  
   
 
   const toggleMobileMenu = () => {
@@ -47,7 +56,6 @@ export const Header = () => {
       <NavLink className="btn btn-ghost text-xl hover:text-orange-400 transition-all transform hover:scale-110" to="/futamok">Futamok</NavLink>
       <NavLink className="btn btn-ghost text-xl hover:text-orange-400 transition-all transform hover:scale-110" to="/bajnoksagok">Bajnokságok</NavLink>
       <NavLink className="btn btn-ghost text-xl hover:text-orange-400 transition-all transform hover:scale-110" to="/forum">Forum</NavLink>
-     
     </>
 
   );
@@ -111,7 +119,6 @@ export const Header = () => {
               {user ? (
                 <div className="flex justify-end items-center space-x-2">
                   <ProfileMenu/>
-             
                 </div>
               ) : (
                 <>
@@ -185,6 +192,14 @@ export const Header = () => {
       {/* Conditional User Links */}
       {user ? (
         <div className="rounded-lg shadow-md flex flex-col p-2">
+          {admins?.includes(user?.uid)?(
+            <NavLink
+              className="m-1 px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 text-center shadow-md hover:shadow-lg"
+              to="/admin"
+            >
+              Admin Page
+            </NavLink>
+          ):null}
           <NavLink
             className="m-1 px-3 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 hover:opacity-90 text-center shadow-md hover:shadow-lg"
             to="/profile"

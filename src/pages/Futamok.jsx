@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { deleteFutam, readAuthorization, readCategories, readRaces } from '../utility/crudUtility';
-import AddNew from '../components/AddNew';
+import AddNew from '../components/AddRace';
 import Details from '../components/Details';
 import Alerts from '../components/Alerts';
-import { deletePhoto } from '../utility/uploadFile';
 import { UserContext } from '../context/userContext';
 import { Footer } from '../components/Footer';
+import { deletePhoto } from '../utility/backendHandling';
 
 export const Futamok = () => {
   const { user } = useContext(UserContext);
@@ -120,7 +120,7 @@ export const Futamok = () => {
                     >
                       Részletek
                     </div>
-                    {admins?.some(admin => admin.Ids.includes(user?.uid)) && (
+                    {admins?.includes(user?.uid) && (
                       <div className='absolute top-0 right-0 m-2'>
                         <div className="dropdown dropdown-end">
                           <div tabIndex={0} role="button" className="btn m-1">

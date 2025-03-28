@@ -1,4 +1,4 @@
-import {collection,query, orderBy,onSnapshot, doc, getDoc, updateDoc, arrayUnion, arrayRemove, addDoc,serverTimestamp, deleteDoc} from "firebase/firestore";
+import {collection,query, orderBy,onSnapshot, doc, getDoc, updateDoc, arrayUnion, arrayRemove, addDoc,serverTimestamp, deleteDoc, setDoc, terminate} from "firebase/firestore";
 import {db} from "./firebaseApp";
 import { v4 as uuidv4 } from 'uuid'; // Correct import for UUID v4
 
@@ -22,9 +22,12 @@ import { v4 as uuidv4 } from 'uuid'; // Correct import for UUID v4
 
   export const readAuthorization = (setAuth) => {
     const collectionRef = collection(db, "adminIds");
+    
     const unsubscribe = onSnapshot(collectionRef, (snapshot) => {
-      setAuth(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+      const adminIds = snapshot.docs.map(doc => doc.id); // Extracting document IDs
+      setAuth(adminIds); // Set state with admin user IDs
     });
+  
     return unsubscribe;
   };
 
@@ -177,6 +180,26 @@ export const deleteComment = async (postId, commentId) => {
     console.error("Error deleting comment:", error);
   }
 };
+
+
+export const toggleAdmin = async (id, isAdmin) => {
+  const docRef = doc(db, "adminIds", id);
+  console.log(docRef);
+  
+  try {
+    if (isAdmin) {
+      await setDoc(docRef, {}); // Create document with UID as the ID
+      console.log("Added admin:", id);
+    } else {
+      await deleteDoc(docRef); // Remove the document
+      console.log("Removed admin:", id);
+    }
+  } catch (error) {
+    console.error("Error updating admin status:", error);
+  }
+};
+
+
 
 export const deleteFutam=async (id)=>{
   const docRef= doc(db, "futamok", id);

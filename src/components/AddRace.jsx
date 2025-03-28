@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { addFutam, readAuthorization, readCategories, updatePost } from '../utility/crudUtility';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
-import { uploadFile } from '../utility/uploadFile';
 import Alerts from './Alerts';
 import { UserContext } from '../context/userContext';
+import { uploadFile } from '../utility/backendHandling';
 
 export default function AddNew({ addEdit, setAddEdit }) {
     const { user } = useContext(UserContext);
@@ -112,7 +112,7 @@ export default function AddNew({ addEdit, setAddEdit }) {
 
     return (
         <div>
-            {admins?.some(admin => admin.Ids.includes(user?.uid)) && (
+            {admins?.includes(user?.uid)     && (
                 <div
                     className="fixed bottom-20 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 bg-rose-600"
                     onClick={() => setAddEdit(true)}

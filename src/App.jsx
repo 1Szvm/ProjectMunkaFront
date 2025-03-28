@@ -12,6 +12,7 @@ import Adminpage from './pages/Adminpage'
 import Regulation from './pages/Regulation'
 import Bajnoksagok_Reszletek from './pages/Bajnoksagok_Reszletek'
 import ForumPost from './pages/ForumPost'
+import UsersList from './components/UsersList'
 
 const router=createBrowserRouter([
   {element:<Header/>,
@@ -29,7 +30,8 @@ const router=createBrowserRouter([
       {path:'/post/:id',element:<ForumPost/>},
       {path:'/admin',element:<Adminpage/>},
       {path:'/regulation',element:<Regulation/>},
-      {path:'/championship_desc',element:<Bajnoksagok_Reszletek/>}
+      {path:'/championship_desc',element:<Bajnoksagok_Reszletek/>},
+      {path:'/users',element:<UsersList/>},
     ],
    
   }

@@ -1,15 +1,23 @@
 import { FiEdit, FiChevronDown, FiTrash, FiShare, FiPlusSquare } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { extractUrlAndId } from "../utility/utils";
 import { UserContext } from "../context/userContext";
+import { readAuthorization } from "../utility/crudUtility";
 
 export default function ProfileMenu() {
   const [open, setOpen] = useState(false); // Track if the dropdown is open
   const toggleMenu = () => setOpen(!open);
+  const [admins,setAdmins]=useState([]);
   const { user, logoutUser } = useContext(UserContext);
+
+    useEffect(() => {
+      readAuthorization(setAdmins);
+  }, []);
+
+
   return (
     <div className=" flex items-center justify-center">
       <motion.div animate={open ? "open" : "closed"} className="relative">
@@ -41,7 +49,9 @@ export default function ProfileMenu() {
   style={{ originY: "top", translateX: "-50%", zIndex: 50 }} // Added zIndex
   className="flex flex-col gap-2 p-2 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] w-48 overflow-hidden"
  >
-         
+          {admins?.includes(user?.uid)? (
+            <NavLink to="/admin" > <Option setOpen={setOpen} Icon={FiEdit} text="Admin Page" /> </NavLink>
+          ):null}
           <NavLink to="/profile" > <Option setOpen={setOpen} Icon={FiEdit} text="Profil" /> </NavLink>
           <motion.button
                             className=""

@@ -3,10 +3,9 @@ import { Footer } from '../components/Footer';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { UserContext } from '../context/userContext';
-import { deletePhoto, uploadFile } from '../utility/uploadFile';
+import { deletePhoto, uploadFile } from '../utility/backendHandling';
 import { extractUrlAndId } from '../utility/utils';
 import { useNavigate } from 'react-router-dom';
-import { allUsers } from '../utility/maneg_users';
 
 export default function Profile() {
   const { user,updateUser } = useContext(UserContext);
@@ -22,9 +21,6 @@ export default function Profile() {
       setName(user?.displayName);
     }
   }, [user]);
-
-  console.log(allUsers());
-  
 
   const onSubmit=async(data)=>{
     if(data?.file[0]){
@@ -62,8 +58,8 @@ export default function Profile() {
                 type="file"
                 className="file-input w-full border border-gray-300 bg-indigo-700 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 {...register("file", {
-                    validate: (value) => {// Skip validation when editing
-                        if (!value[0]) return true; // Show error if missing in create mode
+                    validate: (value) => {
+                        if (!value[0]) return true;
                         const fileExtension = value[0]?.name.split(".").pop().toLowerCase();
                         const acceptedFormats = ["jpg", "png"];
                         if (!acceptedFormats.includes(fileExtension)) return "Invalid fájl formátum!";
