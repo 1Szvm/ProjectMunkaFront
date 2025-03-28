@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { readAuthorization } from '../utility/crudUtility'
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/userContext';
-import { deleteUserById, readUsers } from '../utility/backendHandling';
+import { deleteUserById, deleteUserPfp, readUsers } from '../utility/backendHandling';
 import { extractUrlAndId } from '../utility/utils';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -49,7 +49,7 @@ export default function Adminpage() {
         return <p className="text-center text-lg font-semibold">Betöltés{dots}</p>;
       }
 
-      const handleDeleteUser=async(uid)=>{
+      const handleDeleteUser=async(fetchedUser)=>{
         const { confirmed }=await confirm({
           description: String("Ez egy visszavonhatatlan művelet"),
           confirmationText:"Igen",
@@ -58,7 +58,8 @@ export default function Adminpage() {
         })
       if(confirmed) {
         try {
-          deleteUserById(uid) 
+          deleteUserById(fetchedUser.uid) 
+          deleteUserPfp(extractUrlAndId(fetchedUser.photoURL).id)
         } catch (error) {
           console.log(error);
         }
@@ -86,7 +87,7 @@ export default function Adminpage() {
                   </div>
                   <div className='flex justify-center items-center'>
                     <div className='btn mx-1 bg-ghost text-white' onClick={()=>handleEdit(fetchedUser)}><EditIcon/></div>
-                    <div className='btn mx-1 bg-red-600 text-white' onClick={()=>handleDeleteUser(fetchedUser.uid)}><DeleteIcon/></div>
+                    <div className='btn mx-1 bg-red-600 text-white' onClick={()=>handleDeleteUser(fetchedUser)}><DeleteIcon/></div>
                   </div>
                 </div>
               </div>
