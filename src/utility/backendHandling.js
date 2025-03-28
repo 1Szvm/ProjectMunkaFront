@@ -67,7 +67,7 @@ export const editUserDName = async(id,displayName) => {
     });
 }
 
-export const deleteUserById = async(id,) => {
+export const deleteUserById = async(id) => {
   axios.delete(url+"/api/users/"+id)
     .then(response => {
       console.log(response.data);

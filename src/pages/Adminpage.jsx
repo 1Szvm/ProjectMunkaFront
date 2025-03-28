@@ -54,7 +54,7 @@ export default function Adminpage() {
           description: String("Ez egy visszavonhatatlan művelet"),
           confirmationText:"Igen",
           cancellationText:"Mégsem",
-          title:"Biztos ki szeretnéd törölni a posztot?"
+          title:"Biztos ki szeretnéd törölni a felhasználót?"
         })
       if(confirmed) {
         try {

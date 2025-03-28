@@ -1,4 +1,4 @@
-import {collection,query, orderBy,onSnapshot, doc, getDoc, updateDoc, arrayUnion, arrayRemove, addDoc,serverTimestamp, deleteDoc, setDoc} from "firebase/firestore";
+import {collection,query, orderBy,onSnapshot, doc, getDoc, updateDoc, arrayUnion, arrayRemove, addDoc,serverTimestamp, deleteDoc, setDoc, terminate} from "firebase/firestore";
 import {db} from "./firebaseApp";
 import { v4 as uuidv4 } from 'uuid'; // Correct import for UUID v4
 
@@ -184,9 +184,10 @@ export const deleteComment = async (postId, commentId) => {
 
 export const toggleAdmin = async (id, isAdmin) => {
   const docRef = doc(db, "adminIds", id);
+  console.log(docRef);
+  
   try {
     if (isAdmin) {
-      console.log(isAdmin);
       await setDoc(docRef, {}); // Create document with UID as the ID
       console.log("Added admin:", id);
     } else {

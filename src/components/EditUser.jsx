@@ -25,6 +25,7 @@ export default function EidtUser({modalRef,selectedUser}) {
         setPhoto(selectedUser?.photoURL ? extractUrlAndId(selectedUser.photoURL)?.url : "../NoPFP.jpg")
     },[selectedUser])
 
+    
     const handleDeletePfp= async()=>{
         const { confirmed }=await confirm({
             description: String("Ez egy visszavonhatatlan művelet"),
@@ -88,13 +89,16 @@ export default function EidtUser({modalRef,selectedUser}) {
                             id="authorization"
                             className="select w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             {...register('authorization', { required: 'A kategória kiválasztása kötelező.' })}
-                            onChange={(e) => setIsAdmin(e.target.value)}
+                            onChange={(e) =>{
+                                const value = e.target.value === "true"; // Convert string to boolean
+                                console.log(typeof value, value)
+                                setIsAdmin(value)}}
                             value={isAdmin}
                         >
-                            <option value={false} >
+                            <option value="false" >
                                 Felhasználó
                             </option>
-                            <option value={true} >
+                            <option value="true" >
                                 Admin
                             </option>
                         </select>
