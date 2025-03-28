@@ -88,7 +88,7 @@ export default function ForumPost() {
       {users.length === 0 ? (
           <LoadingUsers />
       ) :(
-       <div className="container m-auto px-5 py-2 page rounded-xl bg-slate-700 w-2/3">
+       <div className="container m-auto px-5 py-2 page rounded-xl mt-3 bg-slate-700  min-w-[250px] max-w-[60%]">
             {post ? (
                 <div className='py-4'>
                   {/*Post*/}
@@ -109,7 +109,7 @@ export default function ForumPost() {
                     </div>
                     <div className='mx-2'>
                       <div className='flex justify-between'>
-                        <div>
+                        <div className=' min-w-[250px] max-w-[99%] pl-10 '>
                           <div className='flex justify-start items-center mb-4'>
                             {users?.find(obj => obj.uid === post?.uid)?.photoURL 
                                 ? (
@@ -131,13 +131,14 @@ export default function ForumPost() {
                               </div>
                           }
                           </div>
-                          <p className="text-2xl font-bold">{post.title}</p>
+                          <p className="text-2xl font-bold break-words">{post.title}</p>
+
                         </div>
                         <div>
                           <div>{new Date(post.letrehozas.toDate()).toLocaleDateString()}</div>
                         </div>
                       </div>
-                      <div className="my-5 p-2 text-lg">
+                      <div className="my-5 p-2 text-lg break-words">
                         {post.content}
                       </div>
                     </div>
@@ -181,6 +182,7 @@ export default function ForumPost() {
                                 : <div className="text-lg">
                                     {users?.find(obj => obj.uid === commentsArray[0])?.displayName || 
                                     <>
+                                    {/* nigger */}
                                       <div className='text-red-600 text-lg text-wrap'>{commentsArray[0]}</div>
                                     </>
                                     }
@@ -190,7 +192,7 @@ export default function ForumPost() {
                           </div>
                           <div className='opacity-70'>{new Date(commentsArray[2].toDate()).toLocaleDateString()}</div>
                         </div>
-                        <div className='m-3 text-lg'>{commentsArray[1]}</div>
+                        <div className='m-3 text-lg break-words'>{commentsArray[1]}</div>
                         <div className='flex justify-end'>
                           {(admins?.includes(user?.uid) || (user?.uid === commentsArray[0]))? (
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="m-2 cursor-pointer size-6" onClick={()=>handleDeleteComment(param.id,commentId)}>
