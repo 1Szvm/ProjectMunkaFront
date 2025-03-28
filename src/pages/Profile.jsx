@@ -60,6 +60,8 @@ export default function Profile() {
                 {...register("file", {
                     validate: (value) => {
                         if (!value[0]) return true;
+                        console.log(value);
+                        
                         const fileExtension = value[0]?.name.split(".").pop().toLowerCase();
                         const acceptedFormats = ["jpg", "png"];
                         if (!acceptedFormats.includes(fileExtension)) return "Invalid fájl formátum!";
@@ -80,8 +82,8 @@ export default function Profile() {
                 if (!value) return "Név megadása kötelező!"
                 return true;}}
               )}
-              onChange={(e)=>setName(e.target.value)}
               value={name}
+              onChange={(e)=>setName(e.target.value)}
               />
               <p className="text-red-600">{errors?.displayName?.message}</p>
           </div>

@@ -21,7 +21,7 @@ export default function Adminpage() {
       useEffect(()=>{
         readAuthorization(setAdmins)
         readUsers(setUsers)
-      },[])
+      },[users])
 
       useEffect(() => {
         if(admins?.length===0) return;

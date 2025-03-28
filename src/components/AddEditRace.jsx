@@ -162,7 +162,11 @@ export default function AddNew({ addEdit, setAddEdit }) {
                     <label className="block font-medium mt-4">Pálya neve</label>
                     <input id="track" type="text" placeholder="Pálya neve"
                         className="input  text-slate-800 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        {...register('track', { required: 'A név megadása kötelező.' })}
+                        {...register('track',                
+                            {validate: (value) => {
+                            if (value.length>30) return "Maximum 30 karakter lehet a név!";
+                            if (!value) return "Név megadása kötelező!"
+                            return true;}})}
                         onChange={(e) => setPalya(e.target.value)}
                         value={palya}
                     />
@@ -196,10 +200,13 @@ export default function AddNew({ addEdit, setAddEdit }) {
                         type="number" 
                         min="1" max="100"
                         className="input w-full border text-slate-800 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        {...register("maxracers", { 
-                            required: "Minimum 1 versenyző szükséges!", 
-                            min: { value: 1, message: "Minimum 1 versenyző szükséges!" } 
-                        })}
+                        {...register("maxracers",                
+                            {validate: (value) => {
+                            if (value>100) return "Maximum 100 versenyző megendgedett!";
+                            if (!value) return "A versenyzők számának megadása kötelező!"
+                            if (value<2) return "Minimum 2 versenyző kell!";
+                            return true;}}
+                        )}
                         onChange={(e) => setMax(e.target.value)}
                         value={max}
                     />
