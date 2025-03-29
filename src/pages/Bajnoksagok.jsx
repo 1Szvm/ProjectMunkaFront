@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Footer } from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
-import { readChampionships } from '../utility/crudUtility';
+import { readCategories, readChampionships } from '../utility/crudUtility';
 
 
 
@@ -15,18 +15,27 @@ export const competitions = [
 
 const Bajnoksagok = () => {
   const [champions, setChampions] = useState([]);
+  const [categories, setCategories]=useState([])
 
-    useEffect(() => {
-      readChampionships(setChampions);
-    }, []);
-  
-    champions.map((competition) => {
-      console.log("-"+competition.id);
-      Object.entries(competition?.data || {}).map(([id, champsArr]) => (
-        console.log(id,champsArr.imgUrl)
-      ))
-      
+  useEffect(() => {
+    readChampionships(setChampions);
+    readCategories(setCategories)
+  }, []);
+
+  const atemptCoppy=()=>{
+    
+    champions.map((competition) => {  
+      categories.map(category=>{
+        if(competition.id==category.id){
+          console.log();
+          console.log(category.nev);
+          Object.entries(competition?.data || {}).map(([id, champsArr]) => (            
+            console.log("--> "+id)
+          ))
+        }
+      })
     })
+  }
     
 
   const navigate = useNavigate();
@@ -67,6 +76,7 @@ const Bajnoksagok = () => {
               </div>
             </motion.div>
           ))}
+          <div className='btn' onClick={()=>atemptCoppy()}>Championships</div>
         </div>
       </main>
 
