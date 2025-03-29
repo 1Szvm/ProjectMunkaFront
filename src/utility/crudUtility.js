@@ -1,6 +1,7 @@
 import {collection,query, orderBy,onSnapshot, doc, getDoc, updateDoc, arrayUnion, arrayRemove, addDoc,serverTimestamp, deleteDoc, setDoc, terminate} from "firebase/firestore";
 import {db} from "./firebaseApp";
 import { v4 as uuidv4 } from 'uuid'; // Correct import for UUID v4
+import { data } from "react-router-dom";
 
   export const readCategories = (setCategories) => {
     const collectionRef = collection(db, "kategoriak");
@@ -34,7 +35,15 @@ import { v4 as uuidv4 } from 'uuid'; // Correct import for UUID v4
   export const readPosts = (setPosts) => {
     const collectionRef = collection(db, "forum");
     const unsubscribe = onSnapshot(collectionRef, (snapshot) => {
-      setPosts(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+      setPosts(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id, })));
+    });
+    return unsubscribe;
+  };
+
+  export const readChampionships = (setChampions) => {
+    const collectionRef = collection(db, "bajnoksagok");                                     
+    const unsubscribe = onSnapshot(collectionRef, (snapshot) => {
+      setChampions(snapshot.docs.map(doc => ({  id: doc.id, data:doc.data() })));
     });
     return unsubscribe;
   };

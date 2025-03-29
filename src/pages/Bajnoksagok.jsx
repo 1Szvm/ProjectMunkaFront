@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Footer } from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
+import { readChampionships } from '../utility/crudUtility';
+
 
 
 export const competitions = [
@@ -12,6 +14,21 @@ export const competitions = [
 ];
 
 const Bajnoksagok = () => {
+  const [champions, setChampions] = useState([]);
+
+    useEffect(() => {
+      readChampionships(setChampions);
+    }, []);
+  
+    champions.map((competition) => {
+      console.log("-"+competition.id);
+      Object.entries(competition?.data || {}).map(([id, champsArr]) => (
+        console.log(id,champsArr.imgUrl)
+      ))
+      
+    })
+    
+
   const navigate = useNavigate();
   return (
     <div className="min-h-screen">
