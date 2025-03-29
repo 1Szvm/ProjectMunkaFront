@@ -13,9 +13,26 @@ export const Home = () => {
   const [matches, setMatches] = useState(window.matchMedia("(min-width: 1168px)").matches);
   const [isLoading, setIsLoading] = useState(true); // State for intro animation
 
-  // window.onresize = function () {
-  //   document.location.reload(true);
-  // };
+  const containerRef = useRef(null); // Attach observer to this container
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Stop observing after loading
+        }
+      },
+      { threshold: 0.3 } // Trigger when 30% of the element is visible
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 1168px)");
@@ -69,20 +86,42 @@ export const Home = () => {
         transition={{ duration: 1, delay: 1 }}
       >
          {matches ? (
-          <div className='w-full flex justify-center'>
-           
-         <div className="mt-3 m-3  border-4  w-[99%] h-[600px] overflow-hidden flex justify-center" style={{borderColor:"rgba(50, 208, 330, 0.3)"}}>
-          
-         <video autoPlay loop muted playsInline preload="auto" poster="thumbnail.jpg" className="w-full h-auto max-h-screen object-cover">
-        <source src="Project3.mp4" type="video/mp4" />
-         Your browser does not support the video tag.
-</video>
-</div>
-       </div>
-         ):( <div className="w-full pt-2 overflow-hidden flex justify-center">
-          <video autoPlay loop muted className="w-full h-auto max-h-screen object-cover">
-            <source src='Project3.mp4' type="video/mp4" />
-          </video>
+          <div className="w-full flex justify-center">
+          <div
+            ref={containerRef} // Observer works on this wrapper
+            className="mt-3 m-3 border-4 w-[99%] min-h-[500px] h-[69vh] overflow-hidden flex justify-center"
+            style={{ borderColor: "rgba(50, 228, 330, 0.8)", borderWidth:"0.1rem", borderRadius:"4px" }}
+          >
+            {isVisible ? (
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                poster="HOMEBG2.jpg"
+                className="w-full h-auto max-h-screen object-cover"
+              >
+                <source src="RaceManagerProjectVideo.mp4" type="video/mp4" />
+                Your browser does not support the video.
+              </video>
+            ) : (
+              <img
+                src="HOMEBG2.jpg"
+                alt="Video Thumbnail"
+                className="w-full h-auto max-h-screen object-cover"
+              />
+            )}
+          </div>
+        </div>
+         ):(   <div ref={containerRef} className="w-full pt-2 overflow-hidden flex justify-center">
+          {isVisible ? (
+            <video autoPlay loop muted className="w-full h-auto max-h-screen object-cover">
+              <source src="RaceManagerProjectVideo.mp4" type="video/mp4" />
+            </video>
+          ) : (
+            <img src="HOMEBG2.jpg" alt="Video Thumbnail" className="w-full h-auto max-h-screen object-cover" />
+          )}
         </div>)}
       
       </motion.div>

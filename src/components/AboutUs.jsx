@@ -9,7 +9,7 @@ export const AboutUs = () => {
       
       {/* Title Animation */}
       <motion.div
-        className="text-center mb-12"
+        className="text-center mb-8"
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5, type: 'spring', stiffness: 100 }}
@@ -22,7 +22,7 @@ export const AboutUs = () => {
 
       {/* Shortened History */}
       <motion.section
-        className="max-w-6xl mx-auto mb-16 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
+        className="max-w-6xl mx-auto mb-10 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.2, delay: 0.2 }}
@@ -47,7 +47,7 @@ export const AboutUs = () => {
 
       {/* Mission and Vision */}
       <motion.section
-        className="max-w-6xl mx-auto mb-16 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
+        className="max-w-6xl mx-auto mb-10 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.2, delay: 0.3 }}
@@ -71,7 +71,7 @@ export const AboutUs = () => {
       </motion.section>
   {/* social */}
   <motion.section
-        className="max-w-6xl mx-auto mb-16 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
+        className="max-w-6xl mx-auto mb-10 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, delay: 0.8 }}
@@ -112,7 +112,7 @@ export const AboutUs = () => {
 
       {/* Championships */}
       <motion.section
-        className="max-w-6xl mx-auto mb-16 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
+        className="max-w-6xl mx-auto mb-10 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, delay: 0.4 }}
@@ -148,7 +148,7 @@ export const AboutUs = () => {
 
       {/* Team */}
       <motion.section
-        className="max-w-6xl mx-auto mb-16 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
+        className="max-w-6xl mx-auto mb-10 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.2, delay: 0.6 }}
@@ -178,7 +178,7 @@ export const AboutUs = () => {
 
       {/* Achievements */}
       <motion.section
-        className="max-w-6xl mx-auto mb-16 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
+        className="max-w-6xl mx-auto mb-10 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, delay: 0.7 }}
@@ -203,7 +203,7 @@ export const AboutUs = () => {
     
       {/* Contact */}
       <motion.section
-        className="max-w-6xl mx-auto mb-16 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
+        className="max-w-6xl mx-auto mb-10 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, delay: 0.8 }}
@@ -228,7 +228,7 @@ export const AboutUs = () => {
         </motion.p>
       </motion.section>
       <motion.section
-        className="max-w-6xl mx-auto mb-16 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
+        className="max-w-6xl mx-auto mb-10 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, delay: 0.8 }}
