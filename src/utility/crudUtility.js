@@ -41,7 +41,7 @@ import { data } from "react-router-dom";
   };
 
   export const readChampionships = (setChampions) => {
-    const collectionRef = collection(db, "bajnoksagok");                                     
+    const collectionRef = collection(db, "bajnoksagok");                                      
     const unsubscribe = onSnapshot(collectionRef, (snapshot) => {
       setChampions(snapshot.docs.map(doc => ({  id: doc.id, data:doc.data() })));
     });
@@ -205,8 +205,6 @@ export const toggleAdmin = async (id, isAdmin) => {
     console.error("Error updating admin status:", error);
   }
 };
-
-
 
 export const deleteFutam=async (id)=>{
   const docRef= doc(db, "futamok", id);
