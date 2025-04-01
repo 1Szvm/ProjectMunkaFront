@@ -22,7 +22,7 @@ export const Auth = () => {
 
   return (
     <div className="home">
-      <div className="flex items-center justify-center h-screen p-8">
+      <div className="flex items-center justify-center  pt-48">
         <div className="w-full max-w-md bg-neutral-100 rounded-lg shadow-lg p-6 text-blue-500">
           <h3 className="text-2xl font-semibold text-center mb-6">
             {isSignIn ? 'Bejelentkezés' : 'Regisztráció'}
