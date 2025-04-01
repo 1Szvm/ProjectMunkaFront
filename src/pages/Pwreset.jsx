@@ -12,7 +12,7 @@ export default function PwReset() {
   }
   return (
 
-    <div className="min-h-screen flex justify-center items-center">
+    <div className="pt-48 flex justify-center items-center">
       <div className="card w-96 shadow-xl">
         <div className="card-body">
           <h2 className="card-title text-center text-2xl font-semibold mb-4">Jelszó módosítás</h2>
