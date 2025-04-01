@@ -76,7 +76,50 @@ const Bajnoksagok = () => {
               </div>
             </motion.div>
           ))}
-          <div className='btn' onClick={()=>atemptCoppy()}>Championships</div>
+          <div>
+          {
+            champions.map((competition) => (
+              categories.map(category => (
+                competition.id==category.id?(
+                  <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="text-left mb-2"
+                  >
+                    <p className="text-xl  italic mb-8 pt-5 font-semibold " style={{color:`${category.color}`}}>{category.nev}</p>
+                    <div className='flex w-screen justify-start'>
+                      {Object.entries(competition?.data || {}).map(([id, champsArr]) => (            
+                        <motion.div
+                          key={id}
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.5}}
+                          whileHover={{ scale: 1.05 }}
+                          className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transform transition-all m-4"
+                        >
+                          <img src={champsArr.imgUrl} className="w-fit h-64 object-cover" />
+                          <div className="p-6">
+                            <h3 className="text-2xl font-bold text-gray-800">{id}</h3>
+                            <p className="text-gray-700 mt-2">{competition.description}</p>
+                            <motion.button
+                            onClick={()=>navigate('/championship_desc')}
+                              whileHover={{ scale: 1.1 }}
+                              whileTap={{ scale: 0.9 }}
+                              className="mt-4 py-2 px-6 bg-yellow-400 text-black rounded-lg hover:bg-yellow-500 transition"
+                            >
+                              Részletek
+                            </motion.button>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                ):null
+              ))
+            ))
+          }
+          </div>
         </div>
       </main>
 

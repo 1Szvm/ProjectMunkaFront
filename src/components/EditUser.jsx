@@ -28,6 +28,7 @@ export default function EidtUser({modalRef,selectedUser}) {
         try {
             deletePhoto(extractUrlAndId(selectedUser.photoURL).id)
             deleteUserPfp(selectedUser.uid) 
+            setPhoto("../NoPFP.jpg")
         } catch (error) {
             console.log(error);
         }
