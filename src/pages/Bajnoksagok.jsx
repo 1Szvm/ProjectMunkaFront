@@ -77,7 +77,7 @@ const Bajnoksagok = () => {
             </motion.div>
           ))} */}
        <div className='flex justify-center flex-wrap  p-1 sm:p-5'>
-          <div className="bg-slate-800 p-5 w-[100%] max-w-[1000px] min-w-[100px] rounded-xl shadow-lg shadow-indigo-500/50   sm:m-4">
+          <div className="bg-stone-900 p-5 w-[100%] max-w-[1000px] min-w-[100px] rounded-xl shadow-lg shadow-indigo-500/50   sm:m-4">
             {
               champions.map((competition) => (
                 categories.map(category => (
@@ -87,7 +87,8 @@ const Bajnoksagok = () => {
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8 }}
-                      className="text-left mb-2 "
+                      className="text-left bg-zinc-800 p-3 mb-5  border-2 border-sky-800 rounded-lg"
+
                     >
                       <p className="text-xl italic mb-8 font-semibold " style={{ color: `${category.color}` }}>{category.nev}</p>
                       
@@ -99,7 +100,7 @@ const Bajnoksagok = () => {
                             animate={{ opacity: 1, scale: 0.95 }}
                             transition={{ duration: 0.25 }}
                             whileHover={{ scale: 1.0 }}
-                            className="bg-slate-200 rounded-xl shadow-md overflow-hidden border-2 border-blue-800 hover:shadow-2xl transform transition-all m-1 w-full max-w-[95%] lg:max-w-sm lg:flex-1"
+                            className="bg-slate-200 rounded-xl shadow-md overflow-hidden border-[0.2rem] border-blue-800 hover:shadow-2xl transform transition-all m-1 w-full max-w-[95%] lg:max-w-sm lg:flex-1"
 
  >
                             <img 
