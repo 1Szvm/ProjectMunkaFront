@@ -12,6 +12,23 @@ import { data } from "react-router-dom";
     return unsubscribe;
   };
 
+  export const readCategoriesById = async (id, setCategory) => {
+    try {
+      const docRef = doc(db, "kategoriak", id);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = { ...docSnap.data(), id: docSnap.id };
+        setCategory(data);
+      } else {
+        console.log("No such document!");
+        setCategory(null);
+      }
+    } catch (error) {
+      console.error("Error reading document:", error);
+      setCategory(null);
+    }
+  };
+
   export const readRaces = (setRaces) => {
     const collectionRef = collection(db, "futamok");
     const q = query(collectionRef, orderBy('idopont', 'asc'))                                       
@@ -46,6 +63,23 @@ import { data } from "react-router-dom";
       setChampions(snapshot.docs.map(doc => ({  id: doc.id, data:doc.data() })));
     });
     return unsubscribe;
+  };
+
+  export const readChampionshipsById = async(id,setChampion) => {
+    try {
+      const docRef = doc(db, "bajnoksagok",id);          
+      const docSnap = await getDoc(docRef); 
+      if (docSnap.exists()) {
+        const data = { ...docSnap.data(), id: docSnap.id };
+        setChampion(data);
+      } else {
+        console.log("No such document!");
+        setChampion(null);
+      }
+    } catch (error) {
+      console.error("Error reading document:", error);
+      setChampion(null);
+    }                           
   };
 
   export const readPost=async(id,setPost)=>{

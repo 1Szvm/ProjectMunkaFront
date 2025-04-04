@@ -1,8 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { useInView, motion } from 'framer-motion';
 import { Footer } from '../components/Footer';
+import { useParams } from 'react-router-dom';
+import { readCategoriesById, readChampionshipsById } from '../utility/crudUtility';
+import { set } from 'react-hook-form';
 
 const ChampionshipDetails = () => {
+  const {id}=useParams()
   const [isDesktop, setIsDesktop] = useState(window.matchMedia('(min-width: 1168px)').matches);
   const [showDrivers, setShowDrivers] = useState(false);
   const [leaderboard, setLeaderboard] = useState([]);
@@ -13,12 +17,17 @@ const ChampionshipDetails = () => {
   const aboutRef = useRef(null);
   const isInView = useInView(aboutRef, { triggerOnce: true, threshold: 0.2 });
 
+  const [category, setCategory] = useState([]);
+  const [championship, setChampionship] = useState([]);
+
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 1168px)');
-    const handleResize = (e) => setIsDesktop(e.matches);
-    mediaQuery.addEventListener('change', handleResize);
-    return () => mediaQuery.removeEventListener('change', handleResize);
-  }, []);
+    readCategoriesById(id,setCategory)
+    readChampionshipsById(id,setChampionship)
+  },[id])
+
+
+
+
  {/* In the future read this from firebase*/}
   useEffect(() => {
     setLeaderboard([
@@ -165,7 +174,7 @@ const ChampionshipDetails = () => {
           <div className="section-header flex justify-center mx-auto p-4">
              {/* In the future read this from firebase aswell*/}
             <h2 className="text-3xl sm:text-4xl font-bold mb-8">
-              Formula 1 Bajnokság - Részletes Áttekintés
+              {category.nev} Bajnokság - Részletes Áttekintés
             </h2>
           </div>
 
