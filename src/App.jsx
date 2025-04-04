@@ -30,7 +30,7 @@ const router=createBrowserRouter([
       {path:'/post/:id',element:<ForumPost/>},
       {path:'/admin',element:<Adminpage/>},
       {path:'/regulation',element:<Regulation/>},
-      {path:'/championship_desc/:id',element:<Bajnoksagok_Reszletek/>},
+      {path:'/championship_desc/:id/:categ',element:<Bajnoksagok_Reszletek/>},
       {path:'/users',element:<UsersList/>},
     ],
    

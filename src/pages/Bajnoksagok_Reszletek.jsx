@@ -7,6 +7,7 @@ import { set } from 'react-hook-form';
 
 const ChampionshipDetails = () => {
   const {id}=useParams()
+  const {categ}=useParams()
   const [isDesktop, setIsDesktop] = useState(window.matchMedia('(min-width: 1168px)').matches);
   const [showDrivers, setShowDrivers] = useState(false);
   const [leaderboard, setLeaderboard] = useState([]);
@@ -25,6 +26,9 @@ const ChampionshipDetails = () => {
     readChampionshipsById(id,setChampionship)
   },[id])
 
+  console.log(categ);
+  
+  console.log(championship[categ]);
 
 
 
@@ -173,9 +177,14 @@ const ChampionshipDetails = () => {
         <section ref={aboutRef} className={`transition-opacity duration-1000 ${isInView ? 'opacity-100' : 'opacity-0'}`}>
           <div className="section-header flex justify-center mx-auto p-4">
              {/* In the future read this from firebase aswell*/}
-            <h2 className="text-3xl sm:text-4xl font-bold mb-8">
-              {category.nev} Bajnokság - Részletes Áttekintés
-            </h2>
+            <div>
+              <p className="text-3xl sm:text-4xl font-bold ">
+                {category.nev} Bajnokság - Részletes Áttekintés
+              </p>
+              <p className='text-center text-2xl font-bold m-4'>
+                {categ}
+              </p>
+            </div>
           </div>
 
           {/* Show Drivers Button */}

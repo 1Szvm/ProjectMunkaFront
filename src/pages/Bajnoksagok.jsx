@@ -112,7 +112,7 @@ const Bajnoksagok = () => {
                               <h3 className="text-2xl font-bold text-gray-800">{id}</h3>
                               <p className="text-gray-700 mt-2">{competition.description}</p>
                               <motion.button
-                                onClick={() => navigate('//championship_desc/'+category.id)}
+                                onClick={() => navigate('/championship_desc/'+category.id+"/"+id)}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 className="mt-4 px-6 py-2 bg-gradient-to-r from-blue-700 to-teal-700 text-slate-100 font-semibold tracking-wide rounded-xl shadow-md hover:from-blue-600 hover:to-teal-600 transition-all duration-300"
