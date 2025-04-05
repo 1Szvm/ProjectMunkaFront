@@ -113,7 +113,7 @@ export default function ForumPost() {
                           <div className='flex justify-start items-center mb-4'>
                             {users?.find(obj => obj.uid === post?.uid)?.photoURL 
                                 ? (
-                                  <img src={extractUrlAndId(users.find(obj => obj.uid === post?.uid)?.photoURL)?.url} alt="Preview" className="img-thumbnail w-20 rounded-full border-2 border-blue-600" />
+                                  <img src={extractUrlAndId(users.find(obj => obj.uid === post?.uid)?.photoURL)?.url} alt="Preview" className="object-cover size-16 rounded-full border-2 border-blue-600" />
                                 ) : (
                                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-10">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -168,9 +168,9 @@ export default function ForumPost() {
                             <div className={`mr-2 rounded-full ${post.uid==commentsArray[0]?"border-2 border-blue-600":""}`}>
                               {users?.find(obj => obj.uid === commentsArray?.[0])?.photoURL 
                                   ? (
-                                    <img src={extractUrlAndId(users.find(obj => obj.uid === commentsArray[0])?.photoURL)?.url || ""} alt="Preview" className="img-thumbnail w-10 rounded-full" />
+                                    <img src={extractUrlAndId(users.find(obj => obj.uid === commentsArray[0])?.photoURL)?.url || ""} alt="Preview" className="object-cover size-12 rounded-full" />
                                   ) : (
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-12">
                                       <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                     </svg>
                                   )

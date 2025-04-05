@@ -51,42 +51,63 @@ export default function Profile() {
           <div className='my-2'>
             <label htmlFor="name" className="block text-sm text-center font-medium text-gray-700">Profil kép</label>
             <div className='flex justify-center'>
-              {photo && <img src={photo} alt="Preview" className="img-thumbnail mt-3" />}
+              {photo && <img src={photo} alt="Preview" className="object-cover size-52 rounded-md mt-3" />}
             </div>
-            <input
+              <input
                 id="file"
                 type="file"
+                accept="image/*"
                 className="file-input w-full border border-gray-300 bg-indigo-700 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 {...register("file", {
-                    validate: (value) => {
-                        if (!value[0]) return true;
-                        console.log(value);
-                        
-                        const fileExtension = value[0]?.name.split(".").pop().toLowerCase();
-                        const acceptedFormats = ["jpg", "png"];
-                        if (!acceptedFormats.includes(fileExtension)) return "Invalid fájl formátum!";
-                        if (value[0].size > 1 * 1000 * 1024) return "Az engedélyezett fájl mérete 1MB";
-                        return true;
-                    }
+                  validate: async (value) => {
+                    const file = value[0];
+                    if (!file) return true;
+
+                    const fileExtension = file.name.split(".").pop().toLowerCase();
+                    const acceptedFormats = ["jpg", "png"];
+                    if (!acceptedFormats.includes(fileExtension)) return "Invalid fájl formátum!";
+                    if (file.size > 1 * 1000 * 1024) return "Az engedélyezett fájl mérete 1MB";
+
+                    const dimensionsValid = await new Promise((resolve) => {
+                      const img = new Image();
+                      const objectUrl = URL.createObjectURL(file);
+
+                      img.onload = () => {
+                        const isValid = img.width <= 600 && img.height <= 600;
+                        URL.revokeObjectURL(objectUrl);
+                        resolve(isValid);
+                      };
+
+                      img.onerror = () => {
+                        URL.revokeObjectURL(objectUrl);
+                        resolve(false);
+                      };
+
+                      img.src = objectUrl;
+                    });
+
+                    if (!dimensionsValid) return "Maximum képméret 600x600 pixel!";
+                    return true;
+                  },
                 })}
                 onChange={(e) => setPhoto(URL.createObjectURL(e.target.files[0]))}
-            />
-            <p className="text-red-600">{errors?.file?.message}</p>
-          </div>
-          <div className="my-4">
-            <label className="block text-sm font-medium text-gray-700">Név</label>
-            <input type="text" id="displayName" className="text-slate-900 bg-slate-100 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition" 
-              {...register('displayName',                 
-                {validate: (value) => {
-                if (value.length>30) return "Maximum 30 karakter lehet a név!";
-                if (!value) return "Név megadása kötelező!"
-                return true;}}
-              )}
-              value={name}
-              onChange={(e)=>setName(e.target.value)}
               />
-              <p className="text-red-600">{errors?.displayName?.message}</p>
-          </div>
+             <p className="text-red-600">{errors?.file?.message}</p>
+            </div>
+            <div className="my-4">
+              <label className="block text-sm font-medium text-gray-700">Név</label>
+              <input type="text" id="displayName" className="text-slate-900 bg-slate-100 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition" 
+                {...register('displayName',                 
+                  {validate: (value) => {
+                  if (value.length>30) return "Maximum 30 karakter lehet a név!";
+                  if (!value) return "Név megadása kötelező!"
+                  return true;}}
+                )}
+                value={name}
+                onChange={(e)=>setName(e.target.value)}
+                />
+                <p className="text-red-600">{errors?.displayName?.message}</p>
+            </div>
           <div className="btn w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition"
             onClick={()=>handleSubmit(onSubmit)()}
           >Mentés</div>

@@ -6,8 +6,8 @@ import { readAuthorization, toggleAdmin } from '../utility/crudUtility';
 import { extractUrlAndId } from '../utility/utils';
 import { deletePhoto, deleteUserPfp, editUserDName } from '../utility/backendHandling';
 
-export default function EidtUser({modalRef,selectedUser}) {
-    const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
+export default function EidtUser({modalRef,selectedUser,refreshUsers}) {
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [admins,setAdmins]=useState([])
     useEffect(() => {
         readAuthorization(setAdmins)
@@ -29,13 +29,13 @@ export default function EidtUser({modalRef,selectedUser}) {
             deletePhoto(extractUrlAndId(selectedUser.photoURL).id)
             deleteUserPfp(selectedUser.uid) 
             setPhoto("../NoPFP.jpg")
+            refreshUsers()
         } catch (error) {
             console.log(error);
         }
     }
 
     const onSubmit = async (data) => {
-        console.log(data);
         try {
             if(admins?.includes(selectedUser?.uid) !== isAdmin){
                 toggleAdmin(selectedUser.uid,isAdmin)
@@ -43,6 +43,7 @@ export default function EidtUser({modalRef,selectedUser}) {
             if(selectedUser.displayName !== displayName){
                 editUserDName(selectedUser.uid,displayName)
             }
+            refreshUsers()
         } catch (error) {
             console.log(error);
         }finally{
@@ -61,9 +62,9 @@ export default function EidtUser({modalRef,selectedUser}) {
                 <div className='my-2'>
  
                     <div className="flex justify-center relative">
-                        <img src={photo} className="rounded-box z-0 size-60" />
+                        <img src={photo} className="rounded-box z-0 object-cover h-40 w-40" />
                         {selectedUser?.photoURL?(
-                        <div className="btn rounded-box absolute z-10 size-60 opacity-0 hover:opacity-70 text-lg" onClick={()=>handleDeletePfp()}>
+                        <div className="btn rounded-box absolute z-10 h-40 w-40 opacity-0 hover:opacity-70 text-lg" onClick={()=>handleDeletePfp()}>
                             <DeleteIcon fontSize='large'/>
                         </div>):null}
                     </div>

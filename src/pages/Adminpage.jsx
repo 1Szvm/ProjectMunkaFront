@@ -23,6 +23,12 @@ export default function Adminpage() {
         readUsers(setUsers)
       },[])
 
+      const refreshUsers = () => {
+        readUsers(setUsers);
+        readAuthorization(setAdmins);
+      };
+      
+
       useEffect(() => {
         if(admins?.length===0) return;
         if(!admins?.includes(user?.uid)){
@@ -73,26 +79,26 @@ export default function Adminpage() {
           <LoadingUsers />
       ) : (
         <div className='flex justify-center'>
-          <div className='border overflow-y-scroll bg-slate-900 w-2/3'>
+          <div className='border overflow-y-scroll mx-2 bg-slate-900 sm:w-2/3 w-screen h-screen rounded-xl'>
             {users.map(fetchedUser => (
               <div key={fetchedUser.uid} className='bg-blue-600 rounded-xl m-4'>
                 {user?.uid==fetchedUser.uid?<p className='px-2'>Te</p>:null}
-                <div className="flex justify-between px-2 items-center bg-slate-800 rounded-xl border">
+                <div className="grid grid-cols-1 w-full sm:grid-cols-2 p-2 items-center bg-slate-800 rounded-xl border">
                   <div className='flex justify-start items-center'>
-                    <div><img className="size-20 rounded-box mx-2" src={fetchedUser.photoURL ? extractUrlAndId(fetchedUser.photoURL)?.url : "../NoPFP.jpg"}/></div>
+                    <div><img className="object-cover sm:size-20 size-12 rounded-box mx-2" src={fetchedUser.photoURL ? extractUrlAndId(fetchedUser.photoURL)?.url : "../NoPFP.jpg"}/></div>
                     <div>
                       <div className={`${admins?.includes(fetchedUser?.uid)?"text-yellow-400":""}`}>{fetchedUser.displayName}</div>
                       <div className='text-sm opacity-70'>{fetchedUser.email}</div>
                     </div>
                   </div>
-                  <div className='flex justify-center items-center'>
+                  <div className='flex justify-end items-center'>
                     <div className='btn mx-1 bg-ghost text-white' onClick={()=>handleEdit(fetchedUser)}><EditIcon/></div>
                     <div className='btn mx-1 bg-red-600 text-white' onClick={()=>handleDeleteUser(fetchedUser)}><DeleteIcon/></div>
                   </div>
                 </div>
               </div>
             ))}
-            <EidtUser modalRef={modalRef} selectedUser={selectedUser}/>
+            <EidtUser modalRef={modalRef} selectedUser={selectedUser} refreshUsers={refreshUsers}/>
           </div>
         </div>)}
     </>
