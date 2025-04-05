@@ -24,8 +24,10 @@ const Bajnoksagok = () => {
 
   const atemptCoppy=()=>{
     
-    champions.map((competition) => {  
-      categories.map(category=>{
+    categories.map(category=>{
+      console.log(category.nev);
+      
+      champions.map((competition) => {  
         if(competition.id==category.id){
           console.log();
           console.log(category.nev);
@@ -79,8 +81,8 @@ const Bajnoksagok = () => {
        <div className='flex justify-center flex-wrap  p-1 sm:p-5'>
           <div className="bg-stone-900 p-5 w-[100%] max-w-[1000px] min-w-[100px] rounded-xl shadow-lg shadow-indigo-500/50   sm:m-4">
             {
-              champions.map((competition) => (
-                categories.map(category => (
+              categories.map(category => (
+                champions.map((competition) => (
                   competition.id == category.id ? (
                     <motion.div
                       key={competition.id}
