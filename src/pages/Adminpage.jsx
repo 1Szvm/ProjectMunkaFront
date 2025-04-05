@@ -74,12 +74,12 @@ export default function Adminpage() {
         
   return (
     <>
-      <h1 className='text-center text-4xl font-bold m-2'>Admin page</h1>
+      <h1 className='text-center text-4xl font-bold m-2'>Felhasználók</h1>
       {users.length === 0 ? (
           <LoadingUsers />
       ) : (
-        <div className='flex justify-center'>
-          <div className='border overflow-y-scroll mx-2 bg-slate-900 sm:w-2/3 w-screen h-screen rounded-xl'>
+        <div className='flex justify-center h-full'>
+          <div className='border mx-2 bg-slate-900 sm:w-2/3 w-screen rounded-xl'>
             {users.map(fetchedUser => (
               <div key={fetchedUser.uid} className='bg-blue-600 rounded-xl m-4'>
                 {user?.uid==fetchedUser.uid?<p className='px-2'>Te</p>:null}

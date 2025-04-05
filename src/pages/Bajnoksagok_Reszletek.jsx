@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import { useInView, motion } from 'framer-motion';
 import { Footer } from '../components/Footer';
 import { useParams } from 'react-router-dom';
-import { readCategoriesById, readChampionshipsById } from '../utility/crudUtility';
+import { readCategoriesById, readChampionshipsById, updateCategory } from '../utility/crudUtility';
 import { set } from 'react-hook-form';
+import { uploadFile } from '../utility/backendHandling';
 
 const ChampionshipDetails = () => {
   const {id}=useParams()
@@ -26,9 +27,7 @@ const ChampionshipDetails = () => {
     readChampionshipsById(id,setChampionship)
   },[id])
 
-  console.log(categ);
-  
-  console.log(championship[categ]);
+  console.log(championship[categ]?.imgUrl);
 
 
 
@@ -67,6 +66,41 @@ const ChampionshipDetails = () => {
     setSelectedDriver(driver);
   };
 
+  const UploadData = async() => {
+    console.log("nothing ventured nothing gained");
+    
+    updateCategory("F123", [
+      { name: 'Max Verstappen', points: 100, position: 1, team: 'Red Bull Racing' },
+      { name: 'Lewis Hamilton', points: 85, position: 2, team: 'Mercedes' },
+      { name: 'Charles Leclerc', points: 70, position: 3, team: 'Ferrari' },
+      { name: 'Sergio Perez', points: 60, position: 4, team: 'Red Bull Racing' },
+      { name: 'Lando Norris', points: 55, position: 5, team: 'McLaren' },
+      { name: 'George Russell', points: 50, position: 6, team: 'Mercedes' },
+    ],"pro",'leaderboard');
+
+    updateCategory("F123", [
+      { team: 'Red Bull Racing', points: 160 },
+      { team: 'Mercedes', points: 135 },
+      { team: 'Ferrari', points: 70 },
+      { team: 'McLaren', points: 55 },
+    ],"pro",'teamleaderboard');
+
+    updateCategory("F123", [
+      { name: 'Max Verstappen', racesPlayed: 30, wins: 15, podiums: 20 },
+      { name: 'Lewis Hamilton', racesPlayed: 30, wins: 12, podiums: 22 },
+      { name: 'Charles Leclerc', racesPlayed: 30, wins: 10, podiums: 18 },
+      { name: 'Sergio Perez', racesPlayed: 30, wins: 8, podiums: 16 },
+      { name: 'Lando Norris', racesPlayed: 30, wins: 5, podiums: 10 },
+      { name: 'George Russell', racesPlayed: 30, wins: 4, podiums: 9 },
+    ],"pro",'driverstats');
+
+    updateCategory("F123", [
+      { date: '2025-03-20', event: 'Australian Grand Prix', time: '10:00 AM' },
+      { date: '2025-03-22', event: 'Bahrain Grand Prix', time: '2:00 PM' },
+    ],"pro",'calendarevents');
+    
+  }
+
   const renderLeaderboard = () => {
     return (
       <motion.div
@@ -75,6 +109,7 @@ const ChampionshipDetails = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
+        <div className='btn' onClick={()=>UploadData()}>Upload data</div>
         <h3 className="text-xl sm:text-lg md:text-xl font-bold text-white mb-4">Pilóta Ranglista</h3>
         <table className="table-auto w-full text-left text-slate-300 text-xs sm:text-sm md:text-base">
           <thead>
