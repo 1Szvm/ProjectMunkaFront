@@ -182,7 +182,7 @@ export default function ForumPost() {
                                 : <div className="text-lg">
                                     {users?.find(obj => obj.uid === commentsArray[0])?.displayName || 
                                     <>
-                                    {/* nigger */}
+                                   
                                       <div className='text-red-600 text-lg text-wrap'>{commentsArray[0]}</div>
                                     </>
                                     }
