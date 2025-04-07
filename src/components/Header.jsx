@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ProfileMenu from "./ProfileMenu";
 import { readAuthorization } from "../utility/crudUtility";
 import { UserContext } from "../context/userContext";
+import { DarkModeContext } from "./DarkModeContext";
 
 export const Header = () => {
   const { user, logoutUser } = useContext(UserContext);
@@ -13,7 +14,7 @@ export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const [matches, setMatches] = useState(window.matchMedia("(min-width: 768px)").matches);
-  const [darkMode, setDarkMode] = useState(true);
+  const { darkMode, setDarkMode } = useContext(DarkModeContext); // ✅ Access BOTH darkMode and setDarkMode here
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -64,8 +65,8 @@ export const Header = () => {
     <motion.div
     className={`min-h-screen transition-colors duration-300 ease-in-out ${
       darkMode
-        ? "bg-gradient-to-r from-gray-800 to-black text-white"
-        : "bg-gradient-to-r from-gray-100 to-gray-300 text-gray-800"
+        ? "bg-gradient-to-r from-zinc-800 to-black text-white"
+        : "bg-gradient-to-r from-zinc-100 to-gray-300 text-gray-800"
     }`}
     animate={{
       background: darkMode
@@ -73,6 +74,7 @@ export const Header = () => {
         : "linear-gradient(to right, #f3f4f6, #d1d5db)", // Light mode gradient
     }}
     transition={{ duration: 0.5, ease: "easeInOut" }}
+    
   >
 
       {matches ? ( // Desktop View
