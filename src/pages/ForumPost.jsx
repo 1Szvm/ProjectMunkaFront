@@ -88,7 +88,7 @@ export default function ForumPost() {
       {users.length === 0 ? (
           <LoadingUsers />
       ) :(
-        <div className="container m-auto px-5 py-2 page rounded-xl mt-4 opacity-200 border-sky-600 border-2 min-w-[250px] w-[85%] max-w-[900px] shadow-lg">
+        <div className="container m-auto sm:px-5 px-3 py-2 page rounded-xl mt-4 opacity-200 border-sky-600 border-2 min-w-[250px] sm:w-[85%] max-w-[900px] shadow-lg">
             {post ? (
                 <div className='py-4'>
                   {/*Post*/}
@@ -109,7 +109,7 @@ export default function ForumPost() {
                     </div>
                     <div className='mx-2'>
                       <div className='flex justify-between'>
-                        <div className=' min-w-[250px] max-w-[99%] pl-10 '>
+                        <div className=' min-w-[250px] max-w-[99%] pl-1'>
                           <div className='flex justify-start items-center mb-4'>
                             {users?.find(obj => obj.uid === post?.uid)?.photoURL 
                                 ? (
@@ -121,11 +121,11 @@ export default function ForumPost() {
                                 )
                             }
                             {user?.uid === post.uid 
-                            ? <div className="text-3xl m-2">Te</div>
-                            : <div className="text-3xl m-2">
+                            ? <div className="sm:text-3xl mx-2">Te</div>
+                            : <div className="sm:text-3xl mx-2">
                                 {users?.find(obj => obj.uid === post.uid)?.displayName || 
                                 <>
-                                  <div className='text-3xl m-2 text-red-700'>({post.uid})</div>
+                                  <div className='text-3xl mx-2 text-red-700'>({post.uid.slice(0,7)})</div>
                                 </>
                                 }
                               </div>
@@ -133,9 +133,6 @@ export default function ForumPost() {
                           </div>
                           <p className="text-2xl font-bold break-words">{post.title}</p>
 
-                        </div>
-                        <div>
-                          <div>{new Date(post.letrehozas.toDate()).toLocaleDateString()}</div>
                         </div>
                       </div>
                       <div className="my-5 p-2 text-lg break-words">
@@ -178,21 +175,20 @@ export default function ForumPost() {
                             </div>
                             <div className='my-1'>
                               {user?.uid === commentsArray[0] 
-                                ? <div className="text-lg">Te</div>
-                                : <div className="text-lg">
+                                ? <div className="sm:text-lg text-md">Te</div>
+                                : <div className="sm:text-lg text-md">
                                     {users?.find(obj => obj.uid === commentsArray[0])?.displayName || 
                                     <>
                                    
-                                      <div className='text-red-600 text-lg text-wrap'>{commentsArray[0]}</div>
+                                      <div className='text-red-600 sm:text-lg text-md text-wrap'>{commentsArray[0].slice(0,7)}</div>
                                     </>
                                     }
                                   </div>
                               }
                             </div>
                           </div>
-                          <div className='opacity-70'>{new Date(commentsArray[2].toDate()).toLocaleDateString()}</div>
                         </div>
-                        <div className='m-3 text-lg break-words'>{commentsArray[1]}</div>
+                        <div className='m-3 text-lg  break-words'>{commentsArray[1]}</div>
                         <div className='flex justify-end'>
                           {(admins?.includes(user?.uid) || (user?.uid === commentsArray[0]))? (
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="m-2 cursor-pointer size-6" onClick={()=>handleDeleteComment(param.id,commentId)}>

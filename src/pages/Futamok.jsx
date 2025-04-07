@@ -58,11 +58,11 @@ export const Futamok = () => {
     <div className="home">
       <div className='min-h-screen'>
         <h1 className='text-3xl m-2 text-center font-bold w-100'>Futamok</h1>
-        <div className="btn-group pb-4 text-center flex justify-center" role="group" aria-label="Category selection">
+        <div className="btn-group pb-4 text-center sm:flex sm:justify-center grid gird-cols-1" role="group" aria-label="Category selection">
           {categories.map((category) => (
-            <div key={category?.id} className="p-1">
+            <div key={category?.id} className="sm:p-1 my-1 sm:my-0">
               <label 
-                className={` bg-white btn ${selectedCategory === category?.id ? 'btn-outline opacity-55 bg-emerald-200' : 'btn-primary'}`}
+                className={` bg-white btn sm:w-fit w-[95%] ${selectedCategory === category?.id ? 'btn-outline opacity-55 bg-emerald-200' : 'btn-primary'}`}
                 style={{ color: category?.color }}
                 onClick={() => handleCategoryClick(category?.id)}
               >
