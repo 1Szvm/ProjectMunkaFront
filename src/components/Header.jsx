@@ -70,10 +70,10 @@ export const Header = () => {
     }`}
     animate={{
       background: darkMode
-        ? "linear-gradient(to right, #1f2937,rgb(13, 9, 26))" // Dark mode gradient
+        ? "linear-gradient(to right, #150c38, #03040e)" // Dark mode gradient
         : "linear-gradient(to right, #f3f4f6, #d1d5db)", // Light mode gradient
     }}
-    transition={{ duration: 0.5, ease: "easeInOut" }}
+    transition={{ duration: 0.6, ease: "easeInOut" }}
     
   >
 
@@ -83,7 +83,7 @@ export const Header = () => {
           transition-colors duration-300 ease-in-out flex items-center justify-center w-full pb-1`}>
              <motion.button
                 onClick={toggleDarkMode}
-                className="absolute left-8 p-[11px] rounded-full bg-slate-700 text-white transition-all duration-300 transform hover:scale-125"
+                className="absolute left-8 p-[11px] rounded-full bg-zinc-700 border-2 border-emerald-400 text-white transition-all duration-300 transform hover:scale-125"
               >
                 {darkMode ? '🌙' : '🌞'}
               </motion.button>
