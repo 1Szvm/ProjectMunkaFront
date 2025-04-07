@@ -1,48 +1,51 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Footer } from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
 import { readCategories, readChampionships } from '../utility/crudUtility';
+import { DarkModeContext } from '../components/DarkModeContext.jsx'; // Import it properly
 
-
-
-// export const competitions = [
-//   { id: 1, name: 'Assetto Corsa - F4 Championship', image: 'https://images.unsplash.com/photo-1610905376670-5e7e0e8a3cfb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'Formula 4 racing series for emerging talents.' },
-//   { id: 2, name: 'Assetto Corsa Competizione - Porsche Cup', image: 'https://images.unsplash.com/photo-1706177357152-611d8d76b64d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', description: 'A prestigious cup for Porsche racing enthusiasts.' },
-//   { id: 3, name: 'F1 23', image: 'https://i.pinimg.com/736x/b6/75/74/b6757464caf3a48c84f6cabd6be503a7.jpg', description: 'The latest installment in the F1 racing series.' },
-//   { id: 4, name: 'F1 24', image: 'https://i.pinimg.com/736x/dd/a7/66/dda7664bd840eda7ed595239837ce501.jpg', description: 'Next-gen F1 racing simulation, with new tracks and cars.' },
-// ];
 
 const Bajnoksagok = () => {
-  const [champions, setChampions] = useState([]);
-  const [categories, setCategories]=useState([])
+  const [champions, setChampions] = useState([]);  // State for championships
+  const [categories, setCategories] = useState([]); // State for categories
+
+  const { darkMode, setDarkMode } = useContext(DarkModeContext); // ✅ Access BOTH darkMode and setDarkMode here
 
   useEffect(() => {
-    readChampionships(setChampions);
-    readCategories(setCategories)
+    readChampionships(setChampions); // Fetch championships from backend
+    readCategories(setCategories);   // Fetch categories from backend
   }, []);
 
-  const atemptCoppy=()=>{
-    
-    categories.map(category=>{
+  const atemptCoppy = () => {
+    // Helper function to log relationships between categories and championships
+    categories.map(category => {
       console.log(category.nev);
-      
-      champions.map((competition) => {  
-        if(competition.id==category.id){
+
+      champions.map((competition) => {
+        if (competition.id == category.id) {
           console.log();
           console.log(category.nev);
-          Object.entries(competition?.data || {}).map(([id, champsArr]) => (            
-            console.log("--> "+id)
-          ))
+          Object.entries(competition?.data || {}).map(([id, champsArr]) =>
+            console.log("--> " + id)
+          );
         }
-      })
-    })
-  }
-    
+      });
+    });
+  };
 
   const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen m-5 p-5">
+    <motion.div
+    className={`min-h-screen p-3`}
+    animate={{
+      // background: darkMode ? "rgb(30, 41, 59)" : "rgb(255, 255, 255)",
+      color: darkMode ? "#ffffff" : "#000000",
+    }}
+    transition={{ duration: 0.5, ease: "easeInOut" }} 
+  >
+
       <main className="flex-grow flex flex-col items-center justify-center ">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -50,36 +53,25 @@ const Bajnoksagok = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-2"
         >
-          <p className="text-xl italic text-sky-500 font-semibold ">Fedezd fel a legnagyobb versenyeket a virtuális világban!</p>
+          <p className="text-lg italic text-sky-500 font-semibold ">Fedezd fel a legnagyobb versenyeket a virtuális világban!</p>
         </motion.div>
 
-        <div className=''>
-          {/* {competitions.map((competition) => (
-            <motion.div
-              key={competition.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: competition.id * 0.2 }}
-              whileHover={{ scale: 1.05 }}
-              className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transform transition-all"
-            >
-              <img src={competition.image} alt={competition.name} className="w-full h-64 object-cover" />
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-800">{competition.name}</h3>
-                <p className="text-gray-700 mt-2">{competition.description}</p>
-                <motion.button
-                onClick={()=>navigate('/championship_desc')}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="mt-4 py-2 px-6 bg-yellow-400 text-black rounded-lg hover:bg-yellow-500 transition"
-                >
-                  Részletek
-                </motion.button>
-              </div>
-            </motion.div>
-          ))} */}
-       <div className='flex justify-center flex-wrap  p-1 sm:p-5'>
-          <div className="bg-stone-900 p-5 w-[100%] max-w-[1000px] min-w-[100px] rounded-xl shadow-lg shadow-indigo-500/50   sm:m-4">
+        <div className='p-[0.1px]'>
+ <motion.div
+      className="flex justify-center flex-wrap p-1 sm:p-3"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.3 }}
+    >
+          <motion.div className="p-5 w-[100%] max-w-[1000px] min-w-[100px] rounded-xl shadow-lg shadow-indigo-500/50 
+            sm:m-4 "
+          animate={{
+             background: darkMode ? "#0A0A0A" : "#292929",
+            color: darkMode ? "#ffffff" : "#000000",
+          }}
+          transition={{ duration: 0.5, ease: "easeInOut" }} 
+          >
             {
               categories.map(category => (
                 champions.map((competition) => (
@@ -87,10 +79,15 @@ const Bajnoksagok = () => {
                     <motion.div
                       key={competition.id}
                       initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8 }}
-                      className="text-left bg-zinc-800 p-3 mb-5  border-2 border-sky-800 rounded-lg"
-
+                      // animate={{ opacity: 1, y: 0 }}
+                      // transition={{ duration: 0.8 }}
+                      className="text-left p-3 mb-5  border-2 border-sky-800 rounded-lg"
+                      animate={{
+                        background: darkMode ? "#1F1F1F" : "#F5F5F5",
+                       color: darkMode ? "#ffffff" : "#000000",
+                       opacity: 1, y: 0
+                     }}
+                     transition={{ duration: 0.5, ease: "easeInOut" }} 
                     >
                       <p className="text-xl italic mb-8 font-semibold " style={{ color: `${category.color}` }}>{category.nev}</p>
                       
@@ -134,9 +131,8 @@ const Bajnoksagok = () => {
               ))
             }
 
-          </div>
-        </div>
-
+          </motion.div>
+          </motion.div>
         </div>
       </main>
 
@@ -144,7 +140,7 @@ const Bajnoksagok = () => {
       <div className="mt-auto w-full">
         <Footer />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
