@@ -11,7 +11,7 @@ export const Auth = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isSignIn = location.pathname === '/auth/in';
-const { darkMode, setDarkMode } = useContext(DarkModeContext); // ✅ Access BOTH darkMode and setDarkMode here
+const { darkMode, setDarkMode } = useContext(DarkModeContext); 
 
   const handleSubmit = (event) => {
     event.preventDefault();

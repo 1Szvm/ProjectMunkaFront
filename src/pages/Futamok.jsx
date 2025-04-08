@@ -58,19 +58,28 @@ export const Futamok = () => {
     <div className="home">
       <div className='min-h-screen'>
         <h1 className='text-3xl m-2 text-center font-bold w-100'>Futamok</h1>
-        <div className="btn-group pb-4 text-center sm:flex sm:justify-center grid gird-cols-1" role="group" aria-label="Category selection">
-          {categories.map((category) => (
-            <div key={category?.id} className="sm:p-1 my-1 sm:my-0">
-              <label 
-                className={` bg-white btn sm:w-fit w-[95%] ${selectedCategory === category?.id ? 'btn-outline opacity-55 bg-emerald-200' : 'btn-primary'}`}
-                style={{ color: category?.color }}
-                onClick={() => handleCategoryClick(category?.id)}
-              >
-                {category?.nev}
-              </label>
-            </div>
-          ))}
-        </div>
+        <div className="pb-5 text-center grid grid-cols-1 gap-3 sm:flex sm:justify-center sm:items-center" role="group" aria-label="Category selection">
+        {categories.map((category) => (
+          <div key={category?.id} className="w-full sm:w-auto transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
+            <button
+              type="button"
+              className={`w-full sm:w-auto px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ease-in-out
+                ${selectedCategory === category?.id
+                  ? 'bg-emerald-600 text-white shadow-xl scale-105'
+                  : 'bg-white text-gray-800 border-2 border-gray-300 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-blue-500 hover:text-white hover:border-transparent'
+                }`}
+              style={{
+                color: selectedCategory !== category?.id ? category?.color : undefined,
+                transition: 'color 0.3s ease, transform 0.3s ease',
+              }}
+              onClick={() => handleCategoryClick(category?.id)}
+            >
+              {category?.nev}
+            </button>
+          </div>
+        ))}
+      </div>
+
 
         <div className='flex justify-center '>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1'>
