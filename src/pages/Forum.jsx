@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { SearchForums } from './SearchForums';
 
+
 import { readPosts } from '../utility/crudUtility';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/userContext';
@@ -21,7 +22,7 @@ const Forum = () => {
   return (
     <>
     <motion.div
-      initial={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0, y: -40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >

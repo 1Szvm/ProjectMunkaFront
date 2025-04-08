@@ -2,13 +2,16 @@ import React, { useContext } from 'react';
 import { Form, useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import Toastify from '../components/Toastify';
+import { motion } from 'framer-motion';
 import { Footer } from '../components/Footer';
 import './Home.css'
+import { DarkModeContext } from '../components/DarkModeContext';
 export const Auth = () => {
   const { user, signInUser, signUpUser, msg, setMsg } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
   const isSignIn = location.pathname === '/auth/in';
+const { darkMode, setDarkMode } = useContext(DarkModeContext); // ✅ Access BOTH darkMode and setDarkMode here
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -21,28 +24,47 @@ export const Auth = () => {
   };
 
   return (
-    <div className="home">
-      <div className="flex items-center justify-center  pt-48">
-        <div className="w-full max-w-md bg-neutral-100 rounded-lg shadow-lg p-6 text-blue-500">
+    <div className="home m-4">
+          <motion.div
+      initial={{ opacity: 0, y: -100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+    
+    >
+      <div className="flex items-center justify-center  pt-48 ">
+        <motion.div
+                 initial={{ opacity: 0.2, y: -10 }}
+                  className="w-full max-w-md bg-neutral-950 rounded-lg shadow-lg p-6 text-indigo-500 border-2 border-indigo-600"
+                 transition={{ duration: 0.6 }}
+                 animate={{
+                  background: darkMode ? "#1F1F1F" : "#F0F5F5",
+                 color: darkMode ? "#ffffff" : "#222222",
+                 opacity: 1, y: 0
+               }}
+           
+               >
           <h3 className="text-2xl font-semibold text-center mb-6">
             {isSignIn ? 'Bejelentkezés' : 'Regisztráció'}
           </h3>
           <Form onSubmit={handleSubmit} className="space-y-4">
             {!isSignIn && (
+           
               <div className="flex flex-col">
-                <label htmlFor="displayName" className="mb-1 text-sm font-medium ">
+                <label htmlFor="displayName" className="text-indigo-500 mb-1 text-sm font-medium ">
                   Felhasználónév
                 </label>
                 <input
                   id="displayName"
                   name="displayName"
+                  placeholder='felhasználónév'
                   type="text"
-                  className="px-3 py-2 border border-gray-700 bg-gray-700 rounded-md focus:outline-none focus:ring focus:ring-indigo-500"
+                  className="px-3 py-2 border text-slate-50 border-gray-700 bg-gray-700 rounded-md focus:outline-none focus:ring focus:ring-indigo-500"
                 />
               </div>
+          
             )}
             <div className="flex flex-col">
-              <label htmlFor="email" className="mb-1 text-sm font-medium text-gray-400">
+              <label htmlFor="email" className=" mb-1 text-sm font-medium text-indigo-500">
                 Email
               </label>
               <input
@@ -50,18 +72,19 @@ export const Auth = () => {
                 name="email"
                 type="email"
                 placeholder="email"
-                className="px-3 py-2 border border-gray-700 bg-gray-700 rounded-md focus:outline-none focus:ring focus:ring-indigo-500"
+                className="px-3 py-2 border text-slate-50  border-gray-700 bg-gray-700 rounded-md focus:outline-none focus:ring focus:ring-indigo-500"
               />
             </div>
             <div className="flex flex-col">
-              <label htmlFor="password" className="mb-1 text-sm font-medium text-gray-400">
+              <label htmlFor="password" className="mb-1 text-sm font-medium text-indigo-500">
                 Jelszó
               </label>
               <input
                 id="password"
                 name="password"
                 type="password"
-                className="px-3 py-2 border border-gray-700 bg-gray-700 rounded-md focus:outline-none focus:ring focus:ring-indigo-500"
+                 placeholder="jelszó"
+                className="px-3 py-2 borde text-slate-50  border-gray-700 bg-gray-700 rounded-md focus:outline-none focus:ring focus:ring-indigo-500"
               />
             </div>
             <button
@@ -79,9 +102,11 @@ export const Auth = () => {
             Elfelejtett jelszó...
           </a>
           <Toastify {...msg}  />
-          <Footer/>
+          </motion.div>
         </div>
-      </div>
-      </div>
+      </motion.div>
+          <Footer/>
+          </div>
+
   );
 };
