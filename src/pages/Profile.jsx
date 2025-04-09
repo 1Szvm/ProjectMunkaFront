@@ -12,8 +12,8 @@ export default function Profile() {
   const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
   const navigate=useNavigate()
   const [text,setText] =useState("")
-  const [photo,setPhoto]=useState("");
-  const [name,setName]=useState("")
+  const [photo,setPhoto]=useState(user?.photoURL ? extractUrlAndId(user.photoURL)?.url : "");
+  const [name,setName]=useState(user?.displayName)
 
   useEffect(() => {
     if (user) {
@@ -27,7 +27,7 @@ export default function Profile() {
       try {
         deletePhoto(extractUrlAndId(user.photoURL).id)
       } catch (error) {
-        console.log("no pfp or something shit itself");
+        console.error("Error deleting photo:", error);
       }
       const file=data?.file ? data.file[0]:null
       const {url,id}=file ? await uploadFile(file) : null
@@ -58,37 +58,15 @@ export default function Profile() {
                 type="file"
                 accept="image/*"
                 className="file-input w-full border border-gray-300 bg-indigo-700 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                {...register("file", {
-                  validate: async (value) => {
-                    const file = value[0];
-                    if (!file) return true;
-
-                    const fileExtension = file.name.split(".").pop().toLowerCase();
-                    const acceptedFormats = ["jpg", "png"];
-                    if (!acceptedFormats.includes(fileExtension)) return "Invalid fájl formátum!";
-                    if (file.size > 1 * 1000 * 1024) return "Az engedélyezett fájl mérete 1MB";
-
-                    const dimensionsValid = await new Promise((resolve) => {
-                      const img = new Image();
-                      const objectUrl = URL.createObjectURL(file);
-
-                      img.onload = () => {
-                        const isValid = img.width <= 600 && img.height <= 600;
-                        URL.revokeObjectURL(objectUrl);
-                        resolve(isValid);
-                      };
-
-                      img.onerror = () => {
-                        URL.revokeObjectURL(objectUrl);
-                        resolve(false);
-                      };
-
-                      img.src = objectUrl;
-                    });
-
-                    if (!dimensionsValid) return "Maximum képméret 600x600 pixel!";
-                    return true;
-                  },
+                  {...register("file", {
+                    validate: (value) => {
+                      if (!value[0]) return true;
+                      const fileExtension = value[0]?.name.split(".").pop().toLowerCase();
+                      const acceptedFormats = ["jpg", "png"];
+                      if (!acceptedFormats.includes(fileExtension)) return "Invalid fájl formátum!";
+                      if (value[0].size > 1 * 1000 * 1024) return "Az engedélyezett fájl mérete 1MB";
+                      return true;
+                  }
                 })}
                 onChange={(e) => setPhoto(URL.createObjectURL(e.target.files[0]))}
               />
