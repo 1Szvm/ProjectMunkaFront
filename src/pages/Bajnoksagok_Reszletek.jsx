@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import { useInView, motion } from 'framer-motion';
 import { Footer } from '../components/Footer';
 import { useParams } from 'react-router-dom';
-import { readCategoriesById, readChampionshipsById } from '../utility/crudUtility';
+import { readCategoriesById, readChampionshipsById, updateCategory } from '../utility/crudUtility';
 import { set } from 'react-hook-form';
+import { uploadFile } from '../utility/backendHandling';
 
 const ChampionshipDetails = () => {
   const {id}=useParams()
@@ -24,11 +25,9 @@ const ChampionshipDetails = () => {
   useEffect(() => {
     readCategoriesById(id,setCategory)
     readChampionshipsById(id,setChampionship)
-  },[id])
+  },[])
 
-  console.log(categ);
-  
-  console.log(championship[categ]);
+  console.log(championship[categ]?.leaderboard?.map((item) => item.name));
 
 
 
@@ -67,6 +66,41 @@ const ChampionshipDetails = () => {
     setSelectedDriver(driver);
   };
 
+  const UploadData = async() => {
+    console.log("nothing ventured nothing gained");
+    
+    updateCategory("xT9kvaoN573rnImgOlPB", [
+      { name: 'Max Verstappen', points: 100, position: 1, team: 'Red Bull Racing' },
+      { name: 'Lewis Hamilton', points: 85, position: 2, team: 'Mercedes' },
+      { name: 'Charles Leclerc', points: 70, position: 3, team: 'Ferrari' },
+      { name: 'Sergio Perez', points: 60, position: 4, team: 'Red Bull Racing' },
+      { name: 'Lando Norris (GOAT)', points: 55, position: 5, team: 'McLaren' },
+      { name: 'George Russell', points: 50, position: 6, team: 'Mercedes' },
+    ],"pro",'leaderboard');
+
+    updateCategory("xT9kvaoN573rnImgOlPB", [
+      { team: 'Red Bull Racing', points: 160 },
+      { team: 'Mercedes', points: 135 },
+      { team: 'Ferrari', points: 70 },
+      { team: 'McLaren', points: 55 },
+    ],"pro",'teamleaderboard');
+
+    updateCategory("xT9kvaoN573rnImgOlPB", [
+      { name: 'Max Verstappen', racesPlayed: 30, wins: 15, podiums: 20 },
+      { name: 'Lewis Hamilton', racesPlayed: 30, wins: 12, podiums: 22 },
+      { name: 'Charles Leclerc', racesPlayed: 30, wins: 10, podiums: 18 },
+      { name: 'Sergio Perez', racesPlayed: 30, wins: 8, podiums: 16 },
+      { name: 'Lando Norris (GOAT)', racesPlayed: 30, wins: 5, podiums: 10 },
+      { name: 'George Russell', racesPlayed: 30, wins: 4, podiums: 9 },
+    ],"pro",'driverstats');
+
+    updateCategory("xT9kvaoN573rnImgOlPB", [
+      { date: '2025-03-20', event: 'Australian Grand Prix', time: '10:00 AM' },
+      { date: '2025-03-22', event: 'Bahrain Grand Prix', time: '2:00 PM' },
+    ],"pro",'calendarevents');
+    
+  }
+
   const renderLeaderboard = () => {
     return (
       <motion.div
@@ -76,30 +110,34 @@ const ChampionshipDetails = () => {
         transition={{ duration: 0.8 }}
       >
         <h3 className="text-xl sm:text-lg md:text-xl font-bold text-white mb-4">Pilóta Ranglista</h3>
-        <table className="table-auto w-full text-left text-slate-300 text-xs sm:text-sm md:text-base">
-          <thead>
-            <tr className="border-b border-slate-600">
-              <th className="py-2 px-2 sm:px-4">Helyezés</th>
-              <th className="py-2 px-2 sm:px-4">Pilóta</th>
-              <th className="py-2 px-2 sm:px-4">Csapat</th>
-              <th className="py-2 px-2 sm:px-4">Pontszám</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leaderboard.map((driver, index) => (
-              <motion.tr
-                key={index}
-                className="transition-all py-2 hover:bg-slate-600"
-                whileHover={{ scale: 1.05 }}
-              >
-                <td className="py-2 px-2 sm:px-4">{driver.position}</td>
-                <td className="py-2 px-2 sm:px-4">{driver.name}</td>
-                <td className="py-2 px-2 sm:px-4">{driver.team}</td>
-                <td className="py-2 px-2 sm:px-4">{driver.points}</td>
-              </motion.tr>
-            ))}
-          </tbody>
-        </table>
+        {championship[categ]?.driverstats?
+          <table className="table-auto w-full text-left text-slate-300 text-xs sm:text-sm md:text-base">
+            <thead>
+              <tr className="border-b border-slate-600">
+                <th className="py-2 px-2 sm:px-4">Helyezés</th>
+                <th className="py-2 px-2 sm:px-4">Pilóta</th>
+                <th className="py-2 px-2 sm:px-4">Csapat</th>
+                <th className="py-2 px-2 sm:px-4">Pontszám</th>
+              </tr>
+            </thead>
+            <tbody>
+              {championship[categ]?.leaderboard?.map((driver, index) => (
+                <motion.tr
+                  key={index}
+                  className="transition-all py-2 hover:bg-slate-600"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <td className="py-2 px-2 sm:px-4">{driver.position}</td>
+                  <td className="py-2 px-2 sm:px-4">{driver.name}</td>
+                  <td className="py-2 px-2 sm:px-4">{driver.team}</td>
+                  <td className="py-2 px-2 sm:px-4">{driver.points}</td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
+          :
+          <div className="text-lg font-bold text-slate-300 mb-4 text-center">Jelenleg nincs ranglista</div>
+        }
       </motion.div>
     );
   };
@@ -143,36 +181,41 @@ const ChampionshipDetails = () => {
         transition={{ duration: 0.8 }}
       >
         <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-4">Pilóta Statisztikák</h3>
-        <table className="table-auto w-full text-left text-slate-300 text-xs sm:text-sm md:text-base">
-          <thead>
-            <tr className="border-b border-slate-600">
-              <th className="py-2 px-2 sm:px-4">Pilóta</th>
-              <th className="py-2 px-2 sm:px-4">Versenyek</th>
-              <th className="py-2 px-2 sm:px-4">Győzelmek</th>
-              <th className="py-2 px-2 sm:px-4">Pódiumok</th>
-            </tr>
-          </thead>
-          <tbody>
-            {driverStats.map((driver, index) => (
-              <motion.tr
-                key={index}
-                className="transition-all py-2 hover:bg-slate-600"
-                whileHover={{ scale: 1.05 }}
-              >
-                <td className="py-2 px-2 sm:px-4">{driver.name}</td>
-                <td className="py-2 px-2 sm:px-4">{driver.racesPlayed}</td>
-                <td className="py-2 px-2 sm:px-4">{driver.wins}</td>
-                <td className="py-2 px-2 sm:px-4">{driver.podiums}</td>
-              </motion.tr>
-            ))}
-          </tbody>
-        </table>
+        {championship[categ]?.driverstats?
+          <table className="table-auto w-full text-left text-slate-300 text-xs sm:text-sm md:text-base">
+            <thead>
+              <tr className="border-b border-slate-600">
+                <th className="py-2 px-2 sm:px-4">Pilóta</th>
+                <th className="py-2 px-2 sm:px-4">Versenyek</th>
+                <th className="py-2 px-2 sm:px-4">Győzelmek</th>
+                <th className="py-2 px-2 sm:px-4">Pódiumok</th>
+              </tr>
+            </thead>
+            <tbody>
+              {championship[categ]?.driverstats?.map((driver, index) => (
+                <motion.tr
+                  key={index}
+                  className="transition-all py-2 hover:bg-slate-600"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <td className="py-2 px-2 sm:px-4">{driver.name}</td>
+                  <td className="py-2 px-2 sm:px-4">{driver.racesPlayed}</td>
+                  <td className="py-2 px-2 sm:px-4">{driver.wins}</td>
+                  <td className="py-2 px-2 sm:px-4">{driver.podiums}</td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
+          :
+          <div className="text-lg font-bold text-slate-300 mb-4 text-center">Jelenleg nincsenek statisztikák</div>
+        }
       </motion.div>
     );
   };
 
   return (
     <div className="championship-container min-h-screen">
+      <div className='btn' onClick={()=>UploadData()}>Upload data</div>
       <div className="container mx-auto px-4 py-6">
         <section ref={aboutRef} className={`transition-opacity duration-1000 ${isInView ? 'opacity-100' : 'opacity-0'}`}>
           <div className="section-header flex justify-center mx-auto p-4">
@@ -209,17 +252,21 @@ const ChampionshipDetails = () => {
           {/* Event Calendar */}
           <div className="calendar  bg-slate-700 p-6 rounded-lg shadow-lg mt-6 md:mt-8">
             <h3 className="text-lg sm:text-xl font-bold text-white mb-4">Eseménynaptár</h3>
-            <ul className="text-slate-300">
-              {calendarEvents.map((event, index) => (
-                <motion.li
-                  key={index}
-                  className="transition-all py-2 px-2 sm:px-4 border-b border-slate-600 hover:bg-slate-600 rounded-md"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  {event.date} - {event.event} at {event.time}
-                </motion.li>
-              ))}
-            </ul>
+            {championship[categ]?.calendarevents?
+              <ul className="text-slate-300">
+                {championship[categ]?.calendarevents?.map((event, index) => (
+                  <motion.li
+                    key={index}
+                    className="transition-all py-2 px-2 sm:px-4 border-b border-slate-600 hover:bg-slate-600 rounded-md"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    {event.date} - {event.event} at {event.time}
+                  </motion.li>
+                ))}
+              </ul>
+              :
+              <div className="text-lg font-bold text-slate-300 mb-4 text-center">Jelenleg nincsenek esmények</div>
+            }
           </div>
           <p style={{height:'100px'}}></p>
           <Footer />

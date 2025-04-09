@@ -244,3 +244,34 @@ export const deleteFutam=async (id)=>{
   const docRef= doc(db, "futamok", id);
   await deleteDoc(docRef)
 }
+
+
+
+// This is for uploading docs to bajnoksagok collection
+
+export const updateCategory = async (id, updatedData, subcateg, fieldName) => {
+  const docRef = doc(db, "bajnoksagok", id);
+
+  try {
+    const docSnap = await getDoc(docRef);
+    if (!docSnap.exists()) {
+      console.log("No such document with ID:", id);
+      return;
+    }
+
+    const subcategData = docSnap.data()?.[subcateg];
+    if (!subcategData) {
+      console.log(`No such field: ${subcateg} in the document`);
+      return;
+    }
+
+    await updateDoc(docRef, {
+      [`${subcateg}.${fieldName}`]: updatedData,
+    });
+
+    console.log(`${fieldName} inside ${subcateg} successfully updated or created!`);
+
+  } catch (error) {
+    console.error("Error updating document:", error);
+  }
+};

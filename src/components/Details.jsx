@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useContext } from 'react';
 import { readCategories, toggleAplication } from '../utility/crudUtility';
 import { UserContext } from '../context/userContext';
 import Alerts from './Alerts';
-
+import { motion } from "framer-motion";
 export default function Details({ selectedRace, showDetails }) {
     const { user } = useContext(UserContext);
     const [categories, setCategories] = useState(null);
@@ -31,8 +31,13 @@ export default function Details({ selectedRace, showDetails }) {
      
     return (
         <dialog ref={modalRef} id="details" className="modal">
-            <div className="modal-box">
-
+        <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="modal-box bg-zinc-100 border-[1.5px] border-zinc-700 shadow-blue-500/50 p-6 rounded-2xl"
+            >
                 {selectedRace ? (
                     <>
                         <img src={selectedRace.imageUrl.url} alt={selectedRace.palya} className='rounded mb-5' />
@@ -71,7 +76,7 @@ export default function Details({ selectedRace, showDetails }) {
                     )}
                     <div className="btn text-white" style={{backgroundColor:category?.color}} onClick={() => modalRef.current?.close()}>Bezár</div>
                     </div>
-                </div>
+                </motion.div>
             {txt &&<Alerts err={txt}/>}
         </dialog>
     );

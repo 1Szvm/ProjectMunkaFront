@@ -6,7 +6,7 @@ import Alerts from '../components/Alerts';
 import { UserContext } from '../context/userContext';
 import { Footer } from '../components/Footer';
 import { deletePhoto } from '../utility/backendHandling';
-
+import { motion } from "framer-motion";
 export const Futamok = () => {
   const { user } = useContext(UserContext);
   const [admins,setAdmins]=useState([]);
@@ -58,21 +58,30 @@ export const Futamok = () => {
     <div className="home">
       <div className='min-h-screen'>
         <h1 className='text-3xl m-2 text-center font-bold w-100'>Futamok</h1>
-        <div className="btn-group pb-4 text-center flex justify-center" role="group" aria-label="Category selection">
-          {categories.map((category) => (
-            <div key={category?.id} className="p-1">
-              <label 
-                className={` bg-white btn ${selectedCategory === category?.id ? 'btn-outline opacity-55 bg-emerald-200' : 'btn-primary'}`}
-                style={{ color: category?.color }}
-                onClick={() => handleCategoryClick(category?.id)}
-              >
-                {category?.nev}
-              </label>
-            </div>
-          ))}
-        </div>
+        <div className="pb-5 text-center grid grid-cols-1 gap-3 sm:flex sm:justify-center sm:items-center" role="group" aria-label="Category selection">
+        {categories.map((category) => (
+          <div key={category?.id} className="w-full sm:w-auto transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
+            <button
+              type="button"
+              className={`w-full sm:w-auto px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ease-in-out
+                ${selectedCategory === category?.id
+                  ? 'bg-emerald-600 text-white shadow-xl scale-105'
+                  : 'bg-white text-gray-800 border-2 border-gray-300 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-blue-500 hover:text-white hover:border-transparent'
+                }`}
+              style={{
+                color: selectedCategory !== category?.id ? category?.color : undefined,
+                transition: 'color 0.3s ease, transform 0.3s ease',
+              }}
+              onClick={() => handleCategoryClick(category?.id)}
+            >
+              {category?.nev}
+            </button>
+          </div>
+        ))}
+      </div>
 
-        <div className='flex justify-center'>
+
+        <div className='flex justify-center '>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1'>
             {races
               .filter((race) => !selectedCategory || race?.kategoria === selectedCategory)
@@ -86,17 +95,65 @@ export const Futamok = () => {
                 if (!category) return null;
 
                 return (
-                  <div
-                    className="card m-1 p-1 max-w-[375px] bg-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-                    style={{
-                      border: "2px solid",
-                      borderColor: category?.color,
-                      boxShadow: `0px 4px 15px ${category?.color || "rgba(0,0,0,0.2)"}`, 
-                    }}
-                    key={race?.id}
-                  >
+                  <motion.div
+                  className="card m-1 p-1 max-w-[375px] bg-slate-100 shadow-xl transition-all duration-300 transform"
+                  style={{
+                    border: "2px solid",
+                    borderColor: category?.color,
+                    boxShadow: `0px 4px 15px ${category?.color || "rgba(0,0,0,0.2)"}`
+                  }}
+                  key={race?.id}
+                  initial={{
+                    scale: 0.9,
+                    opacity: 0,
+                    y: 100,
+                  }}
+                  animate={{
+                    scale: 0.98,
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                    delay: 0.2,
+                  }}
+                  whileHover={{
+                    scale: 1,
+                    boxShadow: `0px 10px 25px ${category?.color || "rgba(0,0,0,0.3)"}`,
+                    borderColor: "white", 
+                    transition: {
+                      type: "spring",
+                      stiffness: 400,
+                      damping: 20,
+                      duration: 0.4,
+                    },
+                  }}
+                  whileTap={{
+                    scale: 0.95,
+                    boxShadow: `0px 4px 20px ${category?.color || "rgba(0,0,0,0.5)"}`,
+                    transition: {
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 15,
+                      duration: 0.2,
+                    },
+                  }}
+                  onHoverStart={() => {
+                    document.body.style.cursor = "pointer";
+                  }}
+                  onHoverEnd={() => {
+                    document.body.style.cursor = "default";
+                  }}
+                >
                     <figure className='relative'>
-                      <img src={race?.imageUrl.url} alt={race?.palya} className='transition-opacity duration-300 hover:opacity-0 rounded-xl w-full object-cover' />
+                    <img
+                    src={race?.imageUrl.url}
+                    alt={race?.palya}
+                    className="transition-opacity duration-300 hover:opacity-0 rounded-xl w-full h-[215px] object-cover"
+                  />
+
                       <div className='absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 hover:opacity-60 rounded-xl' 
                         style={{ backgroundColor: category?.color }}>
                         <h2 className="text-4xl font-bold text-center text-white transition-transform duration-300 transform">
@@ -104,7 +161,7 @@ export const Futamok = () => {
                         </h2>
                       </div>
                     </figure>
-                    <div className="m-2 flex justify-between">
+                    <div className="m-2 flex  justify-between">
                       <div className="rounded-lg p-2 text-sm text-white text-center max-w-fit" 
                         style={{ backgroundColor: category?.color }}>
                         {category?.nev}
@@ -113,15 +170,21 @@ export const Futamok = () => {
                         {daysDiff} nap múlva
                       </div>
                     </div>
-                    <div 
-                      className='p-2 btn text-white text-xl text-center max-w-full m-2 rounded-lg'
-                      style={{ backgroundColor: category?.color }} 
-                      onClick={() => handleDetails(race?.id)}
-                    >
-                      Részletek
-                    </div>
+                    <motion.div
+                    initial={{ scale: 0.85, opacity: 0.6 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="p-2 btn text-white text-xl text-center max-w-full m-2 rounded-lg cursor-pointer"
+                    style={{ backgroundColor: category?.color }}
+                    onClick={() => handleDetails(race?.id)}
+                  >
+                    Részletek
+                  </motion.div>
+
+
                     {admins?.includes(user?.uid) && (
-                      <div className='absolute top-0 right-0 m-2'>
+                      <div className='absolute top-0  right-0 m-2'>
                         <div className="dropdown dropdown-end">
                           <div tabIndex={0} role="button" className="btn m-1">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -130,12 +193,12 @@ export const Futamok = () => {
                           </div>
                           <ul
                             tabIndex={0}
-                            className="dropdown-content menu bg-slate-50 rounded-lg shadow-md w-fit p-2 text-gray-800"
+                            className="dropdown-content  menu bg-slate-50 rounded-lg shadow-md w-fit p-2 text-gray-800"
                           >
                             <li>
                               <button
                                 onClick={() => setAddEdit(race)}
-                                className="block px-4 py-2 w-full text-left hover:bg-gray-100 rounded-md transition"
+                                className="block  px-4 py-2 w-full text-left hover:bg-gray-100 rounded-md transition"
                               >
                                 Szerkesztés
                               </button>
@@ -153,7 +216,7 @@ export const Futamok = () => {
                         </div>
                       </div>
                     )}
-                  </div>
+                  </motion.div>
                 );
               })
             }

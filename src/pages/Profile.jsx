@@ -41,7 +41,7 @@ export default function Profile() {
   return (
     <div className="home h-screen flex items-center justify-center">
       <motion.div 
-        initial={{ opacity: 0, y: -20 }} 
+        initial={{ opacity: 0, y: -200 }} 
         animate={{ opacity: 1, y: 0 }} 
         transition={{ duration: 0.6 }}
         className="bg-white p-8 rounded-lg shadow-lg w-80 max-w-md mb-16 border border-gray-300"

@@ -63,7 +63,7 @@ export const Home = () => {
           className="fixed top-0 left-0 w-full h-screen bg-black flex items-center justify-center text-white z-50"
           initial={{ opacity: 1 }}
           animate={{ opacity: 0 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
           exit={{ opacity: 0 }}
         >
           <h1 className="text-4xl md:text-5xl font-bold text-center">Üdvözlünk a HUN-SRT-nél 🏁</h1>

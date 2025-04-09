@@ -55,7 +55,7 @@ export default function EidtUser({modalRef,selectedUser,refreshUsers}) {
   return (
     <div>
         <dialog ref={modalRef} id="add" className="modal">
-            <div className='bg-slate-600 rounded-lg p-4 w-1/2'>
+            <div className='bg-slate-600 rounded-lg p-4 w-4/5'>
                 <div className='flex justify-center'>
                     <p className='text-xl'>Profil szerkesztése</p>
                 </div>
