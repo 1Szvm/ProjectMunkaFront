@@ -3,11 +3,7 @@ import { readCategories, toggleAplication } from '../utility/crudUtility';
 
 import Alerts from './Alerts';
 import { motion } from "framer-motion";
-<<<<<<< HEAD
 import { UserContext } from '../context/UserContext';
-=======
-
->>>>>>> 10e5b393f5f41b1cb5a58df7d3bbbed142935ad7
 export default function Details({ selectedRace, showDetails }) {
     const { user } = useContext(UserContext);
     const [categories, setCategories] = useState(null);

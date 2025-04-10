@@ -1,14 +1,9 @@
 import React from 'react'
 import { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
-<<<<<<< HEAD
-import { useEffect } from 'react'
-
-=======
 import { DarkModeContext } from '../components/DarkModeContext.jsx';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
->>>>>>> 10e5b393f5f41b1cb5a58df7d3bbbed142935ad7
 export default function PwReset() {
   const { msg,resetPassword } = useContext(UserContext)
   const handleSubmit = (e) => {
@@ -17,12 +12,7 @@ export default function PwReset() {
     resetPassword(data.get('email') )
     
   }
-<<<<<<< HEAD
-
-  
-=======
   const { darkMode, setDarkMode } = useContext(DarkModeContext); 
->>>>>>> 10e5b393f5f41b1cb5a58df7d3bbbed142935ad7
   return (
     <motion.div
     initial={{ opacity: 0, y: -10 }}

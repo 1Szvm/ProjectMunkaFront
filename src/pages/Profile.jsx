@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Footer } from '../components/Footer';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
-import { UserContext } from '../context/userContext';
+
 import { deletePhoto, uploadFile } from '../utility/backendHandling';
 import { extractUrlAndId } from '../utility/utils';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 
 export default function Profile() {
   const { user,updateUser } = useContext(UserContext);
