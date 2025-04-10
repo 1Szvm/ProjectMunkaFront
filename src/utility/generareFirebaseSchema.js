@@ -1,7 +1,7 @@
 import {db} from "./firebaseApp";
 import {collection,getDocs} from "firebase/firestore";
 
-export const generateSchema = async (collectionName) => {
+export const generateSchema = async (collectionName,setSchema) => {
   const collectionRef = collection(db, collectionName);
   const snapshot = await getDocs(collectionRef);
 
@@ -19,7 +19,7 @@ export const generateSchema = async (collectionName) => {
       schema[key] = type; // Egyedi mezőnév és típus tárolása
     });
   });
-
+  setSchema(schema);
   console.log("Schema:", schema);
 };
 
