@@ -102,7 +102,7 @@ export const Header = () => {
                 onClick={() => window.location.href = '/'} // Redirect on click (if needed)
               >
                 <motion.img
-                  src="hsrtlogov1.jpg"
+                  src="https://res.cloudinary.com/myblogki2024/image/upload/v1744280378/hsrtlogov1_atp0hq.jpg"
                   alt="Logo"
                   className="rounded-xl h-[5vh] w-[5vh] transition-all duration-300 ease-in-out"
                 />
@@ -180,7 +180,7 @@ export const Header = () => {
       {/* Logo and App Name */}
       <div className="navbar-center flex items-center space-x-4 p-2">
         <motion.img
-          src="hsrtlogov1.jpg"
+          src="https://res.cloudinary.com/myblogki2024/image/upload/v1744280378/hsrtlogov1_atp0hq.jpg"
           alt="Logo"
           className="rounded-xl h-[5vh] w-[5vh] transition-all duration-300 ease-in-out transform hover:scale-110"
           whileHover={{ scale: 1.1, rotate: 10 }}

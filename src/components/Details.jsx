@@ -3,7 +3,11 @@ import { readCategories, toggleAplication } from '../utility/crudUtility';
 
 import Alerts from './Alerts';
 import { motion } from "framer-motion";
+<<<<<<< HEAD
 import { UserContext } from '../context/UserContext';
+=======
+
+>>>>>>> 10e5b393f5f41b1cb5a58df7d3bbbed142935ad7
 export default function Details({ selectedRace, showDetails }) {
     const { user } = useContext(UserContext);
     const [categories, setCategories] = useState(null);
@@ -36,7 +40,7 @@ export default function Details({ selectedRace, showDetails }) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
+            transition={{ duration: 0.45, ease: "easeOut" }}
             className="modal-box bg-zinc-100 border-[1.5px] border-zinc-700 shadow-blue-500/50 p-6 rounded-2xl"
             >
                 {selectedRace ? (

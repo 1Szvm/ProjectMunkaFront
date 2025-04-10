@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Form, useLocation, useNavigate } from 'react-router-dom';
+import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import Toastify from '../components/Toastify';
 import { motion } from 'framer-motion';
@@ -94,13 +94,13 @@ const { darkMode, setDarkMode } = useContext(DarkModeContext);
               Küldés
             </button>
           </Form>
-          <a
-            href="#"
+          <Link
+            to="#"
             onClick={() => navigate('/pwreset')}
             className="block mt-4 text-sm text-center text-indigo-400 hover:underline"
           >
             Elfelejtett jelszó...
-          </a>
+          </Link>
           <Toastify {...msg}  />
           </motion.div>
         </div>
