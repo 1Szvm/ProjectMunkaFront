@@ -7,9 +7,10 @@ import ProfileMenu from "./ProfileMenu";
 import { readAuthorization } from "../utility/crudUtility";
 import { UserContext } from "../context/userContext";
 import { DarkModeContext } from "./DarkModeContext";
+import Toastify from "./Toastify";
 
 export const Header = () => {
-  const { user, logoutUser } = useContext(UserContext);
+  const { user, logoutUser, msg } = useContext(UserContext);
   const [admins,setAdmins]=useState([]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
@@ -240,6 +241,7 @@ export const Header = () => {
      
       )}
       <Outlet />
+      <Toastify {...msg} />
     </motion.div>
   );
 };
