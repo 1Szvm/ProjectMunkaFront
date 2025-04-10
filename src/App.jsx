@@ -13,6 +13,7 @@ import Regulation from './pages/Regulation'
 import Bajnoksagok_Reszletek from './pages/Bajnoksagok_Reszletek'
 import ForumPost from './pages/ForumPost'
 import UsersList from './components/UsersList'
+import Schema from './pages/Schema'
 
 const router=createBrowserRouter([
   {element:<Header/>,
@@ -32,6 +33,7 @@ const router=createBrowserRouter([
       {path:'/regulation',element:<Regulation/>},
       {path:'/championship_desc/:id/:categ',element:<Bajnoksagok_Reszletek/>},
       {path:'/users',element:<UsersList/>},
+      {path:'/schema',element:<Schema/>},
     ],
    
   }
