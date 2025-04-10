@@ -4,7 +4,7 @@ import { Footer } from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
 import { readCategories, readChampionships } from '../utility/crudUtility';
 import { DarkModeContext } from '../components/DarkModeContext.jsx'; // Import it properly
-
+import { LazyMotion, domAnimation, m } from 'framer-motion';    
 
 const Bajnoksagok = () => {
   const [champions, setChampions] = useState([]);  // State for championships
@@ -37,6 +37,7 @@ const Bajnoksagok = () => {
   const navigate = useNavigate();
 
   return (
+    <LazyMotion features={domAnimation}>
     <motion.div
     className={`min-h-screen p-3`}
     animate={{
@@ -141,6 +142,7 @@ const Bajnoksagok = () => {
         <Footer />
       </div>
     </motion.div>
+    </LazyMotion>
   );
 };
 
