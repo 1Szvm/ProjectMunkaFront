@@ -1,15 +1,18 @@
 import React from 'react'
 import { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
+import { useEffect } from 'react'
 
 export default function PwReset() {
   const { msg,resetPassword } = useContext(UserContext)
   const handleSubmit = (e) => {
     e.preventDefault()
     const data = new FormData(e.currentTarget)
-    resetPassword(data.get('email'))
-
+    resetPassword(data.get('email') )
+    
   }
+
+  
   return (
 
     <div className="pt-48 flex justify-center items-center">

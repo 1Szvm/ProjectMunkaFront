@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import { readCategories, toggleAplication } from '../utility/crudUtility';
-import { UserContext } from '../context/userContext';
+
 import Alerts from './Alerts';
 import { motion } from "framer-motion";
+import { UserContext } from '../context/UserContext';
 export default function Details({ selectedRace, showDetails }) {
     const { user } = useContext(UserContext);
     const [categories, setCategories] = useState(null);
