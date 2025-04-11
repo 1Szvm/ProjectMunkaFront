@@ -3,10 +3,6 @@ import { motion, useInView } from 'framer-motion';
 import { Footer } from '../components/Footer';
 import './Home.css';
 import { AboutUs } from '../components/AboutUs';
-import Regulation from './Regulation';
-import { Button } from 'reactstrap';
-import { useNavigate } from 'react-router-dom';
-
 
 export const Home = () => {
 
@@ -15,6 +11,24 @@ export const Home = () => {
 
   const containerRef = useRef(null); // Attach observer to this container
   const [isVisible, setIsVisible] = useState(false);
+
+
+  const [scrollY, setScrollY] = useState(0);
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const scaleFactor = Math.min(1 + scrollY / 1000, 2); // Állítsd be a maximális skálázást
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -79,32 +93,64 @@ export const Home = () => {
       />
 
       {/* Video Section Animation (Centered for Mobile & Desktop) */}
-      <motion.div
+        <motion.div
         className="w-full flex justify-center items-center"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 1 }}
       >
-         {matches ? (
+        {matches ? (
           <div className="w-full flex justify-center">
-          <div
-            ref={containerRef} // Observer works on this wrapper
-            className="mt-3 m-3 border-4 w-[99%] min-h-[500px] h-[69vh] overflow-hidden flex justify-center"
-            style={{ borderColor: "rgba(50, 228, 330, 0.8)", borderWidth:"0.1rem", borderRadius:"4px" }}
-          >
+            <div
+              ref={containerRef} // Observer works on this wrapper
+              className="mt-3 m-3 border-4 w-[99%] min-h-[500px] h-[69vh] overflow-hidden flex justify-center"
+              style={{
+                borderColor: "rgba(50, 228, 330, 0.8)",
+                borderWidth: "0.1rem",
+                borderRadius: "4px",
+              }}
+            >
+              {isVisible ? (
+                <motion.video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                  poster="HOMEBG2.jpg"
+                  className="w-full h-auto max-h-screen object-cover"
+                  style={{
+                    transform: `scale(${scaleFactor})`,
+                    transition: "transform 0.2s ease-out",
+                  }}
+                >
+                  <source src="RaceManagerProjectVideo.mp4" type="video/mp4" />
+                  Your browser does not support the video.
+                </motion.video>
+              ) : (
+                <img
+                  src="HOMEBG2.jpg"
+                  alt="Video Thumbnail"
+                  className="w-full h-auto max-h-screen object-cover"
+                />
+              )}
+            </div>
+          </div>
+        ) : (
+          <div ref={containerRef} className="w-full pt-2 overflow-hidden flex justify-center">
             {isVisible ? (
-              <video
+              <motion.video
                 autoPlay
                 loop
                 muted
-                playsInline
-                preload="auto"
-                poster="HOMEBG2.jpg"
                 className="w-full h-auto max-h-screen object-cover"
+                style={{
+                  transform: `scale(${scaleFactor})`,
+                  transition: "transform 0.2s ease-out",
+                }}
               >
                 <source src="RaceManagerProjectVideo.mp4" type="video/mp4" />
-                Your browser does not support the video.
-              </video>
+              </motion.video>
             ) : (
               <img
                 src="HOMEBG2.jpg"
@@ -113,20 +159,8 @@ export const Home = () => {
               />
             )}
           </div>
-        </div>
-         ):(   <div ref={containerRef} className="w-full pt-2 overflow-hidden flex justify-center">
-          {isVisible ? (
-            <video autoPlay loop muted className="w-full h-auto max-h-screen object-cover">
-              <source src="RaceManagerProjectVideo.mp4" type="video/mp4" />
-            </video>
-          ) : (
-            <img src="HOMEBG2.jpg" alt="Video Thumbnail" className="w-full h-auto max-h-screen object-cover" />
-          )}
-        </div>)}
-      
+        )}
       </motion.div>
-
-      {/* About Us with Scroll Animation */}
       <motion.div
         ref={aboutRef}
         initial={{ opacity: 0, y: 50 }}
@@ -139,7 +173,6 @@ export const Home = () => {
       </motion.div>
 
       <Footer />
-      {/* <p className="h-[10px]"></p> */}
     </div>
   );
 };
