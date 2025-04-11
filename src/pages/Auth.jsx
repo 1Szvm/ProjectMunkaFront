@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
-import { UserContext } from '../context/userContext';
+
 import Toastify from '../components/Toastify';
 import { motion } from 'framer-motion';
 import { Footer } from '../components/Footer';
 import './Home.css'
 import { DarkModeContext } from '../components/DarkModeContext';
+import { UserContext } from '../context/UserContext';
 export const Auth = () => {
   const { user, signInUser, signUpUser, msg, setMsg } = useContext(UserContext);
   const navigate = useNavigate();

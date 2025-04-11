@@ -5,7 +5,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ProfileMenu from "./ProfileMenu";
 import { readAuthorization } from "../utility/crudUtility";
-import { UserContext } from "../context/userContext";
+import { UserContext } from "../context/UserContext";
 import { DarkModeContext } from "./DarkModeContext";
 import Toastify from "./Toastify";
 

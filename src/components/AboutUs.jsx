@@ -45,7 +45,7 @@ export const AboutUs = () => {
         </motion.p>
       </motion.section>
 
-      {/* Mission and Vision */}
+
       <motion.section
         className="max-w-6xl mx-auto mb-10 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
         initial={{ opacity: 0, x: 50 }}
@@ -69,7 +69,7 @@ export const AboutUs = () => {
           A küldetésünk, hogy minden szimulátoros számára elérhető versenyközösséget hozzunk létre, függetlenül a tapasztalati szinttől. Mindenkinek lehetőséget biztosítunk, hogy profi versenyeken vegyen részt.
         </motion.p>
       </motion.section>
-  {/* social */}
+  {/* social media */}
   <motion.section
         className="max-w-6xl mx-auto mb-10 p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-slate-800"
         initial={{ opacity: 0, y: 50 }}

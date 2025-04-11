@@ -4,10 +4,11 @@ import { SearchForums } from './SearchForums';
 
 import { readPosts } from '../utility/crudUtility';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../context/userContext';
+
 import { generateSchema } from '../utility/generareFirebaseSchema';
 import AddPost from '../components/addPost';
 import { motion, AnimatePresence } from "framer-motion";
+import { UserContext } from '../context/UserContext';
 const Forum = () => {
   const { user } = useContext(UserContext);
   const [posts,setPosts]=useState(null)

@@ -1,7 +1,8 @@
 import React, { useContext, useRef, useState } from 'react'
-import { UserContext } from '../context/userContext';
+
 import { useForm } from 'react-hook-form';
 import { addPost } from '../utility/crudUtility';
+import { UserContext } from '../context/UserContext';
 
 
 export default function () {
@@ -33,6 +34,7 @@ export default function () {
 
   return (
     <div>
+      {/*add Posts */}
         {user&&
           <div
             className="fixed bottom-5 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 bg-red-600"

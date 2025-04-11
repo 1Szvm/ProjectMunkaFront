@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import { addComment, deleteComment, deletePost, readAuthorization, readPost } from '../utility/crudUtility';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { UserContext } from '../context/userContext';
+
 import { useConfirm } from "material-ui-confirm";
 import Alerts from '../components/Alerts';
 import { readUsers } from '../utility/backendHandling';
 import { extractUrlAndId } from '../utility/utils';
+import { UserContext } from '../context/UserContext';
 
 export default function ForumPost() {
     const { user } = useContext(UserContext);

@@ -13,9 +13,7 @@ export const SearchForums = () => {
   const [search, setSearch] = useState("")
   const [src, setSrc] = useState(true)
 
-  const reset = async () => {
-    window.location.reload()
-  }
+ 
   useEffect(() => {
     readPosts(setPosts);
 

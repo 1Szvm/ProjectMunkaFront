@@ -3,8 +3,9 @@ import { addFutam, readAuthorization, readCategories, updatePost } from '../util
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import Alerts from './Alerts';
-import { UserContext } from '../context/userContext';
+
 import { uploadFile } from '../utility/backendHandling';
+import { UserContext } from '../context/UserContext';
 
 export default function AddNew({ addEdit, setAddEdit }) {
     const { user } = useContext(UserContext);
@@ -16,7 +17,6 @@ export default function AddNew({ addEdit, setAddEdit }) {
     const [err, setErr] = useState(null);
     const modalRef = useRef(null);
     const [isEditMode, setIsEditMode] = useState(false);
-
     const [idopont, setIdopont] = useState("");
     const [selectedCateg, setSelectedCateg] = useState("");
     const [palya, setPalya] = useState("");
@@ -111,7 +111,9 @@ export default function AddNew({ addEdit, setAddEdit }) {
     };
 
     return (
+        
         <div>
+            {/* Verseny hozzáadása */}
             {admins?.includes(user?.uid)     && (
                 <div
                     className="fixed bottom-20 right-5 flex justify-center items-center w-16 h-16 rounded-full shadow-lg cursor-pointer transition-transform duration-300 bg-rose-600"

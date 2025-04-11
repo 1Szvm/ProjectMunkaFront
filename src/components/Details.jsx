@@ -20,7 +20,7 @@ export default function Details({ selectedRace, showDetails }) {
         }
     }, [showDetails]);
     const handleApplication=async ()=>{        
-      if(!user) setText("Jelentkezz be jelentekezéshez!")
+      if(!user) setText("Jelentkezz be jelentekezéshez!") //should login before join
         else await toggleAplication(selectedRace.id,user.uid)
     }
 
@@ -31,6 +31,7 @@ export default function Details({ selectedRace, showDetails }) {
     }, [categories, selectedRace]); 
      
     return (
+        //race details
         <dialog ref={modalRef} id="details" className="modal">
         <motion.div
             initial={{ opacity: 0, scale: 0.95 }}

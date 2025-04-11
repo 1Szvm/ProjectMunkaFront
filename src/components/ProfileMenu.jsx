@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { extractUrlAndId } from "../utility/utils";
-import { UserContext } from "../context/userContext";
+import { UserContext } from "../context/UserContext";
 import { readAuthorization } from "../utility/crudUtility";
 
 export default function ProfileMenu() {

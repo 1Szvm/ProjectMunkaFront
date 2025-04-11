@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { readAuthorization } from '../utility/crudUtility'
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../context/userContext';
+
 import { deleteUserById, deleteUserPfp, readUsers } from '../utility/backendHandling';
 import { extractUrlAndId } from '../utility/utils';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EidtUser from '../components/EditUser';
 import { useConfirm } from 'material-ui-confirm';
+import { UserContext } from '../context/UserContext';
 
 export default function Adminpage() {
       const navigate=useNavigate()

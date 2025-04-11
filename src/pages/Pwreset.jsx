@@ -3,7 +3,8 @@ import { useContext } from 'react'
 import { DarkModeContext } from '../components/DarkModeContext.jsx';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../context/userContext.jsx';
+import { UserContext } from '../context/UserContext.jsx';
+
 export default function PwReset() {
   const { msg,resetPassword } = useContext(UserContext)
   const handleSubmit = (e) => {
