@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { deletePhoto, uploadFile } from '../utility/backendHandling';
 import { extractUrlAndId } from '../utility/utils';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../context/userContext';
 
 export default function Profile() {
   const { user,updateUser } = useContext(UserContext);

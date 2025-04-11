@@ -62,7 +62,7 @@ export default function () {
                 className="input text-slate-900 bg-slate-50 w-[100%] border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 {...register('title',                
                   {validate: (value) => {
-                  if (value.length>50) return "A cím maximum 50 karakter lehet!";
+                  if (value.length>100) return "A cím maximum 100 karakter lehet!";
                   if (!value) return "A cím megadása kötelező!"
                   return true;}})}
                 onChange={(e) => setTitle(e.target.value)}
@@ -76,7 +76,7 @@ export default function () {
                 className="textarea w-full border text-slate-900 bg-slate-50 border-gray-300 rounded-lg px-3 py-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 {...register('post',                   
                   {validate: (value) => {
-                  if (value.length>200) return "A szöveg maximum 200 karakter lehet!";
+                  if (value.length>1000) return "A szöveg maximum 1000 karakter lehet!";
                   if (!value) return "A szöveg megadása kötelező!"
                   return true;}})}
                 onChange={(e) => setPost(e.target.value)}

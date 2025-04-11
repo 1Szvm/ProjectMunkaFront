@@ -1,1 +1,80 @@
-{"numTotalTestSuites":6,"numPassedTestSuites":6,"numFailedTestSuites":0,"numPendingTestSuites":0,"numTotalTests":9,"numPassedTests":9,"numFailedTests":0,"numPendingTests":0,"numTodoTests":0,"snapshot":{"added":0,"failure":false,"filesAdded":0,"filesRemoved":0,"filesRemovedList":[],"filesUnmatched":0,"filesUpdated":0,"matched":0,"total":0,"unchecked":0,"uncheckedKeysByFile":[],"unmatched":0,"updated":0,"didUpdate":false},"startTime":1744306687987,"success":true,"testResults":[{"assertionResults":[{"ancestorTitles":["Futamok Page"],"fullName":"Futamok Page renders header and category button","status":"passed","title":"renders header and category button","duration":161.14669999999933,"failureMessages":[],"meta":{}},{"ancestorTitles":["Futamok Page"],"fullName":"Futamok Page renders race card","status":"passed","title":"renders race card","duration":16.788000000000466,"failureMessages":[],"meta":{}},{"ancestorTitles":["Futamok Page"],"fullName":"Futamok Page filters races by selected category","status":"passed","title":"filters races by selected category","duration":25.827100000000428,"failureMessages":[],"meta":{}},{"ancestorTitles":["Futamok Page"],"fullName":"Futamok Page shows admin options for races if user is admin","status":"passed","title":"shows admin options for races if user is admin","duration":15.554400000000896,"failureMessages":[],"meta":{}}],"startTime":1744306696693,"endTime":1744306696912.5544,"status":"passed","message":"","name":"D:/Project/front/src/tests/Futaom.test.jsx"},{"assertionResults":[{"ancestorTitles":["Search Page"],"fullName":"Search Page renders the search input and header","status":"passed","title":"renders the search input and header","duration":118.03130000000056,"failureMessages":[],"meta":{}},{"ancestorTitles":["Search Page"],"fullName":"Search Page filters posts based on search input","status":"passed","title":"filters posts based on search input","duration":17.106400000000576,"failureMessages":[],"meta":{}},{"ancestorTitles":["Search Page"],"fullName":"Search Page displays all posts when search is empty","status":"passed","title":"displays all posts when search is empty","duration":9.420200000000477,"failureMessages":[],"meta":{}}],"startTime":1744306697100,"endTime":1744306697244.4202,"status":"passed","message":"","name":"D:/Project/front/src/tests/SearchForums.test.jsx"},{"assertionResults":[{"ancestorTitles":["something truthy and falsy"],"fullName":"something truthy and falsy true to be true","status":"passed","title":"true to be true","duration":1.5387999999993554,"failureMessages":[],"meta":{}},{"ancestorTitles":["something truthy and falsy"],"fullName":"something truthy and falsy false to be false","status":"passed","title":"false to be false","duration":0.3805999999995038,"failureMessages":[],"meta":{}}],"startTime":1744306694530,"endTime":1744306694532.3806,"status":"passed","message":"","name":"D:/Project/front/src/tests/test1.test.js"}]}
+{
+    "numTotalTestSuites": 3,
+    "numPassedTestSuites": 3,
+    "numFailedTestSuites": 0,
+    "numPendingTestSuites": 0,
+    "numTotalTests": 3,
+    "numPassedTests": 3,
+    "numFailedTests": 0,
+    "numPendingTests": 0,
+    "numTodoTests": 0,
+    "snapshot": {
+        "added": 0,
+        "failure": false,
+        "filesAdded": 0,
+        "filesRemoved": 0,
+        "filesRemovedList": [],
+        "filesUnmatched": 0,
+        "filesUpdated": 0,
+        "matched": 0,
+        "total": 0,
+        "unchecked": 0,
+        "uncheckedKeysByFile": [],
+        "unmatched": 0,
+        "updated": 0,
+        "didUpdate": false
+    },
+    "startTime": 1744280172373,
+    "success": true,
+    "testResults": [
+        {
+            "assertionResults": [
+                {
+                    "ancestorTitles": [
+                        "something truthy and falsy"
+                    ],
+                    "fullName": "something truthy and falsy true to be true",
+                    "status": "passed",
+                    "title": "true to be true",
+                    "duration": 2.343700000001263,
+                    "failureMessages": [],
+                    "meta": {}
+                },
+                {
+                    "ancestorTitles": [
+                        "something truthy and falsy"
+                    ],
+                    "fullName": "something truthy and falsy false to be false",
+                    "status": "passed",
+                    "title": "false to be false",
+                    "duration": 0.3356000000003405,
+                    "failureMessages": [],
+                    "meta": {}
+                }
+            ],
+            "startTime": 1744280187768,
+            "endTime": 1744280187770.3438,
+            "status": "passed",
+            "message": "",
+            "name": "C:/Delete/hsrt/ProjectMunkaFront/src/tests/test1.test.js"
+        },
+        {
+            "assertionResults": [
+                {
+                    "ancestorTitles": [],
+                    "fullName": "renders Hello component",
+                    "status": "passed",
+                    "title": "renders Hello component",
+                    "duration": 25.678499999999985,
+                    "failureMessages": [],
+                    "meta": {}
+                }
+            ],
+            "startTime": 1744280187781,
+            "endTime": 1744280187806.6785,
+            "status": "passed",
+            "message": "",
+            "name": "C:/Delete/hsrt/ProjectMunkaFront/src/tests/Hello.test.jsx"
+        }
+    ]
+}

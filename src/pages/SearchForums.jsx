@@ -11,16 +11,10 @@ export const SearchForums = () => {
   const navigate = useNavigate()
   const [posts, setPosts] = useState([])
   const [search, setSearch] = useState("")
-  const [src, setSrc] = useState(true)
 
- 
   useEffect(() => {
     readPosts(setPosts);
-
   }, []);
-
-
-  console.log(search);
 
   return (
     <>
@@ -60,7 +54,7 @@ export const SearchForums = () => {
                   key={post.id}
                   onClick={() => navigate("/post/" + post.id)}
                 >
-                  <div className="bg-slate-100 card w-full border-slate-300 border shadow-xl opacity-95 rounded-lg overflow-hidden transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-sky-600 group-hover:opacity-100">
+                  <div className="bg-slate-100 card w-full border-slate-300 border  h-[175px] shadow-xl opacity-95 rounded-lg overflow-hidden transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-sky-600 group-hover:opacity-100">
                     <div className="card-body p-5 flex flex-col justify-between h-full">
                       <div className='flex justify-between mb-3'>
                         <h2 className="card-title text-xl font-semibold text-gray-800 group-hover:text-blue-700 transition-all duration-300">

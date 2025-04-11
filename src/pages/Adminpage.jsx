@@ -79,7 +79,7 @@ export default function Adminpage() {
       {users.length === 0 ? (
           <LoadingUsers />
       ) : (
-        <div className='flex justify-center h-full'>
+        <div className='flex justify-center h-full text-zinc-100'>
           <div className='border mx-2 bg-slate-900 sm:w-2/3 w-screen rounded-xl'>
             {users.map(fetchedUser => (
               <div key={fetchedUser.uid} className='bg-blue-600 rounded-xl m-4'>
@@ -88,7 +88,7 @@ export default function Adminpage() {
                   <div className='flex justify-start items-center'>
                     <div><img className="object-cover sm:size-20 size-12 rounded-box mx-2" src={fetchedUser.photoURL ? extractUrlAndId(fetchedUser.photoURL)?.url : "../NoPFP.jpg"}/></div>
                     <div>
-                      <div className={`${admins?.includes(fetchedUser?.uid)?"text-yellow-400":""}`}>{fetchedUser.displayName}</div>
+                      <div className={`${admins?.includes(fetchedUser?.uid)?"text-yellow-400 ":""}`}>{fetchedUser.displayName}</div>
                       <div className='text-sm opacity-70'>{fetchedUser.email}</div>
                     </div>
                   </div>
@@ -101,7 +101,8 @@ export default function Adminpage() {
             ))}
             <EidtUser modalRef={modalRef} selectedUser={selectedUser} refreshUsers={refreshUsers}/>
           </div>
-        </div>)}
+        </div>
+      )}
     </>
   )
 }
