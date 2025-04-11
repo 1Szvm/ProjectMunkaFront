@@ -21,7 +21,7 @@ export default function ProfileMenu() {
   return (
     <div className=" flex items-center justify-center">
       <motion.div animate={open ? "open" : "closed"} className="relative">
-        <button
+        <div
           onClick={toggleMenu} // Toggle the state when clicked
           className="flex items-center gap-2 px-3 py-2 rounded-md text-indigo-50 transition-colors"
         >
@@ -41,14 +41,14 @@ export default function ProfileMenu() {
           <motion.span variants={iconVariants}>
             
           </motion.span>
-        </button>
+        </div>
 
         <motion.ul
-  initial={wrapperVariants.closed}
-  variants={wrapperVariants}
-  style={{ originY: "top", translateX: "-50%", zIndex: 50 }} // Added zIndex
-  className="flex flex-col gap-2 p-2 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] w-48 overflow-hidden"
- >
+            initial={wrapperVariants.closed}
+            variants={wrapperVariants}
+            style={{ originY: "top", translateX: "-50%", zIndex: 50 }} // Added zIndex
+            className="flex flex-col gap-2 p-2 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] w-48 overflow-hidden"
+          >
           {admins?.includes(user?.uid)? (
             <NavLink to="/admin" > <Option setOpen={setOpen} Icon={FiEdit} text="Admin Page" /> </NavLink>
           ):null}
