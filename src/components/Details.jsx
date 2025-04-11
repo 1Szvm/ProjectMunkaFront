@@ -41,7 +41,9 @@ export default function Details({ selectedRace, showDetails }) {
             >
                 {selectedRace ? (
                     <>
-                        <img src={selectedRace.imageUrl.url} alt={selectedRace.palya} className='rounded mb-5' />
+                        <div className='flex justify-center '>
+                        <img className="rounded-xl w-full border-2 border-zinc-800 h-[215px] object-cover" src={selectedRace.imageUrl.url} alt={selectedRace.palya} />
+                        </div>
                         <div className='flex justify-between py-4 text-slate-700'>
                             <div>
                                 <h3 className="font-bold text-xl ">{selectedRace.palya}</h3>

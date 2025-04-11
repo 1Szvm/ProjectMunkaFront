@@ -49,10 +49,11 @@ export const UserProvider=({children})=>{
     const resetPassword=async(email)=>{
         try {
             await sendPasswordResetEmail(auth,email)
-            setMsg({})
-            setMsg({resetPw:"Email leküldve!"})
+            setMsg(() => {})
+            setMsg(() => ({resetPw:"Email elküldve!"}))
         } catch (error) {   
-            setMsg({...msg,err:error.message})
+            // setMsg({...msg,err:error.message})
+            // console.log(error);
         }
     }
 
