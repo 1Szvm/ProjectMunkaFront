@@ -58,3 +58,21 @@ export const deleteUserById = async(id) => {
     console.error("Error deleting user:", error);
   }
 }
+
+export const getCollections = async(setCollections) => {
+  try {
+    const response = await axios.get(url+"/api/collections")
+    setCollections(response.data)
+  } catch (error) {
+    console.error("Error fetching collections:", error);
+  }
+}
+
+export const getCollectionData = async(collectionName,setCollectionData) => {
+  try {
+    const response = await axios.get(url+"/api/collections/"+collectionName)
+    setCollectionData(response.data)
+  } catch (error) {
+    console.error("Error fetching collection data:", error);
+  }
+}
