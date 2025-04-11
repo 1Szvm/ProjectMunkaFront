@@ -85,12 +85,13 @@ export default function ForumPost() {
 
   return (
     <>
+    <div className='flex justify-center'>
       {users.length === 0 ? (
           <LoadingUsers />
       ) :(
-        <div className="container m-auto sm:px-5 px-3 py-2 page rounded-xl mt-4 opacity-200 border-sky-600 border-2 min-w-[250px] sm:w-[85%] max-w-[900px] shadow-lg">
+        <div className="container m-4 sm:px-5 px-3 py-2 page rounded-xl mt-4 opacity-200 border-sky-600 border-2 min-w-[250px] sm:w-[85%] max-w-[900px] shadow-lg">
             {post ? (
-                <div className='py-4'>
+                <div className='py-3 m-1'>
                   {/*Post*/}
                   <div>
                     <div className='flex justify-between mb-2'>
@@ -144,7 +145,7 @@ export default function ForumPost() {
                     {/*Add comment*/}
                     {user?
                       <div>
-                        <textarea id='comment' type="text" placeholder="Írj valamit..." className="textarea w-full" 
+                        <textarea id='comment' type="text" placeholder="Írj valamit..." className="text-zinc-800 font-semibold textarea w-full" 
                           {...register('comment', { required: 'A szöveg megadása kötelező.' })}
                           value={comment} 
                           onChange={(e)=>setComment(e.target.value)}
@@ -209,6 +210,7 @@ export default function ForumPost() {
             )}
             {err &&<Alerts err={err}/>}
         </div>)}
+        </div>
     </>
   )
 }

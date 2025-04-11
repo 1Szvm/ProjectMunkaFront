@@ -64,10 +64,10 @@ export const Futamok = () => {
           <div key={category?.id} className="w-full sm:w-auto transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
             <button
               type="button"
-              className={`w-full sm:w-auto px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ease-in-out
+              className={`w-full sm:w-auto px-4 py-3 rounded-xl text-m font-[600]  transition-all duration-300 ease-in-out
                 ${selectedCategory === category?.id
-                  ? 'bg-emerald-600 text-white shadow-xl scale-105'
-                  : 'bg-white text-gray-800 border-2 border-gray-300 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-blue-500 hover:text-white hover:border-transparent'
+                  ? 'bg-gradient-to-r from-zinc-500 to-slate-300 text-slate-800 shadow-xl scale-105'
+                  : 'bg-white text-gray-800 border border-zinc-800  hover:bg-gradient-to-r hover:from-zinc-500 hover:to-slate-300 '
                 }`}
               style={{
                 color: selectedCategory !== category?.id ? category?.color : undefined,
