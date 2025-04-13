@@ -17,6 +17,8 @@ export const Header = () => {
   const [matches, setMatches] = useState(window.matchMedia("(min-width: 768px)").matches);
   const { darkMode, setDarkMode } = useContext(DarkModeContext); // ✅ Access BOTH darkMode and setDarkMode here
 
+  const [isHovered, setIsHovered] = useState(false);
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
@@ -95,25 +97,33 @@ export const Header = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <div className="pl-10 navbar-start flex items-center gap-4">{navLinks}</div>
-            <div className="navbar-center flex items-center justify-center pl-16">
-              <motion.button
-                className="flex items-center gap-2"
-                whileHover={{ scale: 1.1}}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => window.location.href = '/'} // Redirect on click (if needed)
+          {/* backtohome */}
+          <div className="navbar-center flex items-center justify-center pl-16">
+          <NavLink
+            className="btn btn-ghost text-2xl w-[220px] font-bold transition-all duration-500 transform flex items-center gap-4 rounded-2xl hover:bg-gray-100/10 dark:hover:bg-violet-600/10 backdrop-blur-md"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <motion.img
+              src="https://res.cloudinary.com/myblogki2024/image/upload/v1744280378/hsrtlogov1_atp0hq.jpg"
+              alt="Logo"
+              className="rounded-xl h-[5vh] w-[5vh] transition-all duration-500 ease-in-out transform hover:scale-110"
+            />
+            
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={isHovered ? "home" : "hun-srt"}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                className="tracking-widest"
               >
-                <motion.img
-                  src="https://res.cloudinary.com/myblogki2024/image/upload/v1744280378/hsrtlogov1_atp0hq.jpg"
-                  alt="Logo"
-                  className="rounded-xl h-[5vh] w-[5vh] transition-all duration-300 ease-in-out"
-                />
-                <span className="text-xl font-bold transition-all transform hover:scale-110 hover:text-amber-500">
-                  HSRT
-                </span>
-              </motion.button>
-              {/* <ProfileMenu/> */}
-            </div>
-
+                {isHovered ? "Home" : "HUN-SRT"}
+              </motion.span>
+            </AnimatePresence>
+          </NavLink>
+        </div>
 
             <div className="navbar-end flex items-center gap-2">
               {/* Dark Mode Toggle Button */}
@@ -179,14 +189,13 @@ export const Header = () => {
       className="absolute top-[120%] right-0 mt-2 rounded-lg shadow-lg bg-white w-40 overflow-hidden z-50 border border-gray-300"
     >
       {/* Logo and App Name */}
-      <div className="navbar-center flex items-center space-x-4 p-2">
-        <motion.img
+      <div className="navbar-center flex items-center ">
+        <NavLink className="btn btn-ghost text-xl font-bold transition-all transform hover:scale-110"><motion.img
           src="https://res.cloudinary.com/myblogki2024/image/upload/v1744280378/hsrtlogov1_atp0hq.jpg"
           alt="Logo"
-          className="rounded-xl h-[5vh] w-[5vh] transition-all duration-300 ease-in-out transform hover:scale-110"
+          className="rounded-xl h-[4vh] w-[4vh] transition-all duration-300 ease-in-out transform hover:scale-110"
           whileHover={{ scale: 1.1, rotate: 10 }}
-        />
-        <NavLink className="btn btn-ghost text-xl font-bold transition-all transform hover:scale-110">HSRT</NavLink>
+        />Home</NavLink>
       </div>
 
       {/* Navigation Links */}

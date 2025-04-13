@@ -371,7 +371,7 @@ const ChampionshipDetails = () => {
             <motion.section className="flex flex-col items-center">
               <motion.img
                 className="w-[120px] h-[160px] sm:w-[150px] sm:h-[200px] object-cover rounded-lg mb-4"
-                src="https://i.pinimg.com/236x/3b/88/21/3b882137d4fd9741631ed9741ec7b46b.jpg"
+                src="https://i.pinimg.com/736x/20/ec/23/20ec232669cd3286e63e5858b6c9bbb4.jpg"
                 alt={driver}
               />
               <motion.h2 className="text-lg sm:text-xl text-white font-semibold">{driver}</motion.h2>

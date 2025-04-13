@@ -57,7 +57,7 @@ export const Home = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // Intro animation lasts 2s
+    }, 3000); // Intro animation lasts 3s
   }, []);
 
   const aboutRef = useRef(null);
@@ -87,12 +87,7 @@ export const Home = () => {
       >
         {matches ? (
           <div ref={containerRef} className="w-full flex justify-center">
-            <div className="mt-3 m-3 border-4 w-[99%] min-h-[500px] h-[69vh] overflow-hidden flex justify-center"
-              style={{
-                borderColor: "rgba(50, 228, 330, 0.8)",
-                borderWidth: "0.1rem",
-                borderRadius: "4px",
-              }}>
+            <div className="mt-3 m-3 border-[0.1rem] border-violet-600 rounded-lg w-[99%] min-h-[500px] h-[69vh] overflow-hidden flex justify-center">
               {isVisible ? (
                 <motion.video
                   autoPlay
@@ -104,15 +99,15 @@ export const Home = () => {
                   className="w-full h-auto max-h-screen object-cover"
                   style={{
                     transform: `scale(${scaleFactor})`,
-                    transition: "transform 0.2s ease-out",
+                    transition: "transform 0.4s ease-out",
                   }}
                 >
-                  <source src="RaceManagerProjectVideo.mp4" type="video/mp4" />
+                  <source src="https://res.cloudinary.com/myblogki2024/video/upload/v1744532446/RaceManagerProjectVideo_fibtgn.mp4" type="video/mp4" />
                   Your browser does not support the video.
                 </motion.video>
               ) : (
                 <img
-                  src="HOMEBG2.jpg"
+                  src="https://res.cloudinary.com/myblogki2024/image/upload/v1744533038/Leonardo_Phoenix_10_A_dramatic_highcontrast_background_for_the_3_zdxvgq.jpg"
                   alt="Video Thumbnail"
                   className="w-full h-auto max-h-screen object-cover"
                 />
@@ -129,14 +124,14 @@ export const Home = () => {
                 className="w-full h-auto max-h-screen object-cover"
                 style={{
                   transform: `scale(${scaleFactor})`,
-                  transition: "transform 0.2s ease-out",
+                  transition: "transform 0.4s ease-out",
                 }}
               >
-                <source src="RaceManagerProjectVideo.mp4" type="video/mp4" />
+                <source src="https://res.cloudinary.com/myblogki2024/video/upload/v1744532446/RaceManagerProjectVideo_fibtgn.mp4" type="video/mp4" />
               </motion.video>
             ) : (
               <img
-                src="HOMEBG2.jpg"
+                src="https://res.cloudinary.com/myblogki2024/image/upload/v1744533038/Leonardo_Phoenix_10_A_dramatic_highcontrast_background_for_the_3_zdxvgq.jpg"
                 alt="Video Thumbnail"
                 className="w-full h-auto max-h-screen object-cover"
               />
@@ -150,7 +145,7 @@ export const Home = () => {
         ref={aboutRef}
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 2 }}
+        transition={{ duration: 3 }}
         className="w-full px-4 md:px-8"
       >
         <AboutUs />

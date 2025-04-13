@@ -149,11 +149,13 @@ export const Futamok = () => {
                   }}
                 >
                     <figure className='relative'>
-                    <img
-                    src={race?.imageUrl.url}
-                    alt={race?.palya}
-                    className="transition-opacity duration-300 hover:opacity-0 rounded-xl w-full h-[215px] object-cover"
-                  />
+                      <img
+                        src={race?.imageUrl.url}
+                        alt={race?.palya}
+                        className="transition-opacity duration-300 hover:opacity-0 rounded-xl w-full h-[215px] object-cover"
+                        loading="lazy"
+                      />
+
 
                       <div className='absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 hover:opacity-60 rounded-xl' 
                         style={{ backgroundColor: category?.color }}>
