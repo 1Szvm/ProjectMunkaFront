@@ -7,7 +7,8 @@ import Alerts from '../components/Alerts';
 import { Footer } from '../components/Footer';
 import { deletePhoto } from '../utility/backendHandling';
 import { motion } from "framer-motion";
-import { UserContext } from '../context/userContext';
+import { UserContext } from '../context/UserContext';
+
 export const Futamok = () => {
   const { user } = useContext(UserContext);
   const [admins,setAdmins]=useState([]);

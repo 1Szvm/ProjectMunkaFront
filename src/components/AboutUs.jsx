@@ -41,7 +41,7 @@ export const AboutUs = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: 0.4 }}
         >
-          A HUNSRT 2022-ban alakult, célunk, hogy profi és tisztességes versenyeket rendezzünk minden szimulátoros számára. Azóta számos eseményt szerveztünk, és sikeresen növeltük közösségünket.
+          A HUN-SRT 2024-ben alakult, célunk, hogy profi és tisztességes versenyeket rendezzünk minden szimulátoros számára. Azóta számos eseményt szerveztünk, és sikeresen növeltük közösségünket.
         </motion.p>
       </motion.section>
 
