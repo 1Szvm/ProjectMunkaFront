@@ -91,16 +91,16 @@ export const Header = () => {
                 {darkMode ? '🌙' : '🌞'}
               </motion.button>
           <motion.div
-            className="navbar px-4 md:px-8 w-full max-w-screen-xl mx-auto flex items-center justify-between"
+            className="navbar px-4 md:px-4 w-full max-w-screen-lg mx-auto flex items-center justify-between"
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <div className="pl-10 navbar-start flex items-center gap-4">{navLinks}</div>
           {/* backtohome */}
-          <div className="navbar-center flex items-center justify-center pl-16">
+          <div className="navbar-center flex items-center justify-center pl-16 ">
           <NavLink
-            className="btn btn-ghost text-2xl w-[220px] font-bold transition-all duration-500 transform flex items-center gap-4 rounded-2xl hover:bg-gray-100/10 dark:hover:bg-violet-600/10 backdrop-blur-md"
+            className="btn btn-ghost text-2xlfont-bold transition-all duration-500 transform flex items-center gap-4 rounded-2xl  hover:bg-gray-100/10 dark:hover:bg-violet-600/10 backdrop-blur-md"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -117,7 +117,7 @@ export const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="tracking-widest"
+                className="tracking-widest text-[20px]"
               >
                 {isHovered ? "Home" : "HUN-SRT"}
               </motion.span>
