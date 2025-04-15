@@ -74,7 +74,7 @@ A **HUN-SRT Racing Manager** egy webes alkalmazás, amelyet a **HUN-SRT (Hungari
 |-----|-----------|
 | **Kaszás István** | UI/UX dizájn, implementáció, rendszeroptimalizálás és tesztelés |
 | **Szilaj Varga Márk Szabolcs** | Backend fejlesztés, funkcionalitás-tesztelés |
-| **Hamar Roland István** | IDK |
+| **Hamar Roland István** | Dokumentáció és technikai asszisztencia, mindemellet backend és frontend is |
 
 
 ---
