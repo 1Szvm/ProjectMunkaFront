@@ -18,8 +18,6 @@ const Forum = () => {
     readPosts(setPosts);
   }, []);
 
-  generateSchema("forum");
-
   return (
     <>
     <motion.div

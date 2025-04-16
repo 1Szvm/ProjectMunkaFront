@@ -10,6 +10,9 @@ export default function Details({ selectedRace, showDetails }) {
     const [category, setCategory] = useState([]);
     const modalRef = useRef(null); // Reference for the modal
     const [txt,setText]=useState(null)
+    const today = new Date();
+    const raceDate = new Date(selectedRace?.idopont.seconds * 1000 + selectedRace?.idopont.nanoseconds / 1000000);
+    const daysDiff = Math.ceil((raceDate - today) / (1000 * 60 * 60 * 24));
 
     
 
@@ -66,13 +69,15 @@ export default function Details({ selectedRace, showDetails }) {
                 <div className="modal-action w-full flex justify-between">
                     {selectedRace?.resztvevok?.includes(user?.uid) ? (
                         <div 
-                        className="btn text-yellow-600 hover:bg-yellow-400 hover:text-slate-950" 
+                        className="btn text-yellow-600 hover:bg-yellow-400 border border-yellow-400 hover:text-slate-950" 
+                        disabled={daysDiff < 1}
                         onClick={handleApplication}
                         >Jelentkezés visszavonás</div>
                     ) : (
                         <div 
-                        className={`btn text-green-600 hover:bg-green-400 hover:text-slate-950 
+                        className={`btn text-green-600 hover:bg-green-400 border border-green-400 hover:text-slate-950 
                         ${selectedRace?.resztvevok?.length === selectedRace?.max ? "cursor-not-allowed opacity-50" : ""}`} 
+                        disabled={daysDiff < 1}
                         onClick={selectedRace?.resztvevok?.length === selectedRace?.max ? null : handleApplication}
                         
                         

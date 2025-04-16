@@ -171,7 +171,7 @@ export const Futamok = () => {
                         {category?.nev}
                       </div>
                       <div className='rounded-lg p-2 text-sm text-white text-center max-w-fit' style={{ backgroundColor: category?.color }}>
-                        {daysDiff} nap múlva
+                        {daysDiff<1?"A verseny már megtörtént":`${daysDiff} nap múlva`}
                       </div>
                     </div>
                     <motion.div

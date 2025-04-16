@@ -8,12 +8,13 @@ import Profile from './pages/Profile'
 import PwReset from './pages/Pwreset'
 import Bajnoksagok from './pages/Bajnoksagok'
 import Forum from './pages/Forum'
-import Adminpage from './pages/Adminpage'
+
 import Regulation from './pages/Regulation'
 import Bajnoksagok_Reszletek from './pages/Bajnoksagok_Reszletek'
 import ForumPost from './pages/ForumPost'
 import UsersList from './components/UsersList'
 import Schema from './pages/Schema'
+import AdminPage from './pages/Adminpage'
 
 const router=createBrowserRouter([
   {element:<Header/>,
@@ -29,7 +30,7 @@ const router=createBrowserRouter([
       {path:'/bajnoksagok',element:<Bajnoksagok/>},
       {path:'/forum',element:<Forum/>},
       {path:'/post/:id',element:<ForumPost/>},
-      {path:'/admin',element:<Adminpage/>},
+      {path:'/admin',element:<AdminPage/>},
       {path:'/regulation',element:<Regulation/>},
       {path:'/championship_desc/:id/:categ',element:<Bajnoksagok_Reszletek/>},
       {path:'/users',element:<UsersList/>},

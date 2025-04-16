@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useInView, motion } from 'framer-motion';
 import { Footer } from '../components/Footer';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { readCategoriesById, readChampionshipsById, updateCategory } from '../utility/crudUtility';
 import { set } from 'react-hook-form';
 import { uploadFile } from '../utility/backendHandling';
@@ -18,6 +18,7 @@ const ChampionshipDetails = () => {
   const [calendarEvents, setCalendarEvents] = useState([]);
   const aboutRef = useRef(null);
   const isInView = useInView(aboutRef, { triggerOnce: true, threshold: 0.2 });
+  const navigate=useNavigate()
 
   const [category, setCategory] = useState([]);
   const [championship, setChampionship] = useState([]);
@@ -26,291 +27,12 @@ const ChampionshipDetails = () => {
     readCategoriesById(id,setCategory)
     readChampionshipsById(id,setChampionship)
   },[])
-
-  console.log(championship[categ]?.leaderboard?.map((item) => item.name));
   
-
-
- 
   const handleDriverClick = (driver) => {
     alert(`Viewing profile for ${driver.name}`);
     setSelectedDriver(driver);
   };
 
-  const UploadData = async() => {
-    console.log("nothing ventured nothing gained");
-    
-    updateCategory("xT9kvaoN573rnImgOlPB", [
-      { name: 'Max Verstappen', points: 100, position: 1, team: 'Red Bull Racing' },
-      { name: 'Lewis Hamilton', points: 85, position: 2, team: 'Mercedes' },
-      { name: 'Charles Leclerc', points: 70, position: 3, team: 'Ferrari' },
-      { name: 'Sergio Perez', points: 60, position: 4, team: 'Red Bull Racing' },
-      { name: 'Lando Norris (GOAT)', points: 55, position: 5, team: 'McLaren' },
-      { name: 'George Russell', points: 50, position: 6, team: 'Mercedes' },
-    ],"pro",'leaderboard');
-
-    updateCategory("xT9kvaoN573rnImgOlPB", [
-      { team: 'Red Bull Racing', points: 160 },
-      { team: 'Mercedes', points: 135 },
-      { team: 'Ferrari', points: 70 },
-      { team: 'McLaren', points: 55 },
-    ],"pro",'teamleaderboard');
-
-    updateCategory("xT9kvaoN573rnImgOlPB", [
-      { name: 'Max Verstappen', racesPlayed: 30, wins: 15, podiums: 20 },
-      { name: 'Lewis Hamilton', racesPlayed: 30, wins: 12, podiums: 22 },
-      { name: 'Charles Leclerc', racesPlayed: 30, wins: 10, podiums: 18 },
-      { name: 'Sergio Perez', racesPlayed: 30, wins: 8, podiums: 16 },
-      { name: 'Lando Norris (GOAT)', racesPlayed: 30, wins: 5, podiums: 10 },
-      { name: 'George Russell', racesPlayed: 30, wins: 4, podiums: 9 },
-    ],"pro",'driverstats');
-
-    updateCategory("xT9kvaoN573rnImgOlPB", [
-      { date: '2025-03-20', event: 'Australian Grand Prix', time: '10:00 AM' },
-      { date: '2025-03-22', event: 'Bahrain Grand Prix', time: '2:00 PM' },
-    ],"pro",'calendarevents');
-    //
-    updateCategory("jbJOxipCFKjkpdAeYdaE", [
-      { name: 'Max Verstappen', points: 100, position: 1, team: 'Red Bull Racing' },
-      { name: 'Lewis Hamilton', points: 85, position: 2, team: 'Mercedes' },
-      { name: 'Charles Leclerc', points: 70, position: 3, team: 'Ferrari' },
-      { name: 'Sergio Perez', points: 60, position: 4, team: 'Red Bull Racing' },
-      { name: 'Lando Norris (GOAT)', points: 55, position: 5, team: 'McLaren' },
-      { name: 'George Russell', points: 50, position: 6, team: 'Mercedes' },
-    ],"GT2",'leaderboard');
-
-    updateCategory("jbJOxipCFKjkpdAeYdaE", [
-      { team: 'Red Bull Racing', points: 160 },
-      { team: 'Mercedes', points: 135 },
-      { team: 'Ferrari', points: 70 },
-      { team: 'McLaren', points: 55 },
-    ],"GT2",'teamleaderboard');
-
-    updateCategory("jbJOxipCFKjkpdAeYdaE", [
-      { name: 'Max Verstappen', racesPlayed: 30, wins: 15, podiums: 20 },
-      { name: 'Lewis Hamilton', racesPlayed: 30, wins: 12, podiums: 22 },
-      { name: 'Charles Leclerc', racesPlayed: 30, wins: 10, podiums: 18 },
-      { name: 'Sergio Perez', racesPlayed: 30, wins: 8, podiums: 16 },
-      { name: 'Lando Norris (GOAT)', racesPlayed: 30, wins: 5, podiums: 10 },
-      { name: 'George Russell', racesPlayed: 30, wins: 4, podiums: 9 },
-    ],"GT2",'driverstats');
-
-    updateCategory("jbJOxipCFKjkpdAeYdaE", [
-      { date: '2025-03-20', event: 'Australian Grand Prix', time: '10:00 AM' },
-      { date: '2025-03-22', event: 'Bahrain Grand Prix', time: '2:00 PM' },
-    ],"GT2",'calendarevents');
-    //
-    updateCategory("jbJOxipCFKjkpdAeYdaE", [
-      { name: 'Max Verstappen', points: 100, position: 1, team: 'Red Bull Racing' },
-      { name: 'Lewis Hamilton', points: 85, position: 2, team: 'Mercedes' },
-      { name: 'Charles Leclerc', points: 70, position: 3, team: 'Ferrari' },
-      { name: 'Sergio Perez', points: 60, position: 4, team: 'Red Bull Racing' },
-      { name: 'Lando Norris (GOAT)', points: 55, position: 5, team: 'McLaren' },
-      { name: 'George Russell', points: 50, position: 6, team: 'Mercedes' },
-    ],"GT3",'leaderboard');
-
-    updateCategory("jbJOxipCFKjkpdAeYdaE", [
-      { team: 'Red Bull Racing', points: 160 },
-      { team: 'Mercedes', points: 135 },
-      { team: 'Ferrari', points: 70 },
-      { team: 'McLaren', points: 55 },
-    ],"GT3",'teamleaderboard');
-
-    updateCategory("jbJOxipCFKjkpdAeYdaE", [
-      { name: 'Max Verstappen', racesPlayed: 30, wins: 15, podiums: 20 },
-      { name: 'Lewis Hamilton', racesPlayed: 30, wins: 12, podiums: 22 },
-      { name: 'Charles Leclerc', racesPlayed: 30, wins: 10, podiums: 18 },
-      { name: 'Sergio Perez', racesPlayed: 30, wins: 8, podiums: 16 },
-      { name: 'Lando Norris (GOAT)', racesPlayed: 30, wins: 5, podiums: 10 },
-      { name: 'George Russell', racesPlayed: 30, wins: 4, podiums: 9 },
-    ],"GT3",'driverstats');
-
-    updateCategory("jbJOxipCFKjkpdAeYdaE", [
-      { date: '2025-03-20', event: 'Australian Grand Prix', time: '10:00 AM' },
-      { date: '2025-03-22', event: 'Bahrain Grand Prix', time: '2:00 PM' },
-    ],"GT3",'calendarevents');
-    //
-    updateCategory("jbJOxipCFKjkpdAeYdaE", [
-      { name: 'Max Verstappen', points: 100, position: 1, team: 'Red Bull Racing' },
-      { name: 'Lewis Hamilton', points: 85, position: 2, team: 'Mercedes' },
-      { name: 'Charles Leclerc', points: 70, position: 3, team: 'Ferrari' },
-      { name: 'Sergio Perez', points: 60, position: 4, team: 'Red Bull Racing' },
-      { name: 'Lando Norris (GOAT)', points: 55, position: 5, team: 'McLaren' },
-      { name: 'George Russell', points: 50, position: 6, team: 'Mercedes' },
-    ],"GT4",'leaderboard');
-
-    updateCategory("jbJOxipCFKjkpdAeYdaE", [
-      { team: 'Red Bull Racing', points: 160 },
-      { team: 'Mercedes', points: 135 },
-      { team: 'Ferrari', points: 70 },
-      { team: 'McLaren', points: 55 },
-    ],"GT4",'teamleaderboard');
-
-    updateCategory("jbJOxipCFKjkpdAeYdaE", [
-      { name: 'Max Verstappen', racesPlayed: 30, wins: 15, podiums: 20 },
-      { name: 'Lewis Hamilton', racesPlayed: 30, wins: 12, podiums: 22 },
-      { name: 'Charles Leclerc', racesPlayed: 30, wins: 10, podiums: 18 },
-      { name: 'Sergio Perez', racesPlayed: 30, wins: 8, podiums: 16 },
-      { name: 'Lando Norris (GOAT)', racesPlayed: 30, wins: 5, podiums: 10 },
-      { name: 'George Russell', racesPlayed: 30, wins: 4, podiums: 9 },
-    ],"GT4",'driverstats');
-
-    updateCategory("jbJOxipCFKjkpdAeYdaE", [
-      { date: '2025-03-20', event: 'Australian Grand Prix', time: '10:00 AM' },
-      { date: '2025-03-22', event: 'Bahrain Grand Prix', time: '2:00 PM' },
-    ],"GT4",'calendarevents');
-    //
-    updateCategory("xT9kvaoN573rnImgOlPB", [
-      { name: 'Max Verstappen', points: 100, position: 1, team: 'Red Bull Racing' },
-      { name: 'Lewis Hamilton', points: 85, position: 2, team: 'Mercedes' },
-      { name: 'Charles Leclerc', points: 70, position: 3, team: 'Ferrari' },
-      { name: 'Sergio Perez', points: 60, position: 4, team: 'Red Bull Racing' },
-      { name: 'Lando Norris (GOAT)', points: 55, position: 5, team: 'McLaren' },
-      { name: 'George Russell', points: 50, position: 6, team: 'Mercedes' },
-    ],"pro",'leaderboard');
-
-    updateCategory("xT9kvaoN573rnImgOlPB", [
-      { team: 'Red Bull Racing', points: 160 },
-      { team: 'Mercedes', points: 135 },
-      { team: 'Ferrari', points: 70 },
-      { team: 'McLaren', points: 55 },
-    ],"pro",'teamleaderboard');
-
-    updateCategory("xT9kvaoN573rnImgOlPB", [
-      { name: 'Max Verstappen', racesPlayed: 30, wins: 15, podiums: 20 },
-      { name: 'Lewis Hamilton', racesPlayed: 30, wins: 12, podiums: 22 },
-      { name: 'Charles Leclerc', racesPlayed: 30, wins: 10, podiums: 18 },
-      { name: 'Sergio Perez', racesPlayed: 30, wins: 8, podiums: 16 },
-      { name: 'Lando Norris (GOAT)', racesPlayed: 30, wins: 5, podiums: 10 },
-      { name: 'George Russell', racesPlayed: 30, wins: 4, podiums: 9 },
-    ],"pro",'driverstats');
-
-    updateCategory("xT9kvaoN573rnImgOlPB", [
-      { date: '2025-03-20', event: 'Australian Grand Prix', time: '10:00 AM' },
-      { date: '2025-03-22', event: 'Bahrain Grand Prix', time: '2:00 PM' },
-    ],"pro",'calendarevents');
-    //
-    updateCategory("SVNYOamIizoTZWHrw1Ol", [
-      { name: 'Max Verstappen', points: 100, position: 1, team: 'Red Bull Racing' },
-      { name: 'Lewis Hamilton', points: 85, position: 2, team: 'Mercedes' },
-      { name: 'Charles Leclerc', points: 70, position: 3, team: 'Ferrari' },
-      { name: 'Sergio Perez', points: 60, position: 4, team: 'Red Bull Racing' },
-      { name: 'Lando Norris (GOAT)', points: 55, position: 5, team: 'McLaren' },
-      { name: 'George Russell', points: 50, position: 6, team: 'Mercedes' },
-    ],"F4",'leaderboard');
-
-    updateCategory("SVNYOamIizoTZWHrw1Ol", [
-      { team: 'Red Bull Racing', points: 160 },
-      { team: 'Mercedes', points: 135 },
-      { team: 'Ferrari', points: 70 },
-      { team: 'McLaren', points: 55 },
-    ],"F4",'teamleaderboard');
-
-    updateCategory("SVNYOamIizoTZWHrw1Ol", [
-      { name: 'Max Verstappen', racesPlayed: 30, wins: 15, podiums: 20 },
-      { name: 'Lewis Hamilton', racesPlayed: 30, wins: 12, podiums: 22 },
-      { name: 'Charles Leclerc', racesPlayed: 30, wins: 10, podiums: 18 },
-      { name: 'Sergio Perez', racesPlayed: 30, wins: 8, podiums: 16 },
-      { name: 'Lando Norris (GOAT)', racesPlayed: 30, wins: 5, podiums: 10 },
-      { name: 'George Russell', racesPlayed: 30, wins: 4, podiums: 9 },
-    ],"F4",'driverstats');
-
-    updateCategory("SVNYOamIizoTZWHrw1Ol", [
-      { date: '2025-03-20', event: 'Australian Grand Prix', time: '10:00 AM' },
-      { date: '2025-03-22', event: 'Bahrain Grand Prix', time: '2:00 PM' },
-    ],"F4",'calendarevents');
-    //
-    updateCategory("BD6AaJvPdc6OalquR90A", [
-      { name: 'Max Verstappen', points: 100, position: 1, team: 'Red Bull Racing' },
-      { name: 'Lewis Hamilton', points: 85, position: 2, team: 'Mercedes' },
-      { name: 'Charles Leclerc', points: 70, position: 3, team: 'Ferrari' },
-      { name: 'Sergio Perez', points: 60, position: 4, team: 'Red Bull Racing' },
-      { name: 'Lando Norris (GOAT)', points: 55, position: 5, team: 'McLaren' },
-      { name: 'George Russell', points: 50, position: 6, team: 'Mercedes' },
-    ],"pro",'leaderboard');
-
-    updateCategory("BD6AaJvPdc6OalquR90A", [
-      { team: 'Red Bull Racing', points: 160 },
-      { team: 'Mercedes', points: 135 },
-      { team: 'Ferrari', points: 70 },
-      { team: 'McLaren', points: 55 },
-    ],"pro",'teamleaderboard');
-
-    updateCategory("BD6AaJvPdc6OalquR90A", [
-      { name: 'Max Verstappen', racesPlayed: 30, wins: 15, podiums: 20 },
-      { name: 'Lewis Hamilton', racesPlayed: 30, wins: 12, podiums: 22 },
-      { name: 'Charles Leclerc', racesPlayed: 30, wins: 10, podiums: 18 },
-      { name: 'Sergio Perez', racesPlayed: 30, wins: 8, podiums: 16 },
-      { name: 'Lando Norris (GOAT)', racesPlayed: 30, wins: 5, podiums: 10 },
-      { name: 'George Russell', racesPlayed: 30, wins: 4, podiums: 9 },
-    ],"pro",'driverstats');
-
-    updateCategory("BD6AaJvPdc6OalquR90A", [
-      { date: '2025-03-20', event: 'Australian Grand Prix', time: '10:00 AM' },
-      { date: '2025-03-22', event: 'Bahrain Grand Prix', time: '2:00 PM' },
-    ],"pro",'calendarevents');
-    //
-    updateCategory("BD6AaJvPdc6OalquR90A", [
-      { name: 'Max Verstappen', points: 100, position: 1, team: 'Red Bull Racing' },
-      { name: 'Lewis Hamilton', points: 85, position: 2, team: 'Mercedes' },
-      { name: 'Charles Leclerc', points: 70, position: 3, team: 'Ferrari' },
-      { name: 'Sergio Perez', points: 60, position: 4, team: 'Red Bull Racing' },
-      { name: 'Lando Norris (GOAT)', points: 55, position: 5, team: 'McLaren' },
-      { name: 'George Russell', points: 50, position: 6, team: 'Mercedes' },
-    ],"rookie",'leaderboard');
-
-    updateCategory("BD6AaJvPdc6OalquR90A", [
-      { team: 'Red Bull Racing', points: 160 },
-      { team: 'Mercedes', points: 135 },
-      { team: 'Ferrari', points: 70 },
-      { team: 'McLaren', points: 55 },
-    ],"rookie",'teamleaderboard');
-
-    updateCategory("BD6AaJvPdc6OalquR90A", [
-      { name: 'Max Verstappen', racesPlayed: 30, wins: 15, podiums: 20 },
-      { name: 'Lewis Hamilton', racesPlayed: 30, wins: 12, podiums: 22 },
-      { name: 'Charles Leclerc', racesPlayed: 30, wins: 10, podiums: 18 },
-      { name: 'Sergio Perez', racesPlayed: 30, wins: 8, podiums: 16 },
-      { name: 'Lando Norris (GOAT)', racesPlayed: 30, wins: 5, podiums: 10 },
-      { name: 'George Russell', racesPlayed: 30, wins: 4, podiums: 9 },
-    ],"rookie",'driverstats');
-
-    updateCategory("BD6AaJvPdc6OalquR90A", [
-      { date: '2025-03-20', event: 'Australian Grand Prix', time: '10:00 AM' },
-      { date: '2025-03-22', event: 'Bahrain Grand Prix', time: '2:00 PM' },
-    ],"rookie",'calendarevents');
-    //
-    updateCategory("xT9kvaoN573rnImgOlPB", [
-      { name: 'Max Verstappen', points: 100, position: 1, team: 'Red Bull Racing' },
-      { name: 'Lewis Hamilton', points: 85, position: 2, team: 'Mercedes' },
-      { name: 'Charles Leclerc', points: 70, position: 3, team: 'Ferrari' },
-      { name: 'Sergio Perez', points: 60, position: 4, team: 'Red Bull Racing' },
-      { name: 'Lando Norris (GOAT)', points: 55, position: 5, team: 'McLaren' },
-      { name: 'George Russell', points: 50, position: 6, team: 'Mercedes' },
-    ],"rookie",'leaderboard');
-
-    updateCategory("xT9kvaoN573rnImgOlPB", [
-      { team: 'Red Bull Racing', points: 160 },
-      { team: 'Mercedes', points: 135 },
-      { team: 'Ferrari', points: 70 },
-      { team: 'McLaren', points: 55 },
-    ],"rookie",'teamleaderboard');
-
-    updateCategory("xT9kvaoN573rnImgOlPB", [
-      { name: 'Max Verstappen', racesPlayed: 30, wins: 15, podiums: 20 },
-      { name: 'Lewis Hamilton', racesPlayed: 30, wins: 12, podiums: 22 },
-      { name: 'Charles Leclerc', racesPlayed: 30, wins: 10, podiums: 18 },
-      { name: 'Sergio Perez', racesPlayed: 30, wins: 8, podiums: 16 },
-      { name: 'Lando Norris (GOAT)', racesPlayed: 30, wins: 5, podiums: 10 },
-      { name: 'George Russell', racesPlayed: 30, wins: 4, podiums: 9 },
-    ],"rookie",'driverstats');
-
-    updateCategory("xT9kvaoN573rnImgOlPB", [
-      { date: '2025-03-20', event: 'Australian Grand Prix', time: '10:00 AM' },
-      { date: '2025-03-22', event: 'Bahrain Grand Prix', time: '2:00 PM' },
-    ],"rookie",'calendarevents');
-    
-  }
 
   const renderLeaderboard = () => {
     return (
@@ -426,8 +148,15 @@ const ChampionshipDetails = () => {
 
   return (
     <div className="championship-container min-h-screen">
-      <div className='btn' onClick={()=>UploadData()}>Upload data</div>
       <div className="container mx-auto px-4 py-6">
+        <div className='w-full'>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" 
+            className="size-8 mb-5 cursor-pointer opacity-90 hover:opacity-100" 
+            onClick={()=>navigate("/bajnoksagok")}
+            >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+          </svg>
+        </div>
         <section ref={aboutRef} className={`transition-opacity duration-1000 ${isInView ? 'opacity-100' : 'opacity-0'}`}>
           <div className="section-header flex justify-center mx-auto p-4">
              {/* In the future read this from firebase aswell*/}

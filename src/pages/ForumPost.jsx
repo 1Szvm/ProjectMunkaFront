@@ -27,20 +27,6 @@ export default function ForumPost() {
       readAuthorization(setAdmins);
       readUsers(setUsers);
   }, [param.id]);
-
-  const LoadingUsers=()=> {
-    const [dots, setDots] = useState("");
-  
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setDots((prev) => (prev.length < 3 ? prev + "." : ""));
-      }, 400);
-  
-      return () => clearInterval(interval);
-    }, []);
-  
-    return <p className="text-center text-lg font-semibold">Betöltés{dots}</p>;
-  }
   
   const onSubmit=async()=>{
     if(user){
@@ -88,7 +74,9 @@ export default function ForumPost() {
     <>
     <div className='flex justify-center'>
       {users.length === 0 ? (
-          <LoadingUsers />
+        <div className="flex justify-center items-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
       ) :(
         <div className="container m-4 sm:px-5 px-3 py-2 page rounded-xl mt-4 opacity-200 border-sky-600 border-2 min-w-[250px] sm:w-[85%] max-w-[900px] shadow-lg">
             {post ? (

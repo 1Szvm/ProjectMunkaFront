@@ -47,7 +47,8 @@ const Schema = () => {
   };
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto">
+      <h1 className='text-center text-4xl font-bold m-2'>Schema</h1>
       <div className="mb-8">
         <label htmlFor="collection-select" className="block text-sm font-medium text-gray-700 mb-2">
           Select a Firestore Collection
@@ -58,7 +59,7 @@ const Schema = () => {
           onChange={(e) => handleCollectionChange(e.target.value)}
           disabled={isLoading}
         >
-          <option value="">Select a collection</option>
+          <option value="" disabled={true}>Select a collection</option>
           {Object.entries(collections).map(([key, value]) => (
             <option key={key} value={value}>
               {value}
