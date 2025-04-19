@@ -57,9 +57,9 @@ export const Header = () => {
 
   const navLinks = (
     <>
-      <NavLink className="btn btn-ghost text-xl hover:text-orange-400 transition-all transform hover:scale-110" to="/futamok">Futamok</NavLink>
-      <NavLink className="btn btn-ghost text-xl hover:text-orange-400 transition-all transform hover:scale-110" to="/bajnoksagok">Bajnokságok</NavLink>
-      <NavLink className="btn btn-ghost text-xl hover:text-orange-400 transition-all transform hover:scale-110" to="/forum">Forum</NavLink>
+      <NavLink className="btn btn-ghost text-xl  hover:text-orange-400 transition-all transform hover:scale-110" to="/futamok">Futamok</NavLink>
+      <NavLink className="btn btn-ghost text-xl  hover:text-orange-400 transition-all transform hover:scale-110" to="/bajnoksagok">Bajnokságok</NavLink>
+      <NavLink className="btn btn-ghost text-xl  hover:text-orange-400 transition-all transform hover:scale-110" to="/forum">Forum</NavLink>
     </>
 
   );
@@ -86,21 +86,21 @@ export const Header = () => {
           transition-colors duration-300 ease-in-out flex items-center justify-center w-full pb-1`}>
              <motion.button
                 onClick={toggleDarkMode}
-                className="absolute left-8 p-[11px] rounded-full bg-zinc-700 border-2 border-emerald-400 text-white transition-all duration-300 transform hover:scale-125"
+                className="absolute left-3 p-[11px] rounded-full bg-zinc-700 border-2 border-emerald-400 text-white transition-all duration-300 transform hover:scale-125"
               >
                 {darkMode ? '🌙' : '🌞'}
               </motion.button>
           <motion.div
-            className="navbar px-4 md:px-4 w-full max-w-screen-lg mx-auto flex items-center justify-between"
+            className="navbar px-4 md:px-4 w-full  max-w-screen-2xl mx-auto flex items-center justify-between"
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <div className="pl-10 navbar-start flex items-center gap-4">{navLinks}</div>
+            <div className="pl-8 navbar-start flex items-center gap-1">{navLinks}</div>
           {/* backtohome */}
-          <div className="navbar-center flex items-center justify-center pl-16 ">
+          <div className="navbar-center flex items-center justify-center p-1 ">
           <NavLink
-            className="btn btn-ghost text-2xlfont-bold transition-all duration-500 transform flex items-center gap-4 rounded-2xl  hover:bg-gray-100/10 dark:hover:bg-violet-600/10 backdrop-blur-md"
+            className="btn btn-ghost text-2xl font-bold transition-all duration-500 transform flex items-center gap-2 rounded-2xl "
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -117,7 +117,7 @@ export const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="tracking-widest text-[20px]"
+                className="tracking-widest text-[18px]"
               >
                 {isHovered ? "Home" : "HUN-SRT"}
               </motion.span>
@@ -126,28 +126,30 @@ export const Header = () => {
         </div>
 
             <div className="navbar-end flex items-center gap-2">
-              {/* Dark Mode Toggle Button */}
+
              
 
               {user ? (
-                <div className="flex justify-end items-center space-x-2">
+                <div className="flex justify-end items-center">
                   <ProfileMenu/>
                 </div>
               ) : (
                 <>
-                  <NavLink
-                    className=" btn btn-ghost bg-blue-500 p-1 hover:bg-sky-600 text-l text-white ml-1"
-                    to="/auth/in"
-                  >
-                    Bejelentkezés
-                  </NavLink>
-                  <NavLink
-                    className="btn btn-ghost bg-green-600 p-1 hover:bg-emerald-700 text-l text-white mr-6"
-                    to="/auth/up"
-                  >
-                    Regisztráció
-                  </NavLink>
-                </>
+                <NavLink
+                  className="btn btn-ghost bg-blue-500 max-w-[95px] px-4 py-2 text-[16px]  md:text-sm hover:bg-sky-600 text-white"
+                  to="/auth/in"
+                >
+                  Bejelentkezés
+                </NavLink>
+                <NavLink
+                  className="btn btn-ghost bg-green-600 max-w-[95px] px-4 py-2 text-sm sm:text-base hover:bg-emerald-700 text-white"
+                  to="/auth/up"
+                >
+                  Regisztráció
+                </NavLink>
+              </>
+              
+              
               )}
             </div>
           </motion.div>
