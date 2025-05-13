@@ -8,7 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EidtUser from '../components/EditUser';
 import { useConfirm } from 'material-ui-confirm';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../context/UserContexta';
 
 export default function AdminUsersList() {
       const navigate=useNavigate()

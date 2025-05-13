@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import Alerts from './Alerts';
 
 import { uploadFile } from '../utility/backendHandling';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../context/UserContexta';
 
 export default function AddNew({ addEdit, setAddEdit }) {
     const { user } = useContext(UserContext);

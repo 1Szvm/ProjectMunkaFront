@@ -4,7 +4,7 @@ import App from './App.jsx'
 
 import { ConfirmProvider } from 'material-ui-confirm'
 import { DarkModeProvider } from './components/DarkModeContext.jsx'
-import { UserProvider } from './context/UserContext.jsx'
+import { UserProvider } from './context/UserContexta.jsx'
 
 
 

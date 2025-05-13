@@ -7,7 +7,7 @@ import { useConfirm } from "material-ui-confirm";
 import Alerts from '../components/Alerts';
 import { readUsers } from '../utility/backendHandling';
 import { extractUrlAndId } from '../utility/utils';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../context/UserContexta';
 
 export default function ForumPost() {
     const { user } = useContext(UserContext);

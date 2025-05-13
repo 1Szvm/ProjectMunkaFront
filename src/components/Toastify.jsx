@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { data, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../context/UserContexta';
 import { EmailAuthCredential, getAdditionalUserInfo } from 'firebase/auth';
 import { auth } from '../utility/firebaseApp';
 

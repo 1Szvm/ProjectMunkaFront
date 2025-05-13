@@ -2,7 +2,7 @@ import React, { useContext, useRef, useState } from 'react'
 
 import { useForm } from 'react-hook-form';
 import { addPost } from '../utility/crudUtility';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../context/UserContexta';
 
 
 export default function () {

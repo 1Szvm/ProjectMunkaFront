@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { Footer } from '../components/Footer';
 import './Home.css'
 import { DarkModeContext } from '../components/DarkModeContext';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../context/UserContexta';
 export const Auth = () => {
   const { user, signInUser, signUpUser, msg, setMsg } = useContext(UserContext);
   const navigate = useNavigate();

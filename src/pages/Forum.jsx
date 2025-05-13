@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { generateSchema } from '../utility/generareFirebaseSchema';
 import AddPost from '../components/addPost';
 import { motion, AnimatePresence } from "framer-motion";
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../context/UserContexta';
 const Forum = () => {
   const { user } = useContext(UserContext);
   const [posts,setPosts]=useState(null)
